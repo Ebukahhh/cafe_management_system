@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Espresso Admin | Sales Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Inter:wght@400;500&amp;family=Newsreader:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        @font-face {
+            font-family: 'Berkeley Mono';
+            src: local('ui-monospace'), local('SFMono-Regular'), local('Menlo'), local('Monaco'), local('Consolas'), local('Liberation Mono'), local('Courier New'), monospace;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .serif-header { font-family: 'Fraunces', serif; }
+        .mono-data { font-family: 'Berkeley Mono', monospace; letter-spacing: -0.05em; }
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+        }
+        .glass-panel {
+            background: rgba(26, 18, 8, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#bbb4ad",
+                        "surface-container-high": "#32281d",
+                        "secondary-container": "#4a4640",
+                        "surface-container-highest": "#3d3327",
+                        "primary": "#ffb779",
+                        "secondary-fixed-dim": "#ccc5be",
+                        "on-tertiary-fixed": "#23005c",
+                        "surface": "#1a1208",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#380088",
+                        "on-primary-fixed-variant": "#6c3a02",
+                        "on-primary-fixed": "#2e1500",
+                        "on-primary-container": "#482400",
+                        "surface-dim": "#1a1208",
+                        "primary-fixed": "#ffdcc1",
+                        "on-surface-variant": "#d7c3b5",
+                        "on-tertiary": "#3c0091",
+                        "surface-container-lowest": "#140d04",
+                        "on-secondary-fixed": "#1e1b16",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "tertiary-fixed": "#e9ddff",
+                        "on-error": "#690005",
+                        "inverse-surface": "#f1e0ce",
+                        "inverse-primary": "#885119",
+                        "tertiary-container": "#a37dff",
+                        "tertiary": "#d0bcff",
+                        "on-secondary": "#33302b",
+                        "surface-bright": "#42372b",
+                        "on-background": "#f1e0ce",
+                        "surface-container-low": "#231a0f",
+                        "outline": "#9f8d81",
+                        "inverse-on-surface": "#392f23",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "on-primary": "#4c2700",
+                        "background": "#1a1208",
+                        "secondary": "#ccc5be",
+                        "primary-container": "#c8864a",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#ffb779",
+                        "outline-variant": "#524439",
+                        "secondary-fixed": "#e9e1d9",
+                        "surface-container": "#271e13",
+                        "surface-tint": "#ffb779",
+                        "on-secondary-fixed-variant": "#4a4640",
+                        "surface-variant": "#3d3327",
+                        "on-surface": "#f1e0ce"
+                    },
+                    fontFamily: {
+                        "headline": ["Fraunces"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- Sidebar Navigation -->
+<nav class="fixed left-0 top-0 h-screen w-[240px] hidden md:flex flex-col py-6 bg-[#F7F4F1] dark:bg-[#1A1208] transition-colors duration-300 z-50">
+<div class="px-8 mb-10">
+<h1 class="font-['Fraunces'] text-2xl text-[#1A1208] dark:text-[#C8864A] font-bold">Espresso Admin</h1>
+<p class="text-[10px] uppercase tracking-widest text-outline mt-1 font-label">Premium Coffee Mgmt</p>
+</div>
+<div class="flex-1 space-y-1">
+<a class="flex items-center text-[#5A4D3F] dark:text-[#A69076] hover:text-[#C8864A] px-8 py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl group-hover:scale-110 duration-200" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center text-[#5A4D3F] dark:text-[#A69076] hover:text-[#C8864A] px-8 py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl group-hover:scale-110 duration-200" data-icon="shopping_bag">shopping_bag</span>
+<span class="text-sm font-medium">Orders</span>
+</a>
+<a class="flex items-center text-[#5A4D3F] dark:text-[#A69076] hover:text-[#C8864A] px-8 py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl group-hover:scale-110 duration-200" data-icon="event_seat">event_seat</span>
+<span class="text-sm font-medium">Reservations</span>
+</a>
+<a class="flex items-center text-[#5A4D3F] dark:text-[#A69076] hover:text-[#C8864A] px-8 py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl group-hover:scale-110 duration-200" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-sm font-medium">Menu</span>
+</a>
+<a class="flex items-center text-[#5A4D3F] dark:text-[#A69076] hover:text-[#C8864A] px-8 py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl group-hover:scale-110 duration-200" data-icon="loyalty">loyalty</span>
+<span class="text-sm font-medium">Subscriptions</span>
+</a>
+<a class="flex items-center text-[#5A4D3F] dark:text-[#A69076] hover:text-[#C8864A] px-8 py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl group-hover:scale-110 duration-200" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-sm font-medium">Promotions</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center text-[#C8864A] font-bold bg-[#FFFFFF] dark:bg-[#2A1D0D] rounded-l-full ml-4 pl-4 py-3 shadow-sm border-r-4 border-primary" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="bar_chart">bar_chart</span>
+<span class="text-sm">Analytics</span>
+</a>
+<a class="flex items-center text-[#5A4D3F] dark:text-[#A69076] hover:text-[#C8864A] px-8 py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl group-hover:scale-110 duration-200" data-icon="settings">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+<div class="mt-auto px-8 pt-6 border-t border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="professional portrait of a young woman with glasses and styled hair in a modern minimalist setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnFxV2ZgRxJM3DTTF4WWK_cjhLy_DTck3l9UKH6y89NF5ExSC9VXIoNv61T0ZBtHfjhQLn4M4LV43ZkijKB3dDYUeXUNXYKe-vyHXQn2J8U3UjSYYULoHGqb99iMCcFOp51--B8RmQxe8BgEDCsd6qGToSk_D1ycEWxxCH0hevtoXj-CFDMniSnk9wwKQB_4VTonZNjdQd8T-BWVW26wsSK4I5CnPTdx86Plp5fvC11C9-haAElRVs8BR-2HE4KLsGYOZfcwNuns0x"/>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Jennifer W.</p>
+<p class="text-[10px] text-outline">Owner &amp; Admin</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-[240px] min-h-screen pb-24 md:pb-12 max-w-[1280px]">
+<!-- Top Bar -->
+<header class="flex justify-between items-center px-8 h-20 fixed top-0 right-0 w-full md:w-[calc(100%-240px)] z-40 bg-[#FFFFFF]/80 dark:bg-[#1A1208]/80 backdrop-blur-xl">
+<h2 class="font-headline text-3xl font-bold text-on-surface">Analytics</h2>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-low rounded-xl text-sm font-medium hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="calendar_today">calendar_today</span>
+                        Last 7 days
+                        <span class="material-symbols-outlined text-lg" data-icon="expand_more">expand_more</span>
+</button>
+<!-- Date Picker Dropdown mock -->
+<div class="absolute right-0 top-full mt-2 w-48 glass-panel rounded-xl py-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none group-hover:pointer-events-auto shadow-xl overflow-hidden">
+<a class="block px-4 py-2 text-sm hover:bg-primary/10 text-primary" href="#">Last 7 days</a>
+<a class="block px-4 py-2 text-sm hover:bg-primary/10" href="#">Last 30 days</a>
+<a class="block px-4 py-2 text-sm hover:bg-primary/10" href="#">Last 3 months</a>
+<div class="h-px bg-outline-variant/20 mx-2 my-1"></div>
+<a class="block px-4 py-2 text-sm hover:bg-primary/10" href="#">Custom Range</a>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+</div>
+</header>
+<div class="pt-28 px-8 space-y-8">
+<!-- KPI Row -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-6 rounded-2xl relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<p class="text-xs font-label text-outline uppercase tracking-wider mb-2">Total Revenue</p>
+<h3 class="text-2xl font-bold serif-header text-primary">$2,840.00</h3>
+<div class="flex items-center gap-1 mt-2 text-xs text-green-500 font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+                        12% vs last period
+                    </div>
+<!-- Sparkline SVG -->
+<div class="absolute bottom-2 right-4 w-24 h-12 opacity-50">
+<svg class="w-full h-full stroke-primary fill-none stroke-2" viewbox="0 0 100 40">
+<path d="M0 35 Q10 32 20 25 T40 28 T60 15 T80 10 T100 5" stroke-linecap="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-6 rounded-2xl relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<p class="text-xs font-label text-outline uppercase tracking-wider mb-2">Total Orders</p>
+<h3 class="text-2xl font-bold serif-header text-on-surface">241</h3>
+<div class="flex items-center gap-1 mt-2 text-xs text-green-500 font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+                        8% vs last period
+                    </div>
+<div class="absolute bottom-2 right-4 w-24 h-12 opacity-50">
+<svg class="w-full h-full stroke-on-surface-variant fill-none stroke-2" viewbox="0 0 100 40">
+<path d="M0 30 Q15 25 30 35 T60 20 T90 25 T100 15" stroke-linecap="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low p-6 rounded-2xl relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<p class="text-xs font-label text-outline uppercase tracking-wider mb-2">Avg. Order Value</p>
+<h3 class="text-2xl font-bold serif-header text-on-surface">$11.78</h3>
+<div class="flex items-center gap-1 mt-2 text-xs text-green-500 font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+                        3% vs last period
+                    </div>
+<div class="absolute bottom-2 right-4 w-24 h-12 opacity-50">
+<svg class="w-full h-full stroke-on-surface-variant fill-none stroke-2" viewbox="0 0 100 40">
+<path d="M0 25 Q20 25 40 20 T60 18 T80 15 T100 12" stroke-linecap="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low p-6 rounded-2xl relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<p class="text-xs font-label text-outline uppercase tracking-wider mb-2">Subscription Rev.</p>
+<h3 class="text-2xl font-bold serif-header text-on-surface">$820.00</h3>
+<div class="flex items-center gap-1 mt-2 text-xs text-green-500 font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+                        5% vs last period
+                    </div>
+<div class="absolute bottom-2 right-4 w-24 h-12 opacity-50">
+<svg class="w-full h-full stroke-primary fill-none stroke-2" viewbox="0 0 100 40">
+<path d="M0 35 L20 30 L40 32 L60 20 L80 15 L100 5" stroke-linecap="round"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- Main Charts Row -->
+<section class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+<!-- Revenue Over Time -->
+<div class="lg:col-span-3 bg-surface-container-low p-8 rounded-2xl">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-headline text-xl">Revenue Over Time</h4>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 text-xs font-label">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+                                Current Week
+                            </div>
+<div class="flex items-center gap-2 text-xs font-label text-outline">
+<span class="w-3 h-3 rounded-full bg-outline-variant"></span>
+                                Previous Week
+                            </div>
+</div>
+</div>
+<div class="relative h-[300px] w-full mt-4">
+<!-- Chart Mockup -->
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-outline-variant/20"></div>
+<div class="absolute left-0 bottom-0 h-full w-[1px] bg-outline-variant/20"></div>
+<svg class="w-full h-full" viewbox="0 0 700 300">
+<!-- Grid lines -->
+<line class="text-outline-variant/10" stroke="currentColor" stroke-dasharray="4" x1="0" x2="700" y1="75" y2="75"></line>
+<line class="text-outline-variant/10" stroke="currentColor" stroke-dasharray="4" x1="0" x2="700" y1="150" y2="150"></line>
+<line class="text-outline-variant/10" stroke="currentColor" stroke-dasharray="4" x1="0" x2="700" y1="225" y2="225"></line>
+<!-- Main Area Fill -->
+<path class="opacity-10" d="M0 280 L100 240 L200 250 L300 180 L400 120 L500 80 L600 90 L700 50 L700 300 L0 300 Z" fill="url(#amberGradient)"></path>
+<!-- Main Line -->
+<path d="M0 280 L100 240 L200 250 L300 180 L400 120 L500 80 L600 90 L700 50" fill="none" stroke="#ffb779" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<defs>
+<lineargradient id="amberGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ffb779"></stop>
+<stop offset="100%" stop-color="#ffb779" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex justify-between mt-4 px-2 text-[10px] font-label text-outline uppercase tracking-tighter">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+</div>
+<!-- Orders by Type -->
+<div class="lg:col-span-2 bg-surface-container-low p-8 rounded-2xl flex flex-col items-center justify-center text-center">
+<h4 class="font-headline text-xl self-start mb-8">Orders by Type</h4>
+<div class="relative w-56 h-56 mb-8">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<!-- Pickup (45%) -->
+<circle cx="18" cy="18" fill="none" r="15.915" stroke="#ffb779" stroke-dasharray="45 55" stroke-dashoffset="0" stroke-width="4"></circle>
+<!-- Delivery (32%) -->
+<circle cx="18" cy="18" fill="none" r="15.915" stroke="#c8864a" stroke-dasharray="32 68" stroke-dashoffset="-45" stroke-width="4"></circle>
+<!-- Dine In (23%) -->
+<circle cx="18" cy="18" fill="none" r="15.915" stroke="#f1e0ce" stroke-dasharray="23 77" stroke-dashoffset="-77" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-bold serif-header text-on-surface">241</span>
+<span class="text-[10px] text-outline uppercase tracking-widest font-label">Total Orders</span>
+</div>
+</div>
+<div class="w-full grid grid-cols-3 gap-2">
+<div class="flex flex-col items-center">
+<span class="w-2 h-2 rounded-full bg-primary mb-1"></span>
+<span class="text-[10px] font-label text-outline">Pickup</span>
+<span class="text-sm font-bold">45%</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="w-2 h-2 rounded-full bg-primary-container mb-1"></span>
+<span class="text-[10px] font-label text-outline">Delivery</span>
+<span class="text-sm font-bold">32%</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="w-2 h-2 rounded-full bg-on-background mb-1"></span>
+<span class="text-[10px] font-label text-outline">Dine In</span>
+<span class="text-sm font-bold">23%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Row -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
+<!-- Top Products -->
+<div class="bg-surface-container-low p-8 rounded-2xl">
+<h4 class="font-headline text-xl mb-8">Top Products This Week</h4>
+<div class="space-y-6">
+<!-- Bar 1 -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span>Pour Over</span>
+<span class="mono-data">68</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 100%"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span>Iced Latte</span>
+<span class="mono-data">52</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 76%"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span>Croissant</span>
+<span class="mono-data">41</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-[#885119]" style="width: 60%"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span>Matcha Latte</span>
+<span class="mono-data">29</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-[#6c3a02]" style="width: 42%"></div>
+</div>
+</div>
+<!-- Bar 5 -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-medium">
+<span>Cold Brew</span>
+<span class="mono-data">24</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-[#482400]" style="width: 35%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Peak Hours Heatmap -->
+<div class="bg-surface-container-low p-8 rounded-2xl">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-headline text-xl">Peak Hours Heatmap</h4>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-label text-outline">Low</span>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-sm bg-[#231a0f]"></div>
+<div class="w-3 h-3 rounded-sm bg-[#4a4640]"></div>
+<div class="w-3 h-3 rounded-sm bg-[#c8864a]"></div>
+<div class="w-3 h-3 rounded-sm bg-[#ffb779]"></div>
+</div>
+<span class="text-[10px] font-label text-outline">High</span>
+</div>
+</div>
+<div class="flex gap-3">
+<!-- Y-Axis Labels -->
+<div class="flex flex-col justify-between py-1 h-[200px] text-[9px] font-label text-outline uppercase">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+<!-- Heatmap Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-12 grid-rows-7 gap-1 h-[200px]">
+<!-- Row 1 Mon -->
+<div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#231a0f]"></div>
+<!-- Row 2 Tue -->
+<div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div>
+<!-- Row 3 Wed -->
+<div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div>
+<!-- Row 4 Thu -->
+<div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#231a0f]"></div>
+<!-- Row 5 Fri -->
+<div class="bg-[#4a4640]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div>
+<!-- Row 6 Sat -->
+<div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div>
+<!-- Row 7 Sun -->
+<div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#4a4640]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#ffb779]"></div><div class="bg-[#c8864a]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div><div class="bg-[#231a0f]"></div>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-3 text-[9px] font-label text-outline uppercase">
+<span>6am</span>
+<span>8am</span>
+<span>10am</span>
+<span>12pm</span>
+<span>2pm</span>
+<span>4pm</span>
+<span>6pm</span>
+<span>8pm</span>
+<span>10pm</span>
+</div>
+</div>
+</div>
+<p class="mt-6 text-xs text-outline leading-relaxed italic border-l-2 border-primary pl-4">
+                        Observation: Morning rush peak occurs between 8-9am on weekdays, while weekends show sustained traffic from 10am to 2pm.
+                    </p>
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile Navigation -->
+<nav class="fixed bottom-0 w-full md:hidden bg-[#FFFFFF] dark:bg-[#1A1208] border-t border-[#F0EDE9] dark:border-[#2A1D0D] h-16 px-4 pb-safe flex justify-around items-center z-50">
+<a class="flex flex-col items-center justify-center text-[#A69076]" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-['Berkeley_Mono'] text-[10px] uppercase tracking-tighter">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#A69076]" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="receipt">receipt</span>
+<span class="font-['Berkeley_Mono'] text-[10px] uppercase tracking-tighter">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C8864A] bg-[#C8864A]/10 rounded-xl px-3 py-1 scale-90 duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="bar_chart">bar_chart</span>
+<span class="font-['Berkeley_Mono'] text-[10px] uppercase tracking-tighter">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#A69076]" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+<span class="font-['Berkeley_Mono'] text-[10px] uppercase tracking-tighter">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#A69076]" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="more_horiz">more_horiz</span>
+<span class="font-['Berkeley_Mono'] text-[10px] uppercase tracking-tighter">More</span>
+</a>
+</nav>
+</body></html>

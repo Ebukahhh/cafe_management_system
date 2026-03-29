@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Berkeley+Mono&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#4a4640",
+              "secondary": "#ccc5be",
+              "tertiary-fixed-dim": "#d0bcff",
+              "surface-variant": "#3d3327",
+              "tertiary": "#d0bcff",
+              "primary-fixed": "#ffdcc1",
+              "surface-container-lowest": "#140d04",
+              "surface": "#1a1208",
+              "background": "#1a1208",
+              "outline-variant": "#524439",
+              "tertiary-fixed": "#e9ddff",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed-variant": "#5516be",
+              "primary": "#ffb779",
+              "inverse-surface": "#f1e0ce",
+              "inverse-primary": "#885119",
+              "on-surface": "#f1e0ce",
+              "surface-container-high": "#32281d",
+              "secondary-fixed": "#e9e1d9",
+              "primary-container": "#c8864a",
+              "on-error": "#690005",
+              "error-container": "#93000a",
+              "on-tertiary": "#3c0091",
+              "inverse-on-surface": "#392f23",
+              "surface-tint": "#ffb779",
+              "on-tertiary-container": "#380088",
+              "on-secondary": "#33302b",
+              "surface-dim": "#1a1208",
+              "on-secondary-fixed-variant": "#4a4640",
+              "on-primary-fixed": "#2e1500",
+              "surface-container-low": "#231a0f",
+              "on-surface-variant": "#d7c3b5",
+              "on-secondary-fixed": "#1e1b16",
+              "on-tertiary-fixed": "#23005c",
+              "on-primary": "#4c2700",
+              "secondary-fixed-dim": "#ccc5be",
+              "surface-container-highest": "#3d3327",
+              "outline": "#9f8d81",
+              "on-background": "#f1e0ce",
+              "surface-bright": "#42372b",
+              "primary-fixed-dim": "#ffb779",
+              "on-primary-container": "#482400",
+              "on-primary-fixed-variant": "#6c3a02",
+              "tertiary-container": "#a37dff",
+              "surface-container": "#271e13",
+              "error": "#ffb4ab",
+              "on-secondary-container": "#bbb4ad"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "mono": ["Berkeley Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .font-serif { font-family: 'Fraunces', serif; }
+        .font-mono { font-family: 'Berkeley Mono', monospace; }
+        .glass-panel {
+            background: rgba(26, 18, 8, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="bg-stone-900 dark:bg-[#1A1208] flex flex-col h-full py-6 px-4 h-screen w-64 fixed left-0 top-0 overflow-y-auto">
+<div class="mb-10 px-2">
+<h1 class="text-xl font-serif text-[#C8864A] italic leading-tight">Jennifer's Café</h1>
+<p class="text-[10px] uppercase tracking-widest text-stone-500 font-bold mt-1">Management System</p>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 text-stone-400 font-medium hover:bg-stone-800 hover:text-stone-100" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 text-stone-400 font-medium hover:bg-stone-800 hover:text-stone-100" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_bag">shopping_bag</span>
+<span class="text-sm">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 text-stone-400 font-medium hover:bg-stone-800 hover:text-stone-100" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="event">event</span>
+<span class="text-sm">Reservations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 text-stone-400 font-medium hover:bg-stone-800 hover:text-stone-100" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-sm">Menu</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 text-stone-400 font-medium hover:bg-stone-800 hover:text-stone-100" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="loyalty">loyalty</span>
+<span class="text-sm">Subscriptions</span>
+</a>
+<a class="text-[#C8864A] bg-stone-800/50 font-bold border-r-4 border-[#C8864A] flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="campaign">campaign</span>
+<span class="text-sm">Promotions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 text-stone-400 font-medium hover:bg-stone-800 hover:text-stone-100" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="leaderboard">leaderboard</span>
+<span class="text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 text-stone-400 font-medium hover:bg-stone-800 hover:text-stone-100" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-stone-800">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Admin User Profile" class="w-full h-full object-cover" data-alt="professional portrait of a confident woman manager in a stylish modern office with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA_GB2LsVvW1Vx3f2qUs0V3bh5HzuuwRfDraWL-pFl8gq3VX0LEx572oEcnuE0SIC3vGJVVJd6FGUipBJ7nEFdvSnaDDfM_y17CPAdQii5ik4PPpoAjncmoVx583durjFiQv1qhytum07sm0IHuWKd-68ommFKpllZH8iQv-Dfj07UQP1e-k_slBherjLV1eqZqM18y2renb59v2q8KapQ71gG2JGxhPI6EL4CL3DnFsYxRwc2OvqCPgbYD9NqBJxRjCbUHyE34R8_"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-stone-100 truncate">Jennifer A.</p>
+<p class="text-xs text-stone-500 truncate">Administrator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar Component -->
+<header class="flex justify-between items-center w-full px-8 py-4 sticky top-0 z-40 bg-stone-50/80 dark:bg-[#1A1208]/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-[#C8864A]/40 outline-none placeholder:text-stone-500" placeholder="Search by name or email..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="p-2 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<section class="max-w-[1280px] mx-auto p-8 space-y-10">
+<!-- Page Heading & Editorial Layout -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="space-y-2">
+<h2 class="text-5xl font-serif font-bold tracking-tight text-on-surface">Customers</h2>
+<p class="text-stone-500 max-w-lg">Manage your specialty coffee community, track loyalty progress, and handle subscription tiers.</p>
+</div>
+<div class="flex gap-2 p-1 bg-surface-container-low rounded-xl">
+<button class="px-4 py-2 text-xs font-bold rounded-lg bg-primary text-on-primary">All</button>
+<button class="px-4 py-2 text-xs font-medium rounded-lg text-stone-400 hover:text-on-surface">Has Subscription</button>
+<button class="px-4 py-2 text-xs font-medium rounded-lg text-stone-400 hover:text-on-surface">Loyalty Member</button>
+<button class="px-4 py-2 text-xs font-medium rounded-lg text-stone-400 hover:text-on-surface">Inactive</button>
+</div>
+</div>
+<!-- Summary Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary/30">
+<p class="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2">Total Customers</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-serif font-bold text-on-surface">184</span>
+<span class="text-xs text-green-500 font-bold">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-tertiary/30">
+<p class="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2">Active Subscribers</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-serif font-bold text-on-surface">18</span>
+<span class="text-xs text-primary font-bold">Gold Tier</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-secondary/30">
+<p class="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2">Avg Orders per Customer</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-serif font-bold text-on-surface">6.2</span>
+<span class="text-xs text-stone-400 font-mono">LIFETIME</span>
+</div>
+</div>
+</div>
+<!-- Customer Table Area -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container">
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500">Customer</th>
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500">Email</th>
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500 text-center">Orders</th>
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500">Total Spent</th>
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500">Loyalty Points</th>
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500">Subscriptions</th>
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500">Last Order</th>
+<th class="px-6 py-4 text-[11px] font-mono uppercase tracking-wider text-stone-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest/10">
+<!-- Row: Abena Mensah -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-bold text-primary">AM</div>
+<span class="font-bold text-sm">Abena Mensah</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-stone-400">abena.m@example.com</td>
+<td class="px-6 py-5 text-sm text-center font-mono">14</td>
+<td class="px-6 py-5 text-sm font-mono tracking-tight">$412.50</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-mono">820</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-0.5 text-[10px] font-bold rounded bg-green-950 text-green-400 uppercase tracking-tight">Active</span>
+</td>
+<td class="px-6 py-5 text-sm text-stone-500">2h ago</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-500 hover:text-on-surface">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row: Kofi Asante -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-bold text-primary">KA</div>
+<span class="font-bold text-sm">Kofi Asante</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-stone-400">kofi.a@ghana.net</td>
+<td class="px-6 py-5 text-sm text-center font-mono">5</td>
+<td class="px-6 py-5 text-sm font-mono tracking-tight">$124.00</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="star">star</span>
+<span class="text-sm font-mono">245</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-0.5 text-[10px] font-bold rounded bg-stone-800 text-stone-500 uppercase tracking-tight">None</span>
+</td>
+<td class="px-6 py-5 text-sm text-stone-500">Yesterday</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-500 hover:text-on-surface">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row: James Owusu (EXPANDED) -->
+<tr class="bg-surface-container-highest/20 border-l-4 border-primary">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<img alt="Customer Profile" class="w-8 h-8 rounded-full object-cover" data-alt="close-up portrait of a cheerful man with glasses in a warm coffee shop setting with soft background bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyJITGlxecI_Uzd64iue7Gr8OhmEuPb6TZWPgzN3yd6Y79LOHyeQx1Uk0V98xr6lrc6vYY0qBklKdlCBYc2krmEtVVB7OtHXewVhTAouFO453UCUV0yZ-uMtsIPkNEgacgHtO0WgKhOOCtqODMX8VBgJ97CuFvWqZAsfytDqHnIdtPJb7tsBz54WD_w4U-FuCRTAGiFmae-rlk-z4YanK_VovTPgfO4M4vaOWEQNWkIKAwYZ2_6qms8I4vGB2N1GBJnrNXGZvTRefI"/>
+<span class="font-bold text-sm">James Owusu</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-stone-400">jameso@corp.com</td>
+<td class="px-6 py-5 text-sm text-center font-mono">28</td>
+<td class="px-6 py-5 text-sm font-mono tracking-tight">$892.20</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold font-mono">1,450</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-0.5 text-[10px] font-bold rounded bg-amber-950 text-amber-500 uppercase tracking-tight">Paused</span>
+</td>
+<td class="px-6 py-5 text-sm text-stone-500">14 min ago</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary">
+<span class="material-symbols-outlined text-lg rotate-180" data-icon="expand_more">expand_more</span>
+</button>
+</td>
+</tr>
+<!-- Expanded Details -->
+<tr class="bg-surface-container-highest/10">
+<td class="px-12 py-8" colspan="8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="space-y-6">
+<h4 class="text-[10px] font-mono uppercase tracking-widest text-stone-500">Recent Activity</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="local_cafe">local_cafe</span>
+<div>
+<p class="text-sm font-bold">Cold Brew Subscription</p>
+<p class="text-[10px] text-stone-500 font-mono">ORD-9421 • 14 min ago</p>
+</div>
+</div>
+<span class="text-sm font-mono font-bold">$12.50</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_basket">shopping_basket</span>
+<div>
+<p class="text-sm font-bold">Pastry Box &amp; Coffee</p>
+<p class="text-[10px] text-stone-500 font-mono">ORD-8312 • 2 days ago</p>
+</div>
+</div>
+<span class="text-sm font-mono font-bold">$24.00</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="local_cafe">local_cafe</span>
+<div>
+<p class="text-sm font-bold">Double Espresso</p>
+<p class="text-[10px] text-stone-500 font-mono">ORD-7910 • 4 days ago</p>
+</div>
+</div>
+<span class="text-sm font-mono font-bold">$4.50</span>
+</div>
+</div>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<h4 class="text-[10px] font-mono uppercase tracking-widest text-stone-500">Loyalty Progress</h4>
+<span class="text-xs text-stone-400"><span class="text-primary font-bold">1,450</span> / 2,000 pts</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 72%"></div>
+</div>
+<p class="text-[10px] text-stone-500 italic">550 points until Platinum Tier upgrade.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 px-4 py-3 bg-primary-container text-on-primary-container rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+                                                View Full Profile
+                                            </button>
+<button class="flex-1 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
+                                                Contact Customer
+                                            </button>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row: Efua Darko -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-bold text-primary">ED</div>
+<span class="font-bold text-sm">Efua Darko</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-stone-400">efua.d@ghana.com</td>
+<td class="px-6 py-5 text-sm text-center font-mono">8</td>
+<td class="px-6 py-5 text-sm font-mono tracking-tight">$192.00</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="star">star</span>
+<span class="text-sm font-mono">410</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-0.5 text-[10px] font-bold rounded bg-red-950 text-red-500 uppercase tracking-tight">Failed</span>
+</td>
+<td class="px-6 py-5 text-sm text-stone-500">3 days ago</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-500 hover:text-on-surface">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row: Ama Boateng -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-bold text-primary">AB</div>
+<span class="font-bold text-sm">Ama Boateng</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-stone-400">ama.b@ghana.net</td>
+<td class="px-6 py-5 text-sm text-center font-mono">19</td>
+<td class="px-6 py-5 text-sm font-mono tracking-tight">$548.00</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-mono">920</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-0.5 text-[10px] font-bold rounded bg-green-950 text-green-400 uppercase tracking-tight">Active</span>
+</td>
+<td class="px-6 py-5 text-sm text-stone-500">5 days ago</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-500 hover:text-on-surface">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row: Kweku Asare -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-bold text-primary">KA</div>
+<span class="font-bold text-sm">Kweku Asare</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-stone-400">kweku.a@example.com</td>
+<td class="px-6 py-5 text-sm text-center font-mono">2</td>
+<td class="px-6 py-5 text-sm font-mono tracking-tight">$34.50</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="star">star</span>
+<span class="text-sm font-mono">65</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-0.5 text-[10px] font-bold rounded bg-stone-800 text-stone-500 uppercase tracking-tight">None</span>
+</td>
+<td class="px-6 py-5 text-sm text-stone-500">2 weeks ago</td>
+<td class="px-6 py-5 text-right">
+<button class="text-stone-500 hover:text-on-surface">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between bg-surface-container border-t border-surface-container-highest/10">
+<span class="text-xs text-stone-500">Showing 1-6 of 184 customers</span>
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container-low rounded-lg hover:bg-surface-container-high text-stone-400">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-2 bg-surface-container-high rounded-lg text-primary font-bold px-4 text-sm">1</button>
+<button class="p-2 bg-surface-container-low rounded-lg hover:bg-surface-container-high text-stone-400 px-4 text-sm">2</button>
+<button class="p-2 bg-surface-container-low rounded-lg hover:bg-surface-container-high text-stone-400 px-4 text-sm">3</button>
+<button class="p-2 bg-surface-container-low rounded-lg hover:bg-surface-container-high text-stone-400">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB Action (Contextual: Dashboard/Home centric, suppressed on details but relevant on list) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="person_add">person_add</span>
+</button>
+</body></html>

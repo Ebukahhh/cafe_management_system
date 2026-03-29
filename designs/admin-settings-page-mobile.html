@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,200..800;1,200..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { display: none; }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#3d3327",
+                        "on-surface": "#f1e0ce",
+                        "on-secondary-fixed-variant": "#4a4640",
+                        "secondary-fixed": "#e9e1d9",
+                        "surface-container": "#271e13",
+                        "surface-tint": "#ffb779",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "on-primary": "#4c2700",
+                        "background": "#1a1208",
+                        "secondary": "#ccc5be",
+                        "primary-container": "#c8864a",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#ffb779",
+                        "outline-variant": "#524439",
+                        "surface-bright": "#42372b",
+                        "on-background": "#f1e0ce",
+                        "surface-container-low": "#231a0f",
+                        "outline": "#9f8d81",
+                        "inverse-on-surface": "#392f23",
+                        "tertiary-container": "#a37dff",
+                        "tertiary": "#d0bcff",
+                        "on-secondary": "#33302b",
+                        "inverse-primary": "#885119",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "tertiary-fixed": "#e9ddff",
+                        "on-error": "#690005",
+                        "inverse-surface": "#f1e0ce",
+                        "surface-container-lowest": "#140d04",
+                        "on-secondary-fixed": "#1e1b16",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#ffdcc1",
+                        "on-surface-variant": "#d7c3b5",
+                        "on-tertiary": "#3c0091",
+                        "on-primary-fixed": "#2e1500",
+                        "on-primary-container": "#482400",
+                        "surface-dim": "#1a1208",
+                        "on-tertiary-container": "#380088",
+                        "on-primary-fixed-variant": "#6c3a02",
+                        "surface": "#1a1208",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#3d3327",
+                        "primary": "#ffb779",
+                        "secondary-fixed-dim": "#ccc5be",
+                        "on-tertiary-fixed": "#23005c",
+                        "on-secondary-container": "#bbb4ad",
+                        "surface-container-high": "#32281d",
+                        "secondary-container": "#4a4640"
+                    },
+                    fontFamily: {
+                        "headline": ["Fraunces"],
+                        "body": ["DM Sans"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body antialiased min-h-screen pb-32">
+<!-- Top AppBar (Mobile Context) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#1A1208]/80 backdrop-blur-xl h-16 flex items-center justify-between px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-xl" style="font-variation-settings: 'FILL' 1;">coffee</span>
+</div>
+<h1 class="font-headline font-bold text-xl text-primary-container italic">Jennifer's Café</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+</header>
+<main class="pt-20 px-4 flex flex-col gap-8 max-w-md mx-auto">
+<!-- Page Title & Editorial Header -->
+<div class="space-y-1">
+<h2 class="font-headline text-3xl font-bold tracking-tight text-on-background">Settings</h2>
+<p class="text-on-surface-variant text-sm font-label opacity-80">Refine your café's digital presence</p>
+</div>
+<!-- Sub-nav: Horizontal Scroll Pill Tabs -->
+<nav class="flex overflow-x-auto gap-2 py-2 -mx-4 px-4 scrollbar-hide">
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-primary-container text-on-primary-container font-medium text-sm transition-all">Café Details</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-medium text-sm hover:bg-surface-container-high transition-all">Opening Hours</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-medium text-sm hover:bg-surface-container-high transition-all">Notifications</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-medium text-sm hover:bg-surface-container-high transition-all">Subscription</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-medium text-sm hover:bg-surface-container-high transition-all">Staff Access</button>
+</nav>
+<!-- Form Sections Stack -->
+<!-- Café Details Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-xl font-semibold text-primary">Café Details</h3>
+<span class="material-symbols-outlined text-outline text-sm">info</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 space-y-5">
+<div class="space-y-2">
+<label class="block font-label text-xs uppercase tracking-widest text-outline">Café Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-3 text-on-surface focus:ring-1 focus:ring-primary/40 transition-all" type="text" value="Jennifer's Specialty Coffee"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label text-xs uppercase tracking-widest text-outline">Contact Email</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-3 text-on-surface focus:ring-1 focus:ring-primary/40 transition-all" type="email" value="hello@jenniferscafe.com"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label text-xs uppercase tracking-widest text-outline">Description</label>
+<textarea class="w-full bg-surface-container-highest border-none rounded-lg p-3 text-on-surface focus:ring-1 focus:ring-primary/40 transition-all" rows="3">Artisanal brews and home-style pastries served in a warm, minimalist atmosphere. Dedicated to the craft of the perfect pour.</textarea>
+</div>
+</div>
+</section>
+<!-- Opening Hours Section -->
+<section class="space-y-6">
+<h3 class="font-headline text-xl font-semibold text-primary">Opening Hours</h3>
+<div class="overflow-x-auto -mx-4 px-4">
+<div class="min-w-[400px] bg-surface-container-low rounded-xl p-4">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant/30">
+<th class="pb-3 font-label text-xs uppercase text-outline">Day</th>
+<th class="pb-3 font-label text-xs uppercase text-outline">Open</th>
+<th class="pb-3 font-label text-xs uppercase text-outline">Close</th>
+<th class="pb-3 font-label text-xs uppercase text-outline">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-outline-variant/10">
+<td class="py-4 font-medium">Monday</td>
+<td class="py-4">07:00 AM</td>
+<td class="py-4">06:00 PM</td>
+<td class="py-4"><span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold">ACTIVE</span></td>
+</tr>
+<tr class="border-b border-outline-variant/10">
+<td class="py-4 font-medium">Tuesday</td>
+<td class="py-4">07:00 AM</td>
+<td class="py-4">06:00 PM</td>
+<td class="py-4"><span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold">ACTIVE</span></td>
+</tr>
+<tr>
+<td class="py-4 font-medium text-outline">Sunday</td>
+<td class="py-4 text-outline">--:--</td>
+<td class="py-4 text-outline">--:--</td>
+<td class="py-4"><span class="px-2 py-1 rounded-full bg-surface-variant text-outline text-[10px] font-bold">CLOSED</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Subscription Settings Section -->
+<section class="space-y-6">
+<h3 class="font-headline text-xl font-semibold text-primary">Subscription Settings</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="space-y-0.5">
+<p class="font-medium text-on-surface">Premium Editorial Plan</p>
+<p class="text-xs text-outline font-label">Billed monthly • $49/mo</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<div class="w-11 h-6 bg-primary rounded-full transition-colors"></div>
+<div class="absolute left-6 top-1 bg-on-primary w-4 h-4 rounded-full transition-transform"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="space-y-0.5">
+<p class="font-medium text-on-surface">Auto-Renew</p>
+<p class="text-xs text-outline font-label">Payment method: VISA **** 4242</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<div class="w-11 h-6 bg-primary rounded-full transition-colors"></div>
+<div class="absolute left-6 top-1 bg-on-primary w-4 h-4 rounded-full transition-transform"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Staff Access Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-xl font-semibold text-primary">Staff Access</h3>
+<button class="text-primary text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">add</span> Add Staff
+                </button>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all">
+<img class="w-12 h-12 rounded-full object-cover grayscale opacity-80" data-alt="portrait of a male barista in a dark apron smiling in a coffee shop setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyBENHc7DAMBIQT6qFautl4wQORL-a5mH7T_Oejtq3bt0Z2U9jLVH1L0ola3WiP-lgMwUGoaJHJDwUkk6TYdb6H1mFzIdop6TQRa1fR5wufa7ZOldg-9NfVz2qVhRLqGR6aLgvdiZs516bwpBkDpVm9Ktfw4w1HOcgVslFAHxqQXthDsb1iSYAT02hxSpjOV6X-cWQ6eu9eMkuxHP48LgDwgRPcHK1zVbVR-FWiETchwkHEtql28uOlvBzQDVWAdFnaoH5WAsL-w5g"/>
+<div class="flex-1">
+<p class="font-medium text-on-surface">Marcus Chen</p>
+<p class="text-xs text-outline font-label">Head Barista • Admin Access</p>
+</div>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl hover:bg-surface-container transition-all">
+<img class="w-12 h-12 rounded-full object-cover grayscale opacity-80" data-alt="portrait of a female staff member with short hair in a minimalist cafe interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTlxNrhr0ylqpYllA6CH999qjDCH2Kyp03-sXmEK5Kl-XsbYWub0uin-YzRUS72kmJH-fhQkTiS-vNQVpzZBlOe2CDoqpkG3hfxaO_9oDs1w4xUMG7U61TLrqD737-5PSsa-3HPK5OMLo2duaYLyVgpCoXA8r8d4BzWloMHoAXo4TAuPWlDI1QQNU-pGaGRPldOuQD0KIdbowKCyOMWFSv-xBMErLh7qkMJAlRSA67KHpP0puVtLkEZ7Tj5ChcbzW-Sjsbyd3i4DSm"/>
+<div class="flex-1">
+<p class="font-medium text-on-surface">Elena Rodriguez</p>
+<p class="text-xs text-outline font-label">Store Manager • Editor Access</p>
+</div>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Save Button -->
+<div class="fixed bottom-16 left-0 right-0 p-4 bg-gradient-to-t from-background via-background to-transparent pt-12 pb-6 z-40">
+<button class="w-full h-14 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-lg shadow-xl shadow-primary/20 active:scale-95 transition-transform flex items-center justify-center gap-2">
+            Save Settings
+        </button>
+</div>
+<!-- Bottom Navigation (Mobile Top-Level Pivot) -->
+<nav class="fixed bottom-0 left-0 right-0 h-16 bg-[#1A1208]/90 backdrop-blur-xl flex items-center justify-around px-2 z-50">
+<button class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="text-[10px] font-label font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined text-2xl">restaurant_menu</span>
+<span class="text-[10px] font-label font-medium">Menu</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+<span class="text-[10px] font-label font-medium">Orders</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined text-2xl">event</span>
+<span class="text-[10px] font-label font-medium">Reservations</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="text-[10px] font-label font-bold">Profile</span>
+</button>
+</nav>
+</body></html>

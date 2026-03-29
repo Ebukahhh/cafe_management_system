@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#d0bcff",
+              "outline-variant": "#524439",
+              "on-surface": "#f1e0ce",
+              "error": "#ffb4ab",
+              "outline": "#9f8d81",
+              "on-secondary-fixed": "#1e1b16",
+              "inverse-primary": "#885119",
+              "inverse-surface": "#f1e0ce",
+              "surface-container": "#271e13",
+              "surface-bright": "#42372b",
+              "surface-container-lowest": "#140d04",
+              "on-background": "#f1e0ce",
+              "secondary-fixed-dim": "#ccc5be",
+              "tertiary-container": "#a37dff",
+              "on-primary-container": "#482400",
+              "secondary": "#ccc5be",
+              "primary-fixed": "#ffdcc1",
+              "secondary-container": "#4a4640",
+              "on-secondary-fixed-variant": "#4a4640",
+              "on-tertiary-container": "#380088",
+              "tertiary-fixed": "#e9ddff",
+              "surface-variant": "#3d3327",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed": "#2e1500",
+              "surface-container-high": "#32281d",
+              "surface-dim": "#1a1208",
+              "primary-fixed-dim": "#ffb779",
+              "surface-container-low": "#231a0f",
+              "background": "#1a1208",
+              "on-tertiary-fixed": "#23005c",
+              "on-primary": "#4c2700",
+              "on-error": "#690005",
+              "surface": "#1a1208",
+              "on-secondary-container": "#bbb4ad",
+              "on-tertiary-fixed-variant": "#5516be",
+              "on-surface-variant": "#d7c3b5",
+              "primary-container": "#c8864a",
+              "primary": "#ffb779",
+              "error-container": "#93000a",
+              "on-tertiary": "#3c0091",
+              "surface-tint": "#ffb779",
+              "secondary-fixed": "#e9e1d9",
+              "inverse-on-surface": "#392f23",
+              "surface-container-highest": "#3d3327",
+              "on-primary-fixed-variant": "#6c3a02",
+              "tertiary": "#d0bcff",
+              "on-secondary": "#33302b"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "mono": ["JetBrains Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<header class="w-full top-0 sticky z-40 bg-stone-900/50 backdrop-blur-md shadow-2xl shadow-black/20">
+<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+<button class="p-2 -ml-2 text-primary">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<div class="font-headline text-2xl text-[#C8864A] italic">Jennifer's Café</div>
+<button class="p-2 -mr-2 text-primary">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</header>
+<main class="pb-40">
+<section class="relative h-[397px] w-full overflow-hidden">
+<img alt="Coffee pour over process" class="w-full h-full object-cover" data-alt="Close-up of a glass carafe being filled with dark specialty coffee from a ceramic dripper, warm steam rising, moody boutique cafe lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGe-oJ69OYSE1naetkXYEcqmV27fftDKG3FqHOPU46KcPjeuBO-TUYinJnFGR-9oK9LmKX0vogAXd-ak04f7q2xY2tV03rEGmQD0xdHXweo3LfT8y4tCz97cSD_tmHpUdwbwESgZ3RzC0K_cYNjtnEmR5teemAShgmdy0pvT5VOgZ-Cni7gOFO2CeklRQhLaxd6v8D2N5ndI_hAfhS39al_cJXq3PxL30A6XAhPUH3llIA9tD-n6Ah6MgRa9lmmbRg8DwlMVglRalA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</section>
+<section class="px-6 -mt-12 relative z-10">
+<div class="flex justify-between items-end mb-4">
+<div class="space-y-1">
+<span class="text-primary font-mono text-[10px] tracking-widest uppercase">Ethiopia • Yirgacheffe</span>
+<h1 class="font-headline text-4xl leading-tight text-on-surface">Single Origin Pour Over</h1>
+</div>
+<div class="text-2xl font-headline text-primary-fixed-dim mb-1">$6.50</div>
+</div>
+<p class="text-on-surface-variant leading-relaxed text-sm mb-10 max-w-prose">
+                Experience the delicate notes of jasmine, lemon zest, and wild honey. Our rotating single-origin beans are meticulously hand-poured to highlight the unique terroir of the region.
+            </p>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between items-center mb-4">
+<label class="font-headline text-lg italic text-[#C8864A]">Select Size</label>
+<span class="text-[10px] font-mono text-outline uppercase tracking-tighter">Essential</span>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<button class="flex-none px-6 py-3 rounded-xl bg-[#C8864A]/10 border border-[#C8864A] text-primary transition-all scale-95 duration-150">
+<span class="block text-xs font-label opacity-60">Small</span>
+<span class="font-bold">8oz</span>
+</button>
+<button class="flex-none px-6 py-3 rounded-xl bg-surface-container-high text-stone-400 hover:text-stone-200 transition-colors">
+<span class="block text-xs font-label opacity-60">Medium</span>
+<span class="font-bold">12oz</span>
+</button>
+<button class="flex-none px-6 py-3 rounded-xl bg-surface-container-high text-stone-400 hover:text-stone-200 transition-colors">
+<span class="block text-xs font-label opacity-60">Large</span>
+<span class="font-bold">16oz</span>
+</button>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-4">
+<label class="font-headline text-lg italic text-[#C8864A]">Brew Temperature</label>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<button class="flex-none px-6 py-3 rounded-xl bg-surface-container-high text-stone-400 hover:text-stone-200 transition-colors">
+<span class="font-bold">Hot</span>
+</button>
+<button class="flex-none px-6 py-3 rounded-xl bg-[#C8864A]/10 border border-[#C8864A] text-primary transition-all">
+<span class="font-bold">Over Ice</span>
+</button>
+<button class="flex-none px-6 py-3 rounded-xl bg-surface-container-high text-stone-400 hover:text-stone-200 transition-colors">
+<span class="font-bold">Ambient</span>
+</button>
+</div>
+</div>
+<div>
+<label class="font-headline text-lg italic text-[#C8864A] block mb-4">Add-ons</label>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl group transition-all hover:bg-surface-container">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div>
+<p class="font-bold text-sm">Extra Shot</p>
+<p class="text-[10px] text-outline font-mono">+$1.50</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-md border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-transparent">check</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-[#C8864A]/5 rounded-2xl ring-1 ring-[#C8864A]/20 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+<div>
+<p class="font-bold text-sm">Oat Milk</p>
+<p class="text-[10px] text-outline font-mono">+$0.75</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-on-primary font-bold">check</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="fixed bottom-0 left-0 w-full z-50">
+<div class="px-6 py-4 bg-background/80 backdrop-blur-xl">
+<button class="w-full bg-gradient-to-r from-primary-container to-[#885119] text-on-primary-container py-4 rounded-xl font-headline text-lg font-bold shadow-lg shadow-black/40 flex items-center justify-center gap-2 transform active:scale-[0.98] transition-all">
+                Add to Cart — $7.25
+                <span class="material-symbols-outlined text-sm">shopping_bag</span>
+</button>
+</div>
+<nav class="bg-[#1A1208]/90 backdrop-blur-xl border-t border-white/5 flex justify-around items-center px-4 pb-8 pt-3 md:hidden">
+<a class="flex flex-col items-center justify-center text-stone-500 active:bg-white/5 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['DM_Sans'] text-[10px] tracking-tight mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#C8864A]/10 text-[#C8864A] rounded-xl px-3 py-1 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-['DM_Sans'] text-[10px] tracking-tight mt-1">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 active:bg-white/5 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-['DM_Sans'] text-[10px] tracking-tight mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 active:bg-white/5 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-['DM_Sans'] text-[10px] tracking-tight mt-1">Reservations</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 active:bg-white/5 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['DM_Sans'] text-[10px] tracking-tight mt-1">Profile</span>
+</a>
+</nav>
+</footer>
+</body></html>

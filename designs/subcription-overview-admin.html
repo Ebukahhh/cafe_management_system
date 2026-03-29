@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Subscription Management | Jennifer's Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary": "#ccc5be",
+                        "on-primary": "#4c2700",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#231a0f",
+                        "on-secondary-fixed-variant": "#4a4640",
+                        "on-secondary-container": "#bbb4ad",
+                        "background": "#1a1208",
+                        "on-secondary-fixed": "#1e1b16",
+                        "on-primary-fixed": "#2e1500",
+                        "tertiary": "#d0bcff",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "primary-fixed": "#ffdcc1",
+                        "on-primary-container": "#482400",
+                        "on-secondary": "#33302b",
+                        "inverse-surface": "#f1e0ce",
+                        "primary-container": "#c8864a",
+                        "surface-bright": "#42372b",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "outline-variant": "#524439",
+                        "on-primary-fixed-variant": "#6c3a02",
+                        "on-tertiary": "#3c0091",
+                        "primary": "#ffb779",
+                        "on-tertiary-container": "#380088",
+                        "outline": "#9f8d81",
+                        "secondary-container": "#4a4640",
+                        "surface-dim": "#1a1208",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "surface-container-high": "#32281d",
+                        "primary-fixed-dim": "#ffb779",
+                        "secondary-fixed": "#e9e1d9",
+                        "inverse-primary": "#885119",
+                        "surface": "#1a1208",
+                        "surface-tint": "#ffb779",
+                        "surface-variant": "#3d3327",
+                        "surface-container-highest": "#3d3327",
+                        "inverse-on-surface": "#392f23",
+                        "on-surface-variant": "#d7c3b5",
+                        "tertiary-container": "#a37dff",
+                        "secondary-fixed-dim": "#ccc5be",
+                        "surface-container": "#271e13",
+                        "on-surface": "#f1e0ce",
+                        "tertiary-fixed": "#e9ddff",
+                        "on-background": "#f1e0ce",
+                        "on-tertiary-fixed": "#23005c",
+                        "surface-container-lowest": "#140d04"
+                    },
+                    fontFamily: {
+                        "headline": ["Fraunces", "serif"],
+                        "body": ["DM Sans", "sans-serif"],
+                        "label": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'DM Sans', sans-serif; }
+        .amber-gradient {
+            background: linear-gradient(135deg, #ffb779 0%, #c8864a 100%);
+        }
+        .glass-panel {
+            background: rgba(39, 30, 19, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 overflow-y-auto bg-stone-100 dark:bg-stone-900 flex flex-col gap-2 p-4 font-['DM_Sans'] text-sm tracking-tight z-[60]">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl amber-gradient flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-on-primary">coffee</span>
+</div>
+<div>
+<h2 class="font-['Fraunces'] text-2xl text-stone-900 dark:text-stone-50 leading-none">Admin Mode</h2>
+<p class="text-[10px] uppercase tracking-widest text-stone-500 mt-1">Coffee Sommelier Console</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 text-stone-600 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 transition-colors rounded-lg cursor-pointer transition-all scale-98 active:opacity-80">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-stone-600 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 transition-colors rounded-lg cursor-pointer transition-all scale-98 active:opacity-80">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span>Orders</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-stone-600 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 transition-colors rounded-lg cursor-pointer transition-all scale-98 active:opacity-80">
+<span class="material-symbols-outlined">event</span>
+<span>Reservations</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-stone-600 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 transition-colors rounded-lg cursor-pointer transition-all scale-98 active:opacity-80">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span>Menu</span>
+</div>
+<!-- Active Navigation -->
+<div class="flex items-center gap-3 px-3 py-2 text-amber-800 dark:text-amber-400 font-bold bg-stone-200 dark:bg-stone-800 rounded-lg cursor-default border-l-4 border-amber-600">
+<span class="material-symbols-outlined">loyalty</span>
+<span>Subscriptions</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-stone-600 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 transition-colors rounded-lg cursor-pointer transition-all scale-98 active:opacity-80">
+<span class="material-symbols-outlined">campaign</span>
+<span>Promotions</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-stone-600 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 transition-colors rounded-lg cursor-pointer transition-all scale-98 active:opacity-80">
+<span class="material-symbols-outlined">analytics</span>
+<span>Analytics</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-stone-600 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 transition-colors rounded-lg cursor-pointer transition-all scale-98 active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</div>
+</nav>
+<div class="mt-auto pt-4 border-t border-stone-200 dark:border-stone-800">
+<button class="w-full py-3 px-4 rounded-xl amber-gradient text-on-primary font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                New Subscription
+            </button>
+<div class="mt-4 flex items-center gap-3 px-2">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="close-up portrait of professional coffee sommelier in a neutral studio setting with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKaPnnChbhc5vXv0IJ6zx7jfmTI8_cSwkzq2aTAQtek84JDDNHyt36fZQHu8I2vURDmy4TFNIryqT5WrP8Udxj6fW0KQPWuR1JklOy_E_n6iEhz7JxGb1tUwo0rz4ZtPCUWUkdlcppkWOajvwVo556r8YqpLBk-U7jmzdeFqN-bxu_1JtntbDxRY1BDbRpiieRdm3yV9KnosznGuuqY5C4XN3CwbzUoL8Ss1iSChCGcE7rqmAaa96qJYVMji2iftVnbWrJbnUFxV-M"/>
+<div class="overflow-hidden">
+<p class="font-bold text-stone-900 dark:text-stone-50 truncate">Jennifer Admin</p>
+<p class="text-xs text-stone-500 truncate">Store Manager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top Navigation -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-md flex justify-between items-center px-8 border-b border-stone-100 dark:border-stone-800 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-8">
+<h1 class="font-['Fraunces'] text-xl font-semibold text-stone-900 dark:text-stone-50">Subscription Management</h1>
+<nav class="hidden md:flex gap-6">
+<a class="text-amber-700 dark:text-amber-400 border-b-2 border-amber-600 pb-1 font-['Fraunces'] text-sm" href="#">Overview</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-300 transition-all font-['Fraunces'] text-sm" href="#">Plans</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-300 transition-all font-['Fraunces'] text-sm" href="#">Customers</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-300 transition-all font-['Fraunces'] text-sm" href="#">Revenue</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-stone-500 dark:text-stone-400 hover:text-amber-600">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-stone-500 dark:text-stone-400 hover:text-amber-600 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="px-4 py-1.5 rounded-full border border-stone-200 dark:border-stone-800 text-sm font-medium hover:bg-stone-50 dark:hover:bg-stone-900 transition-all">
+                    Export Data
+                </button>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="pt-24 pb-12 px-8 max-w-[1280px] mx-auto">
+<!-- Summary Stats -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<span class="bg-emerald-500/10 text-emerald-500 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-500/20">+12%</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wider">Active Subscriptions</p>
+<h3 class="font-['Fraunces'] text-4xl font-bold text-on-surface">18</h3>
+</div>
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wider">Revenue (This Month)</p>
+<h3 class="font-['Fraunces'] text-4xl font-bold text-primary">$820.00</h3>
+</div>
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error/10 rounded-lg">
+<span class="material-symbols-outlined text-error">error</span>
+</div>
+<span class="bg-error/20 text-error text-xs font-bold px-2.5 py-1 rounded-full border border-error/30">Action Required</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wider">Failed Charges</p>
+<h3 class="font-['Fraunces'] text-4xl font-bold text-on-surface">1</h3>
+</div>
+</section>
+<!-- Active Subscriptions Table -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-['Fraunces'] text-2xl font-bold text-on-surface">Active Subscriptions</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-xl border border-outline-variant/10">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Customer</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Items</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Schedule</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Next Run</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">MB</div>
+<div>
+<p class="font-bold text-on-surface">Marcus Bennett</p>
+<p class="text-xs text-on-surface-variant">marcus.b@email.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium">Ethiopian Yirgacheffe (250g)</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono bg-surface-container-high px-2 py-1 rounded">Weekly</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm">Oct 24, 2023</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-500">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center font-bold text-secondary text-xs">SL</div>
+<div>
+<p class="font-bold text-on-surface">Sarah Lopez</p>
+<p class="text-xs text-on-surface-variant">s.lopez@cloud.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium">Cold Brew Bundle (4pk)</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono bg-surface-container-high px-2 py-1 rounded">Bi-Weekly</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm">Oct 26, 2023</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-500">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary/20 flex items-center justify-center font-bold text-tertiary text-xs">DW</div>
+<div>
+<p class="font-bold text-on-surface">David Wong</p>
+<p class="text-xs text-on-surface-variant">dwong@corp.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium">House Blend (1kg)</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono bg-surface-container-high px-2 py-1 rounded">Monthly</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm">Nov 02, 2023</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-500">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">JC</div>
+<div>
+<p class="font-bold text-on-surface">Julia Chen</p>
+<p class="text-xs text-on-surface-variant">jchen@studio.io</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium">Oat Milk Case (12pk)</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono bg-surface-container-high px-2 py-1 rounded">Monthly</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm">Oct 28, 2023</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1 text-xs font-bold text-amber-500">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                        Paused
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 (Ama Boateng - Failed) -->
+<tr class="bg-error-container/10 hover:bg-error-container/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error/20 flex items-center justify-center font-bold text-error text-xs">AB</div>
+<div>
+<p class="font-bold text-on-surface">Ama Boateng</p>
+<p class="text-xs text-error">ama.b@mail.gh</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium">Artisan Roast (500g)</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono bg-error-container/20 text-error px-2 py-1 rounded">Weekly</span>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-error font-bold italic">Overdue</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1 text-xs font-bold text-error">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                        Failed
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="bg-error text-on-error px-3 py-1 rounded text-xs font-bold hover:scale-105 transition-transform">
+                                        Retry
+                                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Collapsible Run Log -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6 group cursor-pointer">
+<div class="flex items-center gap-4">
+<h2 class="font-['Fraunces'] text-2xl font-bold text-on-surface">Run Log — Last 7 Days</h2>
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] font-mono px-2 py-0.5 rounded">AUTO-UPDATED</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-y-1 transition-transform">expand_more</span>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/5 overflow-hidden">
+<div class="divide-y divide-outline-variant/10">
+<!-- Log Item 1 -->
+<div class="flex items-center px-6 py-4 hover:bg-surface-container-low transition-colors">
+<div class="w-2 h-10 bg-emerald-500 rounded-full mr-6"></div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<p class="font-bold">Batch Run: #SUB-8829</p>
+<span class="text-[10px] font-mono text-on-surface-variant">2023-10-23 04:00 AM</span>
+</div>
+<p class="text-sm text-on-surface-variant">Processed 12 subscriptions. All payments succeeded.</p>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="flex items-center px-6 py-4 hover:bg-surface-container-low transition-colors">
+<div class="w-2 h-10 bg-error rounded-full mr-6"></div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<p class="font-bold">Batch Run: #SUB-8828</p>
+<span class="text-[10px] font-mono text-on-surface-variant">2023-10-22 04:00 AM</span>
+</div>
+<p class="text-sm text-on-surface-variant">Processed 4 subscriptions. <span class="text-error font-medium">1 failed (Ama Boateng)</span>.</p>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="flex items-center px-6 py-4 hover:bg-surface-container-low transition-colors">
+<div class="w-2 h-10 bg-emerald-500 rounded-full mr-6"></div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<p class="font-bold">Batch Run: #SUB-8827</p>
+<span class="text-[10px] font-mono text-on-surface-variant">2023-10-21 04:00 AM</span>
+</div>
+<p class="text-sm text-on-surface-variant">Processed 18 subscriptions. All payments succeeded.</p>
+</div>
+</div>
+</div>
+<button class="w-full py-4 text-center text-primary text-sm font-bold border-t border-outline-variant/10 hover:bg-primary/5 transition-colors">
+                        View Detailed History
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile View Placeholder (Simulated within the same layout for demonstration) -->
+<!-- In a real app, media queries would handle this transition -->
+<div class="block md:hidden fixed inset-0 bg-background z-[100] overflow-y-auto">
+<header class="h-16 flex items-center justify-between px-4 bg-surface shadow-sm">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+<h1 class="font-['Fraunces'] font-bold text-lg">Subscriptions</h1>
+<span class="material-symbols-outlined text-on-surface">search</span>
+</header>
+<div class="p-4 space-y-4">
+<!-- Mobile Stats Stack -->
+<div class="grid grid-cols-1 gap-3">
+<div class="bg-surface-container p-4 rounded-xl flex justify-between items-center">
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant">Active</p>
+<h4 class="text-2xl font-bold">18</h4>
+</div>
+<span class="bg-emerald-500/10 text-emerald-500 text-xs px-2 py-1 rounded-full">+12%</span>
+</div>
+<div class="bg-surface-container p-4 rounded-xl flex justify-between items-center border-l-4 border-primary">
+<div>
+<p class="text-[10px] uppercase text-on-surface-variant">Revenue</p>
+<h4 class="text-2xl font-bold text-primary">$820.00</h4>
+</div>
+</div>
+<div class="bg-error-container/20 p-4 rounded-xl flex justify-between items-center border-l-4 border-error">
+<div>
+<p class="text-[10px] uppercase text-error">Failed</p>
+<h4 class="text-2xl font-bold text-error">1</h4>
+</div>
+</div>
+</div>
+<!-- Mobile List (Card Style) -->
+<div class="space-y-3">
+<h3 class="font-bold text-lg px-1">Recent Subscriptions</h3>
+<div class="bg-surface-container rounded-xl p-4 shadow-sm border border-outline-variant/5">
+<div class="flex justify-between items-start mb-2">
+<p class="font-bold">Marcus Bennett</p>
+<span class="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full font-bold uppercase">Active</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-3">Ethiopian Yirgacheffe (250g)</p>
+<div class="flex justify-between items-end border-t border-outline-variant/10 pt-3">
+<p class="text-xs text-on-surface-variant">Next: <span class="text-on-surface font-medium">Oct 24</span></p>
+<button class="text-primary text-xs font-bold">Manage</button>
+</div>
+</div>
+<!-- Failed card for Ama -->
+<div class="bg-error-container/10 rounded-xl p-4 shadow-sm border border-error/20">
+<div class="flex justify-between items-start mb-2">
+<p class="font-bold text-error">Ama Boateng</p>
+<span class="text-[10px] bg-error text-on-error px-2 py-0.5 rounded-full font-bold uppercase">Failed</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-3">Artisan Roast (500g)</p>
+<div class="flex justify-between items-end border-t border-error/10 pt-3">
+<p class="text-xs text-error font-bold">Action Required</p>
+<button class="bg-error text-on-error px-4 py-1.5 rounded-lg text-xs font-bold">Retry Pay</button>
+</div>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-outline-variant/20 rounded-xl text-on-surface-variant font-bold text-sm">
+                View Run Log
+            </button>
+</div>
+<nav class="fixed bottom-0 left-0 right-0 bg-surface-container-high h-16 border-t border-outline-variant/10 flex items-center justify-around px-2">
+<span class="material-symbols-outlined text-on-surface-variant">home</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+<span class="material-symbols-outlined text-on-surface-variant">inventory_2</span>
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</nav>
+</div>
+</body></html>

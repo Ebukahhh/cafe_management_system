@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,200..800;1,200..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed-variant": "#4a4640",
+              "on-secondary": "#33302b",
+              "on-surface-variant": "#d7c3b5",
+              "surface-container": "#271e13",
+              "on-tertiary-fixed": "#23005c",
+              "on-tertiary-fixed-variant": "#5516be",
+              "inverse-surface": "#f1e0ce",
+              "surface-bright": "#42372b",
+              "primary": "#ffb779",
+              "on-tertiary": "#3c0091",
+              "tertiary": "#d0bcff",
+              "tertiary-fixed-dim": "#d0bcff",
+              "outline": "#9f8d81",
+              "on-primary-container": "#482400",
+              "inverse-on-surface": "#392f23",
+              "tertiary-container": "#a37dff",
+              "on-primary": "#4c2700",
+              "on-error-container": "#ffdad6",
+              "surface-dim": "#1a1208",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "secondary-container": "#4a4640",
+              "on-secondary-container": "#bbb4ad",
+              "on-tertiary-container": "#380088",
+              "secondary": "#ccc5be",
+              "primary-fixed": "#ffdcc1",
+              "on-error": "#690005",
+              "surface-variant": "#3d3327",
+              "primary-container": "#c8864a",
+              "on-surface": "#f1e0ce",
+              "secondary-fixed-dim": "#ccc5be",
+              "outline-variant": "#524439",
+              "on-background": "#f1e0ce",
+              "on-secondary-fixed": "#1e1b16",
+              "background": "#1a1208",
+              "inverse-primary": "#885119",
+              "surface-container-low": "#231a0f",
+              "on-primary-fixed-variant": "#6c3a02",
+              "on-primary-fixed": "#2e1500",
+              "surface-container-lowest": "#140d04",
+              "secondary-fixed": "#e9e1d9",
+              "surface-container-high": "#32281d",
+              "surface": "#1a1208",
+              "surface-tint": "#ffb779",
+              "primary-fixed-dim": "#ffb779",
+              "tertiary-fixed": "#e9ddff",
+              "surface-container-highest": "#3d3327"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "mono": ["JetBrains Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(39, 30, 19, 0.6);
+        backdrop-filter: blur(12px);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .primary-gradient {
+        background: linear-gradient(135deg, #ffb779 0%, #c8864a 100%);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary-container">
+<!-- Top Navigation -->
+<nav class="w-full top-0 sticky z-50 bg-[#1A1208] flex justify-between items-center px-4 py-5">
+<div class="text-[#C8864A] font-['Fraunces'] text-xl italic">Jennifer's Café</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#C8864A]">menu</span>
+</div>
+</nav>
+<main class="w-full overflow-x-hidden">
+<!-- Hero Section -->
+<section class="bg-background px-4 pt-12 pb-16 flex flex-col items-start">
+<h1 class="font-headline text-5xl font-bold leading-tight tracking-tight text-on-surface mb-6">
+                Your café, <br/><span class="italic text-primary">reimagined.</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-sm mb-10 leading-relaxed">
+                The digital sommelier for your specialty coffee business. Streamline orders, loyalty, and craft-level metrics in one tactile interface.
+            </p>
+<div class="w-full flex flex-col gap-4 mb-16">
+<button class="w-full py-4 px-8 rounded-xl primary-gradient text-on-primary font-bold text-lg shadow-xl shadow-primary/10">
+                    Get Started
+                </button>
+<button class="w-full py-4 px-8 rounded-xl bg-surface-container-high text-on-surface font-semibold text-lg">
+                    Book a Demo
+                </button>
+</div>
+<div class="w-full relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl">
+<img alt="Café Interior" class="w-full h-full object-cover" data-alt="Moody atmospheric shot of a boutique specialty coffee shop interior with warm amber lighting, wooden textures, and steam rising from a pour-over" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMQfHZQ6ShoW8WWJKcJRiDEtbZgiVQLEli3KH1R9MykdBTv3VEeucjorvRq4Z2XmEtpL7glNWquMd4vlh0Ksgw7Dv2EBzy7ES2xKOA2aTPkkMCfKN358haPOu4ePRyIJ9HRo6ssjaZB9u5wYQyaBSvvSPn9KJE3roVihXa5R_Hfqm8LiXVIx3PneoC0jy1A2eZJanqgg0cg8pEhLVPF9yJN2CE38rHNAVq90vYS6hbz_DlDGk_t3lWbpEhG7lzJM1FikNO76p2INR9"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+</div>
+</section>
+<!-- Features Strip -->
+<section class="bg-[#F5EDE5] px-4 py-20 flex flex-col gap-8">
+<div class="mb-4">
+<h2 class="font-headline text-3xl text-on-primary-fixed italic mb-2">Artisan Tools</h2>
+<div class="w-12 h-1 bg-primary-container rounded-full"></div>
+</div>
+<!-- Card 1 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border border-black/5 flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">coffee_maker</span>
+<h3 class="font-headline text-2xl text-on-primary-fixed">Precision Brewing</h3>
+<p class="text-on-secondary-fixed-variant leading-relaxed">Track extraction times and temperatures with lab-certified precision for every single origin roast.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border border-black/5 flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<h3 class="font-headline text-2xl text-on-primary-fixed">Intelligent Stock</h3>
+<p class="text-on-secondary-fixed-variant leading-relaxed">Inventory heatmaps that predict bean freshness and supply needs before you ever run low.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border border-black/5 flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+<h3 class="font-headline text-2xl text-on-primary-fixed">Elevated Loyalty</h3>
+<p class="text-on-secondary-fixed-variant leading-relaxed">Reward your regulars with a digital membership that feels like a private club, not a punch card.</p>
+</div>
+</section>
+<!-- Popular Items (Horizontal Scroll) -->
+<section class="py-20 bg-background overflow-hidden">
+<div class="px-4 mb-10 flex justify-between items-end">
+<div>
+<span class="font-mono text-[10px] uppercase tracking-[0.2em] text-primary mb-2 block">Our Curated Selection</span>
+<h2 class="font-headline text-3xl font-bold">Most loved this week</h2>
+</div>
+</div>
+<div class="flex overflow-x-auto gap-6 px-4 no-scrollbar">
+<!-- Product Card 1 -->
+<div class="flex-none w-[280px]">
+<div class="relative h-[340px] rounded-2xl overflow-hidden mb-4 group">
+<img alt="Espresso Tonic" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up of a layered espresso tonic in a glass with a rosemary garnish and clear ice cubes, dark moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANM39BjDykuXDn00xVzqrmrQXNLjw_iRyKExqKjT9sxe_b8tDjWZwpLSHAAdsIYVQXHtQ479KNqoApiCTfnfK81dE7molD_933ZRCQle6z8CNpstbwrvG0EPjN73E0csVnIHoFRGATyZaf58J7vH3gVuCyWZF_c4FMZDRDFvUYmsg9kFQPREWT__YeWoF_aoJjU4ibUsZL5jZ4ERX5OXHApp54_PGjkIXQMgucxyig3gLnH4BFOD2SA3zjeX7uYo263w69UTfQ5m9h"/>
+<div class="absolute top-4 right-4 bg-primary text-on-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Top Pick</div>
+</div>
+<h4 class="font-headline text-xl mb-1">Amber Espresso Tonic</h4>
+<p class="text-on-surface-variant text-sm mb-2">Single origin Ethiopian Yirgacheffe</p>
+<span class="font-mono text-primary font-bold">$6.50</span>
+</div>
+<!-- Product Card 2 -->
+<div class="flex-none w-[280px]">
+<div class="relative h-[340px] rounded-2xl overflow-hidden mb-4 group">
+<img alt="Oat Milk Latte" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Minimalist top view of a flat white coffee with intricate leaf latte art in a ceramic cup on a dark stone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABHcNTDDpl1Z04iaqwg07G86VfmaHLSSvtuylD98JShlMAgBPbyD9kAoq8AM-0WUOLxOrS0CnSZrVbNrT14xhtlZOaZrT3RiYg9E2rSbSuXkjuEF1E57-6wTHErdsW4Oact3yChrPoXEfxAQjkrHKAPy9bOAlBWK-OPgwUPLGZv08l2y1EWTPWK7f4ZoVJ6HpSUjIqLu0n-dZ2CE2PWQkaArHQPbRBfYCBFusykz-csVGeZ7sGFKqBQ9Jym7UhADF9D6APyEBn87yB"/>
+</div>
+<h4 class="font-headline text-xl mb-1">Velvet Oat Flat White</h4>
+<p class="text-on-surface-variant text-sm mb-2">Micro-foam with notes of hazelnut</p>
+<span class="font-mono text-primary font-bold">$5.75</span>
+</div>
+<!-- Product Card 3 -->
+<div class="flex-none w-[280px]">
+<div class="relative h-[340px] rounded-2xl overflow-hidden mb-4 group">
+<img alt="Cold Brew" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Dark cold brew coffee being poured into a glass filled with milk, creating swirling marble patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR19UqH30tgQWWwtoYeS0e5O1ua4Q4-HNghtNBIDbyJnw5w0PzYEY4a5TQvL12oQ00d5wJMweE1mCk6bBkCry7Zj5zAiF6ptyKw57U79quH0WVsNO56IIP2F_3AGKmwC_sZ-7VqUGVCn5TawS-CnqJmKDS-QwkkLF-Sjcu0cfrlbHfHJdWtiQiX5MAWmyloT6LKwJOSWk2wpkLTlIr3q6X8fxpyfGxhlL78xxSiDCnkHFMvVgfyBAP1t1HGFr9bttIg8kF5-bqfkT8"/>
+</div>
+<h4 class="font-headline text-xl mb-1">Midnight Cold Brew</h4>
+<p class="text-on-surface-variant text-sm mb-2">18-hour steep with dark chocolate notes</p>
+<span class="font-mono text-primary font-bold">$6.25</span>
+</div>
+</div>
+</section>
+<!-- Loyalty Banner -->
+<section class="bg-primary-container px-4 py-12">
+<div class="bg-surface-container-lowest/20 rounded-2xl p-8 flex flex-col gap-6 items-center text-center">
+<span class="material-symbols-outlined text-on-primary-container text-5xl">stars</span>
+<h2 class="font-headline text-3xl text-on-primary-container">Join the Inner Circle</h2>
+<p class="text-on-primary-container/80 text-lg">Earn rewards on every artisanal cup and get early access to limited micro-lot releases.</p>
+<button class="bg-on-primary-container text-white w-full py-4 rounded-xl font-bold tracking-wide uppercase text-sm">
+                    Register Now
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#1A1208] border-t border-stone-800/30 px-6 py-12 flex flex-col items-center gap-6">
+<div class="text-[#C8864A] font-['Fraunces'] text-2xl italic">Jennifer's Café</div>
+<div class="flex gap-8">
+<span class="material-symbols-outlined text-stone-500">social_leaderboard</span>
+<span class="material-symbols-outlined text-stone-500">camera_alt</span>
+<span class="material-symbols-outlined text-stone-500">alternate_email</span>
+</div>
+<p class="text-stone-500 font-['DM_Sans'] text-[10px] uppercase tracking-widest text-center leading-relaxed">
+            © 2024 Jennifer's Café. <br/>All rights reserved.
+        </p>
+</footer>
+</body></html>

@@ -1,0 +1,80 @@
+﻿Γû▓ Next.js 16.2.1 (Turbopack)
+- Environments: .env.local, .env
+
+  Creating an optimized production build ...
+node.exe : (node:15708) [M
+ODULE_TYPELESS_PACKAGE_JSO
+N] Warning: Module type 
+of file:///C:/Users/Sober/
+Desktop/cafe_mgt_system/ta
+ilwind.config.ts?id=177479
+6582160 is not specified 
+and it doesn't parse as 
+CommonJS.
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" "C:
+\Users\Sober\AppData\Roami
+ng\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: ((  
+  node:15708) [M...se a   
+ s CommonJS.:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+Reparsing as ES module 
+because module syntax was 
+detected. This incurs a 
+performance overhead.
+To eliminate this 
+warning, add "type": 
+"module" to C:\Users\Sober
+\Desktop\cafe_mgt_system\p
+ackage.json.
+(Use `node 
+--trace-warnings ...` to 
+show where the warning 
+was created)
+Γ£ô Compiled successfully in 16.6s
+  Running TypeScript ...
+Failed to type check.
+
+./src/lib/store/auth.ts:11
+3:20
+Type error: Conversion of 
+type '{ [x: string]: 
+unknown; }' to type 
+'Profile' may be a 
+mistake because neither 
+type sufficiently 
+overlaps with the other. 
+If this was intentional, 
+convert the expression to 
+'unknown' first.
+  Type '{ [x: string]: 
+unknown; }' is missing 
+the following properties 
+from type 'Profile': id, 
+full_name, avatar_url, 
+phone, and 4 more.
+
+  [90m111 |[0m     }
+  [90m112 |[0m
+[31m[1m>[0m [90m113 
+|[0m     set({ profile: 
+data [36mas[0m 
+[33mProfile[0m })
+  [90m    |[0m          
+          [31m[1m^[0m
+  [90m114 |[0m   },
+  [90m115 |[0m }))
+  [90m116 |[0m
+Next.js build worker 
+exited with code: 1 and 
+signal: null

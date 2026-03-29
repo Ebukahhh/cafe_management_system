@@ -1,26 +1,72 @@
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+/* ─────────────────────────────────────────────
+   Font CSS Variables
+   Fraunces, DM Sans, Inter loaded via next/font/google in layout.tsx
+   Berkeley Mono used as fallback monospace (paid font)
+   ───────────────────────────────────────────── */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-fraunces: "Fraunces", serif;
+  --font-dm-sans: "DM Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─────────────────────────────────────────────
+   Base Styles
+   ───────────────────────────────────────────── */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1A1208;
+  color: #F5ECD7;
+  font-family: var(--font-dm-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(200, 134, 74, 0.3);
+  color: #C8864A;
+}
+
+/* ─────────────────────────────────────────────
+   Design System Utility Classes
+   ───────────────────────────────────────────── */
+
+/* Glass & Gradient Rule — Glassmorphism for floating elements (modals, dropdowns) */
+.glass-card {
+  background: rgba(38, 26, 13, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Signature amber gradient — Primary CTA surfaces */
+.amber-glow {
+  background: linear-gradient(135deg, #C8864A 0%, #8B5E35 100%);
+}
+
+/* Ghost Border — Accessibility fallback at 10% opacity */
+.ghost-border {
+  outline: 1px solid rgba(107, 83, 67, 0.1);
+}
+
+/* Ambient shadow — diffused, never pure black */
+.ambient-shadow {
+  box-shadow: 0 20px 40px rgba(26, 18, 8, 0.08);
+}
+
+/* ─────────────────────────────────────────────
+   Accessibility — Reduced Motion
+   ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

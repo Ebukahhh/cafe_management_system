@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up - Jennifer's Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#42372b",
+              "surface-container-low": "#231a0f",
+              "outline": "#9f8d81",
+              "inverse-on-surface": "#392f23",
+              "on-background": "#f1e0ce",
+              "tertiary-container": "#a37dff",
+              "tertiary": "#d0bcff",
+              "on-secondary": "#33302b",
+              "inverse-primary": "#885119",
+              "tertiary-fixed-dim": "#d0bcff",
+              "tertiary-fixed": "#e9ddff",
+              "on-error": "#690005",
+              "inverse-surface": "#f1e0ce",
+              "surface-variant": "#3d3327",
+              "on-surface": "#f1e0ce",
+              "on-secondary-fixed-variant": "#4a4640",
+              "secondary-fixed": "#e9e1d9",
+              "surface-tint": "#ffb779",
+              "surface-container": "#271e13",
+              "secondary": "#ccc5be",
+              "primary-container": "#c8864a",
+              "error": "#ffb4ab",
+              "on-tertiary-fixed-variant": "#5516be",
+              "on-primary": "#4c2700",
+              "background": "#1a1208",
+              "outline-variant": "#524439",
+              "primary-fixed-dim": "#ffb779",
+              "on-error-container": "#ffdad6",
+              "surface": "#1a1208",
+              "surface-container-highest": "#3d3327",
+              "primary": "#ffb779",
+              "secondary-fixed-dim": "#ccc5be",
+              "on-tertiary-fixed": "#23005c",
+              "on-secondary-container": "#bbb4ad",
+              "secondary-container": "#4a4640",
+              "surface-container-high": "#32281d",
+              "surface-container-lowest": "#140d04",
+              "on-secondary-fixed": "#1e1b16",
+              "error-container": "#93000a",
+              "primary-fixed": "#ffdcc1",
+              "on-tertiary": "#3c0091",
+              "on-surface-variant": "#d7c3b5",
+              "on-primary-fixed": "#2e1500",
+              "on-surface-dim": "#1a1208",
+              "on-tertiary-container": "#380088",
+              "on-primary-fixed-variant": "#6c3a02"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "editorial": ["Newsreader", "serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #1a1208;
+      }
+      .custom-glass {
+        background: rgba(26, 18, 8, 0.7);
+        backdrop-filter: blur(20px);
+      }
+      .amber-gradient {
+        background: linear-gradient(135deg, #ffb779 0%, #c8864a 100%);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface antialiased selection:bg-primary/30 min-h-screen flex flex-col">
+<!-- Suppressing Navigation Shell for Transactional/Sign-up flow as per instruction -->
+<main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="max-w-md w-full space-y-10">
+<!-- Brand Anchor -->
+<div class="text-center">
+<span class="font-headline text-3xl font-bold text-primary-container italic tracking-tight">Jennifer's Café</span>
+</div>
+<!-- Header Section -->
+<div class="text-center space-y-2">
+<h1 class="font-headline text-4xl font-semibold text-on-surface tracking-tight">Create your account</h1>
+<p class="text-on-surface-variant font-medium">
+                    Already have an account? 
+                    <a class="text-primary-container hover:text-primary transition-colors underline-offset-4 decoration-primary-container/30 hover:underline" href="#">Log in</a>
+</p>
+</div>
+<!-- Registration Form -->
+<form action="#" class="mt-8 space-y-6" method="POST">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- First Name -->
+<div class="space-y-1.5">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1" for="first_name">First Name</label>
+<input class="block w-full px-4 py-3 bg-surface-container-highest border-0 rounded-lg text-on-surface focus:ring-1 focus:ring-primary-container/40 transition-all placeholder-on-surface-variant/50" id="first_name" name="first_name" placeholder="Eleanor" required="" type="text"/>
+</div>
+<!-- Last Name -->
+<div class="space-y-1.5">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1" for="last_name">Last Name</label>
+<input class="block w-full px-4 py-3 bg-surface-container-highest border-0 rounded-lg text-on-surface focus:ring-1 focus:ring-primary-container/40 transition-all placeholder-on-surface-variant/50" id="last_name" name="last_name" placeholder="Vance" required="" type="text"/>
+</div>
+</div>
+<!-- Email (Validated State) -->
+<div class="space-y-1.5">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1" for="email">Email</label>
+<div class="relative">
+<input class="block w-full px-4 py-3 bg-surface-container-highest border-0 rounded-lg text-on-surface focus:ring-1 focus:ring-primary-container/40 transition-all" id="email" name="email" required="" type="email" value="eleanor.vance@specialty.coffee"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-green-500 text-xl">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Phone (Optional) -->
+<div class="space-y-1.5">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1" for="phone">Phone (Optional)</label>
+<input class="block w-full px-4 py-3 bg-surface-container-highest border-0 rounded-lg text-on-surface focus:ring-1 focus:ring-primary-container/40 transition-all placeholder-on-surface-variant/50" id="phone" name="phone" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+<!-- Password (Error State) -->
+<div class="space-y-1.5">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1" for="password">Password</label>
+<div class="relative">
+<input class="block w-full px-4 py-3 bg-surface-container-highest border-0 rounded-lg text-on-surface ring-1 ring-error/50 focus:ring-1 focus:ring-error transition-all" id="password" name="password" required="" type="password" value="••••••••"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-error text-xl">error</span>
+</div>
+</div>
+<p class="text-[10px] font-label text-error/90 mt-1 ml-1 tracking-wide">Password must be at least 12 characters long.</p>
+</div>
+<!-- Confirm Password -->
+<div class="space-y-1.5">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1" for="confirm_password">Confirm Password</label>
+<input class="block w-full px-4 py-3 bg-surface-container-highest border-0 rounded-lg text-on-surface focus:ring-1 focus:ring-primary-container/40 transition-all placeholder-on-surface-variant/50" id="confirm_password" name="confirm_password" placeholder="••••••••" required="" type="password"/>
+</div>
+<!-- Terms -->
+<div class="flex items-start px-1">
+<div class="flex items-center h-5">
+<input class="h-4 w-4 rounded bg-surface-container-highest border-0 text-primary-container focus:ring-offset-background focus:ring-primary-container" id="terms" name="terms" required="" type="checkbox"/>
+</div>
+<div class="ml-3 text-xs leading-5">
+<label class="text-on-surface-variant" for="terms">I agree to the <a class="text-primary-container font-medium" href="#">Terms of Service</a> and <a class="text-primary-container font-medium" href="#">Privacy Policy</a>.</label>
+</div>
+</div>
+<!-- CTA -->
+<div>
+<button class="w-full amber-gradient text-on-primary font-bold py-4 px-6 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-lg shadow-primary-container/20" type="submit">
+                        Create Account
+                    </button>
+</div>
+</form>
+<!-- Social Logins -->
+<div class="pt-8 space-y-6">
+<div class="relative">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/30"></div>
+</div>
+<div class="relative flex justify-center text-xs">
+<span class="px-4 bg-background text-on-surface-variant font-label uppercase tracking-widest">Or continue with</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center px-4 py-3 rounded-xl bg-surface-container-high hover:bg-surface-bright transition-colors group">
+<svg class="h-5 w-5 mr-2" fill="currentColor" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-5.38z" fill="#EA4335"></path>
+</svg>
+<span class="text-sm font-medium text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center px-4 py-3 rounded-xl bg-surface-container-high hover:bg-surface-bright transition-colors">
+<svg class="h-5 w-5 mr-2" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C6.477 2 2 6.477 2 12c0 4.419 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"></path>
+</svg>
+<span class="text-sm font-medium text-on-surface">GitHub</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer from Shared Components JSON -->
+<footer class="flex flex-col md:flex-row justify-between items-center px-8 py-6 w-full mt-auto bg-[#1A1208] border-t border-[#C8864A]/10">
+<span class="font-['DM_Sans'] text-[10px] uppercase tracking-widest text-[#C8864A]/60 order-2 md:order-1 mt-4 md:mt-0">© 2024 Jennifer's Specialty Coffee Management</span>
+<div class="flex gap-8 order-1 md:order-2">
+<a class="font-['DM_Sans'] text-[10px] uppercase tracking-widest text-[#C8864A]/60 hover:text-[#C8864A] transition-opacity" href="#">Privacy Policy</a>
+<a class="font-['DM_Sans'] text-[10px] uppercase tracking-widest text-[#C8864A]/60 hover:text-[#C8864A] transition-opacity" href="#">Terms of Service</a>
+<a class="font-['DM_Sans'] text-[10px] uppercase tracking-widest text-[#C8864A]/60 hover:text-[#C8864A] transition-opacity" href="#">Support</a>
+</div>
+</footer>
+<!-- Decorative Texture Background Elements -->
+<div class="fixed top-0 right-0 -z-10 w-1/3 h-1/2 opacity-20 pointer-events-none">
+<div class="w-full h-full amber-gradient blur-[120px] rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+</div>
+<div class="fixed bottom-0 left-0 -z-10 w-1/4 h-1/3 opacity-10 pointer-events-none">
+<div class="w-full h-full bg-tertiary blur-[100px] rounded-full transform -translate-x-1/4 translate-y-1/4"></div>
+</div>
+</body></html>

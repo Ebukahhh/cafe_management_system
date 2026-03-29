@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=640, initial-scale=1.0" name="viewport"/>
+<title>Edit Product — Single Origin Pour Over</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Berkeley+Mono&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,200..800;1,200..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#4c2700",
+              "on-tertiary-fixed": "#23005c",
+              "on-primary-fixed-variant": "#6c3a02",
+              "on-surface": "#f1e0ce",
+              "on-secondary": "#33302b",
+              "tertiary-fixed-dim": "#d0bcff",
+              "inverse-surface": "#f1e0ce",
+              "surface-container-lowest": "#140d04",
+              "secondary-fixed-dim": "#ccc5be",
+              "background": "#1a1208",
+              "secondary-fixed": "#e9e1d9",
+              "outline-variant": "#524439",
+              "on-error": "#690005",
+              "tertiary": "#d0bcff",
+              "on-tertiary": "#3c0091",
+              "surface-container-low": "#231a0f",
+              "surface-bright": "#42372b",
+              "inverse-primary": "#885119",
+              "surface-container-high": "#32281d",
+              "outline": "#9f8d81",
+              "on-primary-container": "#482400",
+              "error": "#ffb4ab",
+              "surface-dim": "#1a1208",
+              "on-tertiary-container": "#380088",
+              "primary-container": "#c8864a",
+              "secondary-container": "#4a4640",
+              "on-error-container": "#ffdad6",
+              "primary-fixed-dim": "#ffb779",
+              "surface-variant": "#3d3327",
+              "on-secondary-fixed": "#1e1b16",
+              "surface-container-highest": "#3d3327",
+              "on-background": "#f1e0ce",
+              "surface": "#1a1208",
+              "tertiary-fixed": "#e9ddff",
+              "inverse-on-surface": "#392f23",
+              "on-tertiary-fixed-variant": "#5516be",
+              "on-surface-variant": "#d7c3b5",
+              "surface-tint": "#ffb779",
+              "on-secondary-fixed-variant": "#4a4640",
+              "on-secondary-container": "#bbb4ad",
+              "on-primary-fixed": "#2e1500",
+              "surface-container": "#271e13",
+              "secondary": "#ccc5be",
+              "primary-fixed": "#ffdcc1",
+              "tertiary-container": "#a37dff",
+              "error-container": "#93000a",
+              "primary": "#ffb779"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "data": ["Berkeley Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-header { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .amber-gradient { background: linear-gradient(135deg, #ffb779 0%, #c8864a 100%); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-stone-50 text-stone-900 min-h-screen pb-32">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 glass-header flex justify-between items-center px-6 h-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-800">menu</span>
+<span class="font-headline italic text-xl font-bold tracking-tight text-stone-900">Jennifer's Café</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-500" data-icon="notifications">notifications</span>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-stone-200">
+<img alt="Admin Avatar" data-alt="close-up portrait of a professional woman with a warm smile in a brightly lit modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEDZ3DDqRQJnd93d9Fu4PiIuPVZJY4jG7hJfIUvFQM1kH886uXHT0I6pKKpJqhCmy3I3d9salXcGNQxRFIEoJWxvMSloAanCHrSiNhpzdLOE5z36XOsKJluizPUbggSCNMiu6MRZ15SyrO1kJE1aEkeMXqn2ItxXoLbK2ckwReGz7ypcdUcmJrDxlanQGqiiPg10_UWRWQp3LrSJ7uqQSyvmxVQu4i53Z2X2McpxQmyuNACeUUsWKqaMY5XMhwhXk1Mrl1qBpkbSt4"/>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Image Upload Section -->
+<section class="relative w-full aspect-video overflow-hidden">
+<img alt="Product Preview" class="w-full h-full object-cover" data-alt="artisan pour-over coffee brewing in a glass decanter with steam rising, dramatic sunlight hitting the liquid and coffee grounds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp22XRQUWvX3vdw-kh32LL0PsYilPHUfvCMmnxOkPKvQIaxg6HhAqELWIyXG8_Tz8A51qPny3NQlYutvKWP7ta71jzh5PVRd5O1ABywobxxeYGkJWCqmSItLYe2WmqD5CoCdUMhQGCDF8VlvLxxzV6xqPIpiZXe-j_OCzHGc6ct15wVhDpSE3dSz8vi92beEsYvclLNWrAuTfzRRCLjBM_m54oXSqIgxTIMphrUpi0Ym0RMVG0QTWg1C4GdDgFYnRmBvy5dbBrgNys"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+<button class="bg-white/90 px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl">
+<span class="material-symbols-outlined text-lg">photo_camera</span>
+                    Change Photo
+                </button>
+</div>
+</section>
+<!-- Form Content -->
+<div class="px-6 py-8 space-y-10">
+<!-- Header -->
+<header>
+<h1 class="font-headline text-3xl font-extrabold text-stone-900">Edit Product</h1>
+<p class="text-stone-500 text-sm font-medium mt-1">Refining the Single Origin Pour Over experience.</p>
+</header>
+<!-- Basic Info Section -->
+<section class="space-y-6">
+<h2 class="text-xs font-data uppercase tracking-widest text-stone-400">Basic Information</h2>
+<div class="space-y-5">
+<div>
+<label class="block text-sm font-bold text-stone-700 mb-2">Product Name</label>
+<input class="w-full bg-stone-100 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#C8864A] font-medium" type="text" value="Single Origin Pour Over"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-bold text-stone-700 mb-2">Category</label>
+<select class="w-full bg-stone-100 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#C8864A] font-medium appearance-none">
+<option>Brewed Coffee</option>
+<option>Espresso</option>
+<option>Tea</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-bold text-stone-700 mb-2">Price ($)</label>
+<input class="w-full bg-stone-100 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#C8864A] font-data" type="text" value="6.50"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-bold text-stone-700 mb-2">Description</label>
+<textarea class="w-full bg-stone-100 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#C8864A] font-medium" rows="4">Lightly roasted Ethiopian Yirgacheffe beans. Floral notes with a distinct citrus finish, brewed with precision at 205°F.</textarea>
+</div>
+<div>
+<label class="block text-sm font-bold text-stone-700 mb-2">Current Stock</label>
+<div class="flex items-center gap-3">
+<input class="w-32 bg-stone-100 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#C8864A] font-data" type="number" value="120"/>
+<span class="text-stone-400 text-sm font-medium italic">units remaining</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Options -->
+<section class="space-y-6">
+<h2 class="text-xs font-data uppercase tracking-widest text-stone-400">Product Options</h2>
+<div class="space-y-4">
+<div class="bg-stone-100 p-5 rounded-2xl">
+<div class="flex justify-between items-center mb-4">
+<span class="font-bold text-stone-800">Size Options</span>
+<span class="material-symbols-outlined text-stone-400 text-lg">add_circle</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-sm border border-stone-200">12oz (Reg)</span>
+<span class="bg-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-sm border border-stone-200">16oz (Large)</span>
+</div>
+</div>
+<div class="bg-stone-100 p-5 rounded-2xl">
+<div class="flex justify-between items-center mb-4">
+<span class="font-bold text-stone-800">Milk &amp; Add-ons</span>
+<span class="material-symbols-outlined text-stone-400 text-lg">edit</span>
+</div>
+<p class="text-sm text-stone-500 leading-relaxed">Oat Milk, Almond Milk, Soy, Extra Shot, Vanilla Syrup.</p>
+</div>
+</div>
+</section>
+<!-- Availability -->
+<section class="bg-[#C8864A]/5 p-6 rounded-3xl space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-bold text-stone-900">Available for Order</h3>
+<p class="text-xs text-stone-500">Toggle visibility on the customer app</p>
+</div>
+<div class="w-12 h-6 bg-[#C8864A] rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-stone-200/50">
+<div>
+<h3 class="font-bold text-stone-900">Seasonal Special</h3>
+<p class="text-xs text-stone-500">Tag as "Limited Time Only"</p>
+</div>
+<div class="w-12 h-6 bg-stone-300 rounded-full relative">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Product Preview Card -->
+<section class="space-y-4">
+<h2 class="text-xs font-data uppercase tracking-widest text-stone-400">Customer Preview</h2>
+<div class="bg-white rounded-3xl overflow-hidden shadow-2xl shadow-stone-200/50 border border-stone-100">
+<div class="aspect-[4/3] w-full bg-stone-200 overflow-hidden">
+<img alt="Preview Image" class="w-full h-full object-cover" data-alt="artisan pour-over coffee brewing in a glass decanter with steam rising, dramatic sunlight hitting the liquid and coffee grounds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsyLnLqcqzu03eph-Qsiq_ajkLhkzi2e7QCBFdHUYL_rY9SsKFU1r5YkkuJeeRe7xNnjaNwmmlCxArlrJpCOX1VcCTxDSkni0JHmBlex3HrlW_KMNCehK-htA1ccquHSe2DkmfJDYs0MKmJG2p9r_2Ye5vQi2itktnxIyuwSfqa0FB-br2oXQXo9-myNlVIK9wW0mGd5W-u2xJhGVNdMk3ydplxRnOq7ejDgjlmREdLN0QKnJhR_dF8WRcjwNRpmkLZXCTIgvGQf4N"/>
+</div>
+<div class="p-6 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-[#C8864A]">Brewed Coffee</span>
+<h4 class="font-headline text-xl font-bold text-stone-900">Single Origin Pour Over</h4>
+</div>
+<span class="font-data text-lg font-bold text-stone-900">$6.50</span>
+</div>
+<p class="text-stone-500 text-sm line-clamp-2 leading-relaxed">Lightly roasted Ethiopian Yirgacheffe beans. Floral notes with a distinct citrus finish.</p>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="pt-6 space-y-6">
+<button class="amber-gradient w-full py-5 rounded-full text-white font-bold text-lg shadow-lg shadow-[#C8864A]/30 active:scale-[0.98] transition-all duration-200">
+                    Save Changes
+                </button>
+<div class="text-center">
+<button class="text-error font-bold text-sm hover:underline flex items-center justify-center gap-2 mx-auto">
+<span class="material-symbols-outlined text-sm">delete</span>
+                        Delete Product
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/90 glass-header flex justify-around items-center h-20 px-4 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:hidden">
+<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#C8864A]" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Menu</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Orders</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
+</a>
+</nav>
+</body></html>

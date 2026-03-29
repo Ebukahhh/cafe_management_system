@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promotions Manager | Jennifer's Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#ccc5be",
+                        "on-background": "#f1e0ce",
+                        "tertiary-container": "#a37dff",
+                        "on-primary-container": "#482400",
+                        "secondary": "#ccc5be",
+                        "secondary-container": "#4a4640",
+                        "primary-fixed": "#ffdcc1",
+                        "on-secondary-fixed-variant": "#4a4640",
+                        "on-tertiary-container": "#380088",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#e9ddff",
+                        "surface-variant": "#3d3327",
+                        "outline-variant": "#524439",
+                        "on-surface": "#f1e0ce",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#1e1b16",
+                        "outline": "#9f8d81",
+                        "inverse-primary": "#885119",
+                        "surface-container": "#271e13",
+                        "inverse-surface": "#f1e0ce",
+                        "surface-bright": "#42372b",
+                        "surface-container-lowest": "#140d04",
+                        "primary-container": "#c8864a",
+                        "primary": "#ffb779",
+                        "error-container": "#93000a",
+                        "surface-tint": "#ffb779",
+                        "on-tertiary": "#3c0091",
+                        "inverse-on-surface": "#392f23",
+                        "secondary-fixed": "#e9e1d9",
+                        "surface-container-highest": "#3d3327",
+                        "on-primary-fixed-variant": "#6c3a02",
+                        "tertiary": "#d0bcff",
+                        "on-secondary": "#33302b",
+                        "on-primary-fixed": "#2e1500",
+                        "surface-dim": "#1a1208",
+                        "primary-fixed-dim": "#ffb779",
+                        "surface-container-high": "#32281d",
+                        "background": "#1a1208",
+                        "surface-container-low": "#231a0f",
+                        "on-primary": "#4c2700",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#23005c",
+                        "surface": "#1a1208",
+                        "on-secondary-container": "#bbb4ad",
+                        "on-surface-variant": "#d7c3b5",
+                        "on-tertiary-fixed-variant": "#5516be"
+                    },
+                    fontFamily: {
+                        "serif": ["Fraunces", "serif"],
+                        "sans": ["DM Sans", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(16px);
+            background: rgba(26, 18, 8, 0.8);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c8864a;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-sans selection:bg-primary/30 min-h-screen">
+<!-- Top Navigation Bar (Mobile Only per JSON) -->
+<nav class="flex lg:hidden justify-between items-center px-4 py-3 w-full fixed top-0 z-50 bg-[#FFFFFF] dark:bg-[#1A1208] shadow-sm dark:shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-sm" data-icon="coffee">coffee</span>
+</div>
+<span class="text-xl font-serif text-[#C8864A] tracking-tight">Jennifer's Café</span>
+</div>
+<div class="flex gap-4">
+<button class="text-[#C8864A] hover:opacity-80 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-[#C8864A] hover:opacity-80 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Side Navigation (Web Only per JSON) -->
+<aside class="hidden lg:flex flex-col py-8 h-screen w-64 fixed left-0 top-0 overflow-y-auto bg-[#F5F2ED] dark:bg-[#1A1208] z-40">
+<div class="px-8 mb-10">
+<h1 class="text-2xl font-serif text-[#C8864A] dark:text-[#C8864A] leading-none mb-1">Jennifer's Café</h1>
+<p class="font-mono text-[10px] uppercase tracking-widest text-stone-500 opacity-70">Admin Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center text-stone-600 dark:text-stone-400 font-medium hover:text-[#C8864A] px-8 py-3 group hover:bg-[#FFFFFF]/50 dark:hover:bg-[#2A1F12]/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+<span class="font-label text-sm uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center text-stone-600 dark:text-stone-400 font-medium hover:text-[#C8864A] px-8 py-3 group hover:bg-[#FFFFFF]/50 dark:hover:bg-[#2A1F12]/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label text-sm uppercase tracking-wider">Orders</span>
+</a>
+<a class="flex items-center text-stone-600 dark:text-stone-400 font-medium hover:text-[#C8864A] px-8 py-3 group hover:bg-[#FFFFFF]/50 dark:hover:bg-[#2A1F12]/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="event">event</span>
+<span class="font-label text-sm uppercase tracking-wider">Reservations</span>
+</a>
+<a class="flex items-center text-[#C8864A] font-bold bg-[#FFFFFF] dark:bg-[#2A1F12] rounded-l-full ml-4 pl-4 py-3 translate-x-1 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="campaign">campaign</span>
+<span class="font-label text-sm uppercase tracking-wider">Promotions</span>
+</a>
+<a class="flex items-center text-stone-600 dark:text-stone-400 font-medium hover:text-[#C8864A] px-8 py-3 group hover:bg-[#FFFFFF]/50 dark:hover:bg-[#2A1F12]/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-label text-sm uppercase tracking-wider">Menu</span>
+</a>
+<a class="flex items-center text-stone-600 dark:text-stone-400 font-medium hover:text-[#C8864A] px-8 py-3 group hover:bg-[#FFFFFF]/50 dark:hover:bg-[#2A1F12]/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="loyalty">loyalty</span>
+<span class="font-label text-sm uppercase tracking-wider">Subscriptions</span>
+</a>
+<a class="flex items-center text-stone-600 dark:text-stone-400 font-medium hover:text-[#C8864A] px-8 py-3 group hover:bg-[#FFFFFF]/50 dark:hover:bg-[#2A1F12]/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="monitoring">monitoring</span>
+<span class="font-label text-sm uppercase tracking-wider">Analytics</span>
+</a>
+<a class="flex items-center text-stone-600 dark:text-stone-400 font-medium hover:text-[#C8864A] px-8 py-3 group hover:bg-[#FFFFFF]/50 dark:hover:bg-[#2A1F12]/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="font-label text-sm uppercase tracking-wider">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-20 lg:pt-8 pb-32 px-4 lg:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h2 class="text-4xl md:text-5xl font-serif text-on-surface leading-tight">Promotions</h2>
+<p class="text-on-surface-variant font-sans mt-2 max-w-md">Manage your seasonal offers and customer loyalty rewards from a central dashboard.</p>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold px-8 py-4 rounded-xl shadow-lg shadow-primary/10 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Create New Promotion</span>
+</button>
+</header>
+<!-- Stats Overview (Asymmetric Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-container-low p-6 rounded-2xl relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="trending_up">trending_up</span>
+</div>
+<p class="text-xs font-mono text-on-surface-variant uppercase tracking-widest mb-4">Active Campaigns</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-serif text-primary">08</span>
+<span class="text-xs text-on-surface-variant">+2 this week</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-2xl md:col-span-2">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-mono text-on-surface-variant uppercase tracking-widest mb-4">Total Revenue Generated</p>
+<span class="text-4xl font-serif text-on-surface">$12,482.50</span>
+</div>
+<div class="h-16 w-32 flex items-end gap-1">
+<div class="w-2 h-1/2 bg-primary-container/20 rounded-full"></div>
+<div class="w-2 h-3/4 bg-primary-container/40 rounded-full"></div>
+<div class="w-2 h-2/3 bg-primary-container/60 rounded-full"></div>
+<div class="w-2 h-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Promotions List -->
+<section class="mb-16">
+<h3 class="text-sm font-mono text-primary uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
+<span class="w-8 h-[1px] bg-primary/30"></span>
+                Active Offers
+            </h3>
+<div class="space-y-6">
+<!-- Promo Card 1 -->
+<div class="bg-surface-container rounded-2xl overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="p-6">
+<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="local_cafe">local_cafe</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-mono text-lg font-bold text-on-surface">ESPRESSO20</span>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold">PERCENTAGE</span>
+</div>
+<p class="text-sm text-on-surface-variant">20% off all espresso-based drinks</p>
+</div>
+</div>
+<div class="bg-emerald-500/10 text-emerald-400 text-[10px] px-3 py-1 rounded-full font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                                LIVE
+                            </div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+<div>
+<p class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-1">Value</p>
+<p class="text-lg font-serif">20% OFF</p>
+</div>
+<div>
+<p class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-1">Min. Order</p>
+<p class="text-lg font-serif font-mono">$15.00</p>
+</div>
+<div class="col-span-2">
+<div class="flex justify-between items-end mb-2">
+<p class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest">Redemptions</p>
+<p class="text-xs font-mono">64 / 100</p>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 64%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant/20">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+<span class="text-xs">Expires Oct 24, 2023</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="block">block</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Card 2 -->
+<div class="bg-surface-container rounded-2xl overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="p-6">
+<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-tertiary-container/10 rounded-xl flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="bakery_dining">bakery_dining</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-mono text-lg font-bold text-on-surface">PASTRYFREE</span>
+<span class="bg-secondary-container text-secondary text-[10px] px-2 py-0.5 rounded-full font-bold">FIXED_ITEM</span>
+</div>
+<p class="text-sm text-on-surface-variant">Free croissant with any large latte</p>
+</div>
+</div>
+<div class="bg-emerald-500/10 text-emerald-400 text-[10px] px-3 py-1 rounded-full font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                                LIVE
+                            </div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+<div>
+<p class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-1">Value</p>
+<p class="text-lg font-serif">1 ITEM</p>
+</div>
+<div>
+<p class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-1">Min. Order</p>
+<p class="text-lg font-serif font-mono">$8.50</p>
+</div>
+<div class="col-span-2">
+<div class="flex justify-between items-end mb-2">
+<p class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest">Redemptions</p>
+<p class="text-xs font-mono">142 / 500</p>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 28%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant/20">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+<span class="text-xs">Expires Nov 12, 2023</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="block">block</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Expired Section (Collapsible) -->
+<section class="border-t border-outline-variant/30 pt-10">
+<details class="group">
+<summary class="flex items-center justify-between cursor-pointer list-none">
+<div class="flex items-center gap-4">
+<span class="text-sm font-mono text-on-surface-variant uppercase tracking-[0.2em]">Archive &amp; Expired</span>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded text-[10px] font-mono text-on-surface-variant">14 items</span>
+</div>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180 text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Expired Promo 1 -->
+<div class="bg-surface-container-low/50 p-4 rounded-xl flex items-center justify-between opacity-60">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center grayscale">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="history">history</span>
+</div>
+<div>
+<p class="font-mono text-sm font-bold text-on-surface">SUMMER15</p>
+<p class="text-xs text-on-surface-variant">Expired Sep 30, 2023</p>
+</div>
+</div>
+<button class="text-xs font-bold text-primary hover:underline">RE-ACTIVATE</button>
+</div>
+<!-- Expired Promo 2 -->
+<div class="bg-surface-container-low/50 p-4 rounded-xl flex items-center justify-between opacity-60">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center grayscale">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="history">history</span>
+</div>
+<div>
+<p class="font-mono text-sm font-bold text-on-surface">GRANDOPENING</p>
+<p class="text-xs text-on-surface-variant">Expired Aug 15, 2023</p>
+</div>
+</div>
+<button class="text-xs font-bold text-primary hover:underline">RE-ACTIVATE</button>
+</div>
+</div>
+</details>
+</section>
+</main>
+<!-- Create Promotion Bottom Sheet (Overlay Mockup) -->
+<!-- Note: Usually toggled via JS, shown here as a structured section for visual proof -->
+<div class="fixed inset-0 z-[100] flex flex-col justify-end pointer-events-none lg:max-w-md lg:left-auto lg:right-0">
+<div class="bg-surface-dim pointer-events-auto rounded-t-3xl shadow-2xl border-t border-outline-variant/10 max-h-[795px] flex flex-col overflow-hidden">
+<!-- Header -->
+<div class="px-6 py-4 flex items-center justify-between border-b border-outline-variant/10">
+<h4 class="text-xl font-serif text-primary">New Promotion</h4>
+<button class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8">
+<!-- Promo Code -->
+<div>
+<label class="block text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">Promotion Code</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface placeholder:text-stone-600 focus:ring-1 focus:ring-primary/40 font-mono" placeholder="e.g. MORNINGBREW" type="text"/>
+</div>
+<!-- Type Selection -->
+<div>
+<label class="block text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-4">Discount Type</label>
+<div class="grid grid-cols-3 gap-2 p-1 bg-surface-container-highest rounded-xl">
+<button class="py-2 text-xs font-bold rounded-lg bg-primary text-on-primary">Percentage</button>
+<button class="py-2 text-xs font-bold rounded-lg text-on-surface-variant hover:bg-surface-variant">Fixed Amount</button>
+<button class="py-2 text-xs font-bold rounded-lg text-on-surface-variant hover:bg-surface-variant">Free Item</button>
+</div>
+</div>
+<!-- Grid Inputs -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">Value</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-xl pl-4 pr-10 py-3 text-on-surface placeholder:text-stone-600 focus:ring-1 focus:ring-primary/40" placeholder="20" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant">%</span>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">Min Order</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">$</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl pl-8 pr-4 py-3 text-on-surface placeholder:text-stone-600 focus:ring-1 focus:ring-primary/40" placeholder="10.00" type="number"/>
+</div>
+</div>
+</div>
+<!-- Date & Uses -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">Max Uses</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface placeholder:text-stone-600 focus:ring-1 focus:ring-primary/40" placeholder="500" type="number"/>
+</div>
+<div>
+<label class="block text-[10px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">Expiry Date</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary/40 text-xs" type="date"/>
+</div>
+</div>
+<!-- Toggles -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div>
+<p class="text-sm font-bold">Active Immediately</p>
+<p class="text-[10px] text-on-surface-variant">Campaign will go live upon creation</p>
+</div>
+<div class="w-10 h-5 bg-primary/20 rounded-full relative p-0.5">
+<div class="w-4 h-4 bg-primary rounded-full absolute right-0.5 shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="p-6 bg-surface-container border-t border-outline-variant/10">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold py-4 rounded-xl shadow-lg hover:scale-[1.01] active:scale-95 transition-all">
+                    Create Promotion
+                </button>
+</div>
+</div>
+</div>
+<!-- Mobile Navigation Shell (Bottom Bar) -->
+<div class="lg:hidden fixed bottom-0 left-0 right-0 bg-surface-dim/80 backdrop-blur-xl z-50 px-4 py-3 flex justify-around items-center">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter">Orders</span>
+</button>
+<div class="relative -top-6">
+<button class="w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-xl shadow-primary/40 text-on-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter">Promos</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl" data-icon="settings">settings</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter">Admin</span>
+</button>
+</div>
+</body></html>

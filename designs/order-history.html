@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order History | Jennifer's Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#4a4640",
+              "secondary": "#ccc5be",
+              "tertiary": "#d0bcff",
+              "tertiary-fixed-dim": "#d0bcff",
+              "surface-variant": "#3d3327",
+              "primary-fixed": "#ffdcc1",
+              "surface-container-lowest": "#140d04",
+              "background": "#1a1208",
+              "surface": "#1a1208",
+              "outline-variant": "#524439",
+              "tertiary-fixed": "#e9ddff",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed-variant": "#5516be",
+              "primary": "#ffb779",
+              "inverse-surface": "#f1e0ce",
+              "inverse-primary": "#885119",
+              "surface-container-high": "#32281d",
+              "secondary-fixed": "#e9e1d9",
+              "on-surface": "#f1e0ce",
+              "primary-container": "#c8864a",
+              "on-error": "#690005",
+              "error-container": "#93000a",
+              "on-tertiary": "#3c0091",
+              "inverse-on-surface": "#392f23",
+              "on-tertiary-container": "#380088",
+              "surface-tint": "#ffb779",
+              "on-secondary": "#33302b",
+              "surface-dim": "#1a1208",
+              "surface-container-low": "#231a0f",
+              "on-secondary-fixed-variant": "#4a4640",
+              "on-primary-fixed": "#2e1500",
+              "on-surface-variant": "#d7c3b5",
+              "on-secondary-fixed": "#1e1b16",
+              "secondary-fixed-dim": "#ccc5be",
+              "on-tertiary-fixed": "#23005c",
+              "on-primary": "#4c2700",
+              "surface-container-highest": "#3d3327",
+              "outline": "#9f8d81",
+              "on-background": "#f1e0ce",
+              "primary-fixed-dim": "#ffb779",
+              "surface-bright": "#42372b",
+              "on-primary-container": "#482400",
+              "on-primary-fixed-variant": "#6c3a02",
+              "on-secondary-container": "#bbb4ad",
+              "tertiary-container": "#a37dff",
+              "surface-container": "#271e13",
+              "error": "#ffb4ab"
+            },
+            fontFamily: {
+              "serif": ["Fraunces", "serif"],
+              "sans": ["Plus Jakarta Sans", "sans-serif"],
+              "mono": ["JetBrains Mono", "monospace"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #1a1208;
+            color: #f1e0ce;
+        }
+        .editorial-gutter {
+            padding-left: clamp(1rem, 5vw, 4rem);
+            padding-right: clamp(1rem, 5vw, 4rem);
+        }
+        .glass-panel {
+            background: rgba(35, 26, 15, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .amber-glow-btn {
+            background: linear-gradient(135deg, #ffb779 0%, #c8864a 100%);
+        }
+    </style>
+</head>
+<body class="font-sans selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Anchor -->
+<header class="bg-[#1A1208] text-[#C8864A] docked full-width top-0 no-border tonal-shift bg-stone-900 sticky z-50">
+<nav class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-serif italic text-[#C8864A]">Jennifer's Café</div>
+<div class="hidden md:flex items-center space-gap-8 gap-8">
+<a class="text-stone-400 font-medium hover:text-[#C8864A] transition-colors duration-300" href="#">Menu</a>
+<a class="text-stone-400 font-medium hover:text-[#C8864A] transition-colors duration-300" href="#">Reserve a Table</a>
+<a class="text-[#C8864A] font-bold border-b-2 border-[#C8864A] pb-1" href="#">My Orders</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#C8864A] p-2 rounded-full hover:bg-surface-container-high transition-all">notifications</button>
+<button class="material-symbols-outlined text-[#C8864A] p-2 rounded-full hover:bg-surface-container-high transition-all">shopping_bag</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/30">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="portrait of a woman with a warm expression in soft natural indoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdS7VmqewnsRRsSCCUdiaB0LHV7iXgBTi-7yrNy_Zkm8LP4PmAlco3GaeALEn47yREOIYtxFZ56aj2sNHcdp9R76WrmYUcwiFcjwZjyoVIqUomxbxTYsI-u5sThfqfwNpE4TtV1DpphJTtKUsLjpO_DOgvW7x1yxuJHZ8nRk-cpcdyJB0TC97YNG08w60jCTPGOFNsM_CHaZtoOtGGF_xnC_G1Hx9Ycom-k37xRVE7wiSrWaoVxr752rbe8lE30ArKSf_RG3dDOZyh"/>
+</div>
+</div>
+</nav>
+</header>
+<main class="editorial-gutter max-w-7xl mx-auto pt-12 pb-32">
+<!-- Editorial Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+<div class="max-w-2xl">
+<h1 class="font-serif text-5xl md:text-7xl font-light italic mb-4 text-on-surface">Your Orders</h1>
+<p class="text-on-surface-variant text-lg max-w-md leading-relaxed">From freshly roasted beans to artisan pastries, track your current cravings and revisit past favorites.</p>
+</div>
+<!-- Filters: Semantic State Management -->
+<div class="flex items-center gap-1 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
+<button class="px-6 py-2 text-stone-400 font-medium whitespace-nowrap hover:text-[#C8864A] transition-all">All</button>
+<button class="px-6 py-2 text-[#C8864A] font-bold border-b-2 border-[#C8864A] whitespace-nowrap">Active</button>
+<button class="px-6 py-2 text-stone-400 font-medium whitespace-nowrap hover:text-[#C8864A] transition-all">Completed</button>
+<button class="px-6 py-2 text-stone-400 font-medium whitespace-nowrap hover:text-[#C8864A] transition-all">Cancelled</button>
+</div>
+</section>
+<!-- Active Orders: Bento-style Highlight -->
+<section class="mb-20">
+<div class="flex items-center gap-3 mb-8">
+<div class="h-px flex-1 bg-outline-variant/20"></div>
+<h2 class="font-serif text-2xl italic text-primary">In Progress</h2>
+<div class="h-px w-12 bg-outline-variant/20"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Highlight Card -->
+<div class="lg:col-span-7 bg-surface-container-low rounded-xl overflow-hidden group hover:bg-surface-container transition-all duration-500">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="steaming pour over coffee being poured into a ceramic mug on a dark wooden cafe table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfKSrZFSGvwfvEWrruBSyzn5na-L2b-22XeZJ1AhMiYVi8DCbX6hXakZ7uY33-Ayq5vlK4mlRbb1Dq8EpyAuGGu-h8ItfYKn25d1hZ2ou8XJN6OCrEHeNx3k3k__LSXoVltVBSoNc7YF6NREw3vBFoSW9fFOlgD0sp0kjGRaMPpTj9SisNPR4jQ9E1EWo1OuABF6jB33KjKmKes1WF95FsB6flNkp3HmLIQvA8_e-cg7_LENMP7CEsruvtFatACPdeKE8p8tbmbeg6"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute bottom-4 left-6 flex items-center gap-3">
+<span class="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase">Order #0047</span>
+<span class="text-on-surface-variant font-mono text-xs italic">5 mins ago</span>
+</div>
+</div>
+<div class="p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<h3 class="font-serif text-2xl text-on-surface italic">Being Prepared</h3>
+</div>
+<p class="text-on-surface-variant font-sans text-lg">Pour Over (Oat) + Battenberg Cake</p>
+</div>
+<button class="amber-glow-btn px-8 py-3 rounded-xl text-on-primary font-bold shadow-xl shadow-primary/10 hover:shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                            Track Order
+                        </button>
+</div>
+</div>
+<!-- Empty State Inset Example -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center p-12 text-center group">
+<div class="mb-6 relative">
+<span class="material-symbols-outlined text-6xl text-outline-variant/40 group-hover:text-primary/40 transition-colors duration-500" style="font-variation-settings: 'wght' 200;">local_cafe</span>
+<div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-surface-container-highest"></div>
+</div>
+<h4 class="font-serif text-xl text-on-surface italic mb-2">Expecting more?</h4>
+<p class="text-on-surface-variant text-sm mb-6 max-w-xs">Discover our seasonal roasts and new arrivals for your next ritual.</p>
+<button class="text-primary font-bold border-b border-primary/30 hover:border-primary pb-1 transition-all">Browse Menu</button>
+</div>
+</div>
+</section>
+<!-- Order History: List with Tonal Depth -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-serif text-2xl italic text-on-surface">Recent History</h2>
+<div class="text-on-surface-variant font-mono text-xs">Page 1-4 of 12</div>
+</div>
+<div class="space-y-4">
+<!-- Order Row 1 -->
+<div class="group bg-surface-container-low hover:bg-surface-container-high rounded-xl p-6 transition-all duration-300 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Date</p>
+<p class="text-on-surface font-medium">Oct 12, 2023</p>
+</div>
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Order #</p>
+<p class="text-on-surface font-mono">#0039</p>
+</div>
+<div class="md:col-span-1">
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Items</p>
+<p class="text-on-surface truncate">Avocado Toast, Flat White (x2)</p>
+</div>
+<div class="md:text-right">
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Total</p>
+<p class="text-primary font-bold">$24.50</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-surface-bright text-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Completed</span>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg text-sm font-bold hover:bg-secondary-container/80 transition-all">Reorder</button>
+</div>
+</div>
+</div>
+<!-- Order Row 2 -->
+<div class="group bg-surface-container-low hover:bg-surface-container-high rounded-xl p-6 transition-all duration-300 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Date</p>
+<p class="text-on-surface font-medium">Oct 10, 2023</p>
+</div>
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Order #</p>
+<p class="text-on-surface font-mono">#0035</p>
+</div>
+<div class="md:col-span-1">
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Items</p>
+<p class="text-on-surface truncate">Cortado, Cinnamon Roll</p>
+</div>
+<div class="md:text-right">
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Total</p>
+<p class="text-primary font-bold">$12.00</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-error-container/20 text-error text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Cancelled</span>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg text-sm font-bold hover:bg-secondary-container/80 transition-all">Reorder</button>
+</div>
+</div>
+</div>
+<!-- Order Row 3 -->
+<div class="group bg-surface-container-low hover:bg-surface-container-high rounded-xl p-6 transition-all duration-300 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Date</p>
+<p class="text-on-surface font-medium">Oct 08, 2023</p>
+</div>
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Order #</p>
+<p class="text-on-surface font-mono">#0028</p>
+</div>
+<div class="md:col-span-1">
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Items</p>
+<p class="text-on-surface truncate">V60 Ethiopian, Almond Croissant</p>
+</div>
+<div class="md:text-right">
+<p class="text-xs font-mono text-stone-500 uppercase tracking-tighter mb-1">Total</p>
+<p class="text-primary font-bold">$16.75</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-surface-bright text-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Completed</span>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg text-sm font-bold hover:bg-secondary-container/80 transition-all">Reorder</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 rounded-full text-on-surface-variant hover:bg-surface-container">2</button>
+<button class="w-10 h-10 rounded-full text-on-surface-variant hover:bg-surface-container">3</button>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#1A1208]/90 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.3)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#C8864A]/20 text-[#C8864A] rounded-xl px-3 py-1 scale-90 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Reservations</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Profile</span>
+</div>
+</nav>
+</body></html>

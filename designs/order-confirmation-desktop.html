@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmed | Jennifer's Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Berkeley+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-primary-fixed": "#2e1500",
+                "surface-container-high": "#32281d",
+                "surface-dim": "#1a1208",
+                "primary-fixed-dim": "#ffb779",
+                "surface-container-low": "#231a0f",
+                "background": "#1a1208",
+                "on-tertiary-fixed": "#23005c",
+                "on-primary": "#4c2700",
+                "on-error": "#690005",
+                "surface": "#1a1208",
+                "on-secondary-container": "#bbb4ad",
+                "on-tertiary-fixed-variant": "#5516be",
+                "on-surface-variant": "#d7c3b5",
+                "primary-container": "#c8864a",
+                "primary": "#ffb779",
+                "error-container": "#93000a",
+                "on-tertiary": "#3c0091",
+                "surface-tint": "#ffb779",
+                "secondary-fixed": "#e9e1d9",
+                "inverse-on-surface": "#392f23",
+                "surface-container-highest": "#3d3327",
+                "on-primary-fixed-variant": "#6c3a02",
+                "tertiary": "#d0bcff",
+                "on-secondary": "#33302b",
+                "tertiary-fixed-dim": "#d0bcff",
+                "outline-variant": "#524439",
+                "on-surface": "#f1e0ce",
+                "error": "#ffb4ab",
+                "outline": "#9f8d81",
+                "on-secondary-fixed": "#1e1b16",
+                "inverse-primary": "#885119",
+                "inverse-surface": "#f1e0ce",
+                "surface-container": "#271e13",
+                "surface-bright": "#42372b",
+                "surface-container-lowest": "#140d04",
+                "on-background": "#f1e0ce",
+                "secondary-fixed-dim": "#ccc5be",
+                "tertiary-container": "#a37dff",
+                "on-primary-container": "#482400",
+                "secondary": "#ccc5be",
+                "primary-fixed": "#ffdcc1",
+                "secondary-container": "#4a4640",
+                "on-secondary-fixed-variant": "#4a4640",
+                "on-tertiary-container": "#380088",
+                "tertiary-fixed": "#e9ddff",
+                "surface-variant": "#3d3327",
+                "on-error-container": "#ffdad6"
+              },
+              fontFamily: {
+                "headline": ["Newsreader"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Inter"],
+                "fraunces": ["Fraunces"],
+                "mono": ["Berkeley Mono"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-cream { background-color: #F5EDE5; }
+        .text-espresso { color: #1A1208; }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 18, 8, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation (Desktop Only) -->
+<nav class="hidden md:flex justify-between items-center px-12 py-6 w-full top-0 sticky z-50 bg-[#251B10]">
+<div class="font-fraunces text-2xl italic text-[#C8864A]">Jennifer's Café</div>
+<div class="flex gap-8 items-center">
+<a class="font-fraunces text-lg tracking-wide text-[#C8864A]/70 hover:text-[#C8864A] transition-colors" href="#">Menu</a>
+<a class="font-fraunces text-lg tracking-wide text-[#C8864A]/70 hover:text-[#C8864A] transition-colors" href="#">Reserve a Table</a>
+<a class="font-fraunces text-lg tracking-wide text-[#C8864A] border-b-2 border-[#C8864A] pb-1 transition-colors" href="#">My Orders</a>
+<span class="material-symbols-outlined text-[#C8864A] cursor-pointer" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="max-w-[1280px] mx-auto px-6 pt-12 pb-32">
+<div class="max-w-[640px] mx-auto flex flex-col items-center">
+<!-- Success Animation / Header Section -->
+<div class="mb-10 text-center flex flex-col items-center">
+<div class="w-24 h-24 rounded-full border-4 border-primary-container flex items-center justify-center mb-6 relative">
+<div class="absolute inset-0 rounded-full border-4 border-primary animate-ping opacity-20"></div>
+<span class="material-symbols-outlined text-5xl text-primary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-fraunces text-4xl mb-3 text-on-surface tracking-tight">Order placed!</h1>
+<p class="text-on-surface-variant text-lg">We've got your order, Abena. See you soon.</p>
+</div>
+<!-- Status Timeline -->
+<div class="w-full mb-12 px-4">
+<div class="relative flex justify-between items-start w-full">
+<!-- Progress Line Background -->
+<div class="absolute top-4 left-0 w-full h-0.5 bg-surface-container-highest z-0"></div>
+<!-- Active Progress Line -->
+<div class="absolute top-4 left-0 w-[50%] h-0.5 bg-primary-container z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<span class="font-label text-[10px] uppercase tracking-wider text-primary">Order Placed</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-on-primary-container animate-pulse"></div>
+</div>
+<span class="font-label text-[10px] uppercase tracking-wider text-on-surface">Preparing</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center"></div>
+<span class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Ready for Pickup</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center"></div>
+<span class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant text-center">Collected</span>
+</div>
+</div>
+</div>
+<!-- Order Summary Card -->
+<div class="w-full bg-cream rounded-xl p-8 mb-8 text-espresso overflow-hidden relative">
+<!-- Subtle texture overlay -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFsA0lfwfOCq5ChkfnEfqwufZ-WrMXstlfN382X9earMeUGBrtTsbUGTvdhtvMEqwRj1cV80RnzokMF4minVglBhPXF9KvmQzWZpzsgf9pEiqRIrD1tAf9tSF0Nl2T42-2qkgXL6AzkEBts30TI2f9CdU0bhUSECH6TwEm3XJpCpu6mWP8LrTrH5WhVdSykUUZpymIvaQLQ9F3XCKbJYRahTIUjTP72J8XAiGAiUBPkx8KStiiTypX_boE88EEIh-2o7ZT3KKCsMaF');"></div>
+<div class="flex justify-between items-start mb-8 border-b border-espresso/10 pb-6">
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-espresso/60 mb-1">Order Number</p>
+<p class="font-mono text-xl font-bold">#0047</p>
+</div>
+<div class="text-right">
+<p class="font-label text-[10px] uppercase tracking-widest text-espresso/60 mb-1">Pickup Time</p>
+<p class="font-body font-semibold">Today at 9:00am</p>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center group">
+<div class="flex flex-col">
+<span class="font-body font-bold text-espresso">2x Pour Over</span>
+<span class="font-body text-sm text-espresso/70 italic">Oat, Large</span>
+</div>
+<span class="font-mono text-espresso/80">$13.00</span>
+</div>
+<!-- Additional items can go here -->
+</div>
+<div class="pt-6 border-t border-espresso/20 flex flex-col gap-3">
+<div class="flex justify-between items-center opacity-70">
+<span class="font-body text-sm">Service Fee</span>
+<span class="font-mono text-sm">$0.60</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-fraunces text-xl">Total paid</span>
+<span class="font-mono text-xl font-bold">$13.60</span>
+</div>
+</div>
+<div class="mt-8 flex items-center gap-3 bg-espresso/5 p-4 rounded-lg">
+<span class="material-symbols-outlined text-espresso/60" data-icon="credit_card">credit_card</span>
+<span class="font-body text-sm text-espresso/80">Visa ending 4747</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex gap-4 w-full mb-16">
+<button class="flex-1 bg-gradient-to-br from-primary to-primary-container text-on-primary-container py-4 rounded-xl font-body font-bold text-lg hover:shadow-lg hover:shadow-primary-container/20 transition-all active:scale-95">
+                    Track Order
+                </button>
+<button class="flex-1 border-2 border-outline-variant text-on-surface py-4 rounded-xl font-body font-bold text-lg hover:bg-surface-container-high transition-all active:scale-95">
+                    Back to Menu
+                </button>
+</div>
+<!-- Upsell Strip -->
+<div class="w-full bg-surface-container-low rounded-xl p-1 overflow-hidden">
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-6 border border-outline-variant/10">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-3xl" data-icon="event_repeat">event_repeat</span>
+</div>
+<div>
+<h3 class="font-fraunces text-xl text-on-surface">Love this order? Subscribe to it.</h3>
+<p class="text-on-surface-variant text-sm">Get this every weekday at 9am</p>
+</div>
+</div>
+<button class="bg-primary-container/10 text-primary px-6 py-3 rounded-full font-body font-semibold text-sm hover:bg-primary-container/20 transition-colors whitespace-nowrap">
+                        Set Up Subscription
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Side Navigation (Management/System context - Suppressed per focus mandate) -->
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 md:hidden bg-[#1A1208]/90 backdrop-blur-xl rounded-t-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-[#C8864A]/50 p-2 scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C8864A]/50 p-2 scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter mt-1">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#C8864A] to-[#A66D3B] text-[#1A1208] rounded-xl p-2 scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C8864A]/50 p-2 scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter mt-1">Resv</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C8864A]/50 p-2 scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-mono uppercase tracking-tighter mt-1">Profile</span>
+</a>
+</nav>
+<!-- Visual Enhancements: Background Texture -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-5">
+<div class="absolute inset-0 bg-[radial-gradient(#C8864A_1px,transparent_1px)] [background-size:40px_40px]"></div>
+</div>
+</body></html>

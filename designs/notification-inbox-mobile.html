@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-container-high": "#32281d",
+                "primary-fixed-dim": "#ffb779",
+                "on-secondary-container": "#bbb4ad",
+                "surface-container-highest": "#3d3327",
+                "surface-bright": "#42372b",
+                "primary": "#ffb779",
+                "on-tertiary": "#3c0091",
+                "on-error": "#690005",
+                "secondary-fixed-dim": "#ccc5be",
+                "outline": "#9f8d81",
+                "on-surface-variant": "#d7c3b5",
+                "on-background": "#f1e0ce",
+                "inverse-primary": "#885119",
+                "inverse-on-surface": "#392f23",
+                "surface-variant": "#3d3327",
+                "on-tertiary-fixed": "#23005c",
+                "on-error-container": "#ffdad6",
+                "surface-container-low": "#231a0f",
+                "on-primary": "#4c2700",
+                "on-primary-fixed": "#2e1500",
+                "tertiary": "#d0bcff",
+                "error": "#ffb4ab",
+                "on-secondary": "#33302b",
+                "inverse-surface": "#f1e0ce",
+                "error-container": "#93000a",
+                "surface-tint": "#ffb779",
+                "tertiary-fixed-dim": "#d0bcff",
+                "primary-fixed": "#ffdcc1",
+                "on-tertiary-fixed-variant": "#5516be",
+                "secondary": "#ccc5be",
+                "on-primary-container": "#482400",
+                "surface-dim": "#1a1208",
+                "on-secondary-fixed-variant": "#4a4640",
+                "secondary-fixed": "#e9e1d9",
+                "on-primary-fixed-variant": "#6c3a02",
+                "on-tertiary-container": "#380088",
+                "outline-variant": "#524439",
+                "surface-container": "#271e13",
+                "secondary-container": "#4a4640",
+                "on-surface": "#f1e0ce",
+                "tertiary-fixed": "#e9ddff",
+                "surface-container-lowest": "#140d04",
+                "on-secondary-fixed": "#1e1b16",
+                "background": "#1a1208",
+                "tertiary-container": "#a37dff",
+                "surface": "#1a1208",
+                "primary-container": "#c8864a"
+              },
+              fontFamily: {
+                "headline": ["Fraunces", "serif"],
+                "body": ["DM Sans", "sans-serif"],
+                "label": ["Inter", "sans-serif"],
+                "mono": ["Berkeley Mono", "monospace"]
+              },
+              borderRadius: {"DEFAULT": "10px", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen pb-24">
+<!-- Top Navigation Anchor -->
+<header class="sticky top-0 z-50 bg-[#F5F2ED] dark:bg-[#251B0F] transition-all duration-300">
+<div class="flex justify-between items-center px-6 py-4 max-w-[720px] mx-auto w-full">
+<h1 class="font-['Fraunces'] font-bold text-[#1A1208] dark:text-[#FFFDF9] text-xl">Jennifer's Café</h1>
+<div class="flex gap-4">
+<button class="text-[#1A1208] dark:text-[#FFFDF9] opacity-80 hover:text-[#C8864A] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="text-[#1A1208] dark:text-[#FFFDF9] opacity-80 hover:text-[#C8864A] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-[720px] mx-auto px-4 py-6 space-y-6">
+<!-- Header Section -->
+<section class="flex items-end justify-between">
+<div class="space-y-1">
+<div class="flex items-center gap-3">
+<h2 class="font-headline text-3xl font-bold tracking-tight text-on-background">Notifications</h2>
+<span class="flex items-center justify-center bg-primary-container text-on-primary-container text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+</div>
+</div>
+<button class="text-primary text-sm font-medium hover:opacity-80 transition-opacity">Mark all as read</button>
+</section>
+<!-- Filter Pills -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-2 -mx-4 px-4">
+<button class="bg-primary text-on-primary px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap">All</button>
+<button class="bg-surface-container-high text-on-surface px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap">Unread</button>
+<button class="bg-surface-container-high text-on-surface px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap">Orders</button>
+<button class="bg-surface-container-high text-on-surface px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap">Reservations</button>
+<button class="bg-surface-container-high text-on-surface px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap">Promos</button>
+</div>
+<!-- Notifications List -->
+<div class="space-y-4">
+<!-- UNREAD: Order Ready -->
+<div class="bg-primary/5 border-l-4 border-primary p-4 rounded-xl shadow-sm relative group overflow-hidden">
+<div class="flex gap-4">
+<div class="bg-primary/10 p-3 rounded-full h-fit">
+<span class="material-symbols-outlined text-primary" data-icon="restaurant">restaurant</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface">Order ready</h3>
+<span class="text-[10px] font-mono text-outline uppercase tracking-wider">Just now</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">Your Signature Espresso and Sourdough Toast are ready for pickup at the counter.</p>
+<div class="pt-3 flex justify-end gap-3">
+<button class="text-xs font-bold text-primary uppercase tracking-widest px-3 py-1.5 hover:bg-primary/10 rounded-lg transition-all">View Order</button>
+</div>
+</div>
+</div>
+</div>
+<!-- UNREAD: Subscription Notice -->
+<div class="bg-primary/5 border-l-4 border-primary p-4 rounded-xl shadow-sm relative group">
+<div class="flex gap-4">
+<div class="bg-primary/10 p-3 rounded-full h-fit">
+<span class="material-symbols-outlined text-primary" data-icon="loyalty">loyalty</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface">Subscription notice</h3>
+<span class="text-[10px] font-mono text-outline uppercase tracking-wider">2h ago</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">Your Monthly Coffee Bean subscription will renew in 3 days. Check your bean preferences.</p>
+<div class="pt-3 flex justify-end gap-3">
+<button class="text-xs font-bold text-primary uppercase tracking-widest px-3 py-1.5 hover:bg-primary/10 rounded-lg transition-all">Manage</button>
+</div>
+</div>
+</div>
+</div>
+<!-- UNREAD: Reservation confirmed -->
+<div class="bg-primary/5 border-l-4 border-primary p-4 rounded-xl shadow-sm relative group">
+<div class="flex gap-4">
+<div class="bg-primary/10 p-3 rounded-full h-fit">
+<span class="material-symbols-outlined text-primary" data-icon="event_available">event_available</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface">Reservation confirmed</h3>
+<span class="text-[10px] font-mono text-outline uppercase tracking-wider">4h ago</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">Table for 2 is locked in for tomorrow at 10:30 AM. We look forward to seeing you!</p>
+<div class="pt-3 flex justify-end gap-3">
+<button class="text-xs font-bold text-primary uppercase tracking-widest px-3 py-1.5 hover:bg-primary/10 rounded-lg transition-all">Add to Calendar</button>
+</div>
+</div>
+</div>
+</div>
+<!-- READ: Promotion -->
+<div class="bg-surface-container-low p-4 rounded-xl relative group">
+<div class="flex gap-4">
+<div class="bg-surface-container-highest p-3 rounded-full h-fit">
+<span class="material-symbols-outlined text-outline" data-icon="celebration">celebration</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface/60">Flash Promo: Sunset Lattes</h3>
+<span class="text-[10px] font-mono text-outline/60 uppercase tracking-wider">Yesterday</span>
+</div>
+<p class="text-sm text-on-surface-variant/60 leading-relaxed">Get 20% off all seasonal lattes after 4:00 PM this week. Show this code: SUNSET20.</p>
+<div class="pt-3 flex justify-end gap-3">
+<button class="text-xs font-bold text-outline uppercase tracking-widest px-3 py-1.5 rounded-lg transition-all opacity-60">Expired</button>
+</div>
+</div>
+</div>
+</div>
+<!-- READ: Delivery feedback -->
+<div class="bg-surface-container-low p-4 rounded-xl relative group">
+<div class="flex gap-4">
+<div class="bg-surface-container-highest p-3 rounded-full h-fit">
+<span class="material-symbols-outlined text-outline" data-icon="rate_review">rate_review</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface/60">Delivery feedback</h3>
+<span class="text-[10px] font-mono text-outline/60 uppercase tracking-wider">2 days ago</span>
+</div>
+<p class="text-sm text-on-surface-variant/60 leading-relaxed">How was your morning delivery? Share your experience to help us improve.</p>
+<div class="pt-3 flex justify-end gap-3">
+<button class="text-xs font-bold text-primary uppercase tracking-widest px-3 py-1.5 hover:bg-primary/10 rounded-lg transition-all">Write Review</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Editorial Card -->
+<section class="mt-8 pt-4">
+<div class="relative rounded-2xl overflow-hidden aspect-[16/9] flex items-end">
+<img alt="Café Atmosphere" class="absolute inset-0 w-full h-full object-cover" data-alt="atmospheric photo of a professional barista pouring latte art in a sunlit modern cafe with warm wood textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdGqw9NuacJZ_u9lDbWJOQH_jNWCyT0E4c3XIfmIcU-yno3jvePaaUGOUpx-JQ4iKiIEiQTk2KKqWYK2o5l63fIUG0G7Vwl5Cc4YjIpYsvG7wVp6UvM6XmmnEfIkG6ek3pfB9CNUA_z-HIy_IrQKCNClSMaphvdGg6hdwyCD5_2dUIve6q_QFdLH4QQuczlcIfYgW1GX9iunWlw0oXavfHQtEGb_OpVQUVSzvA5JSdmvrc4HATwX71atPyermYG1Dm_pI8xlOlrgXW"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="relative p-6 space-y-1">
+<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Barista's Choice</p>
+<h4 class="font-headline text-2xl text-on-surface leading-tight">Mastering the Art of the Perfect Pour-Over</h4>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-[#FFFDF9]/90 dark:bg-[#1A1208]/90 backdrop-blur-xl border-t border-[#1A1208]/5 dark:border-[#FFFDF9]/5 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-[#1A1208] dark:text-[#FFFDF9] opacity-60 hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['DM_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1A1208] dark:text-[#FFFDF9] opacity-60 hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-['DM_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1A1208] dark:text-[#FFFDF9] opacity-60 hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-['DM_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#C8864A] bg-[#C8864A]/10 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-['DM_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Inbox</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1A1208] dark:text-[#FFFDF9] opacity-60 hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['DM_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;700;800&amp;family=DM+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#3d3327",
+              "surface-container-highest": "#3d3327",
+              "on-tertiary-fixed": "#23005c",
+              "inverse-surface": "#f1e0ce",
+              "surface-tint": "#ffb779",
+              "tertiary-fixed": "#e9ddff",
+              "surface-container": "#271e13",
+              "primary-fixed-dim": "#ffb779",
+              "primary-container": "#c8864a",
+              "outline": "#9f8d81",
+              "on-background": "#f1e0ce",
+              "surface-container-low": "#231a0f",
+              "on-primary-container": "#482400",
+              "on-surface": "#f1e0ce",
+              "surface": "#1a1208",
+              "on-tertiary-fixed-variant": "#5516be",
+              "primary": "#ffb779",
+              "error-container": "#93000a",
+              "on-primary-fixed-variant": "#6c3a02",
+              "on-primary": "#4c2700",
+              "on-secondary-container": "#bbb4ad",
+              "error": "#ffb4ab",
+              "inverse-on-surface": "#392f23",
+              "surface-container-lowest": "#140d04",
+              "on-primary-fixed": "#2e1500",
+              "on-tertiary-container": "#380088",
+              "secondary-fixed": "#e9e1d9",
+              "secondary": "#ccc5be",
+              "tertiary": "#d0bcff",
+              "background": "#1a1208",
+              "surface-dim": "#1a1208",
+              "primary-fixed": "#ffdcc1",
+              "on-secondary": "#33302b",
+              "tertiary-fixed-dim": "#d0bcff",
+              "inverse-primary": "#885119",
+              "outline-variant": "#524439",
+              "on-tertiary": "#3c0091",
+              "tertiary-container": "#a37dff",
+              "on-secondary-fixed-variant": "#4a4640",
+              "secondary-container": "#4a4640",
+              "on-error-container": "#ffdad6",
+              "on-surface-variant": "#d7c3b5",
+              "on-secondary-fixed": "#1e1b16",
+              "surface-container-high": "#32281d",
+              "secondary-fixed-dim": "#ccc5be",
+              "surface-bright": "#42372b",
+              "on-error": "#690005"
+            },
+            fontFamily: {
+              "headline": ["Fraunces"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Inter"],
+              "mono": ["Fira Code"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(26, 18, 8, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen">
+<!-- Top AppBar (Mobile Implementation) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#1A1208]/80 backdrop-blur-xl shadow-sm dark:shadow-none px-4 py-4 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<button class="hover:bg-stone-50 dark:hover:bg-stone-900 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-[#C8864A]">menu</span>
+</button>
+<h1 class="font-headline font-bold text-lg text-[#C8864A]">Jennifer's Café</h1>
+</div>
+<div class="flex items-center gap-1">
+<button class="hover:bg-stone-50 dark:hover:bg-stone-900 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-[#C8864A]">search</span>
+</button>
+<button class="hover:bg-stone-50 dark:hover:bg-stone-900 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-[#C8864A]">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 max-w-md mx-auto">
+<!-- Header Section -->
+<section class="mb-8">
+<h2 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight mb-2">Menu Manager</h2>
+<p class="text-on-surface-variant font-label text-sm uppercase tracking-widest opacity-70">Inventory &amp; Availability</p>
+</section>
+<!-- Category Tabs -->
+<nav class="mb-8 overflow-x-auto no-scrollbar flex items-center gap-3 py-2">
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-primary-container text-on-primary-container font-bold text-sm shadow-lg shadow-primary/10">All items</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-bright transition-colors">Coffee</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-bright transition-colors">Desserts</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-bright transition-colors">Food</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-bright transition-colors">Seasonals</button>
+</nav>
+<!-- Products Grid (2 Columns Mobile Optimized) -->
+<div class="grid grid-cols-1 gap-6">
+<!-- Card 1 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden flex flex-col hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-3 left-3 z-10">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/40" type="checkbox"/>
+</div>
+<div class="flex h-36">
+<div class="w-[40%] h-full relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up of a glass V60 pour over coffee being brewed with a steady stream of water into a carafe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8u9QlGEZ4lzWZFhpCkTI06c-ZzmJ6cLPpfW3v2is5NYjvCJ7SoVAkWRXt7cI5jDoINlJZLw_9y6LppSXR45OtvF9iqHzIHy0xWr28WuBvKFZhibDb7_7r9JTrp-_-v_5fznIsEMa9lX6TsuY1F5LeqtcM7scQY6y2yiqAz_oIxMzhEA8yJswG6aM33aXs6AltEY4s1OLruIU2RuEAcPU48N9oqa-sOowFokQQuCjp6I-S9OfEt0nFZNaObvoV8KsAhic5HjieD0Y-"/>
+</div>
+<div class="w-[60%] p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-mono text-[10px] text-primary uppercase tracking-tighter bg-primary/10 px-1.5 py-0.5 rounded">Coffee</span>
+<span class="font-headline font-bold text-on-surface text-base">$5.50</span>
+</div>
+<h3 class="font-bold text-on-surface leading-snug mt-1">Single Origin Pour Over</h3>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] font-medium text-emerald-500 uppercase tracking-wider">In Stock</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3 bg-surface-container-highest flex justify-between items-center">
+<span class="text-[11px] text-on-surface-variant font-medium uppercase tracking-widest">Availability</span>
+<div class="w-10 h-5 bg-primary-container rounded-full relative flex items-center px-1">
+<div class="w-3.5 h-3.5 bg-on-primary-container rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden flex flex-col hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-3 left-3 z-10">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/40" type="checkbox"/>
+</div>
+<div class="flex h-36">
+<div class="w-[40%] h-full relative overflow-hidden">
+<img class="w-full h-full object-cover opacity-60 grayscale group-hover:scale-110 transition-all duration-500" data-alt="Traditional checkered Battenberg cake with pink and yellow sponge wrapped in almond marzipan on a ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvjVHIYPN2-jWq8T0VG7IReMWOFlsmgbZLjOZ6sD3RsuTqWxPS_3T06aKeygZnn-UDa87jxVB6YNGyCzB5Xp7nmL7e6rLn8e0t7v325zvlSzB_a30tLvkZBbIBJTQpnohPtq1je4DMaN_of_PX2GNRp-_eYuByq7nkMTet_zeyqQLntW1nD07e2fIIf0hNQDdsyI3K02A7DfQIw8U0ohBk6HjxkWOBOfj0pnk9I6Iza9ZUGIGPuJuNnkkZSTIE0_iwm0qKyvGdp3m_"/>
+<div class="absolute inset-0 bg-background/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/50 text-3xl">block</span>
+</div>
+</div>
+<div class="w-[60%] p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-mono text-[10px] text-on-surface-variant uppercase tracking-tighter bg-surface-container-highest px-1.5 py-0.5 rounded">Desserts</span>
+<span class="font-headline font-bold text-on-surface-variant text-base">$4.00</span>
+</div>
+<h3 class="font-bold text-on-surface-variant leading-snug mt-1">Battenberg Cake</h3>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span class="text-[11px] font-medium text-error uppercase tracking-wider">Out of Stock</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3 bg-surface-container-highest flex justify-between items-center">
+<span class="text-[11px] text-on-surface-variant font-medium uppercase tracking-widest opacity-50">Availability</span>
+<div class="w-10 h-5 bg-outline-variant rounded-full relative flex items-center px-1">
+<div class="w-3.5 h-3.5 bg-surface-container rounded-full shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden flex flex-col hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-3 left-3 z-10">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/40" type="checkbox"/>
+</div>
+<div class="flex h-36">
+<div class="w-[40%] h-full relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Creamy oat milk latte with elegant leaf latte art in a dark ceramic cup on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyoAm3NInxy6KU2EQJ9qtUo5auHo0vsU0385LSHFiczM206vLe138HWLPB6DLnrQepjHugThdLF1dZw_BHAa9bu8-G7RMObbrjFJfNWvrTyeSqyz8YKutCXdyHuGOtIB1W_B9fA99ckeW3DLO_7S7Faq6UFZ_NE8HBsi0NiC-f0wMy_0lk4ZMR9c-cIRs4Du5BPj0lG16yw3y8Mu53XP5KFO5kaVxdvvljoap30P3SnnH_1cLRYCRkz00xsiRgZ-gmBTw1OUzS0zx5"/>
+</div>
+<div class="w-[60%] p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-mono text-[10px] text-primary uppercase tracking-tighter bg-primary/10 px-1.5 py-0.5 rounded">Coffee</span>
+<span class="font-headline font-bold text-on-surface text-base">$4.50</span>
+</div>
+<h3 class="font-bold text-on-surface leading-snug mt-1">Oat Milk Latte</h3>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-[11px] font-medium text-primary uppercase tracking-wider">Low Stock: 2 left</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3 bg-surface-container-highest flex justify-between items-center">
+<span class="text-[11px] text-on-surface-variant font-medium uppercase tracking-widest">Availability</span>
+<div class="w-10 h-5 bg-primary-container rounded-full relative flex items-center px-1">
+<div class="w-3.5 h-3.5 bg-on-primary-container rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden flex flex-col hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-3 left-3 z-10">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/40" type="checkbox"/>
+</div>
+<div class="flex h-36">
+<div class="w-[40%] h-full relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Artisanal avocado toast on sourdough with radish slices, seeds, and chili flakes on a minimalist plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVpiY5210qVzdWP51E6wO_MGUVZ48u4unm9Fhi94bbskyGAwE8MwWQSwMxKm_nMa8I4tpd2uKZKsnRihMdS8Al1NT-COxo-ItQRx39PIEIKlMN1zOi0iWgvAZLlIcyc0FPSd9FuRR-doeglXIkCk6PTfuRx_11x-xmjH602dKnCuhvQ15xyCSjotHyYveS8r7dCkBr-LobjuRSCGLui-RTpZr8CkoAe8yRh7oJs2TIKdlWL4QZb-CaWyHei9RL41WTRVl7-Fox0aLh"/>
+</div>
+<div class="w-[60%] p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-mono text-[10px] text-primary uppercase tracking-tighter bg-primary/10 px-1.5 py-0.5 rounded">Food</span>
+<span class="font-headline font-bold text-on-surface text-base">$12.00</span>
+</div>
+<h3 class="font-bold text-on-surface leading-snug mt-1">Avocado Toast</h3>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] font-medium text-emerald-500 uppercase tracking-wider">In Stock</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3 bg-surface-container-highest flex justify-between items-center">
+<span class="text-[11px] text-on-surface-variant font-medium uppercase tracking-widest">Availability</span>
+<div class="w-10 h-5 bg-primary-container rounded-full relative flex items-center px-1">
+<div class="w-3.5 h-3.5 bg-on-primary-container rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden flex flex-col hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-3 left-3 z-10">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/40" type="checkbox"/>
+</div>
+<div class="flex h-36">
+<div class="w-[40%] h-full relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Tilted view of cold brew coffee in a glass bottle next to a glass with ice cubes, moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxLsyTDSkMngUQJfoRMSQwrZ-78uLUPtpQVnaKrzUOs2cZnKud4yIqrnzvx6fDbc8HzS6YaMR8HQhITTRWi_s11cKwIo34tuMHr3gpROo7xSqC8dax0P2Wcj4y_ULI-in-xpqeI_dimD7vW4SFNOOKJTyryv-prluWWAXJrurtPIvvnJscBUKH0fLXNXA-os1d51LGo1o8LXc56abBzBLGD6O7qR5o5uvyqTbaYV_dZr23kMdt_CwifvoDGxyS2yHKUTenr4MdMP0z"/>
+</div>
+<div class="w-[60%] p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-mono text-[10px] text-primary uppercase tracking-tighter bg-primary/10 px-1.5 py-0.5 rounded">Coffee</span>
+<span class="font-headline font-bold text-on-surface text-base">$5.00</span>
+</div>
+<h3 class="font-bold text-on-surface leading-snug mt-1">Cold Brew</h3>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] font-medium text-emerald-500 uppercase tracking-wider">In Stock</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3 bg-surface-container-highest flex justify-between items-center">
+<span class="text-[11px] text-on-surface-variant font-medium uppercase tracking-widest">Availability</span>
+<div class="w-10 h-5 bg-primary-container rounded-full relative flex items-center px-1">
+<div class="w-3.5 h-3.5 bg-on-primary-container rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden flex flex-col hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-3 left-3 z-10">
+<input class="w-5 h-5 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/40" type="checkbox"/>
+</div>
+<div class="flex h-36">
+<div class="w-[40%] h-full relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Flaky golden brown croissant on a dark background with dramatic light highlighting the pastry layers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwEDcpKbhssMOrXGNGO6U2rKRzAH1ZxXEqiChak_KMwlFrLik2NjYdKme81TXMkI8LfRLIJ7ihFEOaTZxPSMRxQlezfffMF91Gh9koj3861Z1q2_-omiP-lHmzyNrCt6fnoMmcooGr2dYfyyQjt7UO70qACSPl_ECcPMYizSVXp6nDgFytjcBgSRKZ6BT3CuiRUcH-K6IO21gMAFKnSDMJYpMs6YUVVAojyrGbCH3qVLX7o07ZQlTZZ9fNrtZOzVhNfCI7UmbvQyUN"/>
+</div>
+<div class="w-[60%] p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-mono text-[10px] text-primary uppercase tracking-tighter bg-primary/10 px-1.5 py-0.5 rounded">Food</span>
+<span class="font-headline font-bold text-on-surface text-base">$3.50</span>
+</div>
+<h3 class="font-bold text-on-surface leading-snug mt-1">Croissant</h3>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] font-medium text-emerald-500 uppercase tracking-wider">In Stock</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3 bg-surface-container-highest flex justify-between items-center">
+<span class="text-[11px] text-on-surface-variant font-medium uppercase tracking-widest">Availability</span>
+<div class="w-10 h-5 bg-primary-container rounded-full relative flex items-center px-1">
+<div class="w-3.5 h-3.5 bg-on-primary-container rounded-full ml-auto shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bulk Actions Floating Bar -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm z-50">
+<div class="bg-surface-bright/95 backdrop-blur-md rounded-2xl px-6 py-4 flex items-center justify-between shadow-2xl border border-outline-variant/20">
+<div class="flex flex-col">
+<span class="text-[10px] font-mono text-primary font-bold uppercase tracking-widest">Selected</span>
+<span class="font-headline font-bold text-on-surface">3 items</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility_off</span>
+                    Deactivate
+                </button>
+<button class="bg-surface-container-highest hover:bg-surface-variant text-on-surface px-3 py-2 rounded-xl text-xs font-bold transition-all">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Action Button -->
+<button class="fixed bottom-6 right-6 w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

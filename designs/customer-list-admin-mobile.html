@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#e9e1d9",
+              "secondary": "#524439",
+              "tertiary-fixed-dim": "#d0bcff",
+              "surface-variant": "#f1e0ce",
+              "tertiary": "#6750a4",
+              "primary-fixed": "#ffdcc1",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#fffbff",
+              "background": "#fffbff",
+              "outline-variant": "#d7c3b5",
+              "tertiary-fixed": "#e9ddff",
+              "on-error-container": "#410002",
+              "on-tertiary-fixed-variant": "#4f378b",
+              "primary": "#885119",
+              "inverse-surface": "#342f2a",
+              "inverse-primary": "#ffb779",
+              "on-surface": "#1f1b16",
+              "surface-container-high": "#f6ede4",
+              "secondary-fixed": "#e9e1d9",
+              "primary-container": "#c8864a",
+              "on-error": "#ffffff",
+              "error-container": "#f9dedc",
+              "on-tertiary": "#ffffff",
+              "inverse-on-surface": "#f9efe2",
+              "surface-tint": "#885119",
+              "on-tertiary-container": "#21005d",
+              "on-secondary": "#ffffff",
+              "surface-dim": "#e2d9d0",
+              "on-secondary-fixed-variant": "#4a4640",
+              "on-primary-fixed": "#2e1500",
+              "surface-container-low": "#fdf2e9",
+              "on-surface-variant": "#524439",
+              "on-secondary-fixed": "#1e1b16",
+              "on-tertiary-fixed": "#21005d",
+              "on-primary": "#ffffff",
+              "secondary-fixed-dim": "#ccc5be",
+              "surface-container-highest": "#f1e0ce",
+              "outline": "#85736b",
+              "on-background": "#1f1b16",
+              "surface-bright": "#fffbff",
+              "primary-fixed-dim": "#ffb779",
+              "on-primary-container": "#2e1500",
+              "on-primary-fixed-variant": "#6c3a02",
+              "tertiary-container": "#e9ddff",
+              "surface-container": "#f9efe2",
+              "error": "#b3261e",
+              "on-secondary-container": "#1e1b16"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "mono": ["JetBrains Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'DM Sans', sans-serif;
+      }
+      .font-serif {
+        font-family: 'Fraunces', serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- Mobile Top Navigation Shell -->
+<header class="sticky top-0 z-40 bg-surface-container-low/80 backdrop-blur-xl px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</button>
+<h1 class="text-xl font-serif font-bold tracking-tight text-on-surface">Jennifer's Café</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="professional headshot of a female manager in a modern cafe setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBth2GKkYPgQ5-1ZcxxN32ZZb05iXNkELNpRh3bUjbPndCrI5FbB1rhTom5EkTwwoa1hqN00DkFhbUm_wscfzuhZCaODBy1kONNMQaeHkEKWW3_ZhVi1-eM8UhsYDYTaL1WOQVRHOYwR9bj7QiWEyGyLp6_hVTx8J9TCCZ3DbohMUFwwLZ1NiXo0aFhywRXCT8qCina2sQ5fmfVWqii63A4V5fGs6V-A4G6N2DaILT_K9I6ufz6me1B3zZ8jKnrNYJaD2WsG7yetB56"/>
+</div>
+</div>
+</header>
+<!-- Search & Filters -->
+<section class="px-4 mt-4 mb-6">
+<div class="relative flex items-center group">
+<span class="material-symbols-outlined absolute left-4 text-outline pointer-events-none">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/40 text-on-surface placeholder-outline-variant transition-all" placeholder="Search customers by name or email..." type="text"/>
+</div>
+<div class="flex gap-2 mt-4 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full text-sm font-medium whitespace-nowrap">All Customers</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">VIPs</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">Subscribed</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">Recent Orders</button>
+</div>
+</section>
+<!-- Content Canvas: Customer List -->
+<main class="px-4 space-y-4">
+<h2 class="text-2xl font-serif font-semibold text-on-surface mb-4">Customer Directory</h2>
+<!-- Active Detail Card: James Owusu (Simulated "Slide-over" context in mobile view) -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border-l-4 border-primary shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="portrait of a confident man named James with warm lighting and minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEIGsnXfJ29DCdeG6zBf_RyZn3bWOmYkjDFSIuJecCW4A3Zoi_wqrc9RYD1569JS7MDBmIzF1Lw7FS8L5I5XjLrfvXzfnnI5RgGh4xpmLigqjtzqsLuie1DlagcMFfYID6MoZ3HxUdxoxi4GYKh_p_o2QYOsqvAK7i4Rn691bG6MiK5fGzh0dp2qGK5adUXoqCoaRelp1cdzQWfmClKEPxClo83OebZvCFKJMvNoxWILMHn4vo2q_P_IPBvPWQxORRBtJtbEkEh709"/>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-surface">James Owusu</h3>
+<p class="text-sm text-on-surface-variant">james.o@example.com</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-primary-container text-on-primary-container tracking-wider font-bold">VIP Gold</span>
+</div>
+</div>
+</div>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+<div class="mt-6 grid grid-cols-3 gap-2">
+<div class="bg-surface-container px-3 py-2 rounded-lg text-center">
+<p class="text-[10px] uppercase font-mono text-outline leading-tight">Total Orders</p>
+<p class="text-lg font-bold font-serif text-on-surface">42</p>
+</div>
+<div class="bg-surface-container px-3 py-2 rounded-lg text-center">
+<p class="text-[10px] uppercase font-mono text-outline leading-tight">Last Visit</p>
+<p class="text-sm font-bold font-serif text-on-surface">2d ago</p>
+</div>
+<div class="bg-surface-container px-3 py-2 rounded-lg text-center">
+<p class="text-[10px] uppercase font-mono text-outline leading-tight">Avg Spend</p>
+<p class="text-sm font-bold font-serif text-on-surface">$24.50</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/20">
+<p class="text-xs text-on-surface-variant font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">local_cafe</span> Preferred Brew: <span class="text-primary font-bold">Ethiopian Pour-over</span>
+</p>
+</div>
+</div>
+<!-- Regular List Items -->
+<div class="space-y-3">
+<!-- Customer Card 2 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-high/50 rounded-xl hover:bg-surface-container-high transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="portrait of a woman with curly hair and a gentle smile against a warm neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkOwrwnzSj65bpdeSVONydKTWnZ_yhWpS5lsCkJK2rnta4OFCvXe_oXMkWOSsS5qGuCMBIsBMkYmTHc7jahllKUYhj_kuk5mA99HBM03iTZtHB_IyIRUuSagn1c6Nf9qPXB5jsZvnnD1FEEBV6lL0PZs3-JyvWSStbdKTjiDcpAC7Wj3j_7jZOLAEs0E51GGUBtz_GD_wqRvL1rQQ0vELQB1CcXJAV5Pc1f1aMGFoTx4g1a2FomM_rQdQ-dkuByqFhAr78RxhzU16A"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Elena Rodriguez</h4>
+<p class="text-xs text-on-surface-variant">elena.rod@webmail.com</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-mono font-bold text-on-surface">$842.10</p>
+<p class="text-[10px] uppercase text-outline">Total Lifetime</p>
+</div>
+</div>
+<!-- Customer Card 3 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-high/50 rounded-xl hover:bg-surface-container-high transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="headshot of a man with spectacles in a professional setting with soft bokeh highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7tF5yJn5NjEVnK5pW4_KqkqvKQxiu0WK2n39B_vLfGxHH_orGb0iJ-BrrlDgaY53ZxHjlZsLJxoca9YeP8-BUOee6RRKm8ZSbpsyKQZKHVTFux-3KlRMYD0a-jdkzDi1SuFz6g5OjATROE88i2m2DFD4_yqXZFHc8QRyzgNl9Djmaz_lmZruzea9L9S254VITOCU6bIGZnAcvNIc7EqdDDewSkmF_WIkvd6aAizUFh60qDDVIw6pDujWZKjB1CZDMYqOysTEccehB"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Marcus Chen</h4>
+<p class="text-xs text-on-surface-variant">m.chen@corporate.com</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-mono font-bold text-on-surface">$1,204.00</p>
+<p class="text-[10px] uppercase text-outline">Total Lifetime</p>
+</div>
+</div>
+<!-- Customer Card 4 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-high/50 rounded-xl hover:bg-surface-container-high transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="portrait of a smiling woman in a bright room with warm morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0cZ3_6bX5A6aYYsScsyys6emaJu1h0MqJOJjFf4qqmWBUMPl_0qOZDgoF34JUhnYNvc2Dtgl3BEJd7G1f_gFSmXANkX4NSJ0_20Ks2M6VbgzLT3Rv9wYBw0CJHAujVc6Y0Y1wPoJjZFN_iGdW403QJRbGXMapw6EZ3vKL6tfn-3Eim9ZLrCDwf8YBI1PcIz7OAWBMKq8lQbZuj6oQ884tdgLfh5z2m97GEoqgByYUrnnDl9zWkyXKuwbBRm42yG0OPG1k9x-mvsn1"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Sarah Jenkins</h4>
+<p class="text-xs text-on-surface-variant">s.jenkins@hello.io</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-mono font-bold text-on-surface">$128.50</p>
+<p class="text-[10px] uppercase text-outline">Total Lifetime</p>
+</div>
+</div>
+<!-- Customer Card 5 -->
+<div class="flex items-center gap-4 p-4 bg-surface-container-high/50 rounded-xl hover:bg-surface-container-high transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="candid shot of a young man laughing in a urban street setting with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATHkX78XRbVXAX5780TkiKHFE5lqGvZI3ZV0eEhUsfDT0-SUDeDJzvC4ovSijDX3iuAn_GRDmWDo0zqX2nDCUhERqErBMoTSzeV6q98PGYEypA0Yg9PP-0QaJD1MC-GlwQLJL3XFXx2lNxpO_T6REtR-F0RIgaLL1e32_gyhmX7FyzPCfODQLZDe7kQyr4Jslp3fFkSPA1CkSNfmB05ECtEEbPJHe2QTG6tweLFyQ4e43R6_cz8Qvzktl4ZrhsaBRuQFuDBUDvhXiP"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Liam Foster</h4>
+<p class="text-xs text-on-surface-variant">liam@foster-studios.com</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-mono font-bold text-on-surface">$345.20</p>
+<p class="text-[10px] uppercase text-outline">Total Lifetime</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Slide-over Panel Simulation (Expanded Detail for James Owusu) -->
+<!-- Note: On mobile, this usually occupies most of the screen or is a long scroll section -->
+<div class="mt-8 px-4">
+<div class="bg-surface-container-high rounded-t-3xl p-6 pb-12 shadow-2xl relative overflow-hidden">
+<div class="w-12 h-1 bg-outline-variant/30 mx-auto rounded-full mb-6"></div>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-20 h-20 rounded-full overflow-hidden border-4 border-surface shadow-lg">
+<img class="w-full h-full object-cover" data-alt="portrait of a confident man named James with warm lighting and minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABCCgGPEHhGp4aJnJRj5-_zUfBpXSip1jAhYA2NdUytZp3AQJXEhHXOa-TXDdw7XQTrTnBDbAyriR2Iq89GvL-rsBf1PN9kpAPozyfCkOCCJc1j2PYG5tJdmgELH4jnwDYsO2Tvz8YYIYTBjfZRQ5Fjv5WhIescPGYVdYWPWJi1oWHaqJiTb4HB_U69VRWqD5ImZxXTNQFTqj1Yp0eN3WW9aESxTA6HdDR9Xm-6W3uquLQxdIBN7bnOT6e4ETPDausSh2LiV9NdL9t"/>
+</div>
+<div>
+<h2 class="text-2xl font-serif font-bold text-on-surface">James Owusu</h2>
+<p class="text-primary font-medium">Verified Customer since 2022</p>
+</div>
+</div>
+<div class="space-y-6">
+<section>
+<h3 class="text-[10px] font-mono uppercase text-outline tracking-widest mb-3">Recent Activity</h3>
+<div class="space-y-3">
+<div class="bg-surface-container-lowest p-4 rounded-xl flex justify-between items-center">
+<div>
+<p class="font-bold text-on-surface">Caramel Macchiato</p>
+<p class="text-xs text-on-surface-variant">Ordered yesterday at 8:45 AM</p>
+</div>
+<span class="font-mono text-primary font-bold">$6.50</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl flex justify-between items-center">
+<div>
+<p class="font-bold text-on-surface">Avocado Toast</p>
+<p class="text-xs text-on-surface-variant">Ordered 3 days ago</p>
+</div>
+<span class="font-mono text-primary font-bold">$14.00</span>
+</div>
+</div>
+</section>
+<section>
+<h3 class="text-[10px] font-mono uppercase text-outline tracking-widest mb-3">Notes &amp; Preferences</h3>
+<div class="bg-surface-container-lowest p-4 rounded-xl">
+<p class="text-sm text-on-surface leading-relaxed italic">"Always prefers extra foam. allergic to nuts. Often brings a laptop and works in the corner booth."</p>
+</div>
+</section>
+<div class="grid grid-cols-2 gap-4">
+<button class="w-full py-4 bg-primary text-on-primary rounded-xl font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit</span>
+                        Edit Profile
+                    </button>
+<button class="w-full py-4 bg-surface text-primary rounded-xl font-bold flex items-center justify-center gap-2 border border-primary/20">
+<span class="material-symbols-outlined text-sm">mail</span>
+                        Contact
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Shell (Mobile) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-md flex justify-around items-center px-4 py-3 shadow-[0_-4px_24px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-medium font-label">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">restaurant_menu</span>
+<span class="text-[10px] font-medium font-label">Menu</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_bag</span>
+<span class="text-[10px] font-medium font-label">Orders</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">event</span>
+<span class="text-[10px] font-medium font-label">Reservations</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] font-bold font-label">Profile</span>
+<div class="w-1 h-1 bg-primary rounded-full"></div>
+</a>
+</nav>
+<!-- Floating Action Button - Only if relevant -->
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary-container text-on-primary-container rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-3xl">person_add</span>
+</button>
+</body></html>

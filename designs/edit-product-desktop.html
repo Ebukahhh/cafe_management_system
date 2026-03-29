@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Product — Single Origin Pour Over</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        @font-face {
+            font-family: 'Berkeley Mono';
+            src: url('https://fonts.cdnfonts.com/css/berkeley-mono') format('woff2');
+        }
+        .font-mono-data { font-family: 'Berkeley Mono', monospace; font-weight: 400; letter-spacing: -0.02em; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-primary": "#4c2700",
+                "on-tertiary-fixed": "#23005c",
+                "on-primary-fixed-variant": "#6c3a02",
+                "on-surface": "#f1e0ce",
+                "on-secondary": "#33302b",
+                "tertiary-fixed-dim": "#d0bcff",
+                "inverse-surface": "#f1e0ce",
+                "surface-container-lowest": "#140d04",
+                "secondary-fixed-dim": "#ccc5be",
+                "background": "#1a1208",
+                "secondary-fixed": "#e9e1d9",
+                "outline-variant": "#524439",
+                "on-error": "#690005",
+                "tertiary": "#d0bcff",
+                "on-tertiary": "#3c0091",
+                "surface-container-low": "#231a0f",
+                "surface-bright": "#42372b",
+                "inverse-primary": "#885119",
+                "surface-container-high": "#32281d",
+                "outline": "#9f8d81",
+                "on-primary-container": "#482400",
+                "error": "#ffb4ab",
+                "surface-dim": "#1a1208",
+                "on-tertiary-container": "#380088",
+                "primary-container": "#c8864a",
+                "secondary-container": "#4a4640",
+                "on-error-container": "#ffdad6",
+                "primary-fixed-dim": "#ffb779",
+                "surface-variant": "#3d3327",
+                "on-secondary-fixed": "#1e1b16",
+                "surface-container-highest": "#3d3327",
+                "on-background": "#f1e0ce",
+                "surface": "#1a1208",
+                "tertiary-fixed": "#e9ddff",
+                "inverse-on-surface": "#392f23",
+                "on-tertiary-fixed-variant": "#5516be",
+                "on-surface-variant": "#d7c3b5",
+                "surface-tint": "#ffb779",
+                "on-secondary-fixed-variant": "#4a4640",
+                "on-secondary-container": "#bbb4ad",
+                "on-primary-fixed": "#2e1500",
+                "surface-container": "#271e13",
+                "secondary": "#ccc5be",
+                "primary-fixed": "#ffdcc1",
+                "tertiary-container": "#a37dff",
+                "error-container": "#93000a",
+                "primary": "#ffb779"
+              },
+              fontFamily: {
+                "headline": ["Newsreader", "serif"],
+                "body": ["Plus Jakarta Sans", "sans-serif"],
+                "label": ["Inter", "sans-serif"],
+                "serif": ["Fraunces", "serif"],
+                "mono": ["Berkeley Mono", "monospace"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Sidebar Shell -->
+<aside class="bg-stone-100 dark:bg-[#1A1208] h-screen w-64 fixed left-0 top-0 flex flex-col h-full py-8 z-50">
+<div class="px-8 mb-10">
+<h1 class="text-xl font-serif italic text-[#1A1208] dark:text-[#F5F5F5] leading-tight">Jennifer's Café</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-stone-500 font-label mt-1">Management System</p>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto">
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#1A1208] px-8 py-3 flex items-center gap-3 transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span class="font-label text-sm">Dashboard</span>
+</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#1A1208] px-8 py-3 flex items-center gap-3 transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label text-sm">Orders</span>
+</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#1A1208] px-8 py-3 flex items-center gap-3 transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="event">event</span>
+<span class="font-label text-sm">Reservations</span>
+</a>
+<!-- Active State -->
+<a class="text-[#C8864A] font-bold bg-white dark:bg-[#C8864A]/10 rounded-l-full ml-4 pl-4 py-3 flex items-center gap-3 scale-[0.98] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="restaurant_menu" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-label text-sm">Menu</span>
+</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#1A1208] px-8 py-3 flex items-center gap-3 transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="card_membership">card_membership</span>
+<span class="font-label text-sm">Subscriptions</span>
+</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#1A1208] px-8 py-3 flex items-center gap-3 transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="campaign">campaign</span>
+<span class="font-label text-sm">Promotions</span>
+</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#1A1208] px-8 py-3 flex items-center gap-3 transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="bar_chart">bar_chart</span>
+<span class="font-label text-sm">Analytics</span>
+</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#1A1208] px-8 py-3 flex items-center gap-3 transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="font-label text-sm">Settings</span>
+</a>
+</nav>
+<div class="px-8 mt-auto pt-8">
+<div class="flex items-center gap-3 p-3 bg-stone-200/50 dark:bg-surface-container-low rounded-xl">
+<img alt="Jennifer's Café Admin" class="w-10 h-10 rounded-full object-cover border border-primary/20" data-alt="professional portrait of a confident female café owner in a bright minimalist setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9fJuTF20lzSytoXM4Cc7Ffc7CJr77x9pBk8Qri6I7956Xrh06Fc27mVquAyO0D0GaY6FQm7dSDWlyDgh8LmfoCXM8_ugxEFma-jv_U1Jj8Q0P5g7oDS13gpa-mUdUdyq9Ssw579Nh3nfjhWpbWgy7FIV7IlPvLJ91xiZsWVo_LUxiarU_BMAQBNSGx-gZD6xzS4sEHNnUkxMLEsl4ZpKtOQICHA_ZRoAbdTrNC1bOvgw--ibjh7hthpjssweRUbx7zFH1TTrUkRbF"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate text-[#1A1208] dark:text-on-surface">Jennifer M.</p>
+<p class="text-[10px] text-stone-500 font-label truncate">Admin Account</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-white/80 dark:bg-[#1A1208]/80 backdrop-blur-md flex justify-between items-center px-10 h-20">
+<div class="flex items-center gap-2">
+<span class="text-stone-400 text-xs font-label">Menu Manager</span>
+<span class="material-symbols-outlined text-stone-300 text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary text-xs font-bold font-label">Edit Product</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg" data-icon="search">search</span>
+<input class="bg-stone-50 dark:bg-surface-container border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-1 focus:ring-primary/40 transition-all placeholder:text-stone-400" placeholder="Search menu..." type="text"/>
+</div>
+<div class="flex items-center gap-4 border-l border-stone-200 dark:border-outline-variant pl-6">
+<button class="text-stone-500 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full ring-2 ring-white dark:ring-background"></span>
+</button>
+<button class="text-stone-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 min-h-screen bg-stone-50 dark:bg-[#1A1208]">
+<div class="max-w-7xl mx-auto px-10 pb-20">
+<header class="mb-10">
+<h2 class="text-4xl font-serif text-[#1A1208] dark:text-on-surface italic leading-tight">Edit Product — Single Origin Pour Over</h2>
+<div class="mt-2 flex items-center gap-3 font-mono-data text-[11px] text-stone-500 uppercase tracking-widest">
+<span>SKU: CP-SOPO-01</span>
+<span class="w-1 h-1 rounded-full bg-stone-300"></span>
+<span>Last updated: 2 hrs ago</span>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-10 items-start">
+<!-- Left Column: Form -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Basic Info Section -->
+<section class="bg-white dark:bg-surface-container-low p-8 rounded-xl shadow-sm shadow-stone-200/50 dark:shadow-none">
+<div class="flex items-center gap-3 mb-8 border-b border-stone-100 dark:border-surface-variant pb-4">
+<span class="material-symbols-outlined text-primary" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<h3 class="text-lg font-serif italic text-on-surface">Basic Info</h3>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="col-span-2">
+<label class="block text-xs font-label uppercase tracking-wider text-stone-500 mb-2">Product Name</label>
+<input class="w-full bg-stone-50 dark:bg-surface-container-highest border-none rounded-lg p-4 font-medium text-on-surface focus:ring-1 focus:ring-primary/40" type="text" value="Single Origin Pour Over"/>
+</div>
+<div>
+<label class="block text-xs font-label uppercase tracking-wider text-stone-500 mb-2">Category</label>
+<select class="w-full bg-stone-50 dark:bg-surface-container-highest border-none rounded-lg p-4 font-medium text-on-surface focus:ring-1 focus:ring-primary/40 appearance-none">
+<option>Coffee</option>
+<option>Tea</option>
+<option>Bakery</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-label uppercase tracking-wider text-stone-500 mb-2">Price ($)</label>
+<input class="w-full bg-stone-50 dark:bg-surface-container-highest border-none rounded-lg p-4 font-mono-data text-on-surface focus:ring-1 focus:ring-primary/40" type="text" value="5.50"/>
+</div>
+<div>
+<label class="block text-xs font-label uppercase tracking-wider text-stone-500 mb-2">Stock Count</label>
+<input class="w-full bg-stone-50 dark:bg-surface-container-highest border-none rounded-lg p-4 font-mono-data text-on-surface focus:ring-1 focus:ring-primary/40" type="number" value="124"/>
+</div>
+</div>
+<div class="col-span-2">
+<label class="block text-xs font-label uppercase tracking-wider text-stone-500 mb-2">Short Description</label>
+<textarea class="w-full bg-stone-50 dark:bg-surface-container-highest border-none rounded-lg p-4 font-medium text-on-surface focus:ring-1 focus:ring-primary/40 resize-none" maxlength="160" rows="3">Hand-selected beans curated for a clean, nuanced cup. Vibrant acidity and a silky body define this artisanal brew.</textarea>
+<div class="mt-2 text-[10px] font-mono-data text-stone-400 text-right uppercase">108 / 160 characters</div>
+</div>
+</div>
+</section>
+<!-- Product Options Section -->
+<section class="bg-white dark:bg-surface-container-low p-8 rounded-xl shadow-sm shadow-stone-200/50 dark:shadow-none">
+<div class="flex justify-between items-center mb-8 border-b border-stone-100 dark:border-surface-variant pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="tune" style="font-variation-settings: 'FILL' 1;">tune</span>
+<h3 class="text-lg font-serif italic text-on-surface">Product Options</h3>
+</div>
+<button class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-primary hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add Option Group
+                            </button>
+</div>
+<div class="space-y-6">
+<!-- Size Option -->
+<div class="bg-stone-50 dark:bg-surface-container-highest p-5 rounded-xl">
+<div class="flex justify-between mb-4">
+<h4 class="text-sm font-bold text-on-surface">Size</h4>
+<span class="text-[10px] font-mono-data text-stone-400 uppercase">3 Choices</span>
+</div>
+<div class="flex gap-3">
+<span class="px-4 py-2 bg-white dark:bg-surface-container-low rounded-full text-xs border border-stone-200 dark:border-outline-variant font-medium">Small</span>
+<span class="px-4 py-2 bg-white dark:bg-surface-container-low rounded-full text-xs border border-stone-200 dark:border-outline-variant font-medium">Medium</span>
+<span class="px-4 py-2 bg-white dark:bg-surface-container-low rounded-full text-xs border border-primary text-primary font-bold">Large</span>
+</div>
+</div>
+<!-- Milk Type Option -->
+<div class="bg-stone-50 dark:bg-surface-container-highest p-5 rounded-xl">
+<div class="flex justify-between mb-4">
+<h4 class="text-sm font-bold text-on-surface">Milk Type</h4>
+<span class="text-[10px] font-mono-data text-stone-400 uppercase">4 Choices</span>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-white dark:bg-surface-container-low rounded-full text-xs border border-stone-200 dark:border-outline-variant font-medium">Regular</span>
+<span class="px-4 py-2 bg-white dark:bg-surface-container-low rounded-full text-xs border border-stone-200 dark:border-outline-variant font-medium">Oat</span>
+<span class="px-4 py-2 bg-white dark:bg-surface-container-low rounded-full text-xs border border-stone-200 dark:border-outline-variant font-medium">Almond</span>
+<span class="px-4 py-2 bg-white dark:bg-surface-container-low rounded-full text-xs border border-stone-200 dark:border-outline-variant font-medium">Soy</span>
+</div>
+</div>
+<!-- Add-ons Option -->
+<div class="bg-stone-50 dark:bg-surface-container-highest p-5 rounded-xl">
+<div class="flex justify-between mb-4">
+<h4 class="text-sm font-bold text-on-surface">Add-ons</h4>
+<span class="text-[10px] font-mono-data text-stone-400 uppercase">Optional</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded border border-outline bg-white dark:bg-surface-container flex items-center justify-center transition-all group-hover:border-primary">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<span class="text-xs text-on-surface">Extra Shot</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded border border-outline bg-white dark:bg-surface-container flex items-center justify-center transition-all group-hover:border-primary">
+</div>
+<span class="text-xs text-on-surface">Honey</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded border border-outline bg-white dark:bg-surface-container flex items-center justify-center transition-all group-hover:border-primary">
+</div>
+<span class="text-xs text-on-surface">Cinnamon</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Availability Section -->
+<section class="bg-white dark:bg-surface-container-low p-8 rounded-xl shadow-sm shadow-stone-200/50 dark:shadow-none">
+<div class="flex items-center gap-3 mb-8 border-b border-stone-100 dark:border-surface-variant pb-4">
+<span class="material-symbols-outlined text-primary" data-icon="visibility" style="font-variation-settings: 'FILL' 1;">visibility</span>
+<h3 class="text-lg font-serif italic text-on-surface">Availability</h3>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between p-4 bg-stone-50 dark:bg-surface-container-highest rounded-xl">
+<div>
+<p class="text-sm font-bold text-on-surface">Available on menu</p>
+<p class="text-[10px] text-stone-500 font-label uppercase mt-0.5">Visible to customers in ordering system</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full transition-all"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 border border-stone-100 dark:border-surface-variant rounded-xl">
+<div>
+<p class="text-sm font-bold text-on-surface">Featured item</p>
+<p class="text-[10px] text-stone-500 font-label uppercase mt-0.5">Prioritize at top of menu section</p>
+</div>
+<div class="w-12 h-6 bg-stone-200 dark:bg-surface-variant rounded-full relative cursor-pointer">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-stone-500 rounded-full transition-all"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 border border-stone-100 dark:border-surface-variant rounded-xl">
+<div>
+<p class="text-sm font-bold text-on-surface">Show in app promotions</p>
+<p class="text-[10px] text-stone-500 font-label uppercase mt-0.5">Include in automated marketing banners</p>
+</div>
+<div class="w-12 h-6 bg-stone-200 dark:bg-surface-variant rounded-full relative cursor-pointer">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-stone-500 rounded-full transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Actions -->
+<div class="flex items-center justify-between pt-6">
+<button class="text-error text-xs font-bold uppercase tracking-widest hover:underline decoration-2 transition-all">Delete Product</button>
+<div class="flex gap-4">
+<button class="px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors">Discard</button>
+<button class="px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-primary to-primary-container text-on-primary shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">Save Changes</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Sticky Preview -->
+<div class="col-span-12 lg:col-span-4 space-y-8 sticky top-24">
+<!-- Product Preview Card -->
+<div class="bg-white dark:bg-surface-container-low rounded-xl overflow-hidden shadow-sm shadow-stone-200/50 border border-stone-100 dark:border-none">
+<div class="p-4 border-b border-stone-100 dark:border-surface-variant flex justify-between items-center">
+<h4 class="text-[10px] font-label uppercase tracking-[0.2em] text-stone-400">Live Menu Preview</h4>
+<div class="flex gap-1.5">
+<span class="w-2 h-2 rounded-full bg-stone-200"></span>
+<span class="w-2 h-2 rounded-full bg-stone-200"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+</div>
+<div class="relative aspect-square">
+<img alt="Pour over coffee being brewed" class="w-full h-full object-cover" data-alt="close-up shot of artisan coffee pouring from a glass carafe into a white ceramic cup with warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1jP1npkC8THi9NBBjF6EddGh-MbBlNLojVPW-ArDL_mb_A56YUHGtBtWafsLNiul8oYczD2mTRvJIdcyNb6S4QbPRFJFEECDSijYZXEIJFmIsGQiWYkfgLH13SztcHHUC3nBV5WXy80VxTy99yBx7qGxkDp5G3loRqCuR9QTM4of5wHcQxf9_eYWdfnH19jo-bkKOAx-khOwVxXYdswZR5BhwbxfhcOKqQp8QzpCFE-fa25XMoOcBegEpYfCC37VSnkhK0Zu69M7c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 text-white">
+<span class="px-3 py-1 bg-primary text-[10px] font-bold uppercase tracking-widest rounded-full">Single Origin</span>
+<h5 class="text-2xl font-serif italic mt-2">Ethiopian Yirgacheffe</h5>
+<p class="text-primary font-mono-data mt-1">$5.50</p>
+</div>
+</div>
+<div class="p-6">
+<p class="text-xs text-stone-500 dark:text-stone-400 font-body leading-relaxed line-clamp-2 italic">
+                                Hand-selected beans curated for a clean, nuanced cup. Vibrant acidity and a silky body define this artisanal brew.
+                            </p>
+<button class="w-full mt-6 py-3 border border-stone-200 dark:border-outline-variant rounded-full text-[10px] font-bold uppercase tracking-widest text-on-surface hover:bg-stone-50 dark:hover:bg-surface-variant transition-colors">Select Options</button>
+</div>
+</div>
+<!-- Image Upload Zone -->
+<div class="bg-surface-container-high p-8 rounded-xl border-2 border-dashed border-outline-variant/30 text-center">
+<span class="material-symbols-outlined text-4xl text-primary/40 mb-4" data-icon="cloud_upload">cloud_upload</span>
+<h4 class="text-sm font-bold text-on-surface mb-2">Upload Product Image</h4>
+<p class="text-xs text-stone-500 font-label mb-6">Drag and drop here, or click to browse files</p>
+<div class="space-y-3 text-left bg-surface-container-low p-4 rounded-lg">
+<div class="flex items-center gap-2">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+<p class="text-[10px] font-label text-stone-400">Preferred aspect ratio: 1:1</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+<p class="text-[10px] font-label text-stone-400">Min resolution: 1200 x 1200px</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+<p class="text-[10px] font-label text-stone-400">Format: JPG, WebP (Max 2MB)</p>
+</div>
+</div>
+<button class="mt-6 w-full py-3 bg-white dark:bg-surface-container-lowest rounded-xl text-xs font-bold text-primary hover:text-primary-container transition-colors shadow-sm">Upload new image</button>
+</div>
+<!-- Tips / Info -->
+<div class="bg-primary/5 p-6 rounded-xl border border-primary/10">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="tips_and_updates">tips_and_updates</span>
+<div>
+<h4 class="text-xs font-bold text-primary uppercase tracking-widest">Coffee Pro Tip</h4>
+<p class="text-xs text-stone-500 dark:text-on-surface-variant mt-2 leading-relaxed italic">
+                                    "Products with high-quality 'pouring' shots see a 24% higher engagement rate in the mobile app."
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

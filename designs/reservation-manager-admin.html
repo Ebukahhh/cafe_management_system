@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reservation Manager - Jennifer's Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Berkeley+Mono&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "tertiary": "#d0bcff",
+                "surface-variant": "#3d3327",
+                "on-tertiary": "#3c0091",
+                "on-primary-fixed-variant": "#6c3a02",
+                "inverse-surface": "#f1e0ce",
+                "on-secondary-fixed": "#1e1b16",
+                "surface-container-high": "#32281d",
+                "secondary-container": "#4a4640",
+                "surface-container-lowest": "#140d04",
+                "on-error-container": "#ffdad6",
+                "primary": "#ffb779",
+                "error": "#ffb4ab",
+                "on-secondary-fixed-variant": "#4a4640",
+                "primary-container": "#c8864a",
+                "outline-variant": "#524439",
+                "on-surface-variant": "#d7c3b5",
+                "on-error": "#690005",
+                "secondary-fixed-dim": "#ccc5be",
+                "on-tertiary-fixed-variant": "#5516be",
+                "on-tertiary-fixed": "#23005c",
+                "surface-bright": "#42372b",
+                "on-primary": "#4c2700",
+                "on-secondary": "#33302b",
+                "secondary-fixed": "#e9e1d9",
+                "primary-fixed-dim": "#ffb779",
+                "on-secondary-container": "#bbb4ad",
+                "inverse-primary": "#885119",
+                "on-primary-fixed": "#2e1500",
+                "tertiary-fixed-dim": "#d0bcff",
+                "surface": "#1a1208",
+                "tertiary-container": "#a37dff",
+                "surface-container-low": "#231a0f",
+                "surface-container-highest": "#3d3327",
+                "error-container": "#93000a",
+                "background": "#1a1208",
+                "tertiary-fixed": "#e9ddff",
+                "inverse-on-surface": "#392f23",
+                "outline": "#9f8d81",
+                "surface-tint": "#ffb779",
+                "primary-fixed": "#ffdcc1",
+                "on-background": "#f1e0ce",
+                "secondary": "#ccc5be",
+                "on-primary-container": "#482400",
+                "surface-container": "#271e13",
+                "on-tertiary-container": "#380088",
+                "on-surface": "#f1e0ce",
+                "surface-dim": "#1a1208"
+              },
+              fontFamily: {
+                "headline": ["Newsreader", "serif"],
+                "body": ["Plus Jakarta Sans", "sans-serif"],
+                "label": ["Inter", "sans-serif"],
+                "serif": ["Fraunces", "serif"],
+                "mono": ["Berkeley Mono", "monospace"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Fraunces', serif; }
+        .font-mono { font-family: 'Berkeley Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #524439; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Sidebar / Rail (Shared Component) -->
+<aside class="fixed inset-y-0 left-0 w-64 flex flex-col z-40 bg-stone-100 dark:bg-stone-900 hidden md:flex h-screen">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img alt="Jennifer's Café Logo" class="w-full h-full object-cover" data-alt="Modern minimalist cafe logo showing a stylized coffee bean in warm amber tones on a clean white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcfqJEAT9DlhEiAFlLUzHuqiJOpu03iPWGekwfdWYo1jkkCmBavvLAFwdIb6mKZFRg129J64Iks1vS1tUUdJ9VlTveAyCDJAeg4JGJXLjS9GU_iZL7CLqQRAEZYFI9WHhnFtYNbGAse5mmmco7LKtYOBP_mduuYeYaWbA0vdl86bWMCidLEsKm1qtQyd-ArBiSJ2LzWFLpwbWEK9GCEowVM_RhWIBkMFT-p9-pCRG7TNTWJCq42CsO9M7WpQAKQV7Hz9Irr39E0wKd"/>
+</div>
+<div>
+<h1 class="text-xl font-serif font-bold text-stone-900 dark:text-stone-100">Jennifer's Café</h1>
+<p class="text-[10px] uppercase tracking-widest text-stone-500 font-label">Management System</p>
+</div>
+</div>
+<nav class="flex-1 mt-4 space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center px-6 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-label text-sm">Dashboard</span>
+</a>
+<!-- Orders -->
+<a class="flex items-center px-6 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">shopping_bag</span>
+<span class="font-label text-sm">Orders</span>
+</a>
+<!-- Reservations (Active) -->
+<a class="flex items-center px-6 py-3 text-amber-700 dark:text-amber-500 bg-white dark:bg-stone-800 border-l-4 border-amber-600 font-bold" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">event_available</span>
+<span class="font-label text-sm">Reservations</span>
+</a>
+<!-- Menu -->
+<a class="flex items-center px-6 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">restaurant_menu</span>
+<span class="font-label text-sm">Menu</span>
+</a>
+<!-- Subscriptions -->
+<a class="flex items-center px-6 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">loyalty</span>
+<span class="font-label text-sm">Subscriptions</span>
+</a>
+<!-- Promotions -->
+<a class="flex items-center px-6 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">campaign</span>
+<span class="font-label text-sm">Promotions</span>
+</a>
+<!-- Analytics -->
+<a class="flex items-center px-6 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">leaderboard</span>
+<span class="font-label text-sm">Analytics</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center px-6 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-label text-sm">Settings</span>
+</a>
+</nav>
+<div class="p-6 border-t border-stone-200 dark:border-stone-800">
+<div class="flex items-center gap-3">
+<img alt="User" class="w-8 h-8 rounded-full border border-primary-container" data-alt="Professional portrait of a female cafe manager in soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuXRhnhzun2KsH9UQvVE9RvCGxiUuR521WPVPPwPbPvIFIACGRfyEtO56jl6TvKYlExu_znVR4vmOhVCHRgjn_h8Tb1t7WLJRpeA3C9UI9nqIVThTuPwwDgSJ2SwfUxmW0rkUsrNvhcw4EwhqdaOvXoGZcFHfdTKrEKyawIRHvVjB3BC8onluQcsM3wWBl73Ogw2-dYrXyMjZ6vYX4EtqfjimscCzMJXXwMmNQDji6ilYHAOmu-dXDbRoZbW4uUvRkm2ZsrKvw3SsK"/>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold truncate">Jennifer Smith</p>
+<p class="text-[10px] text-stone-500 truncate">Admin Access</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top AppBar (Shared Component) -->
+<header class="fixed top-0 right-0 left-0 md:left-64 h-16 z-30 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-4 md:px-8">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-stone-600 dark:text-stone-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-serif text-xl font-bold text-stone-900 dark:text-stone-100">Reservations</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-stone-100 dark:bg-stone-900 px-3 py-1.5 rounded-full border border-stone-200 dark:border-stone-800">
+<span class="material-symbols-outlined text-stone-400 text-sm mr-2">search</span>
+<input class="bg-transparent border-none text-xs focus:ring-0 w-32 md:w-48 text-stone-800 dark:text-stone-200" placeholder="Search guests..." type="text"/>
+</div>
+<button class="p-2 text-stone-500 hover:bg-stone-50 dark:hover:bg-stone-900 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-amber-500 rounded-full border-2 border-white dark:border-stone-950"></span>
+</button>
+<button class="p-2 text-stone-500 hover:bg-stone-50 dark:hover:bg-stone-900 rounded-full transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Wrapper -->
+<main class="pt-16 md:pl-64 min-h-screen bg-stone-50 dark:bg-surface-dim">
+<div class="max-w-[1280px] mx-auto p-4 md:p-8 flex flex-col lg:flex-row gap-8">
+<!-- Center Canvas -->
+<div class="flex-1 space-y-8">
+<!-- Page Heading & Date Navigator -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-2 bg-white dark:bg-stone-900 p-1 rounded-xl shadow-sm border border-stone-100 dark:border-stone-800">
+<button class="p-2 hover:bg-stone-50 dark:hover:bg-stone-800 rounded-lg text-stone-500">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="px-4 font-serif font-semibold text-stone-900 dark:text-stone-100">Tuesday, 8 April 2025</span>
+<button class="p-2 hover:bg-stone-50 dark:hover:bg-stone-800 rounded-lg text-stone-500">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="h-6 w-[1px] bg-stone-200 dark:bg-stone-700 mx-1"></div>
+<button class="px-4 py-1.5 text-xs font-bold text-amber-600 dark:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-lg">Today</button>
+</div>
+<div class="flex items-center bg-stone-200 dark:bg-stone-800 p-1 rounded-xl w-fit">
+<button class="px-4 py-1.5 text-xs font-bold rounded-lg bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-sm">List</button>
+<button class="px-4 py-1.5 text-xs font-bold rounded-lg text-stone-500 hover:text-stone-700">Calendar</button>
+</div>
+</div>
+<!-- Summary Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 overflow-x-auto pb-2 scrollbar-hide">
+<div class="bg-white dark:bg-stone-900 p-4 rounded-xl shadow-sm border border-stone-100 dark:border-stone-800 flex flex-col min-w-[140px]">
+<span class="text-[10px] text-stone-500 font-label uppercase tracking-widest mb-1">Today</span>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">8</span>
+<span class="text-xs text-stone-400">reservations</span>
+</div>
+</div>
+<div class="bg-white dark:bg-stone-900 p-4 rounded-xl shadow-sm border border-stone-100 dark:border-stone-800 flex flex-col min-w-[140px]">
+<span class="text-[10px] text-stone-500 font-label uppercase tracking-widest mb-1">Confirmed</span>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-serif font-bold text-emerald-600 dark:text-emerald-500">5</span>
+<span class="material-symbols-outlined text-sm text-emerald-500" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl shadow-sm border border-amber-100 dark:border-amber-900/30 flex flex-col min-w-[140px]">
+<span class="text-[10px] text-amber-700 dark:text-amber-400 font-label uppercase tracking-widest mb-1">Pending</span>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-serif font-bold text-amber-600 dark:text-amber-500">2</span>
+<span class="material-symbols-outlined text-sm text-amber-500" style="font-variation-settings: 'FILL' 1;">hourglass_empty</span>
+</div>
+</div>
+<div class="bg-white dark:bg-stone-900 p-4 rounded-xl shadow-sm border border-stone-100 dark:border-stone-800 flex flex-col min-w-[140px]">
+<span class="text-[10px] text-stone-500 font-label uppercase tracking-widest mb-1">Declined</span>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-serif font-bold text-stone-400">1</span>
+</div>
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex gap-6 border-b border-stone-200 dark:border-stone-800">
+<button class="pb-3 text-sm text-stone-500 font-bold hover:text-stone-900 dark:hover:text-stone-100 transition-colors">All</button>
+<button class="pb-3 text-sm text-amber-600 dark:text-amber-500 font-bold border-b-2 border-amber-600 relative">
+                        Pending
+                        <span class="ml-2 bg-amber-100 dark:bg-amber-900/40 text-[10px] px-1.5 py-0.5 rounded-full">2</span>
+</button>
+<button class="pb-3 text-sm text-stone-500 font-bold hover:text-stone-900 dark:hover:text-stone-100 transition-colors">Confirmed</button>
+<button class="pb-3 text-sm text-stone-500 font-bold hover:text-stone-900 dark:hover:text-stone-100 transition-colors">Declined</button>
+<button class="pb-3 text-sm text-stone-500 font-bold hover:text-stone-900 dark:hover:text-stone-100 transition-colors">Completed</button>
+</div>
+<!-- Pending Section -->
+<section class="space-y-4">
+<h3 class="text-xs font-label uppercase tracking-tighter text-stone-400 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        Action Required
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Pending Card 1 -->
+<div class="bg-white dark:bg-stone-900 rounded-xl border-l-4 border-amber-500 shadow-sm p-5 hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-xl font-mono font-bold text-stone-900 dark:text-stone-100">11:00am</p>
+<p class="text-xs text-stone-500 flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">group</span>
+                                        4 Guests
+                                    </p>
+</div>
+<span class="bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Pending</span>
+</div>
+<div class="space-y-2 mb-6">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100">Marco Rossi</h4>
+<p class="text-sm text-stone-500 font-mono">+39 345 123 4567</p>
+<div class="bg-stone-50 dark:bg-stone-800 p-3 rounded-lg flex items-start gap-2 border border-stone-100 dark:border-stone-700">
+<span class="material-symbols-outlined text-stone-400 text-sm mt-0.5">chat_bubble</span>
+<p class="text-xs italic text-stone-600 dark:text-stone-300">"Window seat if possible"</p>
+</div>
+<p class="text-[10px] text-stone-400 mt-2">Submitted: 2 hours ago</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-lg text-xs transition-colors">Confirm</button>
+<button class="flex-1 border border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 font-bold py-2 rounded-lg text-xs transition-colors">Decline</button>
+</div>
+</div>
+<!-- Pending Card 2 -->
+<div class="bg-white dark:bg-stone-900 rounded-xl border-l-4 border-amber-500 shadow-sm p-5 hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-xl font-mono font-bold text-stone-900 dark:text-stone-100">12:30pm</p>
+<p class="text-xs text-stone-500 flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">group</span>
+                                        2 Guests
+                                    </p>
+</div>
+<span class="bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Pending</span>
+</div>
+<div class="space-y-2 mb-6">
+<h4 class="font-serif text-lg text-stone-900 dark:text-stone-100">Elena Gilbert</h4>
+<p class="text-sm text-stone-500 font-mono">+1 202 555 0199</p>
+<div class="bg-stone-50 dark:bg-stone-800 p-3 rounded-lg flex items-start gap-2 border border-stone-100 dark:border-stone-700">
+<span class="material-symbols-outlined text-stone-400 text-sm mt-0.5">cake</span>
+<p class="text-xs italic text-stone-600 dark:text-stone-300">"Birthday celebration"</p>
+</div>
+<p class="text-[10px] text-stone-400 mt-2">Submitted: 45 mins ago</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-lg text-xs transition-colors">Confirm</button>
+<button class="flex-1 border border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 font-bold py-2 rounded-lg text-xs transition-colors">Decline</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Confirmed Section -->
+<section class="space-y-3">
+<h3 class="text-xs font-label uppercase tracking-tighter text-stone-400 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        Confirmed Today
+                    </h3>
+<div class="space-y-2">
+<!-- Row 1 -->
+<div class="bg-white dark:bg-stone-900 rounded-lg border-l-4 border-emerald-500 shadow-sm p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-6">
+<span class="font-mono font-bold text-stone-900 dark:text-stone-100 w-16">8:30am</span>
+<div>
+<p class="font-bold text-sm">Sarah Jenkins</p>
+<p class="text-xs text-stone-500">Party of 2</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check</span>
+                                    Confirmed
+                                </span>
+<button class="text-xs font-bold text-amber-600 dark:text-amber-500 hover:underline">View Details</button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="bg-white dark:bg-stone-900 rounded-lg border-l-4 border-emerald-500 shadow-sm p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-6">
+<span class="font-mono font-bold text-stone-900 dark:text-stone-100 w-16">9:15am</span>
+<div>
+<p class="font-bold text-sm">David Chen</p>
+<p class="text-xs text-stone-500">Party of 5</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check</span>
+                                    Confirmed
+                                </span>
+<button class="text-xs font-bold text-amber-600 dark:text-amber-500 hover:underline">View Details</button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="bg-white dark:bg-stone-900 rounded-lg border-l-4 border-emerald-500 shadow-sm p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-6">
+<span class="font-mono font-bold text-stone-900 dark:text-stone-100 w-16">10:00am</span>
+<div>
+<p class="font-bold text-sm">Anna Varkis</p>
+<p class="text-xs text-stone-500">Party of 1</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check</span>
+                                    Confirmed
+                                </span>
+<button class="text-xs font-bold text-amber-600 dark:text-amber-500 hover:underline">View Details</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Side Panel (Slot Capacity) -->
+<aside class="w-full lg:w-[320px] space-y-6">
+<div class="bg-white dark:bg-stone-900 rounded-2xl p-6 shadow-sm border border-stone-100 dark:border-stone-800">
+<h3 class="font-serif text-lg font-bold text-stone-900 dark:text-stone-100 mb-6">Slot Capacity Settings</h3>
+<div class="space-y-6">
+<!-- Slot Item -->
+<div class="flex items-center justify-between">
+<span class="font-mono text-sm text-stone-600 dark:text-stone-400">8:00am</span>
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold w-4 text-center">2</span>
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+<span class="text-[10px] text-stone-400 w-10">covers</span>
+</div>
+</div>
+<!-- Slot Item -->
+<div class="flex items-center justify-between">
+<span class="font-mono text-sm text-stone-600 dark:text-stone-400">9:00am</span>
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold w-4 text-center">8</span>
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+<span class="text-[10px] text-stone-400 w-10">covers</span>
+</div>
+</div>
+<!-- Slot Item -->
+<div class="flex items-center justify-between">
+<span class="font-mono text-sm text-stone-600 dark:text-stone-400">10:00am</span>
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold w-4 text-center">8</span>
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+<span class="text-[10px] text-stone-400 w-10">covers</span>
+</div>
+</div>
+<!-- Slot Item -->
+<div class="flex items-center justify-between">
+<span class="font-mono text-sm text-stone-600 dark:text-stone-400">11:00am</span>
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold w-4 text-center">4</span>
+<button class="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 flex items-center justify-center text-stone-500 hover:bg-stone-50">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+<span class="text-[10px] text-stone-400 w-10">covers</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-xl transition-all shadow-md shadow-amber-900/20">
+                        Save Capacity Settings
+                    </button>
+<div class="mt-6 pt-6 border-t border-stone-100 dark:border-stone-800 text-center">
+<a class="text-xs font-bold text-amber-600 dark:text-amber-500 flex items-center justify-center gap-2 hover:underline" href="#">
+<span class="material-symbols-outlined text-sm">block</span>
+                            Block a date or slot
+                        </a>
+</div>
+</div>
+<!-- Quick Stats -->
+<div class="bg-gradient-to-br from-amber-600 to-primary-container p-6 rounded-2xl text-on-primary">
+<p class="text-[10px] font-label uppercase tracking-widest opacity-80 mb-1">Peak Hour Today</p>
+<h4 class="font-serif text-2xl font-bold mb-4">9:00am - 10:30am</h4>
+<p class="text-xs opacity-90 leading-relaxed">
+                        95% capacity reach predicted based on confirmed reservations and historical trends.
+                    </p>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

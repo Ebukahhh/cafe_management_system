@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Jennifer's Café Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#d0bcff",
+              "error": "#ffb4ab",
+              "on-secondary": "#33302b",
+              "on-error-container": "#ffdad6",
+              "surface-variant": "#3d3327",
+              "on-tertiary-fixed": "#23005c",
+              "surface-container-low": "#231a0f",
+              "on-primary": "#4c2700",
+              "on-primary-fixed": "#2e1500",
+              "outline": "#9f8d81",
+              "secondary-fixed-dim": "#ccc5be",
+              "inverse-primary": "#885119",
+              "inverse-on-surface": "#392f23",
+              "on-surface-variant": "#d7c3b5",
+              "on-background": "#f1e0ce",
+              "primary-fixed-dim": "#ffb779",
+              "on-secondary-container": "#bbb4ad",
+              "surface-container-highest": "#3d3327",
+              "surface-container-high": "#32281d",
+              "primary": "#ffb779",
+              "on-tertiary": "#3c0091",
+              "on-error": "#690005",
+              "surface-bright": "#42372b",
+              "on-secondary-fixed": "#1e1b16",
+              "tertiary-fixed": "#e9ddff",
+              "surface-container-lowest": "#140d04",
+              "surface": "#1a1208",
+              "primary-container": "#c8864a",
+              "background": "#1a1208",
+              "tertiary-container": "#a37dff",
+              "outline-variant": "#524439",
+              "on-primary-fixed-variant": "#6c3a02",
+              "on-tertiary-container": "#380088",
+              "surface-container": "#271e13",
+              "secondary-container": "#4a4640",
+              "on-surface": "#f1e0ce",
+              "secondary": "#ccc5be",
+              "on-primary-container": "#482400",
+              "tertiary-fixed-dim": "#d0bcff",
+              "primary-fixed": "#ffdcc1",
+              "on-tertiary-fixed-variant": "#5516be",
+              "on-secondary-fixed-variant": "#4a4640",
+              "secondary-fixed": "#e9e1d9",
+              "surface-dim": "#1a1208",
+              "inverse-surface": "#f1e0ce",
+              "surface-tint": "#ffb779",
+              "error-container": "#93000a"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .amber-glow:focus-within {
+            box-shadow: 0 0 0 2px rgba(200, 134, 74, 0.2);
+            border-color: #c8864a;
+        }
+        .glass-panel {
+            backdrop-filter: blur(16px);
+            background: rgba(26, 18, 8, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen flex flex-col items-center overflow-x-hidden">
+<!-- Hero Background Texture (Visual Interest) -->
+<div class="fixed inset-0 z-0 pointer-events-none opacity-20">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-surface-container-highest blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
+</div>
+<!-- Main Content Shell -->
+<main class="relative z-10 w-full max-w-md px-6 pt-12 pb-8 flex flex-col items-center">
+<!-- Logo & Branding Section -->
+<header class="mb-12 flex flex-col items-center text-center">
+<div class="mb-6">
+<div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-container rounded-xl flex items-center justify-center shadow-2xl">
+<span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="coffee">coffee</span>
+</div>
+</div>
+<h1 class="font-headline text-3xl font-bold tracking-tight text-primary-container mb-1">
+                Jennifer's Café
+            </h1>
+<p class="font-body text-on-surface-variant text-sm tracking-wide opacity-80">
+                Welcome back.
+            </p>
+</header>
+<!-- Login Form Container -->
+<section class="w-full bg-surface-container-low rounded-[10px] p-6 shadow-xl border border-outline-variant/10">
+<h2 class="font-headline text-2xl mb-8 text-on-surface">Good to see you again</h2>
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant px-1" for="email">Email address</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-highest border border-transparent rounded-[8px] px-4 py-3.5 text-on-surface placeholder:text-outline/50 focus:outline-none amber-glow transition-all duration-200" id="email" placeholder="name@cafe-management.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant" for="password">Password</label>
+</div>
+<div class="relative group">
+<input class="w-full bg-surface-container-highest border border-transparent rounded-[8px] px-4 py-3.5 text-on-surface placeholder:text-outline/50 focus:outline-none amber-glow transition-all duration-200" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</div>
+<div class="flex justify-end">
+<a class="font-label text-xs text-primary-container hover:underline underline-offset-4 transition-all" href="#">Forgot password?</a>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="w-full bg-gradient-to-r from-primary-container to-primary text-on-primary-container font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 active:scale-95 transition-all duration-200 mt-4 text-sm tracking-widest uppercase" type="submit">
+                    Log In
+                </button>
+</form>
+<!-- Social Login Divider -->
+<div class="relative my-10 text-center">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/30"></div>
+</div>
+<span class="relative bg-surface-container-low px-4 text-xs font-label text-on-surface-variant tracking-widest uppercase">Or continue with</span>
+</div>
+<!-- Social Buttons -->
+<div class="space-y-3">
+<button class="w-full flex items-center justify-center gap-3 border border-outline-variant rounded-full py-3.5 font-label text-sm text-on-surface hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="google">google</span>
+                    Google
+                </button>
+<button class="w-full flex items-center justify-center gap-3 border border-outline-variant rounded-full py-3.5 font-label text-sm text-on-surface hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="facebook">social_leaderboard</span>
+                    Facebook
+                </button>
+</div>
+</section>
+<!-- Support Link -->
+<footer class="mt-auto pt-12 flex flex-col items-center gap-4">
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-stone-500">
+                New to the platform? <a class="text-primary-container font-bold hover:underline" href="#">Contact Admin</a>
+</p>
+<div class="flex gap-6 opacity-60">
+<a class="font-label text-[10px] uppercase tracking-widest text-stone-400 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-stone-400 hover:text-primary transition-colors" href="#">Terms</a>
+</div>
+</footer>
+</main>
+<!-- Aesthetic Decorative Image (Editorial touch) -->
+<div class="w-full max-w-md px-6 mt-8 mb-12">
+<div class="rounded-2xl overflow-hidden aspect-[16/9] shadow-inner relative group">
+<img alt="Boutique cafe interior" class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out" data-alt="cinematic moody close-up of steam rising from a porcelain coffee cup in a dimly lit artisan cafe with warm wood textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ZoO0aHUTPqkvmIXb5OmXc3MQnB6WOhZTYHdGCHE4asavWw2UG4pqmuV6TgptUlrLAL8y8_9_l72hXGlfUATCUBGz20mjYW83Kza01PbskYWMEuHQ-Jx8dkFaMUhgBlXhjXegAYs2iKGDoZTITDV_6QtfKsIeIK5_4UDjW_NsG7Qnsg45fBIUl2BJOrnWL1WNixNOuEBU4l1AZoeXVMfm-zykmrIxHflVVu_DyiD0W-ElgPQFFsu4ap1PZW87GXwr8yxn8coDxcNp"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+</div>
+</body></html>

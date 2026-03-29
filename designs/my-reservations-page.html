@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Reservations - Jennifer's Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=Plus+Jakarta+Sans:wght@200..800&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=DM+Sans:wght@100..1000&amp;family=Berkeley+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#4a4640",
+                        "secondary": "#ccc5be",
+                        "tertiary": "#d0bcff",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "surface-variant": "#3d3327",
+                        "primary-fixed": "#ffdcc1",
+                        "surface-container-lowest": "#140d04",
+                        "background": "#1a1208",
+                        "surface": "#1a1208",
+                        "outline-variant": "#524439",
+                        "tertiary-fixed": "#e9ddff",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "primary": "#ffb779",
+                        "inverse-surface": "#f1e0ce",
+                        "inverse-primary": "#885119",
+                        "surface-container-high": "#32281d",
+                        "secondary-fixed": "#e9e1d9",
+                        "on-surface": "#f1e0ce",
+                        "primary-container": "#c8864a",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#3c0091",
+                        "inverse-on-surface": "#392f23",
+                        "on-tertiary-container": "#380088",
+                        "surface-tint": "#ffb779",
+                        "on-secondary": "#33302b",
+                        "surface-dim": "#1a1208",
+                        "surface-container-low": "#231a0f",
+                        "on-secondary-fixed-variant": "#4a4640",
+                        "on-primary-fixed": "#2e1500",
+                        "on-surface-variant": "#d7c3b5",
+                        "on-secondary-fixed": "#1e1b16",
+                        "secondary-fixed-dim": "#ccc5be",
+                        "on-tertiary-fixed": "#23005c",
+                        "on-primary": "#4c2700",
+                        "surface-container-highest": "#3d3327",
+                        "outline": "#9f8d81",
+                        "on-background": "#f1e0ce",
+                        "primary-fixed-dim": "#ffb779",
+                        "surface-bright": "#42372b",
+                        "on-primary-container": "#482400",
+                        "on-primary-fixed-variant": "#6c3a02",
+                        "on-secondary-container": "#bbb4ad",
+                        "tertiary-container": "#a37dff",
+                        "surface-container": "#271e13",
+                        "error": "#ffb4ab"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Inter", "sans-serif"],
+                        "serif": ["Fraunces", "serif"],
+                        "mono": ["Berkeley Mono", "monospace"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background-color: rgba(26, 18, 8, 0.8);
+        }
+        .amber-glow {
+            background: linear-gradient(135deg, #ffb779 0%, #c8864a 100%);
+        }
+        /* Custom Scrollbar for Mobile Tabs */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary min-h-screen pb-24 md:pb-0">
+<!-- TopNavBar -->
+<header class="bg-[#1A1208] dark:bg-[#1A1208] docked full-width top-0 no-border tonal-shift bg-stone-900 sticky z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-serif italic text-[#C8864A]">Jennifer's Café</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-stone-400 font-medium hover:text-[#C8864A] transition-colors duration-300" href="#">Menu</a>
+<a class="text-[#C8864A] font-bold border-b-2 border-[#C8864A] pb-1 hover:text-[#C8864A] transition-colors duration-300" href="#">Reserve a Table</a>
+<a class="text-stone-400 font-medium hover:text-[#C8864A] transition-colors duration-300" href="#">My Orders</a>
+</nav>
+<div class="flex items-center space-x-5">
+<button class="text-[#C8864A] hover:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-[#C8864A] hover:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a woman with a warm smile in a sunlit environment with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbSdjWo2XyvMr0Z158UVlMYUVTxEoLZHRJfJICMYOPCX21NxSpkzuUIBG-50ZFeWMVCgbWLdZWjZRx1Eid2f8lS7CVgpCRJ5g-HUk8ahJSroMy-L07ctNIi4LC2tAvXFKprgtdfM--29BcxSVxi-GlTYSVuAZ-bwfCi_QFT_jv4f9xS7gnEyUzeuNqp_70bSBdOOv1dE9ezKf9mjFwr8cKS_1U_0mzv4zh_-XkIbLPEHVyxDnVSHCI2Niey68WhDmkB7-1jWOTcB7"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+<!-- Hero Section -->
+<div class="mb-12">
+<h1 class="font-serif text-5xl md:text-6xl text-primary mb-4 tracking-tight">My Reservations</h1>
+<p class="text-on-surface-variant max-w-xl text-lg">Manage your upcoming visits and view your history with us. We look forward to hosting you.</p>
+</div>
+<!-- Tab Filters -->
+<div class="flex overflow-x-auto hide-scrollbar border-b border-surface-container-highest mb-12 gap-8 md:gap-12 sticky top-[72px] bg-background/95 backdrop-blur-md z-40 py-2">
+<button class="text-primary font-bold border-b-2 border-primary pb-4 whitespace-nowrap transition-all">Upcoming</button>
+<button class="text-stone-500 font-medium pb-4 whitespace-nowrap hover:text-primary transition-all">Pending</button>
+<button class="text-stone-500 font-medium pb-4 whitespace-nowrap hover:text-primary transition-all">Past</button>
+<button class="text-stone-500 font-medium pb-4 whitespace-nowrap hover:text-primary transition-all">Cancelled</button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Main Content Area -->
+<div class="lg:col-span-8 space-y-12">
+<!-- Upcoming Section -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-serif text-2xl text-on-surface">Upcoming</h2>
+<span class="font-mono text-xs text-outline bg-surface-container px-3 py-1 rounded-full">1 TOTAL</span>
+</div>
+<!-- Confirmed Card -->
+<div class="group relative bg-[#FDFBF7] dark:bg-[#FDFBF7] rounded-xl overflow-hidden shadow-sm border-l-8 border-[#C8864A] flex flex-col md:flex-row items-stretch transition-transform hover:-translate-y-1">
+<div class="w-full md:w-48 h-48 md:h-auto overflow-hidden">
+<img alt="Cafe interior" class="w-full h-full object-cover" data-alt="Warmly lit interior of a luxury boutique cafe with rich wooden textures and artisan coffee equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3HDEOpUSdu3g3Em3q9IYmMBRPxT47ogw_FKiZezrOgzM5oD8dOeb4kzDYMJb5RFGF_M6aVi68VfHP_btsMe-3k2R_ZJhezKQ7hh8lV0Cze0s3DSzH352030DV8q50gTVixPr4qS2U7dW5aBuXEc_LtTuZseeR6pYSY0qpf53R2oav4NOpVEPzVveWNB22g3bq4iqJRYDQMkyLr4h9pxm2UFZDPd7xCpRHVquBXmdfs696NP11jsKqC1YffIQ7r0wbGxehzfJ8M4CF"/>
+</div>
+<div class="flex-1 p-6 md:p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Confirmed
+                                    </div>
+<div class="text-[#1A1208] font-mono text-sm font-bold">#RES-8821</div>
+</div>
+<h3 class="text-3xl font-serif text-[#1A1208] mb-2 leading-tight">Saturday 5 April</h3>
+<div class="flex flex-wrap gap-4 text-stone-600 mb-6">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="font-medium text-sm">11:00 AM</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg" data-icon="groups">groups</span>
+<span class="font-medium text-sm">4 Guests</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+<span class="font-medium text-sm">Window Table</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-3 pt-6 border-t border-stone-200">
+<button class="flex-1 py-3 px-6 rounded-xl border border-stone-300 text-stone-700 font-bold text-sm hover:bg-stone-50 transition-colors uppercase tracking-wider">Cancel</button>
+<button class="flex-1 py-3 px-6 rounded-xl amber-glow text-on-primary font-bold text-sm shadow-md hover:brightness-110 transition-all uppercase tracking-wider flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_add_on">calendar_add_on</span>
+                                    Add to Calendar
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Pending Section -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-serif text-2xl text-on-surface">Pending</h2>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 md:p-8 flex flex-col md:flex-row gap-8 items-start border border-outline-variant/10">
+<div class="flex-1">
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold mb-6">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">hourglass_top</span>
+                                Awaiting Confirmation
+                            </div>
+<h3 class="text-2xl font-serif text-on-surface mb-2">Friday 11 April</h3>
+<p class="text-on-surface-variant font-mono text-xs mb-6 uppercase tracking-widest">Requested: 7:00 PM • 2 Guests</p>
+<p class="text-sm text-on-surface-variant italic mb-6">"Our team is currently reviewing your request. You'll receive a notification within 2 hours."</p>
+</div>
+<div class="flex flex-col w-full md:w-auto gap-3">
+<button class="w-full md:w-48 py-3 rounded-xl bg-surface-container-highest text-on-surface font-medium text-sm hover:bg-surface-bright transition-all">Edit Request</button>
+<button class="w-full md:w-48 py-3 rounded-xl border border-outline-variant/30 text-outline font-medium text-sm hover:text-error hover:border-error/30 transition-all">Withdraw</button>
+</div>
+</div>
+</section>
+<!-- Past Section (Expandable Rows) -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-serif text-2xl text-on-surface">Past Reservations</h2>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                            View All <span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Collapsed Row -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex items-center justify-between hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex flex-col items-center justify-center text-on-surface-variant">
+<span class="text-[10px] font-mono leading-none">MAR</span>
+<span class="text-lg font-bold leading-none">22</span>
+</div>
+<div>
+<div class="font-serif text-lg">Table for 2 • Dinner</div>
+<div class="text-xs text-on-surface-variant font-mono">COMPLETED • #RES-7104</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:block text-right">
+<div class="text-sm font-medium">Re-order Drinks?</div>
+<div class="text-[10px] text-primary">Limited Time Offer</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-5 flex items-center justify-between opacity-70">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex flex-col items-center justify-center text-on-surface-variant">
+<span class="text-[10px] font-mono leading-none">FEB</span>
+<span class="text-lg font-bold leading-none">14</span>
+</div>
+<div>
+<div class="font-serif text-lg">Valentine's Special • 2 Guests</div>
+<div class="text-xs text-on-surface-variant font-mono">COMPLETED • #RES-6502</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar / Empty State Inset -->
+<aside class="lg:col-span-4 space-y-8">
+<!-- Quick Book / CTA -->
+<div class="bg-surface-container-high rounded-2xl p-8 overflow-hidden relative">
+<div class="relative z-10">
+<h4 class="font-serif text-2xl text-primary mb-2">Host an Event?</h4>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Planning a birthday or corporate gathering? Our private lounge is available for booking.</p>
+<button class="w-full py-4 px-6 rounded-xl amber-glow text-on-primary font-bold text-sm shadow-xl hover:scale-[1.02] transition-transform uppercase tracking-widest">Inquire Now</button>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -right-12 -bottom-12 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="skillet">skillet</span>
+</div>
+</div>
+<!-- Empty State Inset Example -->
+<div class="bg-surface-container-low rounded-2xl p-10 flex flex-col items-center text-center border-2 border-dashed border-outline-variant/20">
+<div class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl text-outline" data-icon="event_busy">event_busy</span>
+</div>
+<h5 class="font-serif text-xl mb-2">No more upcoming?</h5>
+<p class="text-on-surface-variant text-sm mb-8">It's quiet in here. Why not secure your next coffee experience today?</p>
+<button class="text-primary font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
+                        Book a Table
+                        <span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Policy Card -->
+<div class="p-6 bg-surface-container rounded-xl border border-outline-variant/10">
+<h6 class="text-xs font-mono text-outline uppercase tracking-widest mb-4">Reservation Policy</h6>
+<ul class="space-y-3 text-xs text-on-surface-variant leading-relaxed">
+<li class="flex gap-2">
+<span class="text-primary">•</span>
+<span>Cancellations must be made 24 hours in advance to avoid a service fee.</span>
+</li>
+<li class="flex gap-2">
+<span class="text-primary">•</span>
+<span>Tables will be held for a maximum of 15 minutes past reservation time.</span>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#1A1208]/90 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.3)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#C8864A]/20 text-[#C8864A] rounded-xl px-3 py-1 scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="event_available" style="font-variation-settings: 'FILL' 1;">event_available</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Reservations</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 hover:bg-stone-800/50 p-2 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[10px] font-medium tracking-tight">Profile</span>
+</a>
+</nav>
+</body></html>

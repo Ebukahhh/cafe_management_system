@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Jennifer's Café Management</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "tertiary": "#d0bcff",
+                "error": "#ffb4ab",
+                "on-secondary": "#33302b",
+                "on-error-container": "#ffdad6",
+                "surface-variant": "#3d3327",
+                "on-tertiary-fixed": "#23005c",
+                "surface-container-low": "#231a0f",
+                "on-primary": "#4c2700",
+                "on-primary-fixed": "#2e1500",
+                "outline": "#9f8d81",
+                "secondary-fixed-dim": "#ccc5be",
+                "inverse-primary": "#885119",
+                "inverse-on-surface": "#392f23",
+                "on-surface-variant": "#d7c3b5",
+                "on-background": "#f1e0ce",
+                "primary-fixed-dim": "#ffb779",
+                "on-secondary-container": "#bbb4ad",
+                "surface-container-highest": "#3d3327",
+                "surface-container-high": "#32281d",
+                "primary": "#ffb779",
+                "on-tertiary": "#3c0091",
+                "on-error": "#690005",
+                "surface-bright": "#42372b",
+                "on-secondary-fixed": "#1e1b16",
+                "tertiary-fixed": "#e9ddff",
+                "surface-container-lowest": "#140d04",
+                "surface": "#1a1208",
+                "primary-container": "#c8864a",
+                "background": "#1a1208",
+                "tertiary-container": "#a37dff",
+                "outline-variant": "#524439",
+                "on-primary-fixed-variant": "#6c3a02",
+                "on-tertiary-container": "#380088",
+                "surface-container": "#271e13",
+                "secondary-container": "#4a4640",
+                "on-surface": "#f1e0ce",
+                "secondary": "#ccc5be",
+                "on-primary-container": "#482400",
+                "tertiary-fixed-dim": "#d0bcff",
+                "primary-fixed": "#ffdcc1",
+                "on-tertiary-fixed-variant": "#5516be",
+                "on-secondary-fixed-variant": "#4a4640",
+                "secondary-fixed": "#e9e1d9",
+                "surface-dim": "#1a1208",
+                "inverse-surface": "#f1e0ce",
+                "surface-tint": "#ffb779",
+                "error-container": "#93000a"
+              },
+              fontFamily: {
+                "headline": ["Fraunces", "serif"],
+                "body": ["Plus Jakarta Sans", "sans-serif"],
+                "label": ["Inter", "sans-serif"],
+                "mono": ["JetBrains Mono", "monospace"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .editorial-asymmetry {
+            transform: translateX(-5%);
+        }
+        .glass-panel {
+            background: rgba(26, 18, 8, 0.4);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen overflow-hidden">
+<!-- Top Navigation Anchor (As requested by Shared Components logic, though hidden for focused journey, we simulate the TopAppBar properties as a branding anchor) -->
+<header class="absolute top-0 w-full z-50 flex justify-between items-center px-8 py-6 w-full mix-blend-difference">
+<div class="text-[#C8864A] font-headline text-2xl font-bold tracking-tight">Jennifer's Café</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#C8864A] cursor-pointer" data-icon="help_outline">help_outline</span>
+</div>
+</header>
+<main class="flex min-h-screen w-full">
+<!-- LEFT PANEL: Dark Aesthetic (Deep Espresso) -->
+<section class="hidden lg:flex lg:w-1/2 bg-surface items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-primary-container/20 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] bg-tertiary-container/10 blur-[100px] rounded-full"></div>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center px-12 max-w-lg">
+<div class="w-full aspect-square mb-12 relative flex items-center justify-center">
+<div class="absolute inset-0 animate-pulse bg-gradient-to-tr from-primary-container/20 to-transparent rounded-full blur-2xl"></div>
+<img class="w-80 h-80 object-cover rounded-full mix-blend-lighten filter grayscale hover:grayscale-0 transition-all duration-700" data-alt="Abstract artistic macro shot of coffee steam rising in warm cinematic lighting with deep shadows and golden highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBtHzbbxyOqCY763NQwuLZhzIcXoR_KWaDJpmhWSe-c1cmPdBgOJafDO8V7O-EFEtmvROFQmZW7AeWrDjY7cSX7jTBxyDVRUgb05YcWpUXenCgQjWqztHB9XN0iVEbeBJ6CzZFBFXcW0h7fLFt_k-y6iyzQdnK1Cn42DRPu1oq7bH3i8bof0z28xC0IFSvw7R7VKXG3Lq4UbT_5I2VTcAspbXDqX3cvSgaO2lpD2Xa29AR6BRLkIFcJWy7PGLB6n6AmjyAMYyrICHf"/>
+</div>
+<h1 class="font-headline text-6xl text-on-surface mb-6 tracking-tight leading-tight">Welcome back.</h1>
+<p class="font-body text-on-surface-variant text-lg leading-relaxed max-w-sm">
+                    Refining the art of the brew with digital precision and artisanal soul.
+                </p>
+</div>
+<div class="absolute bottom-12 left-12 font-mono text-[10px] tracking-[0.2em] uppercase text-on-surface-variant/40 flex items-center gap-2">
+<span class="w-8 h-[1px] bg-on-surface-variant/20"></span>
+                Specialty Management v.2.4
+            </div>
+</section>
+<!-- RIGHT PANEL: Warm Off-White Aesthetic -->
+<section class="w-full lg:w-1/2 bg-[#FFFDF9] flex items-center justify-center p-8 lg:p-24 relative">
+<div class="w-full max-w-md">
+<!-- Branding for Mobile -->
+<div class="lg:hidden mb-12">
+<h2 class="font-headline text-3xl text-primary-container font-bold">Jennifer's Café</h2>
+</div>
+<div class="space-y-2 mb-10">
+<h2 class="font-headline text-4xl text-surface-container-lowest font-semibold tracking-tight">Good to see you again</h2>
+<p class="text-stone-500 font-body">
+                        Don't have an account? 
+                        <a class="text-primary-container font-semibold hover:underline underline-offset-4 transition-all" href="#">Sign up</a>
+</p>
+</div>
+<form class="space-y-6">
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="text-sm font-label font-medium text-surface-container-highest tracking-wide" for="email">Email address</label>
+<input class="w-full h-12 px-4 bg-stone-100 border-none rounded-lg focus:ring-2 focus:ring-primary-container/20 focus:bg-white text-surface transition-all placeholder:text-stone-400 font-body" id="email" placeholder="jennifer@cafe.com" type="email"/>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-sm font-label font-medium text-surface-container-highest tracking-wide" for="password">Password</label>
+<a class="text-xs font-label text-stone-500 hover:text-primary-container transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative group">
+<input class="w-full h-12 px-4 bg-stone-100 border-none rounded-lg focus:ring-2 focus:ring-primary-container/20 focus:bg-white text-surface transition-all placeholder:text-stone-400 font-body" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full h-14 bg-gradient-to-r from-primary-container to-[#B26E3A] text-white font-bold rounded-xl shadow-lg shadow-primary-container/20 hover:shadow-xl hover:scale-[1.01] transition-all active:scale-[0.98] font-body text-lg" type="submit">
+                        Log In
+                    </button>
+</form>
+<div class="relative my-10">
+<div class="absolute inset-0 flex items-center">
+<span class="w-full border-t border-stone-200"></span>
+</div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest font-label font-bold text-stone-400 bg-[#FFFDF9] px-4">
+                        or continue with
+                    </div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 h-12 border border-stone-200 rounded-lg hover:bg-stone-50 transition-colors font-body text-sm font-medium text-stone-700">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                        Google
+                    </button>
+<button class="flex items-center justify-center gap-3 h-12 border border-stone-200 rounded-lg hover:bg-stone-50 transition-colors font-body text-sm font-medium text-stone-700">
+<svg class="w-5 h-5" fill="#1877F2" viewbox="0 0 24 24">
+<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+</svg>
+                        Facebook
+                    </button>
+</div>
+</div>
+<!-- Footer for transactional flow (Suppressed from global, localized version) -->
+<footer class="absolute bottom-0 w-full flex justify-center items-center gap-8 px-8 py-8 w-full">
+<div class="flex gap-6">
+<a class="font-label text-[10px] uppercase tracking-widest text-stone-400 hover:underline decoration-[#C8864A] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-stone-400 hover:underline decoration-[#C8864A] underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+</div>
+</footer>
+</section>
+</main>
+<!-- Background Decoration for Right Side -->
+<div class="fixed top-0 right-0 w-[40%] h-full pointer-events-none opacity-[0.03] lg:block hidden">
+<div class="absolute inset-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBcFpTLgHdWfHGxtE3psIsNtepn2ibJCeRI0OQax7WF7jCIgelecnktDpf3vwPWnDge3ojIP6pFjSG2PYJdwEYcRhzlb-AjFe_8RaqyTWwc2W-KwRpCK8K41UxePuZ73B4X__XlkFKtQz_xthtiX6bk0b2pe158GVEmORHxjtJ7jK0OqP76-zQfnEzqXj-si7HHKirfBO9-sNHurErPWvnm41GD0_6l1euVxhc5iqPRbMnSIdEUY2E5zzoEXgImfEHrjdJQTyIfI9H6');"></div>
+</div>
+</body></html>

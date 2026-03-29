@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#885119",
+              "on-surface": "#f1e0ce",
+              "outline": "#9f8d81",
+              "on-secondary-container": "#bbb4ad",
+              "on-secondary": "#33302b",
+              "on-error": "#690005",
+              "surface-container-low": "#231a0f",
+              "on-primary-fixed-variant": "#6c3a02",
+              "surface-dim": "#1a1208",
+              "secondary-fixed-dim": "#ccc5be",
+              "primary-fixed": "#ffdcc1",
+              "surface-variant": "#3d3327",
+              "background": "#1a1208",
+              "secondary-fixed": "#e9e1d9",
+              "secondary": "#ccc5be",
+              "on-tertiary": "#3c0091",
+              "error": "#ffb4ab",
+              "surface-container": "#271e13",
+              "secondary-container": "#4a4640",
+              "inverse-on-surface": "#392f23",
+              "on-primary-container": "#482400",
+              "on-tertiary-fixed-variant": "#5516be",
+              "on-tertiary-fixed": "#23005c",
+              "tertiary-fixed-dim": "#d0bcff",
+              "tertiary-fixed": "#e9ddff",
+              "surface-bright": "#42372b",
+              "inverse-surface": "#f1e0ce",
+              "surface-container-lowest": "#140d04",
+              "error-container": "#93000a",
+              "on-primary-fixed": "#2e1500",
+              "primary-container": "#c8864a",
+              "surface": "#1a1208",
+              "on-secondary-fixed-variant": "#4a4640",
+              "tertiary": "#d0bcff",
+              "surface-container-highest": "#3d3327",
+              "on-tertiary-container": "#380088",
+              "on-surface-variant": "#d7c3b5",
+              "on-primary": "#4c2700",
+              "primary": "#ffb779",
+              "surface-container-high": "#32281d",
+              "on-secondary-fixed": "#1e1b16",
+              "on-error-container": "#ffdad6",
+              "tertiary-container": "#a37dff",
+              "outline-variant": "#524439",
+              "primary-fixed-dim": "#ffb779",
+              "surface-tint": "#ffb779",
+              "on-background": "#f1e0ce"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "mono": ["Berkeley Mono", "monospace"],
+              "sans": ["DM Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(39, 30, 19, 0.7);
+        backdrop-filter: blur(12px);
+      }
+      .amber-glow {
+        background: linear-gradient(135deg, #c8864a 0%, #8b5e34 100%);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen pb-32">
+<!-- Top Navigation (Mobile Header) -->
+<header class="flex justify-between items-center px-4 py-6 z-50 sticky top-0 bg-background/80 backdrop-blur-md">
+<div class="flex flex-col">
+<span class="font-headline text-primary italic text-xl tracking-tight">Jennifer's Café</span>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-outline">Order Tracking</span>
+</div>
+<button class="p-2 text-primary-container">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</header>
+<main class="px-4 space-y-8 max-w-md mx-auto">
+<!-- Status Hero Card -->
+<section class="glass-card rounded-3xl p-8 relative overflow-hidden text-center flex flex-col items-center">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="coffee">coffee</span>
+</div>
+<h1 class="font-headline text-2xl text-on-surface mb-2 leading-tight">Your order is being prepared</h1>
+<div class="flex items-baseline space-x-2 mt-4">
+<span class="font-mono text-5xl font-light tracking-tighter text-primary">08:24</span>
+<span class="font-label text-xs text-outline uppercase tracking-widest">Remaining</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest mt-8 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3 rounded-full"></div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="space-y-6 px-2">
+<h2 class="font-label text-[10px] uppercase tracking-[0.2em] text-outline mb-4">Live Progress</h2>
+<div class="relative space-y-8">
+<!-- Vertical Line Connector -->
+<div class="absolute left-[11px] top-2 bottom-2 w-[2px] bg-surface-container-highest"></div>
+<!-- Step 1 -->
+<div class="flex items-start space-x-6 relative">
+<div class="z-10 bg-green-500/20 text-green-500 rounded-full p-1 border-2 border-background">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<p class="font-sans text-on-surface font-medium">Order Placed</p>
+<p class="font-label text-xs text-outline">9:02am</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start space-x-6 relative">
+<div class="z-10 bg-green-500/20 text-green-500 rounded-full p-1 border-2 border-background">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<p class="font-sans text-on-surface font-medium">Confirmed by Café</p>
+<p class="font-label text-xs text-outline">9:03am</p>
+</div>
+</div>
+<!-- Step 3 (Active) -->
+<div class="flex items-start space-x-6 relative">
+<div class="z-10 flex items-center justify-center w-6 h-6">
+<div class="absolute w-6 h-6 bg-primary/30 rounded-full animate-ping"></div>
+<div class="w-3 h-3 bg-primary rounded-full border-2 border-background z-20"></div>
+</div>
+<div>
+<p class="font-sans text-primary font-bold">Being Prepared</p>
+<p class="font-label text-xs text-primary/80">9:05am • Started</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-start space-x-6 relative">
+<div class="z-10 w-6 h-6 flex items-center justify-center">
+<div class="w-3 h-3 bg-surface-container-highest rounded-full border-2 border-background"></div>
+</div>
+<div class="opacity-50">
+<p class="font-sans text-on-surface font-medium">Ready for Pickup</p>
+<p class="font-label text-xs text-outline">Upcoming</p>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="flex items-start space-x-6 relative">
+<div class="z-10 w-6 h-6 flex items-center justify-center">
+<div class="w-3 h-3 bg-surface-container-highest rounded-full border-2 border-background"></div>
+</div>
+<div class="opacity-30">
+<p class="font-sans text-on-surface font-medium">Collected</p>
+<p class="font-label text-xs text-outline">Upcoming</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Order Summary Details -->
+<section class="bg-surface-container-low rounded-2xl p-6">
+<h3 class="font-headline text-lg text-on-surface mb-4">Order Details</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-on-surface font-sans">Dark Roast Espresso x 2</span>
+<span class="text-xs text-outline">Oat Milk, Extra Hot</span>
+</div>
+<span class="font-mono text-primary">$12.40</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-on-surface font-sans">Butter Croissant x 1</span>
+<span class="text-xs text-outline">Warmed</span>
+</div>
+<span class="font-mono text-primary">$4.50</span>
+</div>
+<div class="pt-4 mt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="font-label uppercase tracking-widest text-[10px] text-outline">Total Paid</span>
+<span class="font-headline text-xl text-primary">$16.90</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Contextual Sticky Bottom Bar -->
+<div class="fixed bottom-24 left-4 right-4 z-40">
+<div class="amber-glow shadow-2xl rounded-2xl px-6 py-4 flex justify-between items-center">
+<div class="flex items-center space-x-3 text-on-primary">
+<span class="font-mono text-lg font-bold">08:24</span>
+<span class="w-[1px] h-4 bg-on-primary/30"></span>
+<span class="font-label text-xs uppercase tracking-widest">Preparing</span>
+</div>
+<button class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl text-xs font-sans text-on-primary backdrop-blur-md transition-all">
+                View Receipt
+            </button>
+</div>
+</div>
+<!-- Bottom Navigation Shell (From JSON) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-[#1A1208]/90 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-stone-500 p-2 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['DM_Sans'] text-[10px] uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 p-2 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-['DM_Sans'] text-[10px] uppercase tracking-widest">Menu</span>
+</a>
+<!-- Active Tab: Orders -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#C8864A] to-[#8B5E34] text-white rounded-xl p-2 transition-transform active:scale-90 shadow-lg scale-110 -translate-y-2" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long">receipt_long</span>
+<span class="font-['DM_Sans'] text-[10px] uppercase tracking-widest">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 p-2 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="event">event</span>
+<span class="font-['DM_Sans'] text-[10px] uppercase tracking-widest">Resv</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 p-2 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-['DM_Sans'] text-[10px] uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+</body></html>
