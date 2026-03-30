@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import FeatureCard from "@/components/FeatureCard";
+import HeroButtons from "@/components/HeroButtons";
 import { getAllProducts } from "@/data/products";
 
 /* ─────────────────────────────────────────────
@@ -98,15 +99,7 @@ export default function LandingPage() {
                 Order ahead, book a table, set up your daily coffee — all in one place.
               </p>
 
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-4">
-                <button className="amber-glow text-on-primary px-8 md:px-10 py-4 md:py-5 rounded-xl font-bold text-base md:text-lg flex items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                  Order Now
-                  <ArrowRightIcon />
-                </button>
-                <button className="bg-surface-container-high text-on-surface px-8 md:px-10 py-4 md:py-5 rounded-xl font-bold text-base md:text-lg active:scale-95 transition-all hover:bg-surface-bright cursor-pointer">
-                  Reserve a Table
-                </button>
-              </div>
+              <HeroButtons />
             </div>
 
             {/* Image column */}

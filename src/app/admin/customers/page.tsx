@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -72,8 +73,8 @@ export default function CustomersPage() {
             </thead>
             <tbody className="divide-y divide-surface-container-highest/10">
               {customers.map((c) => (
-                <>
-                  <tr key={c.name} className={`hover:bg-surface-bright/20 transition-colors ${c.expanded ? "bg-surface-container-highest/20 border-l-4 border-primary" : ""}`}>
+                <Fragment key={c.name}>
+                  <tr className={`hover:bg-surface-bright/20 transition-colors ${c.expanded ? "bg-surface-container-highest/20 border-l-4 border-primary" : ""}`}>
                     <td className="px-6 py-5">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-xs font-bold text-primary">{c.initials}</div>
@@ -98,7 +99,7 @@ export default function CustomersPage() {
                     </td>
                   </tr>
                   {c.expanded && (
-                    <tr key={`${c.name}-detail`} className="bg-surface-container-highest/10">
+                    <tr className="bg-surface-container-highest/10">
                       <td className="px-12 py-8" colSpan={8}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                           <div className="space-y-6">
@@ -146,7 +147,7 @@ export default function CustomersPage() {
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>

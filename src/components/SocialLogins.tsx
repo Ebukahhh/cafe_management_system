@@ -1,7 +1,11 @@
+'use client'
+
 /* ─────────────────────────────────────────────
    SocialLogins — Shared Google/Facebook OAuth buttons
    Used on both Login and Signup pages
    ───────────────────────────────────────────── */
+
+import { createClient } from '@/lib/supabase/client'
 
 function GoogleIcon() {
   return (
@@ -23,6 +27,16 @@ function FacebookIcon() {
 }
 
 export default function SocialLogins() {
+  const handleOAuth = async (provider: 'google' | 'facebook') => {
+    const supabase = createClient()
+    await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+  }
+
   return (
     <>
       {/* Divider */}
@@ -37,11 +51,17 @@ export default function SocialLogins() {
 
       {/* OAuth buttons */}
       <div className="grid grid-cols-2 gap-4">
-        <button className="flex items-center justify-center gap-3 h-12 rounded-lg hover:bg-stone-50 transition-colors font-body text-sm font-medium text-stone-700 bg-stone-100 cursor-pointer">
+        <button 
+          onClick={() => handleOAuth('google')}
+          className="flex items-center justify-center gap-3 h-12 rounded-lg hover:bg-stone-50 transition-colors font-body text-sm font-medium text-stone-700 bg-stone-100 cursor-pointer"
+        >
           <GoogleIcon />
           Google
         </button>
-        <button className="flex items-center justify-center gap-3 h-12 rounded-lg hover:bg-stone-50 transition-colors font-body text-sm font-medium text-stone-700 bg-stone-100 cursor-pointer">
+        <button 
+          onClick={() => handleOAuth('facebook')}
+          className="flex items-center justify-center gap-3 h-12 rounded-lg hover:bg-stone-50 transition-colors font-body text-sm font-medium text-stone-700 bg-stone-100 cursor-pointer"
+        >
           <FacebookIcon />
           Facebook
         </button>
