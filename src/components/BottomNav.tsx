@@ -64,7 +64,7 @@ interface BottomNavProps {
 
 const tabs = [
   { key: "home", label: "Home", icon: HomeIcon, href: "/" },
-  { key: "menu", label: "Menu", icon: MenuIcon, href: "/menu" },
+  { key: "menu", label: "Menu", icon: MenuIcon, href: "/#menu" },
   { key: "orders", label: "Orders", icon: OrdersIcon, href: "/orders" },
   { key: "reservations", label: "Reservations", icon: CalendarIcon, href: "/reservations" },
   { key: "profile", label: "Profile", icon: ProfileIcon, href: "/profile" },

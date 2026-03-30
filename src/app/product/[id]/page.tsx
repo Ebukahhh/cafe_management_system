@@ -335,7 +335,7 @@ export default async function ProductDetailPage({
                   Add to Cart
                 </Link>
                 <Link
-                  href="#"
+                  href="/subscription"
                   className="flex items-center justify-center gap-2 text-primary text-sm font-medium hover:underline underline-offset-4"
                 >
                   <RepeatIcon />

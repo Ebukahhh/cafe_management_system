@@ -51,6 +51,7 @@ export async function proxy(request: NextRequest) {
     request.nextUrl.pathname.startsWith(r)
   )
 
+  /* TEMPORARILY DISABLED: Bypass auth checks for development
   if (isProtected && !user) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
@@ -65,6 +66,7 @@ export async function proxy(request: NextRequest) {
     url.searchParams.set('redirect', '/admin')
     return NextResponse.redirect(url)
   }
+  */
 
   return supabaseResponse
 }

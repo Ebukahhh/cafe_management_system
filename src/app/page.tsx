@@ -177,7 +177,7 @@ export default function LandingPage() {
             bg shift: surface-container-lowest (darkest)
             Editorial header with asymmetric "Curated Selection" mono label
             ════════════════════════════════════════════ */}
-        <section className="py-20 md:py-32 bg-surface-container-lowest">
+        <section id="menu" className="py-20 md:py-32 bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             {/* Section header — editorial asymmetry */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-4">
@@ -190,7 +190,7 @@ export default function LandingPage() {
                 </h2>
               </div>
               <Link
-                href="/menu"
+                href="/#menu"
                 className="text-on-surface font-bold text-lg flex items-center gap-2 group shrink-0"
               >
                 View Menu

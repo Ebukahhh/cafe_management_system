@@ -7,7 +7,7 @@ import Link from "next/link";
    ───────────────────────────────────────────── */
 
 const footerLinks = [
-  { label: "Order", href: "/menu" },
+  { label: "Menu", href: "/#menu" },
   { label: "Reservations", href: "/reservations" },
   { label: "Subscribe", href: "/subscription" },
   { label: "Privacy Policy", href: "#" },

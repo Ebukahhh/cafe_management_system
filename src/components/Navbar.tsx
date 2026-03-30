@@ -7,7 +7,7 @@ import Link from "next/link";
    ───────────────────────────────────────────── */
 
 const navLinks = [
-  { label: "Order", href: "/menu", active: true },
+  { label: "Menu", href: "/#menu", active: true },
   { label: "Reservations", href: "/reservations" },
   { label: "Subscribe", href: "/subscription" },
 ];

@@ -55,13 +55,13 @@ function PlusCircleIcon() {
 }
 
 const sidebarItems = [
-  { icon: <PersonIcon />, label: "Personal Info", active: true },
-  { icon: <ShieldIcon />, label: "Security" },
-  { icon: <CreditCardIcon />, label: "Payment Methods" },
-  { icon: <UtensilsIcon />, label: "Dietary Preferences" },
-  { icon: <BellIcon />, label: "Notifications" },
-  { icon: <RepeatIcon />, label: "Subscriptions" },
-  { icon: <MapPinIcon />, label: "Saved Addresses" },
+  { icon: <PersonIcon />, label: "Personal Info", active: true, href: "/profile" },
+  { icon: <ShieldIcon />, label: "Security", href: "#" },
+  { icon: <CreditCardIcon />, label: "Payment Methods", href: "#" },
+  { icon: <UtensilsIcon />, label: "Dietary Preferences", href: "#" },
+  { icon: <BellIcon />, label: "Notifications", href: "/notifications" },
+  { icon: <RepeatIcon />, label: "Subscriptions", href: "/subscription" },
+  { icon: <MapPinIcon />, label: "Saved Addresses", href: "#" },
 ];
 
 const dietaryOptions = ["Vegan", "Vegetarian", "Gluten-Free", "Nut-Free", "Lactose-Free", "Halal"];
@@ -112,10 +112,10 @@ export default function ProfilePage() {
           {/* Nav Links */}
           <nav className="flex-1 px-4 py-2 space-y-1 overflow-y-auto">
             {sidebarItems.map((item) => (
-              <a key={item.label} href="#" className={`flex items-center gap-4 px-4 py-3 transition-colors duration-200 ${item.active ? "text-primary font-bold bg-surface-container-low" : "text-on-surface/30 hover:text-on-surface/60 hover:bg-surface-container-low"}`} style={item.active ? { borderRight: "4px solid var(--color-primary, #C8864A)" } : undefined}>
+              <Link key={item.label} href={item.href || "#"} className={`flex items-center gap-4 px-4 py-3 transition-colors duration-200 ${item.active ? "text-primary font-bold bg-surface-container-low" : "text-on-surface/30 hover:text-on-surface/60 hover:bg-surface-container-low"}`} style={item.active ? { borderRight: "4px solid var(--color-primary, #C8864A)" } : undefined}>
                 {item.icon}
                 <span className="text-sm">{item.label}</span>
-              </a>
+              </Link>
             ))}
           </nav>
           {/* Footer */}
