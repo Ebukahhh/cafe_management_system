@@ -28,6 +28,23 @@ export async function getProducts(categoryId?: string) {
   return data as ProductWithOptions[]
 }
 
+/** Fetch all products (including unavailable), for admin pages */
+export async function getAllProductsForAdmin() {
+  const supabase = createClient()
+
+  const { data, error } = await supabase
+    .from('products')
+    .select('*, product_options(*), categories(name)')
+    .order('sort_order', { ascending: true })
+
+  if (error) {
+    console.error('Failed to fetch admin products:', error.message)
+    throw new Error(error.message)
+  }
+
+  return data as ProductWithOptions[]
+}
+
 /** Fetch a single product by ID with options and category */
 export async function getProductById(id: string) {
   const supabase = createClient()
