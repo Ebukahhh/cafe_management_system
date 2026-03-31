@@ -156,6 +156,8 @@ export interface Reservation {
   party_size: number
   status: ReservationStatus
   note: string | null
+  reviewed_by: string | null
+  reviewed_at: string | null
   created_at: string
   updated_at: string
 }
