@@ -1,0 +1,36 @@
+-- Optional: if you do NOT use SUPABASE_SERVICE_ROLE_KEY on the server,
+-- add policies so authenticated admins can read/update all reservations.
+-- Adjust `profiles.role` if your app uses a different column or JWT claim.
+
+-- Example: allow admins to read every row
+-- CREATE POLICY "Admins can read all reservations"
+-- ON public.reservations
+-- FOR SELECT
+-- TO authenticated
+-- USING (
+--   EXISTS (
+--     SELECT 1 FROM public.profiles
+--     WHERE profiles.id = auth.uid()
+--     AND profiles.role = 'admin'
+--   )
+-- );
+
+-- Example: allow admins to update any reservation (confirm / decline)
+-- CREATE POLICY "Admins can update reservations"
+-- ON public.reservations
+-- FOR UPDATE
+-- TO authenticated
+-- USING (
+--   EXISTS (
+--     SELECT 1 FROM public.profiles
+--     WHERE profiles.id = auth.uid()
+--     AND profiles.role = 'admin'
+--   )
+-- )
+-- WITH CHECK (
+--   EXISTS (
+--     SELECT 1 FROM public.profiles
+--     WHERE profiles.id = auth.uid()
+--     AND profiles.role = 'admin'
+--   )
+-- );

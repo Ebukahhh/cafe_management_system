@@ -15,15 +15,20 @@ interface CreateReservationInput {
 }
 
 export async function createReservation(input: CreateReservationInput) {
-  // Step 1: Check availability
-  const isAvailable = await checkSlotAvailability(
-    input.date,
-    input.timeSlot,
-    input.partySize
-  )
-
-  if (!isAvailable) {
-    throw new Error('This slot is fully booked. Please choose another time.')
+  // Step 1: Check availability when the RPC exists; otherwise insert still succeeds
+  try {
+    const isAvailable = await checkSlotAvailability(
+      input.date,
+      input.timeSlot,
+      input.partySize
+    )
+    if (!isAvailable) {
+      throw new Error('This slot is fully booked. Please choose another time.')
+    }
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e)
+    if (msg.includes('fully booked')) throw e
+    console.warn('[createReservation] Availability check skipped:', msg)
   }
 
   // Step 2: Insert reservation
