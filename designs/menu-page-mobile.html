@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Menu | Espresso Modernist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=Plus+Jakarta+Sans:wght@200..800&amp;family=Inter:wght@100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #FFFDF9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-serif { font-family: 'Fraunces', serif; }
+        .font-mono-special { font-family: 'Berkeley Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed-variant": "#4a4640",
+                        "background": "#FFFDF9",
+                        "on-primary-fixed-variant": "#6c3a02",
+                        "surface-container": "#f7f2eb",
+                        "on-secondary-container": "#4a4640",
+                        "surface": "#FFFDF9",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#ffb779",
+                        "surface-tint": "#c8864a",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "on-secondary-fixed": "#1e1b16",
+                        "surface-container-high": "#f1ebe3",
+                        "secondary": "#635f59",
+                        "primary-container": "#c8864a",
+                        "on-tertiary-fixed": "#23005c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#6750a4",
+                        "on-tertiary-container": "#21005d",
+                        "on-surface-variant": "#524439",
+                        "primary": "#885119",
+                        "on-primary-container": "#ffffff",
+                        "on-surface": "#1f1b16",
+                        "inverse-primary": "#ffb779",
+                        "outline-variant": "#d7c3b5",
+                        "secondary-fixed": "#e9e1d9",
+                        "on-error-container": "#410002",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fff8f2",
+                        "secondary-container": "#e9e1d9",
+                        "secondary-fixed-dim": "#ccc5be",
+                        "on-background": "#1f1b16",
+                        "surface-container-highest": "#ebe5dd",
+                        "inverse-surface": "#352f29",
+                        "inverse-on-surface": "#f9efe4",
+                        "tertiary-container": "#eaddff",
+                        "surface-variant": "#f4dfd1",
+                        "tertiary-fixed": "#e9ddff",
+                        "surface-dim": "#e3d9cf",
+                        "on-primary-fixed": "#2e1500",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#faf2e8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdcc1",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "outline": "#857467"
+                    },
+                    fontFamily: {
+                        "headline": ["Fraunces"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopNavBar -->
+<header class="bg-stone-50 dark:bg-[#1A1208] docked full-width top-0 z-40 sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-stone-600 active:scale 0.98 transition-transform">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-2xl font-serif italic text-[#1A1208] dark:text-[#C8864A]">Espresso Modernist</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-stone-600 hover:text-[#C8864A] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</div>
+</header>
+<main class="px-4 pt-6">
+<!-- Page Title -->
+<h2 class="text-4xl font-headline font-semibold text-on-surface mb-6">Our Menu</h2>
+<!-- Category Pills (Horizontal Scroll) -->
+<div class="flex overflow-x-auto pb-4 gap-3 no-scrollbar -mx-4 px-4">
+<button class="px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-medium whitespace-nowrap shadow-sm">All</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors">Coffee</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors">Cold Drinks</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors">Food</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors">Desserts</button>
+</div>
+<!-- Product Grid (Single Column Stack) -->
+<section class="space-y-6 mt-4">
+<!-- Product 1 -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-lowest transition-all duration-300 hover:surface-container-low">
+<div class="aspect-[16/10] w-full overflow-hidden">
+<img alt="Artisan Latte" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close-up of a perfectly poured latte with intricate heart-shaped foam art in a dark ceramic cup on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk5UZZGQAlgpEw0VwxVMGvikDJktlXt3DC4NkbRjBStftWNK44U6_m4_Bvfwx08Treu7nvCj5coX5Azb4pccNHQd_dCNGyc7haOPc2ibB2VVBBZ8BO1wpj5zAHIwnekSn83o409nLTjmm15yqkoqhDFIvqDAux7Vxh5iUE-KtDYJhGxQs-iTbPdpiygQGWICS2Og1WcHbUa5Vrcr0bqfSp3jE5jhWwFZv2pL6OsC8dC7U_7PrEip8e3LJT1bFpRm0W-EOZCJSLScPS"/>
+</div>
+<div class="p-5 flex justify-between items-start">
+<div>
+<h3 class="text-xl font-headline font-medium text-on-surface">Artisan Latte</h3>
+<p class="text-primary font-bold mt-1">$4.50</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 active:scale-95 transition-transform">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-lowest transition-all duration-300 hover:surface-container-low">
+<div class="aspect-[16/10] w-full overflow-hidden">
+<img alt="Signature Cold Brew" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A cold brew coffee served in a tall glass with large ice cubes and a splash of milk swirling beautifully" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI_PriV6uZMOCI87v5FeDjqhGpVxtrMhd7GGRXGorLZpY1ZsPc0zZXptxcYgvbDtNp1s31MzHlUpNNP6YApAs_gwQLGDUQE4sgnjRQvIyT26VlK4xOkIyMxNeB2jKfsQkuMaFbJxG4HVzfV3zjAanqI-PbAcg4cVtIWpc2AXlBuCyaLbp6KsqXpMLlT5gnytbboESlRdQlH07L8Gvnq1HJarkTDsf2tITvTlQQ3PK1TUyi1rEGyT3eaOitnRu3Z2_QSFAbh9xAXWOe"/>
+</div>
+<div class="p-5 flex justify-between items-start">
+<div>
+<h3 class="text-xl font-headline font-medium text-on-surface">Signature Cold Brew</h3>
+<p class="text-primary font-bold mt-1">$5.25</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 active:scale-95 transition-transform">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-lowest transition-all duration-300 hover:surface-container-low">
+<div class="aspect-[16/10] w-full overflow-hidden">
+<img alt="Butter Croissant" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Freshly baked butter croissant with flaky golden layers on a textured paper napkin with crumbs around" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnXdXL_r-DceMYkmF2JNvRuIV8zqA2h0nUxTbexvzMTI_rk9sybmXxyF5qBx5yUw-Xyg3AxzEyhfBRJbd_s3QxFlsy8CvaTTvweinlr_QIDz5j1Zs4CJMVvZSyquOCIRxPamst4EZAfUi5Onc7BTVGNlQSgQkClAQEOjltDnFYijBB0M2m7gN32-EyJVMjzvci3ZBEcIYcfH6uJhcf9Pmq1GxoSjcUMSKSsc6H9vAlg4TF5mj_UfNaullFBstwj1LcUkSdYljsnIy_"/>
+</div>
+<div class="p-5 flex justify-between items-start">
+<div>
+<h3 class="text-xl font-headline font-medium text-on-surface">Butter Croissant</h3>
+<p class="text-primary font-bold mt-1">$3.75</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 active:scale-95 transition-transform">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-lowest transition-all duration-300 hover:surface-container-low">
+<div class="aspect-[16/10] w-full overflow-hidden">
+<img alt="Velvet Mocha" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Rich chocolate mocha in a glass mug topped with whipped cream and cocoa powder dusting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjeOIRxhgzZB3EO65K56t79ndm5jF6NVa8TGdsWDgRjtDtVIoNSomyMgumDRe5m6FJ53NHam6ZpoFC-xvmWSBoFkB_cH6VcVhsuuXZoJCRAVgIFe5iQGUcuwlpxy-Dr-oyhOShsUXw85IeBrAVsje2BmXYjM0LzHLLsH8JG547fIer2EOz3it9OoO1fim-jNE3UmaapS7CaqXgdp5PKPcfu16kDIkgdW2B-b27_5yptSwIr-Nr5di6on2n9u9GxVY2FzIXKbP-6nvo"/>
+</div>
+<div class="p-5 flex justify-between items-start">
+<div>
+<h3 class="text-xl font-headline font-medium text-on-surface">Velvet Mocha</h3>
+<p class="text-primary font-bold mt-1">$5.00</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 active:scale-95 transition-transform">
+                        Add to Cart
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating View Cart Button -->
+<div class="fixed bottom-[100px] left-0 right-0 px-4 z-40">
+<button class="w-full bg-primary-container text-on-primary-container py-4 rounded-2xl flex justify-between items-center px-6 shadow-xl backdrop-blur-md bg-opacity-95 active:scale-[0.98] transition-all duration-150">
+<span class="font-bold tracking-tight">View Cart (3 items)</span>
+<span class="text-lg font-bold">$18.50</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-stone-50/80 dark:bg-[#1A1208]/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-none">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-500 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-medium tracking-tight font-body">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#C8864A]/10 text-[#C8864A] rounded-xl px-3 py-1 tactile scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="restaurant_menu" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="text-[10px] font-medium tracking-tight font-body">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-500 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-[10px] font-medium tracking-tight font-body">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-500 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="event_seat">event_seat</span>
+<span class="text-[10px] font-medium tracking-tight font-body">Reservations</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-500 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium tracking-tight font-body">Profile</span>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

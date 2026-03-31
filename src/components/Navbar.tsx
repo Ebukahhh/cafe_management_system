@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import ProtectedLink from "@/components/ProtectedLink";
 import type { User } from "@supabase/supabase-js";
+import { usePathname } from "next/navigation";
 
 /* ─────────────────────────────────────────────
    Navbar — Sticky top navigation
@@ -14,7 +15,8 @@ import type { User } from "@supabase/supabase-js";
    ───────────────────────────────────────────── */
 
 const navLinks = [
-  { label: "Menu", href: "/#menu", active: true, protected: false },
+  { label: "Home", href: "/", protected: false },
+  { label: "Menu", href: "/menu", protected: false },
   { label: "Reservations", href: "/reservations", protected: true },
   { label: "Subscribe", href: "/subscription", protected: true },
 ];
@@ -36,6 +38,7 @@ function getDisplayName(user: User): string {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -98,7 +101,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className={`font-body font-medium transition-colors duration-300 ${
-                  link.active
+                  pathname === link.href
                     ? "text-primary decoration-primary decoration-2 underline underline-offset-8"
                     : "text-on-surface/50 hover:text-primary"
                 }`}
@@ -110,7 +113,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className={`font-body font-medium transition-colors duration-300 ${
-                  link.active
+                  pathname === link.href
                     ? "text-primary decoration-primary decoration-2 underline underline-offset-8"
                     : "text-on-surface/50 hover:text-primary"
                 }`}
