@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Menu | Espresso Modernist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Inter:wght@100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed-variant": "#4a4640",
+                        "background": "#FFFDF9",
+                        "on-primary-fixed-variant": "#6c3a02",
+                        "surface-container": "#F5F2EE",
+                        "on-secondary-container": "#4a4640",
+                        "surface": "#FFFDF9",
+                        "error": "#BA1A1A",
+                        "primary-fixed-dim": "#ffb779",
+                        "surface-tint": "#C8864A",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "on-secondary-fixed": "#1e1b16",
+                        "surface-container-high": "#EBE7E2",
+                        "secondary": "#625D59",
+                        "primary-container": "#c8864a",
+                        "on-tertiary-fixed": "#23005c",
+                        "on-secondary": "#FFFFFF",
+                        "tertiary": "#6750A4",
+                        "on-tertiary-container": "#21005D",
+                        "on-surface-variant": "#524439",
+                        "primary": "#C8864A",
+                        "on-primary-container": "#FFFFFF",
+                        "on-surface": "#1A1208",
+                        "inverse-primary": "#ffb779",
+                        "outline-variant": "#D7C3B5",
+                        "secondary-fixed": "#E9E1D9",
+                        "on-error-container": "#410002",
+                        "on-error": "#FFFFFF",
+                        "error-container": "#FFDAD6",
+                        "surface-bright": "#FFFDF9",
+                        "secondary-container": "#E9E1D9",
+                        "secondary-fixed-dim": "#ccc5be",
+                        "on-background": "#1A1208",
+                        "surface-container-highest": "#E5E1DC",
+                        "inverse-surface": "#322F2C",
+                        "inverse-on-surface": "#F7F0E8",
+                        "tertiary-container": "#EADDFF",
+                        "surface-variant": "#F2EBE4",
+                        "tertiary-fixed": "#E9DDFF",
+                        "surface-dim": "#E5E1DC",
+                        "on-primary-fixed": "#2e1500",
+                        "on-primary": "#FFFFFF",
+                        "surface-container-low": "#FAF7F2",
+                        "surface-container-lowest": "#FFFFFF",
+                        "on-tertiary": "#FFFFFF",
+                        "primary-fixed": "#ffdcc1",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "outline": "#857365"
+                    },
+                    fontFamily: {
+                        "headline": ["Fraunces", "serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Inter", "sans-serif"],
+                        "mono": ["Berkeley Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(255, 253, 249, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .amber-gradient {
+            background: linear-gradient(135deg, #C8864A 0%, #A3652D 100%);
+        }
+        .asymmetric-gutter {
+            padding-left: max(1.5rem, calc((100vw - 1280px) / 2 + 1.5rem));
+            padding-right: max(1.5rem, calc((100vw - 1280px) / 2 + 1.5rem));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- TopNavBar from Shared Components -->
+<nav class="fixed top-0 left-0 w-full z-50 glass-header border-none">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-headline italic text-[#1A1208]" href="#">
+                    Jennifer's Café
+                </a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#C8864A] font-bold border-b-2 border-[#C8864A] pb-1 hover:text-[#C8864A] transition-colors duration-300" href="#">Menu</a>
+<a class="text-stone-600 font-medium hover:text-[#C8864A] transition-colors duration-300" href="#">Reserve a Table</a>
+<a class="text-stone-600 font-medium hover:text-[#C8864A] transition-colors duration-300" href="#">My Orders</a>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container-high">
+<img alt="Customer Profile" class="w-full h-full object-cover" data-alt="Portrait of a smiling professional woman with a warm expression in soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIb-nLMnoivYFInPH0r2okqoOgssJ5KaNaD3519KCGVIr4EY5yJ4b4usIMLUpfE8GlU_3dAfcPIcKR3ZsN3JqGFqo_gNU25WXSa6efd9qoIbv9uaTWqIY9ozNN0NROwjd_6_s1WzG7AN7IBDWSPh5xsgwIQ1C0bf7knAmirVhdldChpgWB_3M-6qHKt2NWYBBZWBwhDPMZU_F8vwf0ITBbja32ili-ZJe8fB57voEvfuRmhLBzeLYDkZRI1WTFp0yG26krplizLf7D"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 asymmetric-gutter">
+<!-- Header Section -->
+<header class="mb-16">
+<h1 class="text-6xl md:text-7xl font-headline text-on-background mb-4 tracking-tight">
+                Our Menu
+            </h1>
+<p class="text-xl text-on-surface-variant max-w-xl font-body leading-relaxed">
+                Curated blends and artisanal pastries, prepared daily. Experience the ritual of fine specialty coffee.
+            </p>
+</header>
+<!-- Category Filter Bar -->
+<div class="flex items-center gap-4 mb-12 overflow-x-auto pb-4 scrollbar-hide">
+<button class="px-6 py-2 rounded-full font-bold text-primary bg-primary/10 transition-all duration-300">
+                All
+                <div class="h-0.5 w-full bg-primary mt-1 rounded-full"></div>
+</button>
+<button class="px-6 py-2 rounded-full font-medium text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 whitespace-nowrap">
+                Coffee
+            </button>
+<button class="px-6 py-2 rounded-full font-medium text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 whitespace-nowrap">
+                Cold Drinks
+            </button>
+<button class="px-6 py-2 rounded-full font-medium text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 whitespace-nowrap">
+                Food
+            </button>
+<button class="px-6 py-2 rounded-full font-medium text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 whitespace-nowrap">
+                Desserts
+            </button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+<!-- Item 1: Popular -->
+<article class="group relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(200,134,74,0.08)] transition-all duration-500">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Popular</span>
+</div>
+<div class="aspect-[4/5] overflow-hidden">
+<img alt="Single Origin Pour Over" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Close up of a precise coffee pour over being brewed into a glass carafe with steam rising and warm morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBNecc2VlZPFTVUa-Pa9E31kwdDmsdFsPjfsqcZpA0LfvtWBHHjxqsld9ZTIzRR3_f6TW68nYgM0FMRWsAD3W3ndJ7Vz0yUIVDffC4s0pOxOsW2i1TQFoYTLazCVfnjBTebFQ4hHEZDmASsvEtUBjbncm5ZgL6W183uzyB0OtgWpgVgGpqC26ONxOPA2tLkIJ64_V3u_YYtiAHS6wn31zZcdcaOrqZlEr-QmtJXd1Jq0xFz0a4alotHCs706atzBJYex27TI5sfs6A"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-2xl font-headline text-on-background">Single Origin Pour Over</h3>
+<span class="font-mono text-primary font-bold">$5.50</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Notes of jasmine, honey, and citrus. Sourced from the Ethiopian highlands.</p>
+<button class="w-full py-4 amber-gradient text-on-primary font-bold rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+                        Add to Cart
+                    </button>
+</div>
+</article>
+<!-- Item 2 -->
+<article class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(200,134,74,0.08)] transition-all duration-500">
+<div class="aspect-[4/5] overflow-hidden">
+<img alt="Artisanal Avocado Toast" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Artisanal sourdough toast topped with mashed avocado, chili flakes, and radish slices on a ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAaTad78C1it80bwI2o1EwEVPQufFGVoTwC6gvM4jEDl19BvptwJMAUWJ4aPTIKGbdrn2mF540lHjHcSAZ9Xt68B2-Q3H7tuAA1QfdxDrPEtNwGj_KMP2nJTUY18Gg3t10zJZeQgD7Iw1_MTtFLmNXtEQ-ZkK5f7tLwwv75Tno2yU37ZbaKwZ9bK9cvExC7DTv3LeAU-iy5_DlDo8j7WwY5FlaIKELD5RuKkDwJ7BAjXKXxOwneTJs4UWjGxkevq4PhNxTh1zym3EU"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-2xl font-headline text-on-background">Avocado Tartine</h3>
+<span class="font-mono text-primary font-bold">$12.00</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">House-made sourdough, smashed avocado, Aleppo pepper, and microgreens.</p>
+<button class="w-full py-4 amber-gradient text-on-primary font-bold rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+                        Add to Cart
+                    </button>
+</div>
+</article>
+<!-- Item 3: Out of Stock -->
+<article class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 opacity-80">
+<div class="aspect-[4/5] overflow-hidden grayscale-[0.5]">
+<img alt="Double Shot Espresso" class="w-full h-full object-cover" data-alt="A small ceramic cup of espresso with rich crema on a dark wooden table in a moody cafe setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6okc4WNBwW0pI83IMd1Hw4TrlgBrDS_kcsDueLejaaGsZW0ZxmCp3amRDHyXjC8MN9WLCXHGU13FEcKQKq6HBgipPxPOmsr39jFD2gkJ4Z7YT0PezEKbshJ1tTC04HSA8jdPnwj0NHhvCemUA9B-mcNeAM7knSicShXLLOfsCKW0a0mV5MvH-8JG0fzUrEItZoiwbguA5VpGTf9EkMe2MkVV1JPY0TUPDOJMrzZwr5RQ9ivcFeYY8J1Gt-AG1ICYQdU8oOW2yTfr6"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-2xl font-headline text-on-background">Velvet Flat White</h3>
+<span class="font-mono text-stone-400 font-bold">$4.75</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Ristretto shots with micro-foamed milk for a silky, rich texture.</p>
+<button class="w-full py-4 bg-stone-200 text-stone-500 font-bold rounded-xl cursor-not-allowed flex items-center justify-center gap-2" disabled="">
+                        Out of Stock
+                    </button>
+</div>
+</article>
+<!-- Item 4 -->
+<article class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(200,134,74,0.08)] transition-all duration-500">
+<div class="aspect-[4/5] overflow-hidden">
+<img alt="Glazed Croissant" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Flaky golden brown croissant on a marble surface with morning sunlight casting soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMruptcOPjY336SAnryi6k_RKU7ap3z00G9m35dRCxxvL6Fe0oElkR7ZAl4i53hgJhZvDzwj6a8cqRaugR26bBFJaQmgGovJSAfAGw7VuBX-yZHOmdcMqRK_KuokHMvheACF9BU0E5UDTmb-IhZoTYSJoj4aepsYFyw0gmx6HEiETEjS2V1jTgrLtQHNUDQSzgrXcuplaywas32cxKyISnhoUFke_W3hDljDQqV3Ik9bGqUoYFQzw0PneFWS7zE0-aSUmCAaZiJKd0"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-2xl font-headline text-on-background">Honeycomb Croissant</h3>
+<span class="font-mono text-primary font-bold">$6.25</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Twice-baked butter croissant filled with honey-infused almond cream.</p>
+<button class="w-full py-4 amber-gradient text-on-primary font-bold rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+                        Add to Cart
+                    </button>
+</div>
+</article>
+<!-- Item 5 -->
+<article class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(200,134,74,0.08)] transition-all duration-500">
+<div class="aspect-[4/5] overflow-hidden">
+<img alt="Cold Brew" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Glass bottle of dark cold brew coffee next to a glass with a large clear ice cube on a textured surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFKBl6tQ4y4fVOzf7RcOHeNxBMf9BpikDeuuaFGih0ygDSpl_YxO4Uc8KY9Rrkm66hC5auZH1CkU1qzfZQPHhYNJWy9SgPoVtoPiKljW-jDM6S7l6YklDhFXRq38nut92kJCGjgsH-wSAPQBSCNh3tTuB9GiGAADlNIxJVQ_b3gSBH1W2iS5oT7Ku6o5UsQaK1lh4_-20IFdf6h_QJcs1nJABawvetCBQSZ-RgGoqrR0VxzoDzLbZ3XBbYf-iDPzYED9h6ueyCy5ax"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-2xl font-headline text-on-background">18hr Cold Brew</h3>
+<span class="font-mono text-primary font-bold">$5.75</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Slow-steeped for 18 hours. Low acidity with deep chocolate undertones.</p>
+<button class="w-full py-4 amber-gradient text-on-primary font-bold rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+                        Add to Cart
+                    </button>
+</div>
+</article>
+<!-- Item 6 -->
+<article class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(200,134,74,0.08)] transition-all duration-500">
+<div class="aspect-[4/5] overflow-hidden">
+<img alt="Matcha Latte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Bright green ceremonial grade matcha latte with intricate foam art in a white ceramic mug" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgyYJqTWJa-YZ_0Cd4aHji1TcK9CAQbuhChAgzBH6puuhRt0v4EXWDbT-YT2nimbWPF1xj7lv7RHM_hT3K9GnTBSGtTvgj7YalhtZNwmbkIjHWpMuvKxtzi_YlNx0aL8CdNkKHeC2hS9qJp_ur3g0_PA9rPqonZiZ4WofMzurvvAJ_EjGn6hYwNDOmrvJHxCaiigYVsNi1947zZiGIYNPIjoEdRjDCdy7mZhmnRpb1EDkbGdYoARWMEjoX0ph5Iogjp4rfXUEgtgDh"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-2xl font-headline text-on-background">Ceremonial Matcha</h3>
+<span class="font-mono text-primary font-bold">$6.50</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">Stone-ground Japanese matcha whisked with your choice of milk.</p>
+<button class="w-full py-4 amber-gradient text-on-primary font-bold rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+                        Add to Cart
+                    </button>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar from Shared Components (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-stone-50/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col items-center justify-center text-stone-500">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-medium tracking-tight font-label">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#C8864A]/10 text-[#C8864A] rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-[10px] font-medium tracking-tight font-label">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-[10px] font-medium tracking-tight font-label">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500">
+<span class="material-symbols-outlined" data-icon="event_seat">event_seat</span>
+<span class="text-[10px] font-medium tracking-tight font-label">Reservations</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium tracking-tight font-label">Profile</span>
+</div>
+</nav>
+</body></html>

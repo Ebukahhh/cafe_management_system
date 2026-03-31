@@ -183,7 +183,7 @@ export default function LandingPage() {
                 </h2>
               </div>
               <Link
-                href="/#menu"
+                href="/menu"
                 className="text-on-surface font-bold text-lg flex items-center gap-2 group shrink-0"
               >
                 View Menu
