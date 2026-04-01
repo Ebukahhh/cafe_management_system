@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Inter:wght@100..900&amp;family=Berkeley+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 18, 8, 0.8);
+            backdrop-filter: blur(16px);
+        }
+        .amber-glow {
+            background: linear-gradient(135deg, #ffb779 0%, #c8864a 100%);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #3d3327; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#c8864a",
+              "surface": "#1a1208",
+              "on-surface": "#f1e0ce",
+              "primary": "#ffb779",
+              "surface-container": "#271e13",
+              "surface-container-low": "#231a0f",
+              "surface-container-high": "#32281d",
+              "surface-container-highest": "#3d3327",
+              "on-surface-variant": "#d7c3b5",
+              "outline": "#9f8d81",
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "mono": ["Berkeley Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col bg-stone-950 p-6 gap-y-4 z-50">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="minimalist aesthetic logo for a specialty coffee shop with elegant serif typography and warm amber tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8brHO2Pt4_vbmVXvphlnhaFuSS2isDMMh_K7akL7DsjlCPB5shQeg97f5SR6Qf-Oi77QlbwH4kzA0zBtQpqtF54qnq3nId0WAcK0OjTvBICegOduSzH3t6_N59rlYrcUAowqwdk4Aik2fygH60soq-Q-SyRE-smBSwmnKQapb14qJhcIUEVR9PGgzSGZD8Aa3sm8XoK1BNd2nyhEze7Ut7fHTlrYa6EQC1yq_ka2kAIPOaFTp_eeQOyg1hunM_wFHTfwu6rCWlfgE"/>
+</div>
+<div>
+<h1 class="text-2xl font-['Fraunces'] text-amber-600 italic leading-none">Jennifer's Café</h1>
+<p class="text-[10px] text-stone-500 font-mono tracking-widest mt-1 uppercase">Coffee Sommelier Admin</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-900 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-amber-500 font-bold bg-stone-900 rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">receipt_long</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-900 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">calendar_today</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Reservations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-900 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">menu_book</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Menu</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-900 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">loyalty</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Subscriptions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-900 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">campaign</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Promotions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-900 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">analytics</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-900 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-sm font-['DM_Sans'] tracking-wide">Settings</span>
+</a>
+</nav>
+<button class="amber-glow text-on-primary-container font-bold py-3 rounded-xl flex items-center justify-center gap-2 mt-auto shadow-lg shadow-amber-900/20 active:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+            New Roast Batch
+        </button>
+</aside>
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 right-0 left-0 md:left-64 h-16 bg-stone-950/80 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-8 z-40">
+<div class="flex items-center gap-8">
+<span class="text-xl font-['Fraunces'] text-amber-600 italic">Jennifer's Café</span>
+<nav class="hidden lg:flex gap-6">
+<a class="text-amber-500 border-b-2 border-amber-500 pb-1 text-sm font-medium" href="#">Live View</a>
+<a class="text-stone-400 hover:text-amber-400 transition-all text-sm font-medium" href="#">Metrics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 text-lg">search</span>
+<input class="bg-stone-900 border-none rounded-full pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-1 focus:ring-amber-900 transition-all" placeholder="Search orders..." type="text"/>
+</div>
+<button class="bg-amber-600/10 text-amber-500 border border-amber-500/20 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-amber-600/20 transition-all">
+                New Order
+            </button>
+<div class="flex items-center gap-2 border-l border-white/10 pl-4">
+<button class="text-stone-400 hover:text-amber-500"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-stone-400 hover:text-amber-500"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 md:pb-8 pl-4 md:pl-[18rem] pr-4 md:pr-[26rem] transition-all min-h-screen">
+<!-- Header & Stats -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="text-4xl font-headline italic text-on-surface">Live Orders</h2>
+<div class="flex items-center gap-2 mt-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<p class="text-xs font-mono text-on-surface-variant/70 tracking-tight">Wednesday, 8 April 2025 — updated just now</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="px-5 py-2.5 rounded-xl border border-outline/30 bg-transparent flex items-center gap-3">
+<span class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">Active</span>
+<span class="text-xl font-headline font-bold text-on-surface">47 orders today</span>
+</div>
+<div class="px-5 py-2.5 rounded-xl amber-glow shadow-xl shadow-primary/10 flex items-center gap-3">
+<span class="text-xs font-mono uppercase tracking-widest text-on-primary-container">Total</span>
+<span class="text-xl font-headline font-bold text-on-primary-container">$384.50 revenue</span>
+</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="mb-10 overflow-x-auto pb-2 scrollbar-hide">
+<div class="flex items-center gap-2 p-1.5 bg-surface-container-low rounded-2xl w-max md:w-full">
+<button class="px-6 py-2 rounded-xl bg-surface-container-highest text-primary font-bold text-sm transition-all shadow-sm">All</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high text-sm transition-all flex items-center gap-2">
+                    Pending <span class="bg-amber-500/20 text-amber-500 px-2 py-0.5 rounded text-[10px] font-mono">3</span>
+</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high text-sm transition-all flex items-center gap-2">
+                    Preparing <span class="bg-orange-500/20 text-orange-500 px-2 py-0.5 rounded text-[10px] font-mono">2</span>
+</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high text-sm transition-all flex items-center gap-2">
+                    Ready <span class="bg-emerald-500/20 text-emerald-500 px-2 py-0.5 rounded text-[10px] font-mono">1</span>
+</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high text-sm transition-all">Delivered</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high text-sm transition-all">Cancelled</button>
+<div class="ml-auto flex items-center gap-2 pr-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined">filter_list</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined">calendar_month</span></button>
+</div>
+</div>
+</div>
+<!-- Kanban Board -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Pending Column -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 mb-2">
+<h3 class="font-headline text-lg italic flex items-center gap-2">
+                        Pending
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+</h3>
+</div>
+<!-- Card 0047 -->
+<div class="bg-surface-container-low rounded-xl p-4 border-t-4 border-amber-500 shadow-xl shadow-black/20 hover:scale-[1.02] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-mono text-amber-500/80 uppercase">#0047 • Pickup</span>
+<h4 class="text-lg font-headline font-bold text-on-surface mt-1">Abena Mensah</h4>
+</div>
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-mono text-on-surface">3 items</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6">2x Espresso Macchiato, 1x Croissant</p>
+<div class="flex items-center justify-between pt-4 border-t border-white/5">
+<span class="font-mono text-primary">$9.00</span>
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-bold text-xs hover:opacity-90 active:scale-95 transition-all shadow-lg">Confirm</button>
+</div>
+</div>
+<!-- Card 0046 -->
+<div class="bg-surface-container-low rounded-xl p-4 border-t-4 border-amber-500 shadow-lg shadow-black/10">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-mono text-amber-500/80 uppercase">#0046 • Delivery</span>
+<h4 class="text-lg font-headline font-bold text-on-surface mt-1">Kofi Asante</h4>
+</div>
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-mono text-on-surface">1 item</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6">1x Pour Over (Ethiopia)</p>
+<div class="flex items-center justify-between pt-4 border-t border-white/5">
+<span class="font-mono text-primary">$5.50</span>
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-bold text-xs transition-all shadow-lg">Confirm</button>
+</div>
+</div>
+</div>
+<!-- Preparing Column -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 mb-2">
+<h3 class="font-headline text-lg italic flex items-center gap-2">
+                        Preparing
+                        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+</h3>
+</div>
+<!-- Card 0045 -->
+<div class="bg-surface-container-low rounded-xl p-4 border-t-4 border-orange-500 shadow-xl shadow-black/20">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-mono text-orange-500/80 uppercase">#0045 • Dine In</span>
+<h4 class="text-lg font-headline font-bold text-on-surface mt-1">Efua Darko</h4>
+</div>
+<div class="flex items-center gap-1 text-orange-500 font-mono text-xs">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                            08:24
+                        </div>
+</div>
+<p class="text-sm text-on-surface-variant mb-4">1x Cortado, 1x Avo Toast</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-orange-500 h-full w-[70%]"></div>
+</div>
+</div>
+<!-- Card 0044 -->
+<div class="bg-surface-container-low rounded-xl p-4 border-t-4 border-orange-500 shadow-xl shadow-black/20">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-mono text-orange-500/80 uppercase">#0044 • Pickup</span>
+<h4 class="text-lg font-headline font-bold text-on-surface mt-1">James Owusu</h4>
+</div>
+<div class="flex items-center gap-1 text-orange-500 font-mono text-xs">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                            04:12
+                        </div>
+</div>
+<p class="text-sm text-on-surface-variant mb-4">1x Iced Latte</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-orange-500 h-full w-[40%]"></div>
+</div>
+</div>
+</div>
+<!-- Ready Column -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 mb-2">
+<h3 class="font-headline text-lg italic flex items-center gap-2">
+                        Ready
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</h3>
+</div>
+<!-- Card 0043 -->
+<div class="bg-surface-container-low rounded-xl p-4 border-t-4 border-emerald-500 shadow-xl shadow-black/20">
+<div class="mb-4 bg-emerald-500/10 text-emerald-400 py-1.5 px-3 rounded-lg text-center text-[10px] font-bold tracking-widest uppercase">
+                        Ready for Pickup
+                    </div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[10px] font-mono text-emerald-500/80 uppercase">#0043 • Pickup</span>
+<h4 class="text-lg font-headline font-bold text-on-surface mt-1">Ama Boateng</h4>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant mb-6">3x Flat Whites</p>
+<div class="flex flex-col gap-2">
+<button class="w-full py-2 bg-emerald-600 text-white font-bold text-xs rounded-lg hover:opacity-90">Mark as Delivered</button>
+<button class="w-full py-2 bg-surface-container-highest text-on-surface-variant font-bold text-xs rounded-lg hover:bg-surface-container-high transition-colors">Notify Customer</button>
+</div>
+</div>
+</div>
+<!-- Delivered Column -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 mb-2">
+<h3 class="font-headline text-lg italic flex items-center gap-2">
+                        Delivered
+                        <span class="w-2 h-2 rounded-full bg-stone-500"></span>
+</h3>
+</div>
+<div class="flex flex-col gap-3">
+<div class="bg-surface-container-low/50 rounded-xl p-3 border-l-4 border-stone-600 flex items-center justify-between">
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase">#0042</p>
+<p class="font-headline text-on-surface text-sm">John Doe</p>
+</div>
+<span class="text-xs font-mono text-on-surface-variant">$12.50</span>
+</div>
+<div class="bg-surface-container-low/50 rounded-xl p-3 border-l-4 border-stone-600 flex items-center justify-between">
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase">#0041</p>
+<p class="font-headline text-on-surface text-sm">Sarah Lee</p>
+</div>
+<span class="text-xs font-mono text-on-surface-variant">$4.20</span>
+</div>
+<div class="bg-surface-container-low/50 rounded-xl p-3 border-l-4 border-stone-600 flex items-center justify-between">
+<div>
+<p class="text-xs font-mono text-stone-500 uppercase">#0040</p>
+<p class="font-headline text-on-surface text-sm">Tom Cook</p>
+</div>
+<span class="text-xs font-mono text-on-surface-variant">$18.90</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Order Detail Side Panel (Desktop Overlay/Fixed) -->
+<aside class="fixed right-0 top-0 bottom-0 w-[24rem] bg-surface-container border-l border-white/5 z-40 hidden md:flex flex-col shadow-2xl">
+<div class="p-8 border-b border-white/5 pt-24">
+<div class="flex items-center justify-between mb-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">print</span>
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-2xl overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="professional warm portrait of a young West African woman with friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaKHTx6ezolNye2fXjEfoLpTWM-vqqRyXbuVR--BB0QRkTNLJZIxAiw8eAjaA0MWfKU5L6myTqihi32Odzf_-QmZG8dxwzaVBcbraQtJmaVuQuMuldszECNa-HaqgaH8GOeCafKn-86kzihvvfyIVsfIqb8xMEv2yaD3pufn8PTLmkPyvzwk1JxjLH29SRcoNlfoDQ1UW0K6PD0JnP03RUIpj4D_InkTQZKH8A2fv-LrZ5_p-Z4anIysWHrm7Tq-3rZ3zivdL25UKQ"/>
+</div>
+<div>
+<h2 class="text-2xl font-headline italic">Abena Mensah</h2>
+<p class="text-xs font-mono text-primary uppercase tracking-widest mt-1">#0047 • Pickup</p>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-8 flex flex-col gap-8">
+<!-- Order Items -->
+<div>
+<h3 class="text-[10px] font-mono uppercase tracking-widest text-on-surface-variant/50 mb-4">Order Items</h3>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="font-mono text-primary">2x</span>
+<div>
+<p class="text-sm font-bold">Espresso Macchiato</p>
+<p class="text-xs text-on-surface-variant italic">Double shot, Oat milk</p>
+</div>
+</div>
+<span class="text-sm font-mono">$6.00</span>
+</div>
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="font-mono text-primary">1x</span>
+<div>
+<p class="text-sm font-bold">Butter Croissant</p>
+<p class="text-xs text-on-surface-variant italic">Warm with jam</p>
+</div>
+</div>
+<span class="text-sm font-mono">$3.00</span>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-white/10 flex justify-between items-center">
+<span class="text-sm font-headline italic opacity-70">Subtotal</span>
+<span class="text-xl font-headline font-bold">$9.00</span>
+</div>
+</div>
+<!-- Payment Info -->
+<div class="bg-surface-container-low rounded-2xl p-5 border border-white/5">
+<h3 class="text-[10px] font-mono uppercase tracking-widest text-on-surface-variant/50 mb-4">Payment Method</h3>
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 bg-stone-900 rounded flex items-center justify-center border border-white/10">
+<span class="text-[8px] font-bold text-white tracking-widest">VISA</span>
+</div>
+<div>
+<p class="text-sm font-medium">Visa ending in 4747</p>
+<p class="text-[10px] font-mono text-emerald-500 uppercase">Verified Transaction</p>
+</div>
+</div>
+</div>
+<!-- Timeline -->
+<div>
+<h3 class="text-[10px] font-mono uppercase tracking-widest text-on-surface-variant/50 mb-6">Order Timeline</h3>
+<div class="flex flex-col gap-8 relative before:content-[''] before:absolute before:left-2 before:top-0 before:bottom-0 before:w-0.5 before:bg-white/5">
+<div class="flex gap-6 relative">
+<div class="w-4 h-4 rounded-full bg-amber-500 ring-4 ring-amber-500/10 z-10"></div>
+<div>
+<p class="text-sm font-bold">Order Received</p>
+<p class="text-xs text-on-surface-variant">08:12 AM by Web Portal</p>
+</div>
+</div>
+<div class="flex gap-6 relative">
+<div class="w-4 h-4 rounded-full bg-surface-container-highest ring-4 ring-white/5 z-10"></div>
+<div class="opacity-40">
+<p class="text-sm font-bold">Preparation Started</p>
+<p class="text-xs">Awaiting confirmation</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-high">
+<button class="w-full amber-glow text-on-primary-container font-bold py-4 rounded-2xl shadow-xl shadow-amber-900/10 active:scale-[0.98] transition-all">
+                Confirm &amp; Start Prep
+            </button>
+</div>
+</aside>
+<!-- Mobile Badge -->
+<div class="fixed bottom-24 right-4 z-50 md:hidden">
+<button class="bg-amber-600 text-white px-4 py-2 rounded-full shadow-2xl flex items-center gap-2 text-sm font-bold animate-bounce">
+<span class="material-symbols-outlined text-sm">notifications_active</span>
+            3 new orders
+        </button>
+</div>
+<!-- BottomNavBar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-stone-950/95 backdrop-blur-md border-t border-white/5 md:hidden z-50">
+<a class="flex flex-col items-center justify-center text-stone-500" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-['Berkeley_Mono'] uppercase tracking-tighter">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-amber-600/10 text-amber-500 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined">reorder</span>
+<span class="text-[10px] font-['Berkeley_Mono'] uppercase tracking-tighter">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-[10px] font-['Berkeley_Mono'] uppercase tracking-tighter">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[10px] font-['Berkeley_Mono'] uppercase tracking-tighter">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-['Berkeley_Mono'] uppercase tracking-tighter">Settings</span>
+</a>
+</nav>
+</body></html>

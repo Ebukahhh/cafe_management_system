@@ -180,10 +180,12 @@ export interface Subscription {
   user_id: string
   frequency: SubscriptionFrequency
   days_of_week: number[] | null
-  preferred_time: string | null
+  preferred_time: string
   status: SubscriptionStatus
   next_run_at: string | null
   end_date: string | null
+  payment_method: string | null
+  failed_count: number
   created_at: string
   updated_at: string
 }
@@ -191,7 +193,7 @@ export interface Subscription {
 export interface SubscriptionItem {
   id: string
   subscription_id: string
-  product_id: string
+  product_id: string | null
   product_name: string
   quantity: number
   unit_price: number
