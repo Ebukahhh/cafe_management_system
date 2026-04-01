@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getAdminOrdersBoard } from '@/lib/supabase/queries/admin-orders'
 import AdminOrdersClient from './admin-orders-client'
 
 export const metadata: Metadata = {
@@ -6,6 +7,9 @@ export const metadata: Metadata = {
   description: 'Manage active orders, update preparation status, and handle deliveries.',
 }
 
-export default function AdminOrdersPage() {
-  return <AdminOrdersClient />
+export const dynamic = 'force-dynamic'
+
+export default async function AdminOrdersPage() {
+  const { orders, stats } = await getAdminOrdersBoard()
+  return <AdminOrdersClient initialOrders={orders} stats={stats} />
 }
