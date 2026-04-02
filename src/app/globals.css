@@ -83,3 +83,30 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Staff Daily Report — print / Save as PDF */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #staff-daily-report-print,
+  #staff-daily-report-print * {
+    visibility: visible;
+  }
+  #staff-daily-report-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #fff !important;
+    color: #1a1208 !important;
+    padding: 1.5rem !important;
+  }
+  #staff-daily-report-print .recharts-wrapper,
+  #staff-daily-report-print .recharts-surface {
+    visibility: visible !important;
+  }
+  #staff-daily-report-print .staff-no-print {
+    display: none !important;
+  }
+}

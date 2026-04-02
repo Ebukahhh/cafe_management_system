@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Espresso Elite | Staff Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Berkeley+Mono:wght@400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#ffb779",
+              "on-primary": "#4c2700",
+              "tertiary-fixed-dim": "#d0bcff",
+              "on-primary-fixed": "#2e1500",
+              "surface": "#1a1208",
+              "on-tertiary-fixed": "#23005c",
+              "secondary": "#ccc5be",
+              "primary-fixed-dim": "#ffb779",
+              "primary-fixed": "#ffdcc1",
+              "on-surface-variant": "#d7c3b5",
+              "secondary-container": "#4a4640",
+              "on-tertiary-container": "#380088",
+              "surface-dim": "#1a1208",
+              "outline-variant": "#524439",
+              "error-container": "#93000a",
+              "inverse-primary": "#885119",
+              "outline": "#9f8d81",
+              "on-secondary-container": "#bbb4ad",
+              "tertiary-container": "#a37dff",
+              "surface-bright": "#42372b",
+              "surface-container-high": "#32281d",
+              "on-tertiary-fixed-variant": "#5516be",
+              "on-secondary-fixed-variant": "#4a4640",
+              "on-secondary": "#33302b",
+              "on-secondary-fixed": "#1e1b16",
+              "tertiary-fixed": "#e9ddff",
+              "inverse-on-surface": "#392f23",
+              "secondary-fixed-dim": "#ccc5be",
+              "on-background": "#f1e0ce",
+              "secondary-fixed": "#e9e1d9",
+              "surface-container": "#271e13",
+              "on-tertiary": "#3c0091",
+              "primary-container": "#c8864a",
+              "primary": "#ffb779",
+              "on-primary-container": "#482400",
+              "surface-container-lowest": "#140d04",
+              "on-primary-fixed-variant": "#6c3a02",
+              "on-error": "#690005",
+              "on-surface": "#f1e0ce",
+              "surface-variant": "#3d3327",
+              "surface-container-low": "#231a0f",
+              "tertiary": "#d0bcff",
+              "error": "#ffb4ab",
+              "inverse-surface": "#f1e0ce",
+              "background": "#1a1208",
+              "surface-container-highest": "#3d3327",
+              "on-error-container": "#ffdad6"
+            },
+            fontFamily: {
+              "headline": ["Fraunces", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Inter", "sans-serif"],
+              "mono": ["Berkeley Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0F0D0B;
+            color: #f1e0ce;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .editorial-gutter {
+            padding-left: clamp(1rem, 5vw, 4rem);
+            padding-right: clamp(1rem, 5vw, 4rem);
+        }
+        .asymmetric-header {
+            margin-left: -2rem;
+        }
+        .glass-card {
+            background: rgba(26, 22, 18, 0.7);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<div class="flex h-screen overflow-hidden">
+<aside class="hidden md:flex flex-col h-full p-4 gap-4 bg-[#1A1208] w-64 shrink-0">
+<div class="flex items-center gap-3 px-2 mb-6">
+<span class="text-xl font-serif text-[#C8864A] italic">Espresso Elite</span>
+</div>
+<div class="space-y-2">
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-[#C8864A] to-[#8B5E34] text-white rounded-xl shadow-lg transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="coffee_maker">coffee_maker</span>
+<span class="font-medium">Live Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-800/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-medium">Order History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-200 hover:bg-stone-800/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-medium">Daily Report</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-4 bg-stone-900 rounded-2xl flex flex-col items-center text-center">
+<img alt="Kwame Asante" class="w-16 h-16 rounded-full mb-3 object-cover border-2 border-[#C8864A]" data-alt="portrait of a confident smiling african male barista with a neat short beard wearing a professional black apron" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwqjjLERPGNpGfiPkVhOrzIVNAV_zw-Os6E0MMzTzxyV1V0XEd4GUOxYx6GRSufPLghdSIq_b4XHxGf_H5YzQIlMfafiQt4CkpSE9AJruuG8-_EmljepMvFWTIccFXquTPu7vBXuWMrguURVzly3iLm9BQd-3zR4qylZH3YXBUJgU_KNyu1cBh3I9ME4HdfrLUZvA4PQRKSjvBCmk7VBrpT8Zk556boZsy6kts41xA5NY74_koYLzxVX4u9agGMAbxU_tzYT4j47iP"/>
+<h3 class="font-bold text-on-surface">Kwame Asante</h3>
+<span class="font-mono text-[10px] uppercase tracking-widest text-[#C8864A]">Barista</span>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden bg-[#0F0D0B]">
+<header class="flex justify-between items-center w-full px-6 py-4 bg-[#1A1208] shrink-0">
+<div class="md:hidden">
+<span class="text-lg font-serif text-[#C8864A] italic">Jennifer's Café</span>
+</div>
+<div class="hidden md:flex items-center bg-surface-container px-4 py-2 rounded-full border border-outline-variant/20">
+<span class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></span>
+<span class="text-xs font-mono text-on-surface tracking-wide">Live — receiving orders</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined text-stone-400" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-[#C8864A] text-white text-[10px] flex items-center justify-center rounded-full font-bold">2</span>
+</div>
+<button class="px-4 py-1.5 rounded-full border border-[#C8864A] text-[#C8864A] text-sm font-semibold hover:bg-[#C8864A] hover:text-on-primary-container transition-all">
+                        Sign Out
+                    </button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline text-4xl text-on-surface mb-2">Live Orders</h1>
+<p class="text-stone-400 max-w-md">Real-time beverage queue and fulfillment dashboard for active barista stations.</p>
+</div>
+<div class="flex bg-surface-container-high rounded-xl p-1 shrink-0 overflow-x-auto">
+<div class="px-6 py-2 rounded-lg bg-[#C8864A] text-on-primary-container text-center min-w-[100px]">
+<div class="font-headline text-xl font-bold">5</div>
+<div class="text-[10px] uppercase font-bold tracking-tighter">Active</div>
+</div>
+<div class="px-6 py-2 rounded-lg text-stone-400 text-center min-w-[100px]">
+<div class="font-headline text-xl">2</div>
+<div class="text-[10px] uppercase font-bold tracking-tighter">Pending</div>
+</div>
+<div class="px-6 py-2 rounded-lg text-stone-400 text-center min-w-[100px]">
+<div class="font-headline text-xl">2</div>
+<div class="text-[10px] uppercase font-bold tracking-tighter">Preparing</div>
+</div>
+<div class="px-6 py-2 rounded-lg text-stone-400 text-center min-w-[100px]">
+<div class="font-headline text-xl">1</div>
+<div class="text-[10px] uppercase font-bold tracking-tighter">Ready</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-bold flex items-center gap-2 uppercase text-xs tracking-widest text-stone-500">
+<span class="w-2 h-2 bg-stone-700 rounded-full"></span>
+                                Pending
+                            </h2>
+<span class="font-mono text-[10px] text-stone-600">2 ITEMS</span>
+</div>
+<div class="bg-[#1A1612] p-5 rounded-2xl border-l-4 border-stone-800 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<div class="font-mono text-xs text-[#C8864A] mb-1">#0047</div>
+<h3 class="text-lg font-bold">Abena Mensah</h3>
+<span class="text-[10px] font-mono text-stone-500 uppercase">Pickup • 1x Cappuccino, 1x Croissant</span>
+</div>
+</div>
+<button class="w-full py-3 bg-[#C8864A] text-on-primary-container rounded-xl font-bold text-sm hover:scale-[0.98] transition-transform">
+                                Start Preparing
+                            </button>
+</div>
+<div class="bg-[#1A1612] p-5 rounded-2xl border-l-4 border-stone-800 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<div class="font-mono text-xs text-[#C8864A] mb-1">#0046</div>
+<h3 class="text-lg font-bold">Kofi Asante</h3>
+<span class="text-[10px] font-mono text-stone-500 uppercase">Delivery • 2x Espresso, 1x Muffin</span>
+</div>
+</div>
+<button class="w-full py-3 bg-[#C8864A] text-on-primary-container rounded-xl font-bold text-sm hover:scale-[0.98] transition-transform">
+                                Start Preparing
+                            </button>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-bold flex items-center gap-2 uppercase text-xs tracking-widest text-[#C8864A]">
+<span class="w-2 h-2 bg-[#C8864A] rounded-full animate-pulse"></span>
+                                Preparing
+                            </h2>
+<span class="font-mono text-[10px] text-stone-600">2 ITEMS</span>
+</div>
+<div class="bg-[#1A1612] p-5 rounded-2xl border-l-4 border-[#C8864A] space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<div class="font-mono text-xs text-[#C8864A] mb-1">#0045</div>
+<h3 class="text-lg font-bold">Efua Darko</h3>
+<span class="text-[10px] font-mono text-stone-500 uppercase">Dine In • 1x Latte Art Special</span>
+</div>
+<div class="font-mono text-[#C8864A] font-bold">08:24</div>
+</div>
+<button class="w-full py-3 bg-gradient-to-r from-[#C8864A] to-[#8B5E34] text-white rounded-xl font-bold text-sm shadow-md">
+                                Mark as Ready
+                            </button>
+</div>
+<div class="bg-[#1A1612] p-5 rounded-2xl border-l-4 border-emerald-500/50 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<div class="font-mono text-xs text-[#C8864A] mb-1">#0044</div>
+<h3 class="text-lg font-bold">James Owusu</h3>
+<span class="text-[10px] font-mono text-stone-500 uppercase">Pickup • 1x Cold Brew</span>
+</div>
+<div class="font-mono text-emerald-500 font-bold">04:12</div>
+</div>
+<button class="w-full py-3 bg-gradient-to-r from-[#C8864A] to-[#8B5E34] text-white rounded-xl font-bold text-sm shadow-md">
+                                Mark as Ready
+                            </button>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-bold flex items-center gap-2 uppercase text-xs tracking-widest text-emerald-500">
+<span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                                Ready
+                            </h2>
+<span class="font-mono text-[10px] text-stone-600">1 ITEM</span>
+</div>
+<div class="bg-[#1A1612] p-5 rounded-2xl border-l-4 border-emerald-500 space-y-4">
+<div class="py-1 px-3 bg-emerald-500/10 text-emerald-500 rounded-full text-[10px] font-bold uppercase tracking-widest text-center">
+                                READY FOR PICKUP
+                            </div>
+<div class="flex justify-between items-start">
+<div>
+<div class="font-mono text-xs text-[#C8864A] mb-1">#0043</div>
+<h3 class="text-lg font-bold">Ama Boateng</h3>
+<span class="text-[10px] font-mono text-stone-500 uppercase">Pickup • 3x Flat White</span>
+</div>
+</div>
+<button class="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold text-sm hover:bg-emerald-700 transition-colors">
+                                Mark as Delivered
+                            </button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<section class="hidden 2xl:flex w-[400px] bg-[#14100C] border-l border-white/5 flex-col shrink-0">
+<div class="p-6 border-b border-white/5">
+<h2 class="font-headline text-2xl text-[#C8864A] italic">Mobile Preview</h2>
+<p class="text-[10px] font-mono uppercase text-stone-500 mt-1">Simulated Responsive View</p>
+</div>
+<div class="flex-1 p-6 flex items-center justify-center">
+<div class="w-[320px] h-[640px] bg-[#0F0D0B] rounded-[3rem] border-[8px] border-stone-800 overflow-hidden relative shadow-2xl flex flex-col">
+<header class="bg-[#1A1208] px-4 py-4 flex justify-between items-center">
+<span class="material-symbols-outlined text-[#C8864A]" data-icon="menu">menu</span>
+<span class="text-sm font-serif italic text-[#C8864A]">Jennifer's Café</span>
+<div class="relative">
+<span class="material-symbols-outlined text-stone-400 scale-75" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-[#C8864A] rounded-full"></span>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 space-y-4 pb-20">
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
+<div class="px-4 py-2 bg-[#C8864A] text-on-primary-container rounded-lg font-bold text-xs whitespace-nowrap">Live Orders</div>
+<div class="px-4 py-2 bg-surface-container text-stone-400 rounded-lg text-xs whitespace-nowrap">History</div>
+<div class="px-4 py-2 bg-surface-container text-stone-400 rounded-lg text-xs whitespace-nowrap">Reports</div>
+</div>
+<div class="space-y-3">
+<div class="bg-[#1A1612] p-4 rounded-xl border-l-4 border-emerald-500">
+<div class="flex justify-between mb-2">
+<span class="text-[10px] font-mono text-[#C8864A]">#0043</span>
+<span class="text-[8px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">READY</span>
+</div>
+<h4 class="text-sm font-bold">Ama Boateng</h4>
+<p class="text-[9px] text-stone-500">3x Flat White</p>
+</div>
+<div class="bg-[#1A1612] p-4 rounded-xl border-l-4 border-[#C8864A]">
+<div class="flex justify-between mb-2">
+<span class="text-[10px] font-mono text-[#C8864A]">#0045</span>
+<span class="text-[8px] font-bold text-[#C8864A] bg-[#C8864A]/10 px-2 py-0.5 rounded uppercase">Preparing 08:24</span>
+</div>
+<h4 class="text-sm font-bold">Efua Darko</h4>
+<p class="text-[9px] text-stone-500">1x Latte Art Special</p>
+</div>
+<div class="bg-[#1A1612] p-4 rounded-xl border-l-4 border-stone-800">
+<div class="flex justify-between mb-2">
+<span class="text-[10px] font-mono text-[#C8864A]">#0047</span>
+<span class="text-[8px] font-bold text-stone-500 bg-stone-800 px-2 py-0.5 rounded">PENDING</span>
+</div>
+<h4 class="text-sm font-bold">Abena Mensah</h4>
+<p class="text-[9px] text-stone-500">1x Cappuccino, 1x Croissant</p>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 inset-x-0 h-14 bg-[#C8864A] text-on-primary-container flex items-center justify-between px-6">
+<span class="font-bold text-xs">5 active orders</span>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-on-primary-container rounded-full"></span>
+<span class="font-mono text-[10px] font-bold uppercase">1 ready</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</body></html>

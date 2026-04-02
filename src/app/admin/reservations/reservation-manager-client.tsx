@@ -1,14 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { useMemo, useState, useTransition } from 'react'
 import type { Reservation, ReservationStatus } from '@/lib/supabase/types/database.types'
 import type { AdminReservationGuest } from '@/lib/supabase/queries/admin-reservations'
 import { reviewReservationAction } from './actions'
 import {
-  addDaysYmd,
-  formatLongDateFromYmd,
   formatMediumDateFromYmd,
   formatRelativeSubmitted,
   formatTimeSlotDisplay,
@@ -107,10 +104,6 @@ export function ReservationManagerClient({
     return rows.filter((r) => matchesFilter(r, tab))
   }
 
-  const prevHref = `/admin/reservations?date=${encodeURIComponent(addDaysYmd(dateYmd, -1))}`
-  const nextHref = `/admin/reservations?date=${encodeURIComponent(addDaysYmd(dateYmd, 1))}`
-  const todayHref = `/admin/reservations?date=${encodeURIComponent(toLocalYmd(new Date()))}`
-
   async function handleReview(
     reservationId: string,
     status: 'confirmed' | 'declined'
@@ -167,57 +160,9 @@ export function ReservationManagerClient({
         </div>
       </header>
 
-      <div className="pt-16 max-w-[1280px] mx-auto p-4 md:p-8 flex flex-col lg:flex-row gap-8">
+      <div className="max-w-[1280px] mx-auto px-4 pb-4 pt-16 md:px-8 md:pb-8 flex flex-col lg:flex-row gap-8">
         <div className="flex-1 space-y-8">
-          <div className="space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div
-                className="flex items-center gap-2 bg-surface-container p-1 rounded-xl"
-                style={{ border: '1px solid rgba(82,68,57,0.1)' }}
-              >
-                <Link
-                  href={prevHref}
-                  className="p-2 hover:bg-surface-container-low rounded-lg text-on-surface/30 cursor-pointer"
-                  scroll={false}
-                >
-                  <span className="material-symbols-outlined">chevron_left</span>
-                </Link>
-                <span className="px-4 font-headline font-semibold text-on-surface">
-                  {formatLongDateFromYmd(dateYmd)}
-                </span>
-                <Link
-                  href={nextHref}
-                  className="p-2 hover:bg-surface-container-low rounded-lg text-on-surface/30 cursor-pointer"
-                  scroll={false}
-                >
-                  <span className="material-symbols-outlined">chevron_right</span>
-                </Link>
-                <div className="h-6 w-px bg-on-surface/10 mx-1" />
-                <Link
-                  href={todayHref}
-                  className="px-4 py-1.5 text-xs font-bold text-amber-500 hover:bg-amber-900/20 rounded-lg cursor-pointer"
-                  scroll={false}
-                >
-                  Today
-                </Link>
-              </div>
-              <div className="flex items-center bg-surface-container-highest p-1 rounded-xl w-fit">
-                <button
-                  type="button"
-                  className="px-4 py-1.5 text-xs font-bold rounded-lg bg-surface-container-low text-on-surface shadow-sm"
-                >
-                  List
-                </button>
-                <button
-                  type="button"
-                  className="px-4 py-1.5 text-xs font-bold rounded-lg text-on-surface/30 hover:text-on-surface cursor-pointer"
-                >
-                  Calendar
-                </button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 {
                   label: summaryDayLabel,
@@ -271,7 +216,6 @@ export function ReservationManagerClient({
                 </div>
               ))}
             </div>
-          </div>
 
           {actionError ? (
             <p className="text-sm text-red-400 bg-red-900/20 px-3 py-2 rounded-lg" role="alert">

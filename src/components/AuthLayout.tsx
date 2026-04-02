@@ -46,8 +46,9 @@ export default function AuthLayout({
                 src="/images/coffee-steam.png"
                 alt="Coffee steam artistry"
                 fill
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                priority
                 sizes="320px"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
             </div>
           </div>
