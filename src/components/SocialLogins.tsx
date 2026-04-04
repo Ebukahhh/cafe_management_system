@@ -5,6 +5,7 @@
    Used on both Login and Signup pages
    ───────────────────────────────────────────── */
 
+import { useAuthLoading } from '@/components/auth/auth-loading-context'
 import { createClient } from '@/lib/supabase/client'
 
 function GoogleIcon() {
@@ -27,7 +28,10 @@ function FacebookIcon() {
 }
 
 export default function SocialLogins() {
+  const { start } = useAuthLoading()
+
   const handleOAuth = async (provider: 'google' | 'facebook') => {
+    start('connecting')
     const supabase = createClient()
     await supabase.auth.signInWithOAuth({
       provider,

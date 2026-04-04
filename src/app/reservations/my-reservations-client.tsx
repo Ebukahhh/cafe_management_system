@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import Navbar from '@/components/Navbar'
-import BottomNav from '@/components/BottomNav'
 import { googleCalendarEventUrlForReservation } from '@/lib/calendar-links'
 import {
   formatLongDateFromYmd,
@@ -129,7 +128,7 @@ export default function MyReservationsClient({
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 pb-40 md:pb-20">
+      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 pb-16 md:pb-20">
         <div className="mb-8 md:mb-12">
           <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl text-primary mb-4 tracking-tight">
             My Reservations
@@ -162,7 +161,7 @@ export default function MyReservationsClient({
         ) : (
           <>
             <div
-              className="flex overflow-x-auto gap-6 md:gap-10 mb-10 md:mb-12 py-2 sticky top-[72px] bg-deep-espresso/95 backdrop-blur-md z-40"
+              className="grid grid-cols-4 gap-0.5 sm:gap-1 md:flex md:gap-10 md:overflow-x-visible mb-8 md:mb-12 py-2 sticky top-[72px] bg-deep-espresso/95 backdrop-blur-md z-40 -mx-1 px-1 md:mx-0 md:px-0"
               style={{ borderBottom: '1px solid rgba(61,51,39,0.5)' }}
             >
               {TABS.map((t) => (
@@ -170,19 +169,30 @@ export default function MyReservationsClient({
                   key={t}
                   type="button"
                   onClick={() => setTab(t)}
-                  className={`pb-4 whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
+                  className={`flex flex-col items-center justify-center gap-0.5 min-w-0 px-0.5 py-2 md:py-0 md:pb-4 md:flex-row md:gap-2 md:whitespace-nowrap transition-all cursor-pointer rounded-lg md:rounded-none ${
                     tab === t ? 'text-primary font-bold' : 'text-on-surface/20 font-medium hover:text-primary'
                   }`}
                   style={tab === t ? { borderBottom: '2px solid var(--color-primary, #C8864A)' } : undefined}
                 >
-                  {t}
-                  <span className="text-xs font-mono text-on-surface/30">({tabCounts[t]})</span>
+                  <span className="text-[9px] leading-tight text-center sm:text-[10px] md:text-base md:font-bold">
+                    {t === 'Cancelled' ? (
+                      <>
+                        <span className="md:hidden">Cancel</span>
+                        <span className="hidden md:inline">Cancelled</span>
+                      </>
+                    ) : (
+                      t
+                    )}
+                  </span>
+                  <span className="text-[8px] md:text-xs font-mono text-on-surface/30 tabular-nums">
+                    ({tabCounts[t]})
+                  </span>
                 </button>
               ))}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-              <div className="lg:col-span-8 space-y-10 md:space-y-12">
+              <div className="lg:col-span-8 w-full max-w-full space-y-10 md:space-y-12">
                 {tab === 'Upcoming' && (
                   <section>
                     <div className="flex items-center justify-between mb-6">
@@ -196,30 +206,32 @@ export default function MyReservationsClient({
                         No confirmed upcoming reservations. When the café confirms your booking, it will appear here.
                       </p>
                     ) : (
-                      <div className="space-y-8">
+                      <div className="flex flex-col gap-6 md:gap-8 w-full">
                         {cat.upcoming.map((r, idx) => (
                           <div
                             key={r.id}
-                            className="relative bg-[#FDFBF7] rounded-xl overflow-hidden flex flex-col md:flex-row items-stretch hover:-translate-y-1 transition-transform"
+                            className="relative bg-[#FDFBF7] rounded-xl overflow-hidden flex flex-col lg:flex-row items-stretch w-full hover:-translate-y-1 transition-transform"
                             style={{ borderLeft: '8px solid #C8864A' }}
                           >
-                            <div className="w-full md:w-48 h-48 md:h-auto min-h-[12rem] overflow-hidden relative">
+                            <div className="w-full lg:w-48 h-44 sm:h-48 lg:h-auto lg:min-h-[12rem] overflow-hidden relative shrink-0">
                               <Image
                                 src="/images/cafe-interior.png"
                                 alt="Café interior"
                                 fill
                                 priority={idx === 0}
                                 className="object-cover"
-                                sizes="(max-width:768px) 100vw, 192px"
+                                sizes="(max-width:1024px) 100vw, 192px"
                               />
                             </div>
-                            <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
+                            <div className="flex-1 min-w-0 p-4 sm:p-6 md:p-8 flex flex-col justify-between">
                               <div>
-                                <div className="flex justify-between items-start mb-4">
-                                  <div className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                                <div className="flex justify-between items-start gap-2 mb-4 min-w-0">
+                                  <div className="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold flex items-center gap-1 shrink-0">
                                     <CheckCircleSmall /> Confirmed
                                   </div>
-                                  <div className="text-[#1A1208] font-mono text-sm font-bold">{formatReservationRef(r.id)}</div>
+                                  <div className="text-[#1A1208] font-mono text-[11px] sm:text-sm font-bold truncate text-right">
+                                    {formatReservationRef(r.id)}
+                                  </div>
                                 </div>
                                 <h3 className="text-2xl md:text-3xl font-headline text-[#1A1208] mb-2 leading-tight">
                                   {formatLongDateFromYmd(r.date)}
@@ -264,11 +276,11 @@ export default function MyReservationsClient({
                     {cat.pending.length === 0 ? (
                       <p className="text-on-surface/40 text-sm py-8">You have no requests waiting for confirmation.</p>
                     ) : (
-                      <div className="space-y-6">
+                      <div className="flex flex-col gap-6 w-full">
                         {cat.pending.map((r) => (
                           <div
                             key={r.id}
-                            className="bg-surface-container-low rounded-xl p-6 md:p-8 flex flex-col md:flex-row gap-8 items-start"
+                            className="bg-surface-container-low rounded-xl p-5 md:p-8 flex flex-col lg:flex-row gap-6 lg:gap-8 items-start w-full"
                             style={{ borderLeft: '4px solid rgba(200,134,74,0.5)' }}
                           >
                             <div className="flex-1">
@@ -431,8 +443,6 @@ export default function MyReservationsClient({
           </>
         )}
       </main>
-      <BottomNav activeTab="reservations" />
-      <div className="h-24 md:hidden" />
     </>
   )
 }

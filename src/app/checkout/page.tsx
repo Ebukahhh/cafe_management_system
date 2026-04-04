@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
 
 /* ─────────────────────────────────────────────
    Checkout Page
@@ -156,8 +155,8 @@ export default function CheckoutPage() {
                 <div className="flex-shrink-0 w-full md:w-48 bg-surface-container-lowest rounded-xl p-4">
                   <div className="text-xs font-bold text-primary uppercase mb-3 text-center font-label">October</div>
                   <div className="grid grid-cols-7 gap-1 text-[10px] text-on-surface/30 mb-2 font-mono text-center">
-                    {dayLabels.map((d) => (
-                      <div key={d}>{d}</div>
+                    {dayLabels.map((d, i) => (
+                      <div key={`weekday-label-${i}`}>{d}</div>
                     ))}
                   </div>
                   <div className="grid grid-cols-7 gap-1 text-center text-sm">
@@ -376,7 +375,7 @@ export default function CheckoutPage() {
       </main>
 
       {/* Mobile sticky CTA */}
-      <div className="fixed bottom-[72px] left-0 w-full z-40 px-4 py-3 bg-deep-espresso/80 backdrop-blur-xl lg:hidden">
+      <div className="fixed bottom-0 left-0 w-full z-40 px-4 py-3 bg-deep-espresso/80 backdrop-blur-xl lg:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <Link
           href="/order-confirmation"
           className="flex w-full amber-glow text-on-primary py-4 rounded-xl font-headline text-lg font-bold active:scale-[0.98] transition-all items-center justify-center gap-2"
@@ -385,9 +384,6 @@ export default function CheckoutPage() {
           Place Order — $16.50
         </Link>
       </div>
-
-      <BottomNav activeTab="orders" />
-      <div className="h-24 md:hidden" />
     </>
   );
 }

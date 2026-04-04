@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useMemo, useState, useTransition, type ReactNode } from 'react'
 import Navbar from '@/components/Navbar'
-import BottomNav from '@/components/BottomNav'
 import { formatUsd } from '@/lib/customer-display'
 import type { ProductWithOptions } from '@/lib/supabase/types/app.types'
 import type { SubscriptionFrequency } from '@/lib/supabase/types/database.types'
@@ -633,8 +632,6 @@ export default function SubscriptionSetupClient({ products, showSuccess, lockSet
           </>
         )}
       </main>
-      <BottomNav activeTab="home" />
-      <div className="h-24 md:hidden" />
     </>
   )
 }

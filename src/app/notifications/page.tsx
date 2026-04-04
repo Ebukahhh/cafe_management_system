@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
 
 /* ─────────────────────────────────────────────
    Notification Inbox
@@ -167,8 +166,6 @@ export default function NotificationsPage() {
           <p className="text-sm">Check back later for more updates from Jennifer&apos;s Café.</p>
         </div>
       </main>
-      <BottomNav activeTab="home" />
-      <div className="h-24 md:hidden" />
     </>
   );
 }

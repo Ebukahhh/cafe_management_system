@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LandingHero from "@/components/LandingHero";
 import ProductCard from "@/components/ProductCard";
 import FeatureCard from "@/components/FeatureCard";
-import HeroButtons from "@/components/HeroButtons";
 import { getAllProducts } from "@/data/products";
 
 /* ─────────────────────────────────────────────
@@ -86,24 +86,15 @@ export default function LandingPage() {
             Editorial asymmetry: text left, image right
             bg: surface (deep espresso)
             ════════════════════════════════════════════ */}
-        <section className="relative min-h-[700px] lg:min-h-[870px] flex items-center overflow-hidden bg-deep-espresso">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
+        <section className="relative min-h-0 lg:min-h-[820px] flex items-center overflow-hidden bg-deep-espresso pt-2 pb-10 md:pt-4 md:pb-14 lg:py-10">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center z-10">
             {/* Text column */}
-            <div className="space-y-8 py-12 lg:py-16">
-              <h1 className="font-headline font-black text-5xl md:text-7xl lg:text-8xl text-on-surface leading-[0.9] tracking-tight">
-                Your café, <br />
-                <span className="text-primary italic font-light">reimagined.</span>
-              </h1>
-
-              <p className="text-on-surface/50 text-lg md:text-xl lg:text-2xl max-w-lg leading-relaxed font-body">
-                Order ahead, book a table, set up your daily coffee — all in one place.
-              </p>
-
-              <HeroButtons />
+            <div className="order-1 lg:order-none">
+              <LandingHero />
             </div>
 
-            {/* Image column */}
-            <div className="relative group">
+            {/* Image column — desktop only */}
+            <div className="relative group hidden lg:block">
               {/* Ambient glow behind image */}
               <div className="absolute -inset-4 bg-primary/10 rounded-[40px] blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
 
@@ -194,7 +185,7 @@ export default function LandingPage() {
             </div>
 
             {/* Product grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 lg:gap-10">
               {products.map((product) => (
                 <ProductCard key={product.name} {...product} />
               ))}

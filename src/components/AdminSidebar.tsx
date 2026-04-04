@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useAuthLoading } from '@/components/auth/auth-loading-context'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
@@ -45,6 +46,7 @@ interface Props {
 export default function AdminSidebar({ user }: Props) {
   const pathname = usePathname()
   const router = useRouter()
+  const { start, stop } = useAuthLoading()
 
   const isActive = (href: string) => {
     if (href === '/admin') return pathname === '/admin'
@@ -52,9 +54,11 @@ export default function AdminSidebar({ user }: Props) {
   }
 
   async function handleSignOut() {
+    start('signing-out')
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/login')
+    stop()
   }
 
   const initials = getInitials(user)

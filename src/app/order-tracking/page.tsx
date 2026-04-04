@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
 
 /* ─────────────────────────────────────────────
    Live Order Tracking Page
@@ -303,7 +302,7 @@ export default function OrderTrackingPage() {
       </main>
 
       {/* Mobile sticky status bar */}
-      <div className="fixed bottom-[72px] left-4 right-4 z-40 md:hidden">
+      <div className="fixed bottom-4 left-4 right-4 z-40 md:hidden pb-[env(safe-area-inset-bottom)]">
         <div className="amber-glow rounded-2xl px-6 py-4 flex justify-between items-center" style={{ boxShadow: "0 8px 30px rgba(0,0,0,0.4)" }}>
           <div className="flex items-center gap-3 text-on-primary">
             <span className="font-mono text-lg font-bold">08:24</span>
@@ -315,9 +314,6 @@ export default function OrderTrackingPage() {
           </button>
         </div>
       </div>
-
-      <BottomNav activeTab="orders" />
-      <div className="h-24 md:hidden" />
     </>
   );
 }

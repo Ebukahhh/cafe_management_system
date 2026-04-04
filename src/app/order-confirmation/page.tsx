@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
 
 /* ─────────────────────────────────────────────
    Order Confirmation Page
@@ -72,7 +71,7 @@ export default function OrderConfirmationPage() {
     <>
       <Navbar />
 
-      <main className="max-w-[640px] mx-auto px-4 md:px-6 pt-8 md:pt-12 pb-40 md:pb-32 flex flex-col items-center">
+      <main className="max-w-[640px] mx-auto px-4 md:px-6 pt-8 md:pt-12 pb-16 md:pb-24 flex flex-col items-center">
 
         {/* ── Success header ── */}
         <div className="mb-10 text-center flex flex-col items-center">
@@ -268,9 +267,6 @@ export default function OrderConfirmationPage() {
           </div>
         </div>
       </main>
-
-      <BottomNav activeTab="orders" />
-      <div className="h-24 md:hidden" />
     </>
   );
 }

@@ -7,6 +7,7 @@
 'use client'
 
 import { create } from 'zustand'
+import { ensureCustomerProfile } from '../supabase/mutations/ensure-customer-profile'
 import { createClient } from '../supabase/client'
 import type { User } from '@supabase/supabase-js'
 import type { Profile } from '../supabase/types/database.types'
@@ -74,7 +75,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       email,
       password,
       options: {
-        data: { full_name: fullName },
+        data: { full_name: fullName, role: 'customer' },
       },
     })
 
@@ -82,6 +83,8 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       set({ isLoading: false })
       throw new Error(error.message)
     }
+
+    set({ isLoading: false })
   },
 
   signOut: async () => {
@@ -99,11 +102,23 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
     const supabase = createClient()
 
-    const { data, error } = await supabase
+    let { data, error } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', user.id)
       .single()
+
+    if (error && error.code === 'PGRST116') {
+      try {
+        await ensureCustomerProfile(user)
+        const retry = await supabase.from('profiles').select('*').eq('id', user.id).single()
+        data = retry.data
+        error = retry.error
+      } catch (e) {
+        console.error('Failed to create missing profile:', e)
+        return
+      }
+    }
 
     if (error) {
       console.error('Failed to fetch profile:', error.message)
