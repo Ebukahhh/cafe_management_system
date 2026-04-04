@@ -69,6 +69,41 @@ body {
   animation: fade-in 0.15s ease-out forwards;
 }
 
+/* Auth loading overlay — ellipsis + progress shimmer */
+@keyframes auth-dot-wave {
+  0%,
+  60%,
+  100% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+
+.animate-auth-dot-1 {
+  animation: auth-dot-wave 1.2s ease-in-out infinite;
+}
+.animate-auth-dot-2 {
+  animation: auth-dot-wave 1.2s ease-in-out 0.2s infinite;
+}
+.animate-auth-dot-3 {
+  animation: auth-dot-wave 1.2s ease-in-out 0.4s infinite;
+}
+
+@keyframes auth-shimmer-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+.animate-auth-shimmer {
+  animation: auth-shimmer-slide 1.85s ease-in-out infinite;
+}
+
 /* ─────────────────────────────────────────────
    Accessibility — Reduced Motion
    ───────────────────────────────────────────── */

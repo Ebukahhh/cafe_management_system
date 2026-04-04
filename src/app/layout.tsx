@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, DM_Sans, Inter } from "next/font/google";
+import { AppProviders } from "./providers";
 import "./globals.css";
 import CartSidebar from "@/components/CartSidebar";
 
@@ -36,10 +37,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${fraunces.variable} ${dmSans.variable} ${inter.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-dvh flex flex-col bg-deep-espresso text-on-surface font-body antialiased">
-        {children}
-        <CartSidebar />
+      <body
+        className="min-h-dvh flex flex-col bg-deep-espresso text-on-surface font-body antialiased"
+        suppressHydrationWarning
+      >
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

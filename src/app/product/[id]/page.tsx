@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
 import { getProductById, getProductIds } from "@/data/products";
 
 /* ─────────────────────────────────────────────
@@ -369,9 +368,6 @@ export default async function ProductDetailPage({
           Add to Cart — {product.price}
         </Link>
       </div>
-
-      <BottomNav activeTab="menu" />
-      <div className="h-24 md:hidden" />
     </>
   );
 }

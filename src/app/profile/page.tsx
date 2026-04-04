@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
-import ProfileSidebar from "@/components/ProfileSidebar";
-import ProfileClient from "./profile-client";
-import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 
 /* ─────────────────────────────────────────────
    Profile / Account Settings
@@ -88,12 +83,6 @@ export default async function ProfilePage() {
             <ProfileClient profile={profileData} />
           </div>
         </main>
-      </div>
-
-      {/* Mobile bottom nav */}
-      <div className="md:hidden">
-        <BottomNav activeTab="home" />
-        <div className="h-24" />
       </div>
     </>
   );

@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
-import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
-import { Database } from "@/lib/supabase/types/database.types";
-
-type NotificationRow = Database['public']['Tables']['notifications']['Row'];
 
 /* ─────────────────────────────────────────────
    Notification Inbox
@@ -98,11 +92,10 @@ export default async function NotificationsPage() {
           {filters.map((f) => (
             <button
               key={f}
-              className={`px-5 py-2 rounded-full text-sm transition-all cursor-pointer ${
-                f === "All"
-                  ? "bg-primary text-deep-espresso font-medium"
-                  : "bg-surface-container-high text-on-surface/40 hover:bg-surface-bright"
-              }`}
+              className={`px-5 py-2 rounded-full text-sm transition-all cursor-pointer ${f === "All"
+                ? "bg-primary text-deep-espresso font-medium"
+                : "bg-surface-container-high text-on-surface/40 hover:bg-surface-bright"
+                }`}
             >
               {f}
             </button>
@@ -114,31 +107,38 @@ export default async function NotificationsPage() {
           {notifications.map((n, i) => (
             <div
               key={i}
-              className={`rounded-xl p-5 transition-all ${
-                !n.is_read
+              className={`rounded-xl p-5 transition-all ${n.unread
                   ? "bg-primary/5 hover:bg-primary/10"
                   : "bg-surface-container-low hover:bg-surface-container"
-              }`}
-              style={!n.is_read ? { borderLeft: "4px solid var(--color-primary, #C8864A)" } : undefined}
+                }`}
+              style={n.unread ? { borderLeft: "4px solid var(--color-primary, #C8864A)" } : undefined}
             >
-              <div className={`flex gap-4 ${n.is_read ? "opacity-70" : ""}`}>
-                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
-                  !n.is_read ? "bg-primary/20 text-primary" : "bg-on-surface/5 text-on-surface/30"
-                }`}>
-                  {getIconForType(n.type)}
+              <div className={`flex gap-4 ${!n.unread ? "opacity-70" : ""}`}>
+                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${n.unread ? "bg-primary/20 text-primary" : "bg-on-surface/5 text-on-surface/30"
+                  }`}>
+                  {n.icon}
                 </div>
                 <div className="flex-grow">
                   <div className="flex justify-between items-start mb-1">
-                    <h3 className={`${!n.is_read ? "font-bold" : "font-medium"} text-on-surface`}>{n.title}</h3>
-                    <span className={`text-[11px] font-label uppercase tracking-widest whitespace-nowrap ml-4 ${
-                      !n.is_read ? "text-primary" : "text-on-surface/20"
-                    }`}>{timeAgo(n.created_at)}</span>
+                    <h3 className={`${n.unread ? "font-bold" : "font-medium"} text-on-surface`}>{n.title}</h3>
+                    <span className={`text-[11px] font-label uppercase tracking-widest whitespace-nowrap ml-4 ${n.unread ? "text-primary" : "text-on-surface/20"
+                      }`}>{n.time}</span>
                   </div>
                   <p className="text-on-surface/40 text-sm mb-4">{n.body}</p>
-                  {n.action_url && (
-                      <Link href={n.action_url} className="inline-flex items-center gap-2 bg-primary text-deep-espresso px-4 py-2 rounded-xl text-xs font-bold hover:scale-[1.02] active:scale-95 transition-all">
-                        View Details
+                  {n.action && (
+                    n.action.variant === "primary" ? (
+                      <Link href={n.action.href} className="inline-flex items-center gap-2 bg-primary text-deep-espresso px-4 py-2 rounded-xl text-xs font-bold hover:scale-[1.02] active:scale-95 transition-all">
+                        {n.action.label}
                       </Link>
+                    ) : n.action.variant === "secondary" ? (
+                      <Link href={n.action.href} className="inline-flex items-center gap-2 bg-surface-variant text-on-surface px-4 py-2 rounded-xl text-xs font-bold hover:bg-surface-bright transition-all">
+                        {n.action.label}
+                      </Link>
+                    ) : (
+                      <button className="text-primary text-xs font-bold underline-offset-4 hover:underline cursor-pointer">
+                        {n.action.label}
+                      </button>
+                    )
                   )}
                 </div>
               </div>
@@ -155,8 +155,6 @@ export default async function NotificationsPage() {
           <p className="text-sm">Check back later for more updates from Jennifer&apos;s Café.</p>
         </div>
       </main>
-      <BottomNav activeTab="home" />
-      <div className="h-24 md:hidden" />
     </>
   );
 }

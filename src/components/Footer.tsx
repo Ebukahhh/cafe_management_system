@@ -24,7 +24,7 @@ export default function Footer() {
             Jennifer&apos;s Café
           </Link>
           <p className="text-on-surface/30 font-body text-xs uppercase tracking-widest text-center md:text-left">
-            © 2024 Jennifer&apos;s Café. All rights reserved.
+            © 2026 Jennifer&apos;s Café. All rights reserved.
           </p>
         </div>
 

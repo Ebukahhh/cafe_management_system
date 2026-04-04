@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
 import { getAllProductsForAdmin, getCategories } from "@/lib/supabase/queries/products";
 import MenuClient from "./MenuClient";
@@ -27,17 +26,11 @@ export default async function MenuPage() {
     <>
       <Navbar />
 
-      <main className="pt-32 pb-32 max-w-7xl mx-auto px-4 md:px-8 min-h-screen">
+      <main className="pt-5 md:pt-28 pb-12 md:pb-16 max-w-7xl mx-auto px-4 md:px-8 min-h-screen">
         <MenuClient initialProducts={products} categories={categories} />
       </main>
 
       <Footer />
-      
-      {/* Mobile nav spacing */}
-      <div className="md:hidden">
-        <BottomNav activeTab="menu" />
-        <div className="h-24" />
-      </div>
     </>
   );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useAuthLoading } from "@/components/auth/auth-loading-context";
 import { createClient } from "@/lib/supabase/client";
 import ProtectedLink from "@/components/ProtectedLink";
 import type { User } from "@supabase/supabase-js";
@@ -48,10 +49,23 @@ function getDisplayName(user: User): string {
   return meta?.full_name || meta?.name || user.email || "Account";
 }
 
+const linkColors = (active: boolean) =>
+  active
+    ? "text-primary decoration-primary decoration-2 underline underline-offset-8"
+    : "text-on-surface/50 hover:text-primary";
+
+const desktopLinkClass = (active: boolean) =>
+  `font-body text-lg font-medium transition-colors duration-300 ${linkColors(active)}`;
+
+const mobileLinkClass = (active: boolean) =>
+  `font-body text-2xl font-headline font-medium transition-colors duration-300 text-center block w-full ${linkColors(active)}`;
+
 export default function Navbar() {
   const pathname = usePathname();
+  const { start } = useAuthLoading();
   const [user, setUser] = useState<User | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { items, openCart } = useCartStore();
   const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
@@ -87,14 +101,45 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
+
   async function handleSignOut() {
+    start("signing-out");
+    setDropdownOpen(false);
+    setMobileOpen(false);
     const supabase = createClient();
     await supabase.auth.signOut();
-    setDropdownOpen(false);
     window.location.href = "/";
   }
 
+  const closeMobile = () => setMobileOpen(false);
+  const openMobile = () => {
+    setDropdownOpen(false);
+    setMobileOpen(true);
+  };
+
   return (
+    <>
     <nav
       className="w-full top-0 sticky z-50 bg-deep-espresso"
       role="navigation"
@@ -116,11 +161,7 @@ export default function Navbar() {
               <ProtectedLink
                 key={link.label}
                 href={link.href}
-                className={`font-body font-medium transition-colors duration-300 ${
-                  pathname === link.href
-                    ? "text-primary decoration-primary decoration-2 underline underline-offset-8"
-                    : "text-on-surface/50 hover:text-primary"
-                }`}
+                className={desktopLinkClass(pathname === link.href)}
               >
                 {link.label}
               </ProtectedLink>
@@ -128,11 +169,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`font-body font-medium transition-colors duration-300 ${
-                  pathname === link.href
-                    ? "text-primary decoration-primary decoration-2 underline underline-offset-8"
-                    : "text-on-surface/50 hover:text-primary"
-                }`}
+                className={desktopLinkClass(pathname === link.href)}
               >
                 {link.label}
               </Link>
@@ -263,8 +300,11 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-primary cursor-pointer"
+            type="button"
+            onClick={openMobile}
+            className="md:hidden text-primary cursor-pointer p-1 -mr-1 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
             aria-label="Open menu"
+            aria-expanded={mobileOpen}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -285,5 +325,95 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+
+    {/* Full-screen mobile navigation */}
+    <div
+      className={`fixed inset-0 z-[100] md:hidden flex flex-col bg-deep-espresso overflow-hidden transition-[transform,opacity] duration-300 ease-out ${
+        mobileOpen
+          ? "translate-x-0 opacity-100"
+          : "translate-x-full opacity-0 pointer-events-none"
+      }`}
+      aria-hidden={!mobileOpen}
+      id="mobile-nav-panel"
+    >
+      <div className="flex justify-between items-center px-4 py-5 shrink-0 border-b border-white/5">
+        <Link
+          href="/"
+          onClick={closeMobile}
+          className="text-primary font-headline text-xl italic font-bold tracking-tight"
+        >
+          Jennifer&apos;s Café
+        </Link>
+        <button
+          type="button"
+          onClick={closeMobile}
+          className="p-2 rounded-xl text-primary hover:bg-white/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          aria-label="Close menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <nav
+        className="flex-1 flex flex-col justify-center gap-2 px-6 min-h-0"
+        aria-label="Mobile navigation"
+      >
+        {navLinks.map((link) =>
+          link.protected ? (
+            <ProtectedLink
+              key={link.label}
+              href={link.href}
+              onNavigate={closeMobile}
+              className={`py-3 ${mobileLinkClass(pathname === link.href)}`}
+            >
+              {link.label}
+            </ProtectedLink>
+          ) : (
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={closeMobile}
+              className={`py-3 ${mobileLinkClass(pathname === link.href)}`}
+            >
+              {link.label}
+            </Link>
+          )
+        )}
+      </nav>
+
+      {/* Guests only — signed-in users use avatar + dropdown in the bar (menu stays links-only) */}
+      {!user && (
+        <div className="shrink-0 px-6 pb-10 pt-4 border-t border-white/5 space-y-3">
+          <Link
+            href="/login"
+            onClick={closeMobile}
+            className="block w-full py-3.5 text-center rounded-xl border border-white/15 text-on-surface font-medium hover:bg-white/5 transition-colors"
+          >
+            Sign In
+          </Link>
+          <Link
+            href="/signup"
+            onClick={closeMobile}
+            className="block w-full py-3.5 text-center rounded-xl amber-glow text-on-primary font-bold uppercase tracking-wider"
+          >
+            Get Started
+          </Link>
+        </div>
+      )}
+    </div>
+    </>
   );
 }
