@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuthLoading } from '@/components/auth/auth-loading-context'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { StaffPortalProvider, useStaffPortal, type StaffProfile } from './staff-portal-context'
@@ -23,6 +24,7 @@ export default function StaffPortalShell({
 
 function StaffChrome() {
   const router = useRouter()
+  const { start, stop } = useAuthLoading()
   const {
     profile,
     activeTab,
@@ -32,10 +34,12 @@ function StaffChrome() {
   } = useStaffPortal()
 
   async function handleSignOut() {
+    start('signing-out')
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/')
     router.refresh()
+    stop()
   }
 
   return (

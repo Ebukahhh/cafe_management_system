@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useAuthLoading } from "@/components/auth/auth-loading-context";
 import { createClient } from "@/lib/supabase/client";
 import ProtectedLink from "@/components/ProtectedLink";
 import type { User } from "@supabase/supabase-js";
@@ -39,6 +40,7 @@ function getDisplayName(user: User): string {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { start } = useAuthLoading();
   const [user, setUser] = useState<User | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -72,9 +74,10 @@ export default function Navbar() {
   }, []);
 
   async function handleSignOut() {
+    start("signing-out");
+    setDropdownOpen(false);
     const supabase = createClient();
     await supabase.auth.signOut();
-    setDropdownOpen(false);
     window.location.href = "/";
   }
 
