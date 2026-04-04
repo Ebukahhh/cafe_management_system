@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 type PageProps = {
-  searchParams: Promise<{ success?: string }>
+  searchParams: Promise<{ success?: string; edit?: string }>
 }
 
 export default async function SubscriptionSetupPage({ searchParams }: PageProps) {
@@ -31,20 +31,37 @@ export default async function SubscriptionSetupPage({ searchParams }: PageProps)
     .from('subscriptions')
     .select('id')
     .eq('user_id', user.id)
-    .eq('status', 'active')
+    .neq('status', 'cancelled')
+    .limit(1)
     .maybeSingle()
 
-  if (activeSub && params.success !== '1') {
-    redirect('/profile')
+  let editData = null
+  if (params.edit) {
+    const { data } = await supabase
+      .from('subscriptions')
+      .select('*, subscription_items(*)')
+      .eq('id', params.edit)
+      .eq('user_id', user.id)
+      .single()
+    if (data) {
+      editData = data
+    }
   }
 
   const products = await getAvailableProductsForSubscription()
+
+  const lockSetup = !!activeSub && !params.edit
+
+  if (lockSetup) {
+    redirect('/profile/subscriptions')
+  }
 
   return (
     <SubscriptionSetupClient
       products={products}
       showSuccess={params.success === '1'}
-      lockSetup={!!activeSub && params.success === '1'}
+      lockSetup={false}
+      editData={editData}
     />
   )
 }

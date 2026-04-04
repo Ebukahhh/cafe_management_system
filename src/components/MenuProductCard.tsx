@@ -1,6 +1,9 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import type { ProductWithOptions } from "@/lib/supabase/types/app.types";
+import { useCartStore } from "@/lib/store/cart";
 
 /* ─────────────────────────────────────────────
    MenuProductCard
@@ -30,6 +33,19 @@ export default function MenuProductCard({ product }: Props) {
   // Based on the DB schema, stock_count can be null for infinite stock items,
   // so we only treat it out of stock if it is exactly 0 or marked unavailable.
   const isOutOfStock = !product.is_available || product.stock_count === 0;
+  const { addItem, openCart } = useCartStore();
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      productName: product.name,
+      imageUrl: product.image_url,
+      unitPrice: product.price,
+      quantity: 1,
+      selectedOptions: {}, // Default options if any, or empty
+    });
+    openCart();
+  };
 
   return (
     <article
@@ -88,13 +104,13 @@ export default function MenuProductCard({ product }: Props) {
             Out of Stock
           </button>
         ) : (
-          <Link
-            href={`/checkout`} // Simplified Add to Cart path per our mock architecture
-            className="w-full py-4 amber-glow text-on-primary font-bold rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-auto"
+          <button
+            onClick={handleAddToCart}
+            className="w-full py-4 amber-glow text-on-primary font-bold rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-auto cursor-pointer"
           >
             <AddShoppingCartIcon />
             Add to Cart
-          </Link>
+          </button>
         )}
       </div>
     </article>

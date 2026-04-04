@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import BottomNav from "@/components/BottomNav";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import { Database } from "@/lib/supabase/types/database.types";
+
+type NotificationRow = Database['public']['Tables']['notifications']['Row'];
 
 /* ─────────────────────────────────────────────
    Notification Inbox
@@ -35,52 +40,45 @@ function BellOffIcon() {
   return <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M13.73 21a2 2 0 0 1-3.46 0" /><path d="M18.63 13A17.89 17.89 0 0 1 18 8" /><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14" /><path d="M18 8a6 6 0 0 0-9.33-5" /><line x1="1" y1="1" x2="23" y2="23" /></svg>;
 }
 
-const filters = ["All", "Orders", "Reservations", "Subscriptions", "Promotions"];
+function getIconForType(type: NotificationRow['type']) {
+  switch (type) {
+    case 'order_update': return <FoodIcon />;
+    case 'reservation_update': return <CalendarCheckIcon />;
+    case 'subscription_alert': return <UpdateIcon />;
+    case 'promotion': return <TagIcon />;
+    default: return <ReceiptIcon />;
+  }
+}
 
-const notifications = [
-  {
-    unread: true,
-    icon: <FoodIcon />,
-    title: "Your order is ready for pickup!",
-    time: "Just now",
-    body: "Order #0047 is freshly prepared and waiting for you at the counter.",
-    action: { label: "Track Order", href: "/order-tracking", variant: "primary" as const },
-  },
-  {
-    unread: true,
-    icon: <UpdateIcon />,
-    title: "Subscription order in 30 minutes",
-    time: "24m ago",
-    body: "Your Weekday Morning Order is scheduled for preparation soon.",
-    action: { label: "Skip This Order", href: "#", variant: "link" as const },
-  },
-  {
-    unread: true,
-    icon: <CalendarCheckIcon />,
-    title: "Reservation confirmed!",
-    time: "2h ago",
-    body: "Sat 5 April, 11:00am. We've saved a cozy window seat for you.",
-    action: { label: "View Reservation", href: "/reservations", variant: "secondary" as const },
-  },
-  {
-    unread: false,
-    icon: <TagIcon />,
-    title: "20% off this weekend only",
-    time: "Yesterday",
-    body: "Enjoy a weekend treat on us. Use Code: WEEKEND20 at checkout.",
-  },
-  {
-    unread: false,
-    icon: <ReceiptIcon />,
-    title: "Order #0045 Delivered",
-    time: "2 days ago",
-    body: "Your order has been delivered. How did we do? Leave a review!",
-    action: { label: "Rate Your Order", href: "#", variant: "link" as const },
-  },
-];
+function timeAgo(dateStr: string) {
+  const date = new Date(dateStr)
+  const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000)
+  if (seconds < 60) return 'Just now'
+  const minutes = Math.floor(seconds / 60)
+  if (minutes < 60) return `${minutes}m ago`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}h ago`
+  const days = Math.floor(hours / 24)
+  if (days === 1) return 'Yesterday'
+  return `${days} days ago`
+}
 
-export default function NotificationsPage() {
-  const unreadCount = notifications.filter((n) => n.unread).length;
+export default async function NotificationsPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login?next=/notifications');
+  }
+
+  const { data: fetchedNotifications } = await supabase
+    .from('notifications')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
+
+  const notifications = fetchedNotifications || [];
+  const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (
     <>
@@ -117,40 +115,30 @@ export default function NotificationsPage() {
             <div
               key={i}
               className={`rounded-xl p-5 transition-all ${
-                n.unread
+                !n.is_read
                   ? "bg-primary/5 hover:bg-primary/10"
                   : "bg-surface-container-low hover:bg-surface-container"
               }`}
-              style={n.unread ? { borderLeft: "4px solid var(--color-primary, #C8864A)" } : undefined}
+              style={!n.is_read ? { borderLeft: "4px solid var(--color-primary, #C8864A)" } : undefined}
             >
-              <div className={`flex gap-4 ${!n.unread ? "opacity-70" : ""}`}>
+              <div className={`flex gap-4 ${n.is_read ? "opacity-70" : ""}`}>
                 <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
-                  n.unread ? "bg-primary/20 text-primary" : "bg-on-surface/5 text-on-surface/30"
+                  !n.is_read ? "bg-primary/20 text-primary" : "bg-on-surface/5 text-on-surface/30"
                 }`}>
-                  {n.icon}
+                  {getIconForType(n.type)}
                 </div>
                 <div className="flex-grow">
                   <div className="flex justify-between items-start mb-1">
-                    <h3 className={`${n.unread ? "font-bold" : "font-medium"} text-on-surface`}>{n.title}</h3>
+                    <h3 className={`${!n.is_read ? "font-bold" : "font-medium"} text-on-surface`}>{n.title}</h3>
                     <span className={`text-[11px] font-label uppercase tracking-widest whitespace-nowrap ml-4 ${
-                      n.unread ? "text-primary" : "text-on-surface/20"
-                    }`}>{n.time}</span>
+                      !n.is_read ? "text-primary" : "text-on-surface/20"
+                    }`}>{timeAgo(n.created_at)}</span>
                   </div>
                   <p className="text-on-surface/40 text-sm mb-4">{n.body}</p>
-                  {n.action && (
-                    n.action.variant === "primary" ? (
-                      <Link href={n.action.href} className="inline-flex items-center gap-2 bg-primary text-deep-espresso px-4 py-2 rounded-xl text-xs font-bold hover:scale-[1.02] active:scale-95 transition-all">
-                        {n.action.label}
+                  {n.action_url && (
+                      <Link href={n.action_url} className="inline-flex items-center gap-2 bg-primary text-deep-espresso px-4 py-2 rounded-xl text-xs font-bold hover:scale-[1.02] active:scale-95 transition-all">
+                        View Details
                       </Link>
-                    ) : n.action.variant === "secondary" ? (
-                      <Link href={n.action.href} className="inline-flex items-center gap-2 bg-surface-variant text-on-surface px-4 py-2 rounded-xl text-xs font-bold hover:bg-surface-bright transition-all">
-                        {n.action.label}
-                      </Link>
-                    ) : (
-                      <button className="text-primary text-xs font-bold underline-offset-4 hover:underline cursor-pointer">
-                        {n.action.label}
-                      </button>
-                    )
                   )}
                 </div>
               </div>

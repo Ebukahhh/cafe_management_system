@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import CartSidebar from "@/components/CartSidebar";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -38,6 +39,7 @@ export default function RootLayout({
     >
       <body className="min-h-dvh flex flex-col bg-deep-espresso text-on-surface font-body antialiased">
         {children}
+        <CartSidebar />
       </body>
     </html>
   );

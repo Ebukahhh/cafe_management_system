@@ -1,5 +1,8 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
+import { useCartStore } from "@/lib/store/cart";
 
 /* ─────────────────────────────────────────────
    ProductCard — Reusable menu item card
@@ -18,6 +21,22 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ id, name, description, price, image, badge }: ProductCardProps) {
+  const { addItem, openCart } = useCartStore();
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault(); // prevents Link navigation
+    const numPrice = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+    addItem({
+      productId: id,
+      productName: name,
+      imageUrl: image,
+      unitPrice: numPrice,
+      quantity: 1,
+      selectedOptions: {},
+    });
+    openCart();
+  };
+
   return (
     <Link href={`/product/${id}`} className="block">
     <article className="group bg-surface-container-low rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
@@ -52,7 +71,10 @@ export default function ProductCard({ id, name, description, price, image, badge
           {description}
         </p>
 
-        <button className="w-full py-4 rounded-xl bg-surface-container-high font-bold hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 text-on-surface cursor-pointer">
+        <button 
+          onClick={handleAdd}
+          className="w-full py-4 rounded-xl bg-surface-container-high font-bold hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 text-on-surface cursor-pointer"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
