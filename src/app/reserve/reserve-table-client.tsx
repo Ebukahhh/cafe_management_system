@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import Navbar from '@/components/Navbar'
-import BottomNav from '@/components/BottomNav'
 import { createClient } from '@/lib/supabase/client'
 import { createReservation } from '@/lib/supabase/mutations/create-reservation'
 import {
@@ -452,9 +451,6 @@ export default function ReserveTableClient() {
           </aside>
         </div>
       </main>
-
-      <BottomNav activeTab="reservations" />
-      <div className="h-24 md:hidden" />
     </>
   )
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
 
 /* ─────────────────────────────────────────────
    Profile / Account Settings
@@ -217,12 +216,6 @@ export default function ProfilePage() {
             </div>
           </div>
         </main>
-      </div>
-
-      {/* Mobile bottom nav */}
-      <div className="md:hidden">
-        <BottomNav activeTab="home" />
-        <div className="h-24" />
       </div>
     </>
   );

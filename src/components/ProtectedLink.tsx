@@ -16,9 +16,11 @@ interface Props {
   children: React.ReactNode
   /** Render as a <button> instead of a <div>; useful for CTA styling */
   asButton?: boolean
+  /** Called after navigation is triggered (e.g. close mobile menu) */
+  onNavigate?: () => void
 }
 
-export default function ProtectedLink({ href, className, children, asButton }: Props) {
+export default function ProtectedLink({ href, className, children, asButton, onNavigate }: Props) {
   const router = useRouter()
 
   async function handleClick() {
@@ -30,11 +32,12 @@ export default function ProtectedLink({ href, className, children, asButton }: P
     } else {
       router.push(`/signup?next=${encodeURIComponent(href)}`)
     }
+    onNavigate?.()
   }
 
   if (asButton) {
     return (
-      <button onClick={handleClick} className={className}>
+      <button type="button" onClick={handleClick} className={className}>
         {children}
       </button>
     )
@@ -42,7 +45,7 @@ export default function ProtectedLink({ href, className, children, asButton }: P
 
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a role="button" tabIndex={0} onClick={handleClick} onKeyDown={(e) => e.key === 'Enter' && handleClick()} className={`cursor-pointer ${className ?? ''}`}>
+    <a role="button" tabIndex={0} onClick={handleClick} onKeyDown={(e) => e.key === 'Enter' && void handleClick()} className={`cursor-pointer ${className ?? ''}`}>
       {children}
     </a>
   )
