@@ -110,14 +110,15 @@ export default function MenuProductCard({ product }: Props) {
             Out of Stock
           </button>
         ) : (
-          <Link
-            href={`/checkout`} // Simplified Add to Cart path per our mock architecture
+          <button
+            type="button"
+            onClick={handleAddToCart}
             className="w-full py-1 md:py-4 text-[9px] md:text-base amber-glow text-on-primary font-bold rounded sm:rounded-md md:rounded-xl active:scale-[0.98] transition-all flex items-center justify-center gap-0.5 md:gap-2 mt-auto"
           >
             <AddShoppingCartIcon className="w-3 h-3 md:w-[18px] md:h-[18px] shrink-0" />
             <span className="truncate max-w-[4.5rem] md:max-w-none">Add</span>
             <span className="hidden md:inline"> to Cart</span>
-          </Link>
+          </button>
         )}
       </div>
     </article>

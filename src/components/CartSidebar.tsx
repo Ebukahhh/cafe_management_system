@@ -1,9 +1,7 @@
 'use client'
 
-import { useEffect, useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
-import { useCartStore } from "@/lib/store/cart"
+import { getCartItemKey, useCartStore } from "@/lib/store/cart"
 import { useRouter } from "next/navigation"
 
 function CloseIcon() {
@@ -36,12 +34,6 @@ export default function CartSidebar() {
   const { items, isOpen, closeCart, updateQuantity, removeItem, getTotals } = useCartStore()
   const { subtotal } = getTotals()
   const router = useRouter()
-  
-  // Prevent hydration errors by keeping initial state closed
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-
-  if (!mounted) return null
 
   const handleCheckout = () => {
     closeCart()
@@ -79,8 +71,11 @@ export default function CartSidebar() {
               </button>
             </div>
           ) : (
-            items.map((item) => (
-              <div key={`${item.productId}-${JSON.stringify(item.selectedOptions)}`} className="flex gap-4">
+            items.map((item) => {
+              const itemKey = getCartItemKey(item)
+
+              return (
+              <div key={itemKey} className="flex gap-4">
                 <div className="w-20 h-20 bg-surface-container-highest rounded-xl shrink-0 overflow-hidden relative">
                   <Image src={item.imageUrl || "/images/placeholders/espresso.jpg"} alt={item.productName} fill className="object-cover" />
                 </div>
@@ -88,27 +83,27 @@ export default function CartSidebar() {
                   <div>
                     <div className="flex justify-between items-start">
                       <h4 className="font-bold text-sm leading-tight text-on-surface mb-1">{item.productName}</h4>
-                      <button onClick={() => removeItem(item.productId)} className="text-on-surface/30 hover:text-red-400 transition-colors">
+                      <button onClick={() => removeItem(itemKey)} className="text-on-surface/30 hover:text-red-400 transition-colors">
                         <TrashIcon />
                       </button>
                     </div>
                     {/* Display options gracefully */}
                     <div className="text-[11px] text-on-surface/40 leading-tight line-clamp-2 pr-4 font-mono">
-                      {Object.entries(item.selectedOptions).map(([k, v]) => `${v}`).join(', ')}
+                      {Object.entries(item.selectedOptions).map(([, v]) => `${v}`).join(', ')}
                     </div>
                   </div>
                   
                   <div className="flex items-center justify-between mt-3">
                     <div className="flex items-center bg-surface-container-highest rounded-lg h-8 overflow-hidden border border-white/5">
-                       <button onClick={() => updateQuantity(item.productId, item.quantity - 1)} className="w-8 h-full flex items-center justify-center hover:bg-surface-bright text-on-surface/70 transition-colors"><MinusIcon /></button>
+                       <button onClick={() => updateQuantity(itemKey, item.quantity - 1)} className="w-8 h-full flex items-center justify-center hover:bg-surface-bright text-on-surface/70 transition-colors"><MinusIcon /></button>
                        <span className="w-8 text-center text-xs font-bold font-mono">{item.quantity}</span>
-                       <button onClick={() => updateQuantity(item.productId, item.quantity + 1)} className="w-8 h-full flex items-center justify-center hover:bg-surface-bright text-on-surface/70 transition-colors"><PlusIcon /></button>
+                       <button onClick={() => updateQuantity(itemKey, item.quantity + 1)} className="w-8 h-full flex items-center justify-center hover:bg-surface-bright text-on-surface/70 transition-colors"><PlusIcon /></button>
                     </div>
                     <span className="font-bold text-sm font-mono text-primary">${item.lineTotal.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
-            ))
+            )})
           )}
         </div>
 
