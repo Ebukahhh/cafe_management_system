@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 /* ─────────────────────────────────────────────
    Checkout Page
@@ -17,85 +19,63 @@ export const metadata: Metadata = {
 
 /* ── Icon Components ── */
 function StorefrontIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 9l1-4h16l1 4" />
-      <path d="M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9" />
-      <path d="M9 21V9" />
-    </svg>
-  );
+  return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" /><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" /><path d="M2 7h20" /><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7" /></svg>;
 }
 
 function DeliveryIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="1" y="3" width="15" height="13" />
-      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-      <circle cx="5.5" cy="18.5" r="2.5" />
-      <circle cx="18.5" cy="18.5" r="2.5" />
-    </svg>
-  );
+  return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 17h4V5H2v12h3" /><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1" /><circle cx="7.5" cy="17.5" r="2.5" /><circle cx="17.5" cy="17.5" r="2.5" /></svg>;
 }
 
 function DineInIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-      <path d="M7 2v20" />
-      <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
-    </svg>
-  );
-}
-
-function LockIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-    </svg>
-  );
-}
-
-function ShieldIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    </svg>
-  );
+  return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg>;
 }
 
 function CreditCardIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-      <line x1="1" y1="10" x2="23" y2="10" />
-    </svg>
-  );
+  return <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>;
 }
 
-/* ── Static data ── */
+function LockIcon() {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>;
+}
+
+function ShieldIcon() {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>;
+}
+
+/* ── Static Data ── */
+const dayLabels = ["S", "M", "T", "W", "T", "F", "S"];
+const calendarDays = Array.from({ length: 31 }, (_, i) => i + 1);
+const timeSlots = ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM"];
 const orderItems = [
-  {
-    name: "Pour Over",
-    qty: 2,
-    price: "$13.00",
-    detail: "Oat Milk, Large size, Ethiopian Beans",
-    image: "/images/pour-over.png",
-  },
-  {
-    name: "Almond Croissant",
-    qty: 1,
-    price: "$5.50",
-    detail: "Warmed up",
-    image: "/images/croissant.png",
-  },
+  { name: "Café Latte", qty: 2, price: "$9.00", detail: "Oat milk, extra shot", image: "/menu/latte.jpg" },
+  { name: "Avocado Toast", qty: 1, price: "$7.50", detail: "Sourdough, poached egg", image: "/menu/toast.jpg" },
+  { name: "Blueberry Muffin", qty: 1, price: "$2.00", detail: "Freshly baked", image: "/menu/muffin.jpg" },
 ];
 
-const timeSlots = ["8:00am", "8:30am", "9:00am", "9:30am"];
-const calendarDays = [12, 13, 14, 15, 16, 17, 18];
-const dayLabels = ["M", "T", "W", "T", "F", "S", "S"];
+export default async function CheckoutPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-export default function CheckoutPage() {
+  if (!user) {
+    redirect('/login?next=/checkout');
+  }
+
+  // Fetch full user profile
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
+
+  // Dynamically fetch pickup capacities
+  // We'll map them from the block structure to strings
+  const { data: slots } = await supabase
+    .from('slot_capacity')
+    .select('time_slot')
+    .order('time_slot', { ascending: true });
+
+  const dynamicSlots = slots ? slots.map((s) => s.time_slot) : [];
+
   return (
     <>
       <Navbar />
@@ -163,13 +143,12 @@ export default function CheckoutPage() {
                     {calendarDays.map((day) => (
                       <div
                         key={day}
-                        className={`p-1 rounded-full ${
-                          day === 14
+                        className={`p-1 rounded-full ${day === 14
                             ? "bg-primary text-deep-espresso font-bold"
                             : day < 14
-                            ? "text-on-surface/20"
-                            : "text-on-surface"
-                        }`}
+                              ? "text-on-surface/20"
+                              : "text-on-surface"
+                          }`}
                       >
                         {day}
                       </div>

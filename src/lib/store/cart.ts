@@ -14,8 +14,11 @@ interface CartState {
   items: CartItem[]
   promoCode: string | null
   discountPercent: number
+  isOpen: boolean
 
   // Actions
+  openCart: () => void
+  closeCart: () => void
   addItem: (item: Omit<CartItem, 'lineTotal'>) => void
   removeItem: (productId: string) => void
   updateQuantity: (productId: string, quantity: number) => void
@@ -32,6 +35,10 @@ export const useCartStore = create<CartState>()(
       items: [],
       promoCode: null,
       discountPercent: 0,
+      isOpen: false,
+
+      openCart: () => set({ isOpen: true }),
+      closeCart: () => set({ isOpen: false }),
 
       addItem: (item) => {
         set((state) => {

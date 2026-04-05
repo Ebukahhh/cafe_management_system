@@ -8,7 +8,7 @@ import Navbar from '@/components/Navbar'
 import { formatUsd } from '@/lib/customer-display'
 import type { ProductWithOptions } from '@/lib/supabase/types/app.types'
 import type { SubscriptionFrequency } from '@/lib/supabase/types/database.types'
-import { createSubscriptionAction } from './actions'
+import { createSubscriptionAction, updateSubscriptionAction } from './actions'
 import { toPreferredTimeSql } from '@/lib/subscription-next-run'
 
 function CalendarIcon() {
@@ -99,6 +99,7 @@ type Props = {
   showSuccess?: boolean
   /** After creating a subscription, show confirmation only (no duplicate signup). */
   lockSetup?: boolean
+  editData?: any
 }
 
 function categoryLabel(p: ProductWithOptions): string {
@@ -108,23 +109,55 @@ function categoryLabel(p: ProductWithOptions): string {
   return c.name ?? 'Menu'
 }
 
-export default function SubscriptionSetupClient({ products, showSuccess, lockSetup }: Props) {
+export default function SubscriptionSetupClient({ products, showSuccess, lockSetup, editData }: Props) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
 
-  const [quantities, setQuantities] = useState<Record<string, number>>({})
-  const [frequency, setFrequency] = useState<SubscriptionFrequency>('weekdays')
-  const [specificDays, setSpecificDays] = useState<number[]>([1, 2, 3, 4, 5])
-  const [weeklyDay, setWeeklyDay] = useState(1)
+  const initialQuantities = useMemo(() => {
+    const q: Record<string, number> = {}
+    if (editData?.subscription_items) {
+      editData.subscription_items.forEach((item: any) => {
+        if (item.product_id) q[item.product_id] = item.quantity
+      })
+    }
+    return q
+  }, [editData])
 
-  const [hour12, setHour12] = useState(7)
-  const [minute, setMinute] = useState(30)
-  const [isPm, setIsPm] = useState(false)
+  const initialFreq = editData?.frequency || 'weekdays'
+  const initialDays = editData?.days_of_week || [1, 2, 3, 4, 5]
+  
+  // Parse preferred_time e.g. "07:30:00"
+  let initHour = 7
+  let initMin = 30
+  let initPm = false
+  if (editData?.preferred_time) {
+    const parts = editData.preferred_time.split(':')
+    if (parts.length >= 2) {
+      let h = parseInt(parts[0], 10)
+      initMin = parseInt(parts[1], 10)
+      if (h >= 12) {
+        initPm = true
+        if (h > 12) h -= 12
+      } else if (h === 0) {
+        h = 12
+      }
+      initHour = h
+    }
+  }
+
+  const [quantities, setQuantities] = useState<Record<string, number>>(initialQuantities)
+  const [frequency, setFrequency] = useState<SubscriptionFrequency>(initialFreq)
+  const [specificDays, setSpecificDays] = useState<number[]>(initialDays)
+  const [weeklyDay, setWeeklyDay] = useState(initialDays[0] || 1)
+
+  const [hour12, setHour12] = useState(initHour)
+  const [minute, setMinute] = useState(initMin)
+  const [isPm, setIsPm] = useState(initPm)
 
   const [alertsOn, setAlertsOn] = useState(true)
-  const [endMode, setEndMode] = useState<'never' | 'date'>('never')
-  const [endDateYmd, setEndDateYmd] = useState('')
+  const [endMode, setEndMode] = useState<'never' | 'date'>(editData?.end_date ? 'date' : 'never')
+  const [endDateYmd, setEndDateYmd] = useState(editData?.end_date || '')
 
   const selectedLines = useMemo(() => {
     const lines: { product: ProductWithOptions; qty: number }[] = []
@@ -209,7 +242,7 @@ export default function SubscriptionSetupClient({ products, showSuccess, lockSet
 
     startTransition(async () => {
       try {
-        await createSubscriptionAction({
+        const payload = {
           frequency,
           specificDays: frequency === 'specific_days' ? specificDays : [],
           weeklyDay: frequency === 'weekly' ? weeklyDay : 1,
@@ -222,8 +255,15 @@ export default function SubscriptionSetupClient({ products, showSuccess, lockSet
             quantity: qty,
             unitPrice: product.price,
           })),
-        })
-        router.push('/subscription?success=1')
+        }
+
+        if (editData) {
+          await updateSubscriptionAction(editData.id, payload)
+          router.push('/profile/subscriptions')
+        } else {
+          await createSubscriptionAction(payload)
+          router.push('/subscription?success=1')
+        }
         router.refresh()
       } catch (e) {
         setError(e instanceof Error ? e.message : 'Something went wrong.')
@@ -242,12 +282,12 @@ export default function SubscriptionSetupClient({ products, showSuccess, lockSet
         )}
         <div className="space-y-2">
           <h1 className="text-4xl md:text-5xl font-headline font-bold text-on-surface tracking-tight">
-            {lockSetup ? 'Subscription active' : 'Set up your subscription'}
+            {lockSetup ? 'Subscription active' : editData ? 'Edit subscription' : 'Set up your subscription'}
           </h1>
           <p className="text-on-surface/40">
             {lockSetup
               ? 'Your recurring order is on file.'
-              : 'Craft your perfect daily ritual at Jennifer&apos;s Café.'}
+              : editData ? 'Update your recurring preferences below.' : 'Craft your perfect daily ritual at Jennifer&apos;s Café.'}
           </p>
         </div>
 
@@ -615,8 +655,8 @@ export default function SubscriptionSetupClient({ products, showSuccess, lockSet
             className="w-full h-16 amber-glow rounded-full text-on-primary font-bold text-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer group disabled:opacity-60 disabled:pointer-events-none"
             style={{ boxShadow: '0 10px 30px rgba(200,134,74,0.3)' }}
           >
-            {pending ? 'Starting…' : 'Start Subscription'}
-            {!pending && (
+            {pending ? 'Saving…' : editData ? 'Save Changes' : 'Start Subscription'}
+            {!pending && !editData && (
               <span className="group-hover:translate-x-1 transition-transform">
                 <ArrowFwdIcon />
               </span>

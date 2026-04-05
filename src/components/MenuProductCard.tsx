@@ -1,6 +1,9 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import type { ProductWithOptions } from "@/lib/supabase/types/app.types";
+import { useCartStore } from "@/lib/store/cart";
 
 /* ─────────────────────────────────────────────
    MenuProductCard
@@ -30,14 +33,26 @@ export default function MenuProductCard({ product }: Props) {
   // Based on the DB schema, stock_count can be null for infinite stock items,
   // so we only treat it out of stock if it is exactly 0 or marked unavailable.
   const isOutOfStock = !product.is_available || product.stock_count === 0;
+  const { addItem, openCart } = useCartStore();
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      productName: product.name,
+      imageUrl: product.image_url,
+      unitPrice: product.price,
+      quantity: 1,
+      selectedOptions: {}, // Default options if any, or empty
+    });
+    openCart();
+  };
 
   return (
     <article
-      className={`group relative bg-surface-container-lowest rounded-lg md:rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 h-full flex flex-col ${
-        isOutOfStock
+      className={`group relative bg-surface-container-lowest rounded-lg md:rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 h-full flex flex-col ${isOutOfStock
           ? "opacity-80"
           : "hover:shadow-[0_20px_40px_rgba(200,134,74,0.08)]"
-      }`}
+        }`}
     >
       {/* Popular Badge overlay */}
       {product.is_featured && !isOutOfStock && (

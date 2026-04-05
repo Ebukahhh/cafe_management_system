@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, DM_Sans, Inter } from "next/font/google";
 import { AppProviders } from "./providers";
 import "./globals.css";
+import CartSidebar from "@/components/CartSidebar";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
