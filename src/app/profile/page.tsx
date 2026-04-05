@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import ProfileMobileHeader from "@/components/ProfileMobileHeader";
+import ProfileSidebar from "@/components/ProfileSidebar";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import ProfileClient from "./profile-client";
 
 /* ─────────────────────────────────────────────
    Profile / Account Settings
@@ -63,17 +67,15 @@ export default async function ProfilePage() {
 
   return (
     <>
-      {/* Mobile-only top bar */}
-      <div className="md:hidden">
-        <Navbar />
-      </div>
+      {/* Mobile-only profile header */}
+      <ProfileMobileHeader title="Personal Info" />
 
       <div className="flex min-h-screen">
         {/* ── Desktop Sidebar ── */}
         <ProfileSidebar />
 
         {/* ── Main Content ── */}
-        <main className="flex-1 md:ml-72 bg-deep-espresso min-h-screen">
+        <main className="flex-1 md:ml-72 bg-deep-espresso min-h-screen pt-0">
           <div className="max-w-4xl mx-auto px-4 md:px-6 pt-8 pb-40 md:py-16">
             <div className="mb-10 md:mb-12">
               <h1 className="font-headline text-4xl md:text-5xl text-on-surface mb-4">Personal Info</h1>

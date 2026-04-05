@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
+import ProfileMobileHeader from "@/components/ProfileMobileHeader";
 import ProfileSidebar from "@/components/ProfileSidebar";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -38,10 +37,8 @@ export default async function SubscriptionsPage() {
 
   return (
     <>
-      {/* Mobile-only top bar */}
-      <div className="md:hidden">
-        <Navbar />
-      </div>
+      {/* Mobile-only profile header */}
+      <ProfileMobileHeader title="Subscriptions" />
 
       <div className="flex min-h-screen">
         <ProfileSidebar />
@@ -91,11 +88,7 @@ export default async function SubscriptionsPage() {
         </main>
       </div>
 
-      {/* Mobile bottom nav */}
-      <div className="md:hidden">
-        <BottomNav activeTab="home" />
-        <div className="h-24" />
-      </div>
+
     </>
   );
 }

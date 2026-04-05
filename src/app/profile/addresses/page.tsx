@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
+import ProfileMobileHeader from "@/components/ProfileMobileHeader";
+
 import ProfileSidebar from "@/components/ProfileSidebar";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -28,9 +28,7 @@ export default async function AddressesPage() {
 
   return (
     <>
-      <div className="md:hidden">
-        <Navbar />
-      </div>
+      <ProfileMobileHeader title="Saved Addresses" />
 
       <div className="flex min-h-screen">
         <ProfileSidebar />
@@ -42,10 +40,7 @@ export default async function AddressesPage() {
         </main>
       </div>
 
-      <div className="md:hidden">
-        <BottomNav activeTab="home" />
-        <div className="h-24" />
-      </div>
+
     </>
   );
 }

@@ -1,0 +1,44 @@
+src/app/checkout/page.tsx(17,26): error TS2304: Cannot find name 'createClient'.
+src/app/checkout/page.tsx(21,5): error TS2304: Cannot find name 'redirect'.
+src/app/checkout/page.tsx(38,43): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/app/checkout/page.tsx(67,22): error TS2304: Cannot find name 'StorefrontIcon'.
+src/app/checkout/page.tsx(74,22): error TS2304: Cannot find name 'DeliveryIcon'.
+src/app/checkout/page.tsx(81,22): error TS2304: Cannot find name 'DineInIcon'.
+src/app/checkout/page.tsx(99,22): error TS2304: Cannot find name 'dayLabels'.
+src/app/checkout/page.tsx(99,37): error TS7006: Parameter 'd' implicitly has an 'any' type.
+src/app/checkout/page.tsx(99,40): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/app/checkout/page.tsx(104,22): error TS2304: Cannot find name 'calendarDays'.
+src/app/checkout/page.tsx(104,40): error TS7006: Parameter 'day' implicitly has an 'any' type.
+src/app/checkout/page.tsx(122,22): error TS2304: Cannot find name 'timeSlots'.
+src/app/checkout/page.tsx(122,37): error TS7006: Parameter 'slot' implicitly has an 'any' type.
+src/app/checkout/page.tsx(203,24): error TS2304: Cannot find name 'CreditCardIcon'.
+src/app/checkout/page.tsx(256,18): error TS2304: Cannot find name 'orderItems'.
+src/app/checkout/page.tsx(256,34): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/app/checkout/page.tsx(259,23): error TS2607: JSX element class does not support attributes because it does not have a 'props' property.
+src/app/checkout/page.tsx(259,24): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'new (width?: number | undefined, height?: number | undefined) => HTMLImageElement' is not a valid JSX element type.
+    Type 'new (width?: number | undefined, height?: number | undefined) => HTMLImageElement' is not assignable to type 'new (props: any, context: any) => Component<any, any, any>'.
+      Type 'HTMLImageElement' is missing the following properties from type 'Component<any, any, any>': context, setState, forceUpdate, render, and 2 more.
+src/app/checkout/page.tsx(297,16): error TS2304: Cannot find name 'Link'.
+src/app/checkout/page.tsx(301,18): error TS2304: Cannot find name 'LockIcon'.
+src/app/checkout/page.tsx(303,17): error TS2304: Cannot find name 'Link'.
+src/app/checkout/page.tsx(307,18): error TS2304: Cannot find name 'ShieldIcon'.
+src/app/checkout/page.tsx(319,10): error TS2304: Cannot find name 'Link'.
+src/app/checkout/page.tsx(323,12): error TS2304: Cannot find name 'LockIcon'.
+src/app/checkout/page.tsx(325,11): error TS2304: Cannot find name 'Link'.
+src/app/notifications/page.tsx(37,31): error TS2304: Cannot find name 'NotificationRow'.
+src/app/notifications/page.tsx(61,26): error TS2304: Cannot find name 'createClient'.
+src/app/notifications/page.tsx(65,5): error TS2304: Cannot find name 'redirect'.
+src/app/notifications/page.tsx(75,45): error TS7006: Parameter 'n' implicitly has an 'any' type.
+src/app/notifications/page.tsx(92,12): error TS2304: Cannot find name 'filters'.
+src/app/notifications/page.tsx(92,25): error TS7006: Parameter 'f' implicitly has an 'any' type.
+src/app/notifications/page.tsx(107,31): error TS7006: Parameter 'n' implicitly has an 'any' type.
+src/app/notifications/page.tsx(107,34): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/app/profile/addresses/page.tsx(3,23): error TS2307: Cannot find module '@/components/BottomNav' or its corresponding type declarations.
+src/app/profile/page.tsx(39,26): error TS2304: Cannot find name 'createClient'.
+src/app/profile/page.tsx(44,5): error TS2304: Cannot find name 'redirect'.
+src/app/profile/page.tsx(73,10): error TS2304: Cannot find name 'ProfileSidebar'.
+src/app/profile/page.tsx(83,14): error TS2304: Cannot find name 'ProfileClient'.
+src/app/profile/payment-methods/page.tsx(3,23): error TS2307: Cannot find module '@/components/BottomNav' or its corresponding type declarations.
+src/app/profile/security/page.tsx(3,23): error TS2307: Cannot find module '@/components/BottomNav' or its corresponding type declarations.
+src/app/profile/subscriptions/page.tsx(4,23): error TS2307: Cannot find module '@/components/BottomNav' or its corresponding type declarations.
