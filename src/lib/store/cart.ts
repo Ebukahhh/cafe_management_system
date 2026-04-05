@@ -10,6 +10,10 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { CartItem, CartTotals } from '../supabase/types/app.types'
 
+export function getCartItemKey(item: Pick<CartItem, 'productId' | 'selectedOptions'>) {
+  return `${item.productId}::${JSON.stringify(item.selectedOptions)}`
+}
+
 interface CartState {
   items: CartItem[]
   promoCode: string | null
@@ -20,8 +24,8 @@ interface CartState {
   openCart: () => void
   closeCart: () => void
   addItem: (item: Omit<CartItem, 'lineTotal'>) => void
-  removeItem: (productId: string) => void
-  updateQuantity: (productId: string, quantity: number) => void
+  removeItem: (itemKey: string) => void
+  updateQuantity: (itemKey: string, quantity: number) => void
   clearCart: () => void
   setPromoCode: (code: string | null, discountPercent: number) => void
 
@@ -43,9 +47,7 @@ export const useCartStore = create<CartState>()(
       addItem: (item) => {
         set((state) => {
           const existing = state.items.find(
-            (i) =>
-              i.productId === item.productId &&
-              JSON.stringify(i.selectedOptions) === JSON.stringify(item.selectedOptions)
+            (i) => getCartItemKey(i) === getCartItemKey(item)
           )
 
           if (existing) {
@@ -71,21 +73,21 @@ export const useCartStore = create<CartState>()(
         })
       },
 
-      removeItem: (productId) => {
+      removeItem: (itemKey) => {
         set((state) => ({
-          items: state.items.filter((i) => i.productId !== productId),
+          items: state.items.filter((i) => getCartItemKey(i) !== itemKey),
         }))
       },
 
-      updateQuantity: (productId, quantity) => {
+      updateQuantity: (itemKey, quantity) => {
         if (quantity <= 0) {
-          get().removeItem(productId)
+          get().removeItem(itemKey)
           return
         }
 
         set((state) => ({
           items: state.items.map((i) =>
-            i.productId === productId
+            getCartItemKey(i) === itemKey
               ? { ...i, quantity, lineTotal: quantity * i.unitPrice }
               : i
           ),
