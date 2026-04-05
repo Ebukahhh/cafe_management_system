@@ -5,22 +5,8 @@ import Footer from "@/components/Footer";
 import LandingHero from "@/components/LandingHero";
 import ProductCard from "@/components/ProductCard";
 import FeatureCard from "@/components/FeatureCard";
-import { getAllProducts } from "@/data/products";
+import { createClient } from "@/lib/supabase/server";
 
-/* ─────────────────────────────────────────────
-   Landing Page
-   Structure follows landing-page-desktop.html:
-   Nav → Hero → Features Strip → Popular Items → Loyalty → Footer
-
-   Design rules applied:
-   • No-Line Rule: bg color shifts only, zero borders
-   • Glass & Gradient: amber-glow CTAs, glassmorphism badge
-   • Typography: Fraunces (headlines), DM Sans (body), mono (metadata)
-   • Tonal Layering: surface tiers for depth
-   • Editorial Asymmetry: offset headlines, wide editorial gutters
-   ───────────────────────────────────────────── */
-
-/* ── Icon SVGs ── */
 function CoffeeIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -72,30 +58,46 @@ function VerifiedIcon() {
   );
 }
 
-/* ── Product data (from shared catalog) ── */
-const products = getAllProducts().filter((p) => p.id !== "single-origin-pour-over");
+export default async function LandingPage() {
+  const supabase = await createClient();
+  const { data: products } = await supabase
+    .from("products")
+    .select("id, name, description, price, image_url, is_featured, categories(name)")
+    .eq("is_available", true)
+    .order("is_featured", { ascending: false })
+    .order("sort_order", { ascending: true })
+    .limit(3);
 
-export default function LandingPage() {
+  type CategoryJoin = { name?: string | null } | Array<{ name?: string | null }> | null;
+
+  const featuredProducts = (products ?? []).map((product) => {
+    const categories = product.categories as CategoryJoin;
+    const categoryName = Array.isArray(categories)
+      ? categories[0]?.name
+      : categories?.name;
+
+    return {
+      id: product.id,
+      name: product.name,
+      description: product.description ?? "Freshly prepared every day.",
+      price: `$${Number(product.price).toFixed(2)}`,
+      image: product.image_url || "/images/coffee-cappuccino.png",
+      badge: product.is_featured ? "Popular" : categoryName ?? undefined,
+    };
+  });
+
   return (
     <>
       <Navbar />
 
       <main>
-        {/* ════════════════════════════════════════════
-            HERO SECTION
-            Editorial asymmetry: text left, image right
-            bg: surface (deep espresso)
-            ════════════════════════════════════════════ */}
         <section className="relative min-h-0 lg:min-h-[820px] flex items-center overflow-hidden bg-deep-espresso pt-2 pb-10 md:pt-4 md:pb-14 lg:py-10">
           <div className="max-w-7xl mx-auto px-4 md:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center z-10">
-            {/* Text column */}
             <div className="order-1 lg:order-none">
               <LandingHero />
             </div>
 
-            {/* Image column — desktop only */}
             <div className="relative group hidden lg:block">
-              {/* Ambient glow behind image */}
               <div className="absolute -inset-4 bg-primary/10 rounded-[40px] blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
 
               <div className="relative rounded-[32px] overflow-hidden aspect-square shadow-2xl">
@@ -109,7 +111,6 @@ export default function LandingPage() {
                 />
               </div>
 
-              {/* Floating glass badge — glassmorphism */}
               <div className="absolute -bottom-6 -left-6 glass-card p-5 md:p-6 rounded-2xl hidden md:block">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
@@ -129,11 +130,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ════════════════════════════════════════════
-            FEATURES STRIP
-            bg shift: on-surface (cream/warm) — inverted palette
-            No borders, tonal icon circles
-            ════════════════════════════════════════════ */}
         <section className="bg-on-surface text-deep-espresso py-20 md:py-24">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
@@ -156,14 +152,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ════════════════════════════════════════════
-            POPULAR ITEMS
-            bg shift: surface-container-lowest (darkest)
-            Editorial header with asymmetric "Curated Selection" mono label
-            ════════════════════════════════════════════ */}
         <section id="menu" className="py-20 md:py-32 bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
-            {/* Section header — editorial asymmetry */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-4">
               <div>
                 <span className="text-primary font-mono text-sm uppercase tracking-[0.3em] block mb-4">
@@ -184,22 +174,15 @@ export default function LandingPage() {
               </Link>
             </div>
 
-            {/* Product grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 lg:gap-10">
-              {products.map((product) => (
-                <ProductCard key={product.name} {...product} />
+              {featuredProducts.map((product) => (
+                <ProductCard key={product.id} {...product} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════════
-            LOYALTY BANNER
-            bg shift: primary-container (warm amber)
-            Subtle dot pattern texture overlay
-            ════════════════════════════════════════════ */}
         <section className="w-full bg-primary-container relative overflow-hidden">
-          {/* Subtle dot pattern texture */}
           <div
             className="absolute inset-0 opacity-10"
             style={{
@@ -211,7 +194,7 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20 relative flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 text-on-primary">
             <div className="max-w-2xl text-center md:text-left">
               <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold mb-4 italic">
-                Join Jennifer&apos;s Café Rewards.
+                Join Jennifer&apos;s Cafe Rewards.
               </h2>
               <p className="text-lg md:text-xl lg:text-2xl font-body opacity-90">
                 Earn points on every order, unlock private tastings, and enjoy a coffee on us for your birthday.
