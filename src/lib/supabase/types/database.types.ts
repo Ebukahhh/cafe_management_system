@@ -31,6 +31,7 @@ export interface Profile {
   full_name: string | null
   avatar_url: string | null
   phone: string | null
+  stripe_customer_id?: string | null
   role: UserRole
   dietary_flags: string[] | null
   created_at: string
@@ -75,10 +76,17 @@ export interface Order {
   payment_id: string | null
   status: OrderStatus
   order_type: OrderType
+  delivery_address?: string | null
+  special_note?: string | null
   subtotal: number
+  delivery_fee?: number
+  discount_amount?: number
   total: number
-  note: string | null
+  note?: string | null
   promo_code: string | null
+  loyalty_redeemed?: number
+  scheduled_for?: string | null
+  is_subscription_run?: boolean
   created_at: string
   updated_at: string
 }
@@ -97,10 +105,27 @@ export interface OrderItem {
 export interface Payment {
   id: string
   user_id: string
+  provider?: string
   provider_ref: string | null
   status: PaymentStatus
   amount: number
-  method: PaymentMethod
+  currency?: string
+  method: PaymentMethod | string | null
+  metadata?: Record<string, unknown> | null
+  created_at: string
+  updated_at?: string
+}
+
+export interface UserPaymentMethod {
+  id: string
+  user_id: string | null
+  stripe_payment_method_id: string
+  brand: string
+  last4: string
+  exp_month: number
+  exp_year: number
+  name_on_card: string | null
+  is_default: boolean | null
   created_at: string
 }
 

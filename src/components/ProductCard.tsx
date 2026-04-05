@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCartStore } from "@/lib/store/cart";
 
 /* ─────────────────────────────────────────────
    ProductCard — Reusable menu item card
@@ -21,22 +20,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ id, name, description, price, image, badge }: ProductCardProps) {
-  const { addItem, openCart } = useCartStore();
-
-  const handleAdd = (e: React.MouseEvent) => {
-    e.preventDefault(); // prevents Link navigation
-    const numPrice = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
-    addItem({
-      productId: id,
-      productName: name,
-      imageUrl: image,
-      unitPrice: numPrice,
-      quantity: 1,
-      selectedOptions: {},
-    });
-    openCart();
-  };
-
   return (
     <Link href={`/product/${id}`} className="block">
       <article className="group bg-surface-container-low rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 md:hover:-translate-y-2">
