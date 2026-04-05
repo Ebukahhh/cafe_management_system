@@ -43,5 +43,5 @@ export default async function CheckoutPage() {
         <CheckoutClient dynamicSlots={dynamicSlots} userProfile={userProfile} />
       </main>
     </>
-  );
+  )
 }

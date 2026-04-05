@@ -174,7 +174,7 @@ export function DailyReportTab() {
             onClick={handlePrint}
             className="flex items-center gap-2 rounded-xl border border-outline-variant px-6 py-2.5 text-on-surface transition-colors hover:bg-surface-container-high"
           >
-            <span className="material-symbols-outlined">print</span>
+            <span className="material-symbols-outlined"></span>
             Print Report
           </button>
           <button
@@ -182,7 +182,7 @@ export function DailyReportTab() {
             onClick={handlePrint}
             className="amber-glow flex items-center gap-2 rounded-xl px-8 py-2.5 font-semibold text-white shadow-xl transition-opacity hover:opacity-90"
           >
-            <span className="material-symbols-outlined">download</span>
+            <span className="material-symbols-outlined"></span>
             Download PDF
           </button>
           <button
@@ -221,7 +221,7 @@ export function DailyReportTab() {
               className="md:col-span-3"
               label="Peak Hour"
               value={stats.busiestHourLabel}
-              icon="query_stats"
+              icon=""
               valueSize="lg"
             />
           </section>
@@ -293,7 +293,7 @@ export function DailyReportTab() {
               <span className="inline-flex items-center gap-2">
                 Completed orders log
                 <span className="material-symbols-outlined text-stone-500 transition-transform group-open:rotate-180">
-                  expand_more
+                
                 </span>
               </span>
             </summary>

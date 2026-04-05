@@ -1,18 +1,22 @@
 /**
- * Browser Supabase Client — for Client Components ('use client')
+ * Browser Supabase client for Client Components.
  *
- * Use this in any component with 'use client', custom hooks, or event handlers.
- * Never call this from Server Components or API routes.
- *
- * NOTE: Once the backend provides the Supabase project ID, generate proper
- * Database types with `npx supabase gen types` and add the generic here:
- *   createBrowserClient<Database>(...)
+ * Using a singleton avoids multiple browser clients competing to refresh
+ * the same auth session lock in localStorage.
  */
 import { createBrowserClient } from '@supabase/ssr'
 
+let browserClient: ReturnType<typeof createBrowserClient> | null = null
+
 export function createClient() {
-  return createBrowserClient(
+  if (browserClient) {
+    return browserClient
+  }
+
+  browserClient = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
+
+  return browserClient
 }

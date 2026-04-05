@@ -62,7 +62,7 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
           <div className="bg-surface-container-high text-on-surface p-4 rounded-xl border border-white/10">
             {message}
           </div>
-        )}
+        ) : null}
 
         <section className="space-y-5">
           <div className="flex items-center gap-4">
@@ -100,11 +100,11 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
             <div className="flex-shrink-0 w-full md:w-48 bg-surface-container-lowest rounded-xl p-4">
               <div className="text-xs font-bold text-primary uppercase mb-3 text-center font-label">Today</div>
               <div className="grid grid-cols-7 gap-1 text-[10px] text-on-surface/30 mb-2 font-mono text-center">
-                {dayLabels.map((d, i) => <div key={i}>{d}</div>)}
+                {dayLabels.map((dayLabel, index) => <div key={`${dayLabel}-${index}`}>{dayLabel}</div>)}
               </div>
               <div className="grid grid-cols-7 gap-1 text-center text-sm">
                 {calendarDays.map((day) => (
-                  <div key={day} className={`p-1 rounded-full ${day === 14 ? "bg-primary text-deep-espresso font-bold" : day < 14 ? "text-on-surface/20" : "text-on-surface"}`}>{day}</div>
+                  <div key={day} className={`p-1 rounded-full ${day === 14 ? 'bg-primary text-deep-espresso font-bold' : day < 14 ? 'text-on-surface/20' : 'text-on-surface'}`}>{day}</div>
                 ))}
               </div>
             </div>
@@ -141,6 +141,12 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
               <label htmlFor="checkout-phone" className="text-sm font-medium text-on-surface/50 font-body block">Phone Number</label>
               <input id="checkout-phone" type="tel" placeholder="+1 (555) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full h-12 px-4 rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface/20 outline-none font-body ring-1 ring-transparent focus:ring-primary/30 transition-all" />
             </div>
+            {orderType === 'delivery' ? (
+              <div className="space-y-2 md:col-span-2">
+                <label htmlFor="checkout-address" className="text-sm font-medium text-on-surface/50 font-body block">Delivery Address</label>
+                <textarea id="checkout-address" value={deliveryAddress} onChange={(event) => setDeliveryAddress(event.target.value)} className="w-full min-h-28 px-4 py-3 rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface/20 outline-none font-body ring-1 ring-transparent focus:ring-primary/30 transition-all resize-none" placeholder="Street address, landmark, and any drop-off instructions" />
+              </div>
+            ) : null}
             <div className="space-y-2 md:col-span-2">
               <label htmlFor="checkout-note" className="text-sm font-medium text-on-surface/50 font-body block">Order Note (Optional)</label>
               <input id="checkout-note" type="text" placeholder="Extra napkins, specific instructions..." value={note} onChange={(e) => setNote(e.target.value)} className="w-full h-12 px-4 rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface/20 outline-none font-body ring-1 ring-transparent focus:ring-primary/30 transition-all" />
@@ -162,10 +168,60 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
                   <div className="text-xs text-on-surface/40">Ready for Stripe handoff</div>
                 </div>
               </div>
-              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-deep-espresso" />
+            ) : null}
+
+            {canPreparePayment && !clientSecret && !isPreparingPayment ? (
+              <button
+                type="button"
+                onClick={handleLoadPaymentForm}
+                className="w-full rounded-2xl bg-primary/10 text-primary px-4 py-4 font-bold hover:bg-primary/15 transition-colors cursor-pointer"
+              >
+                Load Secure Payment Form
+              </button>
+            ) : null}
+
+            {isPreparingPayment ? (
+              <div className="rounded-xl bg-surface-container-highest px-4 py-5 text-sm text-on-surface/50 animate-pulse">
+                Preparing secure payment form...
               </div>
-            </div>
+            ) : null}
+
+            {clientSecret && localPaymentId ? (
+              <Elements
+                stripe={stripePromise}
+                options={{
+                  clientSecret,
+                  appearance: {
+                    theme: 'night',
+                    variables: {
+                      colorPrimary: '#c8864a',
+                      colorBackground: '#2b2119',
+                      colorText: '#f5ede5',
+                      colorDanger: '#f87171',
+                      borderRadius: '16px',
+                    },
+                  },
+                }}
+              >
+                <div className="space-y-5">
+                  <div className="rounded-2xl bg-surface-container-highest p-4">
+                    <PaymentElement options={paymentOptions} />
+                  </div>
+                  <CheckoutPaymentForm
+                    clientSecret={clientSecret}
+                    localPaymentId={localPaymentId}
+                    snapshot={snapshot}
+                    totalDisplay={totalDisplay}
+                    disabled={!canPreparePayment}
+                    onSuccess={() => {
+                      clearCart()
+                      router.push(`/order-confirmation?payment=${localPaymentId}`)
+                    }}
+                    onError={(message) => setError(message)}
+                  />
+                </div>
+              </Elements>
+            ) : null}
           </div>
           <p className="text-sm text-on-surface/40">
             Saved payment styling is shown here for continuity, but no charge or order submission happens from this screen yet.
@@ -178,9 +234,9 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
           <h3 className="font-headline text-2xl mb-8">Order Summary</h3>
 
           <div className="space-y-6 mb-8 max-h-64 overflow-y-auto">
-            {items.length === 0 && <p className="text-on-surface/40 italic">Cart is empty.</p>}
-            {items.map((item, idx) => (
-              <div key={idx} className="flex gap-4">
+            {items.length === 0 ? <p className="text-on-surface/40 italic">Cart is empty.</p> : null}
+            {items.map((item, index) => (
+              <div key={`${item.productId}-${index}`} className="flex gap-4">
                 <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-highest relative">
                   <Image src={item.imageUrl || '/images/coffee-cappuccino.png'} alt={item.productName} fill className="object-cover" sizes="64px" />
                 </div>
@@ -190,7 +246,7 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
                     <span className="text-sm font-bold font-mono">${item.lineTotal.toFixed(2)}</span>
                   </div>
                   <p className="text-xs text-on-surface/40 mt-1 line-clamp-2">
-                    {Object.values(item.selectedOptions).join(', ')}
+                    {Object.values(item.selectedOptions ?? {}).join(', ') || 'Standard preparation'}
                   </p>
                 </div>
               </div>
@@ -203,18 +259,18 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
               <span className="font-mono">${totals.subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-on-surface/50">Tax / Default Fee</span>
+              <span className="text-on-surface/50">Delivery Fee</span>
               <span className="font-mono">$0.00</span>
             </div>
-            {totals.discount > 0 && (
+            {totals.discount > 0 ? (
               <div className="flex justify-between text-sm">
                 <span className="text-on-surface/50">Discount</span>
                 <span className="font-mono text-primary">-${totals.discount.toFixed(2)}</span>
               </div>
-            )}
+            ) : null}
           </div>
 
-          <div className="flex justify-between items-center py-6 mb-2">
+          <div className="flex justify-between items-center py-6">
             <span className="font-headline text-xl">Total</span>
             <span className="font-headline text-3xl text-primary tracking-tight">${totals.total.toFixed(2)}</span>
           </div>
