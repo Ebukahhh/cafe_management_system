@@ -1,6 +1,7 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
+import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js'
 import type { OrderStatus, OrderType } from '@/lib/supabase/types/database.types'
 import {
   createContext,
@@ -169,7 +170,7 @@ export function StaffPortalProvider({
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'orders' },
-        (payload) => {
+        (payload: RealtimePostgresChangesPayload<{ id?: string; status?: OrderStatus }>) => {
           const row = payload.new as { id?: string; status?: OrderStatus }
           if (row?.id && row.status && PIPELINE.includes(row.status)) {
             flashHighlight(row.id)

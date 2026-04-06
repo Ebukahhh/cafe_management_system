@@ -1,8 +1,12 @@
 'use client'
 
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
+import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useRouter } from "next/navigation";
+import { finalizeCheckoutPaymentAction, prepareCheckoutPaymentAction } from "./actions";
 import { useCartStore } from "@/lib/store/cart";
+import { getStripeClient } from "@/lib/stripe/client";
 
 function StorefrontIcon() { return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l1-4h16l1 4" /><path d="M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9" /><path d="M9 21V9" /></svg>; }
 function DeliveryIcon() { return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>; }
@@ -12,38 +16,185 @@ function ShieldIcon() { return <svg xmlns="http://www.w3.org/2000/svg" width="14
 
 const calendarDays = [12, 13, 14, 15, 16, 17, 18];
 const dayLabels = ["M", "T", "W", "T", "F", "S", "S"];
+const stripePromise = getStripeClient();
 
 interface CheckoutClientProps {
   dynamicSlots: string[];
-  userProfile?: any;
+  userProfile?: {
+    full_name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+  } | null;
+}
+
+type PaymentFormProps = {
+  localPaymentId: string;
+  totalDisplay: string;
+  disabled: boolean;
+  onSuccess: () => void;
+  onError: (message: string) => void;
+};
+
+function CheckoutPaymentForm({ localPaymentId, totalDisplay, disabled, onSuccess, onError }: PaymentFormProps) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const clearCart = useCartStore((state) => state.clearCart);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!stripe || !elements || disabled || isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    onError("");
+
+    try {
+      const result = await stripe.confirmPayment({
+        elements,
+        redirect: "if_required",
+      });
+
+      if (result.error) {
+        onError(result.error.message ?? "Payment confirmation failed.");
+        return;
+      }
+
+      if (!result.paymentIntent) {
+        onError("Stripe did not return a payment confirmation.");
+        return;
+      }
+
+      const finalized = await finalizeCheckoutPaymentAction({
+        localPaymentId,
+        paymentIntentId: result.paymentIntent.id,
+      });
+
+      if (finalized.status === "failed") {
+        onError("Payment failed. Please try another card or payment method.");
+        return;
+      }
+
+      clearCart();
+      onSuccess();
+
+      if (finalized.status === "succeeded" || finalized.status === "processing") {
+        router.push(`/order-confirmation?payment=${localPaymentId}`);
+      }
+    } catch (error) {
+      onError(error instanceof Error ? error.message : "Unable to complete checkout.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <button
+        type="submit"
+        disabled={!stripe || !elements || disabled || isSubmitting}
+        className="w-full amber-glow py-4 rounded-full flex items-center justify-center gap-3 text-on-primary font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none cursor-pointer shadow-lg"
+      >
+        <LockIcon />
+        {isSubmitting ? "Processing..." : `Pay ${totalDisplay}`}
+      </button>
+    </form>
+  );
 }
 
 export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutClientProps) {
-  const { items, getTotals } = useCartStore();
-  const totals = getTotals();
+  const router = useRouter();
+  const { items, promoCode, getTotals } = useCartStore();
+  const clearCart = useCartStore((state) => state.clearCart);
+  const [mounted, setMounted] = useState(false);
 
-  const [orderType, setOrderType] = useState<'pickup' | 'delivery' | 'dine_in'>('pickup');
-  const [pickupTime, setPickupTime] = useState<string>('ASAP');
-  const [fullName, setFullName] = useState(userProfile?.full_name || '');
-  const [email, setEmail] = useState(userProfile?.email || '');
-  const [phone, setPhone] = useState(userProfile?.phone || '');
-  const [note, setNote] = useState('');
-  const [message, setMessage] = useState('');
+  const [orderType, setOrderType] = useState<"pickup" | "delivery" | "dine_in">("pickup");
+  const [pickupTime, setPickupTime] = useState<string>("ASAP");
+  const [fullName, setFullName] = useState(userProfile?.full_name || "");
+  const [email, setEmail] = useState(userProfile?.email || "");
+  const [phone, setPhone] = useState(userProfile?.phone || "");
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [note, setNote] = useState("");
+  const [savePaymentMethod, setSavePaymentMethod] = useState(true);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [localPaymentId, setLocalPaymentId] = useState<string | null>(null);
+  const [isPreparingPayment, setIsPreparingPayment] = useState(false);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const safeItems = mounted ? items : [];
+  const totals = mounted
+    ? getTotals()
+    : {
+        subtotal: 0,
+        discount: 0,
+        total: 0,
+        itemCount: 0,
+      };
   const timeSlots = dynamicSlots.length > 0 ? dynamicSlots : ["8:00am", "8:30am", "9:00am", "9:30am"];
+  const totalDisplay = `$${totals.total.toFixed(2)}`;
+  const canPreparePayment = mounted && safeItems.length > 0 && fullName.trim() !== "" && email.trim() !== "" && (orderType !== "delivery" || deliveryAddress.trim() !== "");
 
-  const handleProceedToPayment = () => {
-    if (items.length === 0) {
-      setMessage("Your cart is empty.");
+  const buildDetails = () => ({
+    orderType,
+    pickupTime,
+    fullName,
+    email,
+    phone,
+    note,
+    deliveryAddress,
+    savePaymentMethod,
+  });
+
+  const handleProceedToPayment = async () => {
+    if (safeItems.length === 0) {
+      setError("Your cart is empty.");
+      setMessage("");
       return;
     }
 
-    if (!fullName || !email) {
-      setMessage("Please provide your name and email before continuing.");
+    if (!fullName.trim() || !email.trim()) {
+      setError("Please provide your name and email before continuing.");
+      setMessage("");
       return;
     }
 
-    setMessage("Checkout handoff to Stripe is still in progress, so this screen currently stops at order review.");
+    if (orderType === "delivery" && !deliveryAddress.trim()) {
+      setError("Please provide a delivery address before continuing.");
+      setMessage("");
+      return;
+    }
+
+    setIsPreparingPayment(true);
+    setError("");
+    setMessage("");
+
+    try {
+      const prepared = await prepareCheckoutPaymentAction({
+        details: buildDetails(),
+        cart: {
+          items: safeItems,
+          promoCode,
+          requestedDiscountAmount: totals.discount,
+        },
+        localPaymentId,
+      });
+
+      setLocalPaymentId(prepared.localPaymentId);
+      setClientSecret(prepared.clientSecret);
+      setMessage("Secure payment form is ready. Enter your card details below to complete checkout.");
+    } catch (prepareError) {
+      setError(prepareError instanceof Error ? prepareError.message : "Unable to prepare payment.");
+    } finally {
+      setIsPreparingPayment(false);
+    }
   };
 
   return (
@@ -54,13 +205,15 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
           <p className="text-on-surface/50 font-body">Review your selection and confirm the details before payment.</p>
         </header>
 
-        <div className="bg-primary/10 text-primary p-4 rounded-xl border border-primary/20">
-          Payment handoff is intentionally paused here while the Stripe step is being finished.
-        </div>
-
-        {message && (
-          <div className="bg-surface-container-high text-on-surface p-4 rounded-xl border border-white/10">
+        {message ? (
+          <div className="bg-primary/10 text-primary p-4 rounded-xl border border-primary/20">
             {message}
+          </div>
+        ) : null}
+
+        {error ? (
+          <div className="bg-red-500/10 text-red-300 p-4 rounded-xl border border-red-500/20">
+            {error}
           </div>
         ) : null}
 
@@ -70,19 +223,19 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
             <h2 className="font-headline text-2xl">Order Type</h2>
           </div>
           <div className="grid grid-cols-3 gap-3 md:gap-4">
-            <button onClick={() => setOrderType('pickup')} className={`cursor-pointer p-4 rounded-xl transition-all ${orderType === 'pickup' ? 'bg-surface-container-high ring-2 ring-primary text-primary' : 'bg-surface-container-low hover:bg-surface-container-high text-on-surface/40'}`}>
+            <button type="button" onClick={() => setOrderType("pickup")} className={`cursor-pointer p-4 rounded-xl transition-all ${orderType === "pickup" ? "bg-surface-container-high ring-2 ring-primary text-primary" : "bg-surface-container-low hover:bg-surface-container-high text-on-surface/40"}`}>
               <div className="flex flex-col items-center text-center gap-2">
                 <StorefrontIcon />
                 <span className="font-medium text-sm">Pickup</span>
               </div>
             </button>
-            <button onClick={() => setOrderType('delivery')} className={`cursor-pointer p-4 rounded-xl transition-all ${orderType === 'delivery' ? 'bg-surface-container-high ring-2 ring-primary text-primary' : 'bg-surface-container-low hover:bg-surface-container-high text-on-surface/40'}`}>
+            <button type="button" onClick={() => setOrderType("delivery")} className={`cursor-pointer p-4 rounded-xl transition-all ${orderType === "delivery" ? "bg-surface-container-high ring-2 ring-primary text-primary" : "bg-surface-container-low hover:bg-surface-container-high text-on-surface/40"}`}>
               <div className="flex flex-col items-center text-center gap-2">
                 <DeliveryIcon />
                 <span className="font-medium text-sm">Delivery</span>
               </div>
             </button>
-            <button onClick={() => setOrderType('dine_in')} className={`cursor-pointer p-4 rounded-xl transition-all ${orderType === 'dine_in' ? 'bg-surface-container-high ring-2 ring-primary text-primary' : 'bg-surface-container-low hover:bg-surface-container-high text-on-surface/40'}`}>
+            <button type="button" onClick={() => setOrderType("dine_in")} className={`cursor-pointer p-4 rounded-xl transition-all ${orderType === "dine_in" ? "bg-surface-container-high ring-2 ring-primary text-primary" : "bg-surface-container-low hover:bg-surface-container-high text-on-surface/40"}`}>
               <div className="flex flex-col items-center text-center gap-2">
                 <DineInIcon />
                 <span className="font-medium text-sm">Dine In</span>
@@ -104,17 +257,17 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
               </div>
               <div className="grid grid-cols-7 gap-1 text-center text-sm">
                 {calendarDays.map((day) => (
-                  <div key={day} className={`p-1 rounded-full ${day === 14 ? 'bg-primary text-deep-espresso font-bold' : day < 14 ? 'text-on-surface/20' : 'text-on-surface'}`}>{day}</div>
+                  <div key={day} className={`p-1 rounded-full ${day === 14 ? "bg-primary text-deep-espresso font-bold" : day < 14 ? "text-on-surface/20" : "text-on-surface"}`}>{day}</div>
                 ))}
               </div>
             </div>
             <div className="flex-grow">
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <button onClick={() => setPickupTime('ASAP')} className={`px-4 py-2.5 rounded-lg font-bold text-sm cursor-pointer transition-all ${pickupTime === 'ASAP' ? 'bg-primary text-deep-espresso ring-2 ring-primary' : 'bg-surface-container-highest text-on-surface hover:bg-surface-bright'}`}>
+                <button type="button" onClick={() => setPickupTime("ASAP")} className={`px-4 py-2.5 rounded-lg font-bold text-sm cursor-pointer transition-all ${pickupTime === "ASAP" ? "bg-primary text-deep-espresso ring-2 ring-primary" : "bg-surface-container-highest text-on-surface hover:bg-surface-bright"}`}>
                   ASAP
                 </button>
                 {timeSlots.map((slot) => (
-                  <button key={slot} onClick={() => setPickupTime(slot)} className={`px-4 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all ${pickupTime === slot ? 'bg-primary text-deep-espresso ring-2 ring-primary font-bold' : 'bg-surface-container-highest text-on-surface hover:bg-surface-bright'}`}>
+                  <button type="button" key={slot} onClick={() => setPickupTime(slot)} className={`px-4 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-all ${pickupTime === slot ? "bg-primary text-deep-espresso ring-2 ring-primary font-bold" : "bg-surface-container-highest text-on-surface hover:bg-surface-bright"}`}>
                     {slot}
                   </button>
                 ))}
@@ -141,7 +294,7 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
               <label htmlFor="checkout-phone" className="text-sm font-medium text-on-surface/50 font-body block">Phone Number</label>
               <input id="checkout-phone" type="tel" placeholder="+1 (555) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full h-12 px-4 rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface/20 outline-none font-body ring-1 ring-transparent focus:ring-primary/30 transition-all" />
             </div>
-            {orderType === 'delivery' ? (
+            {orderType === "delivery" ? (
               <div className="space-y-2 md:col-span-2">
                 <label htmlFor="checkout-address" className="text-sm font-medium text-on-surface/50 font-body block">Delivery Address</label>
                 <textarea id="checkout-address" value={deliveryAddress} onChange={(event) => setDeliveryAddress(event.target.value)} className="w-full min-h-28 px-4 py-3 rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface/20 outline-none font-body ring-1 ring-transparent focus:ring-primary/30 transition-all resize-none" placeholder="Street address, landmark, and any drop-off instructions" />
@@ -151,6 +304,17 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
               <label htmlFor="checkout-note" className="text-sm font-medium text-on-surface/50 font-body block">Order Note (Optional)</label>
               <input id="checkout-note" type="text" placeholder="Extra napkins, specific instructions..." value={note} onChange={(e) => setNote(e.target.value)} className="w-full h-12 px-4 rounded-lg bg-surface-container-highest text-on-surface placeholder:text-on-surface/20 outline-none font-body ring-1 ring-transparent focus:ring-primary/30 transition-all" />
             </div>
+            <label className="md:col-span-2 flex items-start gap-3 rounded-xl bg-surface-container-high px-4 py-4 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={savePaymentMethod}
+                onChange={(event) => setSavePaymentMethod(event.target.checked)}
+                className="mt-1 h-4 w-4 accent-primary"
+              />
+              <span className="text-sm text-on-surface/70">
+                Save this payment method for faster future orders.
+              </span>
+            </label>
           </div>
         </section>
 
@@ -164,67 +328,62 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
               <div className="flex items-center gap-4">
                 <div className="w-12 h-8 bg-deep-espresso rounded flex items-center justify-center text-blue-400 font-bold italic text-sm">VISA</div>
                 <div>
-                  <div className="text-sm font-bold">Visa ending in 4747</div>
-                  <div className="text-xs text-on-surface/40">Ready for Stripe handoff</div>
+                  <div className="text-sm font-bold">Stripe secure checkout</div>
+                  <div className="text-xs text-on-surface/40">Powered by Payment Element</div>
                 </div>
               </div>
-            ) : null}
+              <LockIcon />
+            </div>
 
-            {canPreparePayment && !clientSecret && !isPreparingPayment ? (
+            {!clientSecret ? (
               <button
                 type="button"
-                onClick={handleLoadPaymentForm}
-                className="w-full rounded-2xl bg-primary/10 text-primary px-4 py-4 font-bold hover:bg-primary/15 transition-colors cursor-pointer"
+                onClick={handleProceedToPayment}
+                disabled={!canPreparePayment || isPreparingPayment}
+                className="w-full rounded-2xl bg-primary/10 text-primary px-4 py-4 font-bold hover:bg-primary/15 transition-colors cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
               >
-                Load Secure Payment Form
+                {isPreparingPayment ? "Preparing secure payment form..." : "Load Secure Payment Form"}
               </button>
             ) : null}
 
-            {isPreparingPayment ? (
-              <div className="rounded-xl bg-surface-container-highest px-4 py-5 text-sm text-on-surface/50 animate-pulse">
-                Preparing secure payment form...
-              </div>
-            ) : null}
-
-            {clientSecret && localPaymentId ? (
+            {clientSecret ? (
               <Elements
                 stripe={stripePromise}
                 options={{
                   clientSecret,
                   appearance: {
-                    theme: 'night',
+                    theme: "night",
                     variables: {
-                      colorPrimary: '#c8864a',
-                      colorBackground: '#2b2119',
-                      colorText: '#f5ede5',
-                      colorDanger: '#f87171',
-                      borderRadius: '16px',
+                      colorPrimary: "#c8864a",
+                      colorBackground: "#2b2119",
+                      colorText: "#f5ede5",
+                      colorDanger: "#f87171",
+                      borderRadius: "16px",
                     },
                   },
                 }}
               >
                 <div className="space-y-5">
                   <div className="rounded-2xl bg-surface-container-highest p-4">
-                    <PaymentElement options={paymentOptions} />
+                    <PaymentElement options={{ layout: "tabs" }} />
                   </div>
-                  <CheckoutPaymentForm
-                    clientSecret={clientSecret}
-                    localPaymentId={localPaymentId}
-                    snapshot={snapshot}
-                    totalDisplay={totalDisplay}
-                    disabled={!canPreparePayment}
-                    onSuccess={() => {
-                      clearCart()
-                      router.push(`/order-confirmation?payment=${localPaymentId}`)
-                    }}
-                    onError={(message) => setError(message)}
-                  />
+                  {localPaymentId ? (
+                    <CheckoutPaymentForm
+                      localPaymentId={localPaymentId}
+                      totalDisplay={totalDisplay}
+                      disabled={safeItems.length === 0}
+                      onSuccess={() => {
+                        clearCart();
+                      }}
+                      onError={(paymentError) => setError(paymentError)}
+                    />
+                  ) : null}
                 </div>
               </Elements>
             ) : null}
           </div>
           <p className="text-sm text-on-surface/40">
-            Saved payment styling is shown here for continuity, but no charge or order submission happens from this screen yet.
+            Payment details are collected securely by Stripe and linked to your local order record after confirmation.
           </p>
         </section>
       </div>
@@ -234,11 +393,11 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
           <h3 className="font-headline text-2xl mb-8">Order Summary</h3>
 
           <div className="space-y-6 mb-8 max-h-64 overflow-y-auto">
-            {items.length === 0 ? <p className="text-on-surface/40 italic">Cart is empty.</p> : null}
-            {items.map((item, index) => (
+            {safeItems.length === 0 ? <p className="text-on-surface/40 italic">{mounted ? "Cart is empty." : "Loading your cart..."}</p> : null}
+            {safeItems.map((item, index) => (
               <div key={`${item.productId}-${index}`} className="flex gap-4">
                 <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-highest relative">
-                  <Image src={item.imageUrl || '/images/coffee-cappuccino.png'} alt={item.productName} fill className="object-cover" sizes="64px" />
+                  <Image src={item.imageUrl || "/images/coffee-cappuccino.png"} alt={item.productName} fill className="object-cover" sizes="64px" />
                 </div>
                 <div className="flex-grow">
                   <div className="flex justify-between items-start">
@@ -246,7 +405,7 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
                     <span className="text-sm font-bold font-mono">${item.lineTotal.toFixed(2)}</span>
                   </div>
                   <p className="text-xs text-on-surface/40 mt-1 line-clamp-2">
-                    {Object.values(item.selectedOptions ?? {}).join(', ') || 'Standard preparation'}
+                    {Object.values(item.selectedOptions ?? {}).join(", ") || "Standard preparation"}
                   </p>
                 </div>
               </div>
@@ -272,21 +431,23 @@ export default function CheckoutClient({ dynamicSlots, userProfile }: CheckoutCl
 
           <div className="flex justify-between items-center py-6">
             <span className="font-headline text-xl">Total</span>
-            <span className="font-headline text-3xl text-primary tracking-tight">${totals.total.toFixed(2)}</span>
+            <span className="font-headline text-3xl text-primary tracking-tight">{totalDisplay}</span>
           </div>
 
           <button
-            onClick={handleProceedToPayment}
-            disabled={items.length === 0}
+            type="button"
+            onClick={clientSecret ? () => router.push("#payment") : handleProceedToPayment}
+            disabled={!mounted || safeItems.length === 0 || isPreparingPayment}
             className="w-full amber-glow py-4 rounded-full flex items-center justify-center gap-3 text-on-primary font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none cursor-pointer shadow-lg"
           >
-            <><LockIcon /> Continue to Payment</>
+            <LockIcon />
+            {clientSecret ? "Payment Form Ready" : isPreparingPayment ? "Preparing..." : "Continue to Payment"}
           </button>
 
           <div className="flex items-center justify-center gap-2 mt-5">
             <ShieldIcon />
             <p className="text-[11px] text-on-surface/30 uppercase tracking-widest text-center font-label">
-              Ready for Stripe handoff. No real card charged.
+              Secure Stripe checkout
             </p>
           </div>
         </div>

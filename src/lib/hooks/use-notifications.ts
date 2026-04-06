@@ -7,6 +7,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
+import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js'
 import { createClient } from '../supabase/client'
 import type { Notification } from '../supabase/types/database.types'
 import { useUIStore } from '../store/ui'
@@ -54,7 +55,7 @@ export function useNotifications(userId: string | null) {
           table: 'notifications',
           filter: `user_id=eq.${userId}`,
         },
-        (payload) => {
+        (payload: RealtimePostgresChangesPayload<Notification>) => {
           const newNotification = payload.new as Notification
 
           // Add to list

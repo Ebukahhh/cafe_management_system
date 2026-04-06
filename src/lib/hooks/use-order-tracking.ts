@@ -7,6 +7,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import type { RealtimePostgresChangesPayload, REALTIME_SUBSCRIBE_STATES } from '@supabase/supabase-js'
 import { createClient } from '../supabase/client'
 import type { OrderStatus } from '../supabase/types/database.types'
 
@@ -25,7 +26,7 @@ export function useOrderTracking(orderId: string | null) {
       .select('status')
       .eq('id', orderId)
       .single()
-      .then(({ data }) => {
+      .then(({ data }: { data: { status: OrderStatus } | null }) => {
         if (data) setStatus((data as unknown as { status: OrderStatus }).status)
       })
 
@@ -40,11 +41,18 @@ export function useOrderTracking(orderId: string | null) {
           table: 'orders',
           filter: `id=eq.${orderId}`,
         },
-        (payload) => {
-          setStatus(payload.new.status as OrderStatus)
+        (payload: RealtimePostgresChangesPayload<{ status: OrderStatus }>) => {
+          const nextStatus =
+            payload.new && typeof payload.new === 'object' && 'status' in payload.new
+              ? (payload.new.status as OrderStatus)
+              : null
+
+          if (nextStatus) {
+            setStatus(nextStatus)
+          }
         }
       )
-      .subscribe((status) => {
+      .subscribe((status: REALTIME_SUBSCRIBE_STATES) => {
         setIsConnected(status === 'SUBSCRIBED')
       })
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 import {
   createContext,
   useCallback,
@@ -61,7 +62,7 @@ export function AuthLoadingProvider({ children }: { children: ReactNode }) {
     const supabase = createClient()
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {
       const p = phaseRef.current
       if (event === 'SIGNED_IN' && session) {
         if (p === 'signing-in' || p === 'signing-up' || p === 'connecting') {

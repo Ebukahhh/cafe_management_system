@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 import { formatUsd, initialsFromName } from '@/lib/customer-display'
+import { updateOrderStatusAction } from './actions'
 import type { AdminOrderCard, AdminOrdersBoardStats } from '@/lib/supabase/queries/admin-orders'
 import type { OrderType } from '@/lib/supabase/types/database.types'
 
@@ -64,12 +65,15 @@ type Props = {
 }
 
 export default function AdminOrdersClient({ initialOrders, stats }: Props) {
+  const [orders, setOrders] = useState<AdminOrderCard[]>(initialOrders)
   const [activeTab, setActiveTab] = useState<TabId>('All')
   const [selectedId, setSelectedId] = useState<string | null>(initialOrders[0]?.id ?? null)
+  const [busyId, setBusyId] = useState<string | null>(null)
+  const [actionError, setActionError] = useState<string | null>(null)
 
   const filtered = useMemo(
-    () => initialOrders.filter((o) => orderMatchesTab(activeTab, o)),
-    [initialOrders, activeTab]
+    () => orders.filter((o) => orderMatchesTab(activeTab, o)),
+    [orders, activeTab]
   )
 
   useEffect(() => {
@@ -81,11 +85,49 @@ export default function AdminOrdersClient({ initialOrders, stats }: Props) {
   }, [activeTab, filtered])
 
   const selected = useMemo(
-    () => initialOrders.find((o) => o.id === selectedId) ?? null,
-    [initialOrders, selectedId]
+    () => orders.find((o) => o.id === selectedId) ?? null,
+    [orders, selectedId]
   )
 
-  const newOrdersCount = stats.tabCounts.pending
+  const liveStats = useMemo(() => {
+    const tabCounts = {
+      pending: orders.filter((o) => o.status === 'pending' || o.status === 'confirmed').length,
+      preparing: orders.filter((o) => o.status === 'preparing').length,
+      ready: orders.filter((o) => o.status === 'ready').length,
+      delivered: orders.filter((o) => o.status === 'delivered').length,
+      cancelled: orders.filter((o) => o.status === 'cancelled').length,
+    }
+
+    return {
+      ...stats,
+      tabCounts,
+    }
+  }, [orders, stats])
+
+  const newOrdersCount = liveStats.tabCounts.pending
+
+  async function handleAdvance(orderId: string, nextStatus: AdminOrderCard['status']) {
+    setActionError(null)
+    setBusyId(orderId)
+    try {
+      await updateOrderStatusAction(orderId, nextStatus)
+      setOrders((current) =>
+        current.map((order) =>
+          order.id === orderId
+            ? {
+                ...order,
+                status: nextStatus,
+                updated_at: new Date().toISOString(),
+              }
+            : order
+        )
+      )
+    } catch (error) {
+      setActionError(error instanceof Error ? error.message : 'Could not update order.')
+    } finally {
+      setBusyId(null)
+    }
+  }
 
   return (
     <div className="flex min-h-screen bg-surface text-on-surface font-body">
@@ -95,7 +137,7 @@ export default function AdminOrdersClient({ initialOrders, stats }: Props) {
             <h2 className="text-4xl font-headline italic text-on-surface">Live Orders</h2>
             <div className="flex items-center gap-2 mt-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-              <p className="text-xs font-mono text-on-surface-variant/70 tracking-tight">{stats.headerDateLine}</p>
+              <p className="text-xs font-mono text-on-surface-variant/70 tracking-tight">{liveStats.headerDateLine}</p>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2 md:gap-3 shrink-0">
@@ -103,23 +145,29 @@ export default function AdminOrdersClient({ initialOrders, stats }: Props) {
               <span className="text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Active</span>
               <span className="text-on-surface-variant/40 text-[10px]">·</span>
               <span className="text-sm font-headline font-bold text-on-surface tabular-nums">
-                {stats.activePipelineToday} orders today
+                {liveStats.activePipelineToday} orders today
               </span>
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg amber-glow shadow-lg shadow-primary/10 whitespace-nowrap">
               <span className="text-[10px] font-mono uppercase tracking-widest text-on-primary-container">Total</span>
               <span className="text-on-primary-container/80 text-[10px]">·</span>
               <span className="text-sm font-headline font-bold text-on-primary-container tabular-nums">
-                {formatUsd(stats.todayRevenue)} revenue
+                {formatUsd(liveStats.todayRevenue)} revenue
               </span>
             </div>
           </div>
         </div>
 
+        {actionError ? (
+          <p className="mb-4 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+            {actionError}
+          </p>
+        ) : null}
+
         <div className="mb-6 overflow-x-auto pb-2 scrollbar-hide">
           <div className="flex items-center gap-2 p-1.5 bg-surface-container-low rounded-2xl w-max md:w-full min-w-0">
             {TABS.map((tab) => {
-              const n = tabBadgeCount(tab, stats.tabCounts)
+              const n = tabBadgeCount(tab, liveStats.tabCounts)
               return (
                 <button
                   key={tab}
@@ -162,7 +210,13 @@ export default function AdminOrdersClient({ initialOrders, stats }: Props) {
             </p>
           ) : (
             filtered.map((o) => (
-              <OrderCard key={o.id} order={o} onSelect={() => setSelectedId(o.id)} />
+              <OrderCard
+                key={o.id}
+                order={o}
+                onSelect={() => setSelectedId(o.id)}
+                onAdvance={handleAdvance}
+                busy={busyId === o.id}
+              />
             ))
           )}
         </div>
@@ -297,7 +351,24 @@ export default function AdminOrdersClient({ initialOrders, stats }: Props) {
   )
 }
 
-function OrderCard({ order, onSelect }: { order: AdminOrderCard; onSelect: () => void }) {
+function nextActionForStatus(status: AdminOrderCard['status']): { label: string; next: AdminOrderCard['status'] } | null {
+  if (status === 'pending' || status === 'confirmed') return { label: 'Confirm', next: 'preparing' }
+  if (status === 'preparing') return { label: 'Mark Ready', next: 'ready' }
+  if (status === 'ready') return { label: 'Mark Delivered', next: 'delivered' }
+  return null
+}
+
+function OrderCard({
+  order,
+  onSelect,
+  onAdvance,
+  busy,
+}: {
+  order: AdminOrderCard
+  onSelect: () => void
+  onAdvance: (orderId: string, next: AdminOrderCard['status']) => void
+  busy: boolean
+}) {
   const meta = `${order.displayId} • ${orderTypeLabel(order.order_type)}`
   const name = order.guest_name ?? 'Guest'
   const isPipeline = order.status === 'pending' || order.status === 'confirmed'
@@ -339,6 +410,7 @@ function OrderCard({ order, onSelect }: { order: AdminOrderCard; onSelect: () =>
   }
 
   if (isReady) {
+    const action = nextActionForStatus(order.status)
     return (
       <div
         role="button"
@@ -363,9 +435,19 @@ function OrderCard({ order, onSelect }: { order: AdminOrderCard; onSelect: () =>
         </div>
         <p className="text-sm text-on-surface-variant mb-6 line-clamp-2">{order.items_summary}</p>
         <div className="flex flex-col gap-2">
-          <button type="button" className="w-full py-2 bg-emerald-600 text-white font-bold text-xs rounded-lg hover:opacity-90 transition-opacity">
-            Mark as Delivered
-          </button>
+          {action ? (
+            <button
+              type="button"
+              className="w-full py-2 bg-emerald-600 text-white font-bold text-xs rounded-lg hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+              onClick={(e) => {
+                e.stopPropagation()
+                void onAdvance(order.id, action.next)
+              }}
+              disabled={busy}
+            >
+              {busy ? 'Updating...' : action.label}
+            </button>
+          ) : null}
           <button type="button" className="w-full py-2 bg-surface-container-highest text-on-surface-variant font-bold text-xs rounded-lg hover:bg-surface-container-high transition-colors">
             Notify Customer
           </button>
@@ -376,6 +458,7 @@ function OrderCard({ order, onSelect }: { order: AdminOrderCard; onSelect: () =>
 
   if (isPreparing) {
     const pct = prepProgressFromId(order.id)
+    const action = nextActionForStatus(order.status)
     return (
       <div
         role="button"
@@ -403,11 +486,25 @@ function OrderCard({ order, onSelect }: { order: AdminOrderCard; onSelect: () =>
         <div className="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
           <div className="bg-orange-500 h-full transition-all" style={{ width: `${pct}%` }} />
         </div>
+        {action ? (
+          <button
+            type="button"
+            className="mt-4 w-full py-2 bg-orange-500 text-white font-bold text-xs rounded-lg hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+            onClick={(e) => {
+              e.stopPropagation()
+              void onAdvance(order.id, action.next)
+            }}
+            disabled={busy}
+          >
+            {busy ? 'Updating...' : action.label}
+          </button>
+        ) : null}
       </div>
     )
   }
 
   if (isPipeline) {
+    const action = nextActionForStatus(order.status)
     return (
       <div
         role="button"
@@ -433,13 +530,19 @@ function OrderCard({ order, onSelect }: { order: AdminOrderCard; onSelect: () =>
         <p className="text-sm text-on-surface-variant mb-6 line-clamp-2">{order.items_summary}</p>
         <div className="flex items-center justify-between pt-4 border-t border-white/5">
           <span className="font-mono text-primary">{formatUsd(order.total)}</span>
-          <button
-            type="button"
-            className="px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-bold text-xs hover:opacity-90 active:scale-95 transition-all shadow-lg"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Confirm
-          </button>
+          {action ? (
+            <button
+              type="button"
+              className="px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-bold text-xs hover:opacity-90 active:scale-95 transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+              onClick={(e) => {
+                e.stopPropagation()
+                void onAdvance(order.id, action.next)
+              }}
+              disabled={busy}
+            >
+              {busy ? 'Updating...' : action.label}
+            </button>
+          ) : null}
         </div>
       </div>
     )

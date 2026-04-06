@@ -1,9 +1,8 @@
 'use client'
 
-import { createClient } from '@/lib/supabase/client'
 import HeroButtons from '@/components/HeroButtons'
+import { useAuthStore } from '@/lib/store/auth'
 import type { User } from '@supabase/supabase-js'
-import { useEffect, useState } from 'react'
 
 function firstNameFromUser(user: User | null): string | null {
   if (!user) return null
@@ -18,18 +17,7 @@ function firstNameFromUser(user: User | null): string | null {
 }
 
 export default function LandingHero() {
-  const [user, setUser] = useState<User | null>(null)
-
-  useEffect(() => {
-    const supabase = createClient()
-    supabase.auth.getUser().then(({ data }) => setUser(data.user))
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_e, session) => {
-      setUser(session?.user ?? null)
-    })
-    return () => subscription.unsubscribe()
-  }, [])
+  const user = useAuthStore((state) => state.user)
 
   const firstName = firstNameFromUser(user)
   const personalized = Boolean(user && firstName)

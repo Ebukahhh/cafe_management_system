@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCartStore } from "@/lib/store/cart";
 import type { ProductWithOptions } from "@/lib/supabase/types/app.types";
 
 /* ─────────────────────────────────────────────
@@ -28,10 +29,25 @@ function AddShoppingCartIcon({ className }: { className?: string }) {
 }
 
 export default function MenuProductCard({ product }: Props) {
+  const { addItem, openCart } = useCartStore();
+
   // If is_available is false OR stock_count is 0, we consider it out of stock
   // Based on the DB schema, stock_count can be null for infinite stock items,
   // so we only treat it out of stock if it is exactly 0 or marked unavailable.
   const isOutOfStock = !product.is_available || product.stock_count === 0;
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      productName: product.name,
+      imageUrl: product.image_url,
+      unitPrice: product.price,
+      quantity: 1,
+      selectedOptions: {},
+    });
+    openCart();
+  };
+
   return (
     <article
       className={`group relative bg-surface-container-lowest rounded-lg md:rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 h-full flex flex-col ${isOutOfStock
