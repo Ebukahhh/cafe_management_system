@@ -9,7 +9,7 @@
 import { create } from 'zustand'
 import { ensureCustomerProfile } from '../supabase/mutations/ensure-customer-profile'
 import { createClient } from '../supabase/client'
-import type { User } from '@supabase/supabase-js'
+import type { AuthChangeEvent, Session, User, UserResponse } from '@supabase/supabase-js'
 import type { Profile } from '../supabase/types/database.types'
 
 interface AuthState {
@@ -36,7 +36,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     const supabase = createClient()
 
     // Get initial session
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    supabase.auth.getUser().then(({ data: { user } }: UserResponse) => {
       set({ user, isLoading: false, isInitialized: true })
       if (user) get().fetchProfile()
     })
@@ -44,7 +44,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     // Listen for auth state changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
       const user = session?.user ?? null
       set({ user, isLoading: false })
       if (user) get().fetchProfile()

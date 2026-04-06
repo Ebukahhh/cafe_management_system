@@ -1,7 +1,8 @@
 'use client'
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import type { OrderWithItems } from "@/lib/supabase/types/app.types";
 import type { OrderStatus } from "@/lib/supabase/types/database.types";
 
@@ -40,7 +41,6 @@ function PulsingDot() {
 
 /* ── Helpers ── */
 const ACTIVE_STATUSES: OrderStatus[] = ['pending', 'confirmed', 'preparing', 'ready'];
-const PAST_STATUSES: OrderStatus[] = ['delivered', 'cancelled'];
 
 function isActive(status: OrderStatus) { return ACTIVE_STATUSES.includes(status); }
 
@@ -83,14 +83,79 @@ const FILTERS: FilterKey[] = ['All', 'Active', 'Completed', 'Cancelled'];
 const PAGE_SIZE = 10;
 
 /* ── Main Component ── */
-export default function OrdersClient({ orders }: { orders: OrderWithItems[] }) {
+export default function OrdersClient({ orders, userId }: { orders: OrderWithItems[]; userId: string }) {
+  const [liveOrders, setLiveOrders] = useState<OrderWithItems[]>(orders);
   const [activeFilter, setActiveFilter] = useState<FilterKey>('All');
   const [page, setPage] = useState(1);
 
-  const activeOrders = orders.filter(o => isActive(o.status));
+  useEffect(() => {
+    setLiveOrders(orders);
+  }, [orders]);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const refreshOrders = async () => {
+      const { data, error } = await supabase
+        .from("orders")
+        .select(`
+          id,
+          status,
+          order_type,
+          subtotal,
+          total,
+          created_at,
+          updated_at,
+          order_items (
+            id,
+            product_name,
+            quantity,
+            unit_price,
+            line_total
+          )
+        `)
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false })
+        .limit(50);
+
+      if (error) {
+        console.error("[orders realtime refresh]", error.message);
+        return;
+      }
+
+      setLiveOrders((data ?? []) as OrderWithItems[]);
+    };
+
+    const channel = supabase
+      .channel(`customer-orders-${userId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'orders',
+          filter: `user_id=eq.${userId}`,
+        },
+        () => {
+          void refreshOrders();
+        }
+      )
+      .subscribe();
+
+    const intervalId = window.setInterval(() => {
+      void refreshOrders();
+    }, 5000);
+
+    return () => {
+      window.clearInterval(intervalId);
+      void supabase.removeChannel(channel);
+    };
+  }, [userId]);
+
+  const activeOrders = liveOrders.filter(o => isActive(o.status));
 
   // Filtered past orders (non-active)
-  const filteredOrders = orders.filter(o => {
+  const filteredOrders = liveOrders.filter(o => {
     if (activeFilter === 'All')       return true;
     if (activeFilter === 'Active')    return isActive(o.status);
     if (activeFilter === 'Completed') return o.status === 'delivered';

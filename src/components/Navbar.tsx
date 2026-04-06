@@ -8,6 +8,7 @@ import ProtectedLink from "@/components/ProtectedLink";
 import type { User } from "@supabase/supabase-js";
 import { usePathname } from "next/navigation";
 import { useCartStore } from "@/lib/store/cart";
+import { useAuthStore } from "@/lib/store/auth";
 
 function BagIcon() {
   return (
@@ -63,7 +64,7 @@ const mobileLinkClass = (active: boolean) =>
 export default function Navbar() {
   const pathname = usePathname();
   const { start } = useAuthLoading();
-  const [user, setUser] = useState<User | null>(null);
+  const user = useAuthStore((state) => state.user);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -72,20 +73,6 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
-
-  useEffect(() => {
-    const supabase = createClient();
-
-    // Get initial session
-    supabase.auth.getUser().then(({ data }) => setUser(data.user));
-
-    // Stay in sync with auth state changes
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => setUser(session?.user ?? null)
-    );
-
-    return () => listener.subscription.unsubscribe();
-  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {

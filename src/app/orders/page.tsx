@@ -50,7 +50,7 @@ export default async function OrderHistoryPage() {
     <>
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 pb-40 md:pb-20">
-        <OrdersClient orders={orders} />
+        <OrdersClient orders={orders} userId={user.id} />
       </main>
     </>
   );
