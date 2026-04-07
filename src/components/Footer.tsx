@@ -1,17 +1,10 @@
 import Link from "next/link";
 
-/* ─────────────────────────────────────────────
-   Footer — Site-wide footer
-   Design: Deep espresso bg, no solid borders.
-   Fraunces logo, DM Sans links, social icons.
-   ───────────────────────────────────────────── */
-
 const footerLinks = [
   { label: "Menu", href: "/menu" },
   { label: "Reservations", href: "/reservations" },
   { label: "Subscribe", href: "/subscription" },
   { label: "Privacy Policy", href: "#" },
-  { label: "Terms", href: "#" },
 ];
 
 export default function Footer() {
