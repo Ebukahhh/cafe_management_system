@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/lib/store/cart";
+import { useAuthStore } from "@/lib/store/auth";
 import type { ProductOption, ProductWithOptions } from "@/lib/supabase/types/app.types";
 
 type ProductDetailClientProps = {
@@ -179,6 +180,7 @@ function getFallbackCoffeeOptions(product: ProductWithOptions): ProductOptionLik
 
 export default function ProductDetailClient({ product }: ProductDetailClientProps) {
   const router = useRouter();
+  const user = useAuthStore((state) => state.user);
   const { addItem, openCart } = useCartStore();
   const optionGroups = (product.product_options.length > 0
     ? product.product_options
@@ -218,6 +220,11 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
   }, {});
 
   const handleAddToCart = () => {
+    if (!user) {
+      router.push(`/login?next=${encodeURIComponent(`/product/${product.id}`)}`);
+      return false;
+    }
+
     addItem({
       productId: product.id,
       productName: product.name,
@@ -227,10 +234,14 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
       selectedOptions: selectedOptionLabels,
     });
     openCart();
+    return true;
   };
 
   const handleReviewCheckout = () => {
-    handleAddToCart();
+    const added = handleAddToCart();
+    if (!added) {
+      return;
+    }
     router.push("/checkout");
   };
 

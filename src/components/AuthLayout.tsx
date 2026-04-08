@@ -4,18 +4,8 @@ import Image from "next/image";
 /* ─────────────────────────────────────────────
    AuthLayout — Shared layout for Login & Signup
    Split-screen: dark branding left, warm form right
-   Design rules: No borders, glassmorphism testimonial,
-   Fraunces headlines, tonal layering
+   Design rules: No borders, tonal layering
    ───────────────────────────────────────────── */
-
-/* Icon components */
-function StarIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-}
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -59,33 +49,6 @@ export default function AuthLayout({
           <p className="font-body text-on-surface/50 text-lg leading-relaxed max-w-sm">
             Refining the art of the brew with digital precision and artisanal soul.
           </p>
-        </div>
-
-        {/* Testimonial glass card */}
-        <div className="absolute bottom-12 left-12 right-12 z-10">
-          <div className="glass-card p-6 rounded-xl max-w-sm">
-            {/* Stars */}
-            <div className="flex gap-1 mb-3 text-primary">
-              <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
-            </div>
-            <p className="text-on-surface/70 italic mb-4 text-sm leading-relaxed font-body">
-              &ldquo;The most seamless ordering experience I&apos;ve ever used.&rdquo;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden relative">
-                <Image
-                  src="/images/testimonial-portrait.png"
-                  alt="Sarah J."
-                  fill
-                  className="object-cover"
-                  sizes="32px"
-                />
-              </div>
-              <span className="font-label text-xs uppercase tracking-widest text-primary">
-                Sarah J.
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* Version label — editorial detail */}
