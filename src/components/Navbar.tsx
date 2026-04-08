@@ -70,9 +70,6 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { items, openCart } = useCartStore();
   const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -87,10 +84,6 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -167,19 +160,20 @@ export default function Navbar() {
         {/* Right side — Custom Actions + Auth actions */}
         <div className="flex items-center gap-4 md:gap-6">
           
-          {/* Cart Toggle */}
-          <button 
-            onClick={openCart}
-            className="relative p-2 text-on-surface/50 hover:text-primary transition-colors cursor-pointer"
-            aria-label="Open cart"
-          >
-            <BagIcon />
-            {mounted && itemCount > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-deep-espresso text-[10px] font-bold flex items-center justify-center rounded-full transform translate-x-1/4 -translate-y-1/4">
-                {itemCount}
-              </span>
-            )}
-          </button>
+          {user ? (
+            <button 
+              onClick={openCart}
+              className="relative p-2 text-on-surface/50 hover:text-primary transition-colors cursor-pointer"
+              aria-label="Open cart"
+            >
+              <BagIcon />
+              {itemCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-deep-espresso text-[10px] font-bold flex items-center justify-center rounded-full transform translate-x-1/4 -translate-y-1/4">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+          ) : null}
 
           {user ? (
             /* ── Authenticated: Avatar + dropdown ── */

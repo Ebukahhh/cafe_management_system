@@ -3,7 +3,9 @@
 import type { MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCartStore } from "@/lib/store/cart";
+import { useAuthStore } from "@/lib/store/auth";
 
 /* ─────────────────────────────────────────────
    ProductCard — Reusable menu item card
@@ -22,11 +24,18 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ id, name, description, price, image, badge }: ProductCardProps) {
+  const router = useRouter();
+  const user = useAuthStore((state) => state.user);
   const { addItem, openCart } = useCartStore();
 
   const handleAdd = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if (!user) {
+      router.push(`/login?next=${encodeURIComponent(`/product/${id}`)}`);
+      return;
+    }
 
     const unitPrice = Number.parseFloat(price.replace(/[^0-9.]/g, ""));
 

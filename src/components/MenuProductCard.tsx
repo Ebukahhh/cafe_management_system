@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCartStore } from "@/lib/store/cart";
+import { useAuthStore } from "@/lib/store/auth";
 import type { ProductWithOptions } from "@/lib/supabase/types/app.types";
 
 /* ─────────────────────────────────────────────
@@ -29,6 +31,8 @@ function AddShoppingCartIcon({ className }: { className?: string }) {
 }
 
 export default function MenuProductCard({ product }: Props) {
+  const router = useRouter();
+  const user = useAuthStore((state) => state.user);
   const { addItem, openCart } = useCartStore();
 
   // If is_available is false OR stock_count is 0, we consider it out of stock
@@ -37,6 +41,11 @@ export default function MenuProductCard({ product }: Props) {
   const isOutOfStock = !product.is_available || product.stock_count === 0;
 
   const handleAddToCart = () => {
+    if (!user) {
+      router.push(`/login?next=${encodeURIComponent("/menu")}`);
+      return;
+    }
+
     addItem({
       productId: product.id,
       productName: product.name,
